@@ -21,5 +21,3 @@ ChimeStack是新一代的轻量化云计算IaaS软件，基于虚拟化技术，
 {{% imgproc chime-landscape Fit "1500x650" %}}
 {{% /imgproc %}}
 
-[快速开始](/docs/getting-started/)
-

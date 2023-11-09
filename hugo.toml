@@ -2,8 +2,8 @@ baseURL = "/"
 title = "ChimeStack"
 
 # Language settings
-contentDir = "content/en"
-defaultContentLanguage = "en"
+contentDir = "content/zh"
+defaultContentLanguage = "zh"
 defaultContentLanguageInSubdir = false
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
@@ -11,7 +11,7 @@ enableMissingTranslationPlaceholders = true
 enableRobotsTXT = true
 
 # Will give values to .Lastmod etc.
-enableGitInfo = true
+enableGitInfo = false
 
 # Comment out to enable taxonomies in Docsy
 # disableKinds = ["taxonomy", "taxonomyTerm"]
@@ -62,20 +62,22 @@ id = "UA-00000000-0"
 [languages.en]
 languageName ="English"
 # Weight used for sorting.
-weight = 1
+weight = 2
 [languages.en.params]
 title = "ChimeStack"
 description = "A lightweight software that provides services for cloud infrastructure"
+time_format_default = "02.01.2006"
+time_format_blog = "02.01.2006"
 
 [languages.zh]
 languageName ="Chinese"
+weight = 1
 contentDir = "content/zh"
 [languages.zh.params]
 title = "ChimeStack"
 description = "一个轻量化的云基础设施服务软件"
 time_format_default = "02.01.2006"
 time_format_blog = "02.01.2006"
-
 
 [markup]
   [markup.goldmark]

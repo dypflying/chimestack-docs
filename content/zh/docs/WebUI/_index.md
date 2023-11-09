@@ -1,5 +1,5 @@
 ---
 title: Web UI
 weight: 3
-description: Web UI使用方法
+description: 介绍ChimeStack的Web UI使用方法
 ---

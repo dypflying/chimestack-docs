@@ -2,7 +2,7 @@
 title: 系统登录
 date: 2023-11-09
 weight: 3
-description: 本章介绍系统登录和修改用户个人信息
+description: 本章节介绍系统登录和设置用户个人信息
 ---
 
 ## ChimeStack用户的三层角色介绍

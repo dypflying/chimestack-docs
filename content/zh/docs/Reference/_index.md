@@ -1,5 +1,5 @@
 ---
 title: Reference
 weight: 5
-description: 
+description: 介绍ChimeStack API和SDK的使用说明
 ---

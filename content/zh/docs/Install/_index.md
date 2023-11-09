@@ -1,6 +1,6 @@
 ---
 title: 安装ChimeStack
-description: 
+description: 介绍ChimeStack的配置环境，安装和配置方法
 weight: 2
 ---
 

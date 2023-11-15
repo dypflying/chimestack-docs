@@ -1,11 +1,11 @@
 ---
 title: 关于 ChimeStack
-linkTitle: About
+linkTitle: 关于 ChimeStack
 menu: {main: {weight: 10}}
 ---
 
 {{% blocks/cover title="关于 ChimeStack" image_anchor="bottom" height="auto" %}}
-上云不再复杂
+私有云不再复杂
 {.mt-5}
 
 {{% /blocks/cover %}}
@@ -13,20 +13,19 @@ menu: {main: {weight: 10}}
 {{% blocks/lead %}}
 
 ChimeStack是一个轻量化的私有云平台软件。
-ChimeStack不像其他的云平台软件需要部署大量的组件，占用大量的系统资源而且运维成本高，对运维人员技术要求也高。ChimeStack只有两个二进制程序（管理程序+客户端程序），无中间依赖，数据库仅依赖mysql。ChimeStack使用Golang语言开发，对系统占用资源少，部署运维都很方便。
 
+ChimeStack不像其它的私有云平台软件需要部署许多组件，占用系统较多的资源而且运维成本高。精简部署时，ChimeStack只有两个守护进程 —— 管理控制进程和客户端进程，极少依赖中间件和第三方程序。
 
 {{% /blocks/lead %}}
 
 {{% blocks/lead %}}
 
-ChimeStack支持存算分离的场景，也支持存算融合的场景，在融合场景下，ChimeStack自研的存算引擎把虚拟机的I/O尽可能地调度到本地节点的存储介质上，极大地提高了I/O效率。
+ChimeStack支持存算分离和存算融合的场景，在融合场景下，ChimeStack自研的存算引擎实现了I/O亲和性调度，即虚拟机存储的主副本在虚拟机运行的节点的存储介质上，缩短了I/O路径，提高了I/O效率。
 
 {{% /blocks/lead %}}
 
-{{% blocks/section %}}
+{{% blocks/lead %}}
 
-# This is another section
-{.text-center}
+ChimeStack框架中只包含管理服务进程(Chime-Server)和客户端进程(Chime-Agent)，它们都为Golang语言开发，无过多的中间件依赖。在AllInOne部署时，仅需要2核4GiB的内存的单节点即可运行完整的私有云平台，并且可以创建出不低于5个虚拟机系统。
 
-{{% /blocks/section %}}
+{{% /blocks/lead %}}

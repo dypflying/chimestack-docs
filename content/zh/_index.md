@@ -9,13 +9,13 @@ title: ChimeStack
 <a class="btn btn-lg btn-secondary me-3 mb-4" href="https://github.com/dypflying/chimestack">
   下载 <i class="fab fa-github ms-2 "></i>
 </a>
-<p class="lead mt-5" style="color:yellow;"><b>一个轻量化的私有云基础设施服务软件</b></p>
+<p class="lead mt-5" style="color:yellow;"><b>轻量化的私有云基础设施服务软件</b></p>
 {{< blocks/link-down color="info" >}}
 {{< /blocks/cover >}}
 
 
 {{% blocks/lead color="primary" %}}
-ChimeStack是新一代的轻量化的云计算IaaS软件，可以帮助企业或组织快速地构建和管理企业私有云环境。ChimeStack优化了超融合环境中的存储和计算的I/O路径，尤其适用于小规模私有云、边缘计算服务场景。
+ChimeStack是一个轻量化的云计算基础设施即服务(IaaS)软件，通过ChimeStack可以帮助企业或组织快速地构建和管理企业私有云环境。ChimeStack优化了超融合环境中的存储和计算的I/O路径，尤其适用于小规模私有云、边缘计算服务场景。
 {.-text-yellow}
 {{% /blocks/lead %}}
 
@@ -23,16 +23,16 @@ ChimeStack是新一代的轻量化的云计算IaaS软件，可以帮助企业或
 {{% blocks/section color="dark" type="row" %}}
 
 {{% blocks/feature icon="fa-gears" title="简单"  %}}
-快速部署，极简运维
+极速部署，极简运维
 {{% /blocks/feature %}}
 
 
 {{% blocks/feature icon="fa-lightbulb" title="轻量"  %}}
-平台进程占用极少资源
+消耗极少量物理资源
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fab fa-dropbox" title="融合" %}}
-支持存储融合部署，优化I/O路径
+{{% blocks/feature icon="fab fa-dropbox" title="高效" %}}
+支持存算融合部署，缩短I/O路径，提高效率
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}
@@ -41,15 +41,15 @@ ChimeStack是新一代的轻量化的云计算IaaS软件，可以帮助企业或
 {{% blocks/section type="row" %}}
 
 {{% blocks/feature icon="fab fa-mixer" title="弹性" %}}
-灵活扩容缩容
+简单、灵活地扩缩容
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fa-compass" title="稳定"  %}}
-全组件HA，架构稳定可靠
+{{% blocks/feature icon="fa-compass" title="可靠"  %}}
+全部组件支持HA部署，架构稳定可靠
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fa-eye" title="用户友好" %}}
-智能运维管理，简单UI交互
+{{% blocks/feature icon="fa-eye" title="友好" %}}
+支持用户界面和CLI交互，提供SDK支持二开
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}

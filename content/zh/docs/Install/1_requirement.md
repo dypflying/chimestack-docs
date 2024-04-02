@@ -1,76 +1,58 @@
 ---
-title: 配置需求
+title: 配置要求
 date: 2023-11-09
 description: 本章对ChimeStack云平台运行所须的基本环境配置进行说明。
 weight: 2
 ---
 
-## 网络配置要求
+### 网络要求
 
-#### 推荐网络配置
+##### 推荐网络配置
 
 1. **千兆管理网**: 用于管控服务端和节点之间的数据传输，以及管控服务访问的网络
 2. **万兆业务网**: 用于虚拟机之间的数据传输
 3. **万兆存储网**: 用户存储服务的数据传输
 
-#### 最小网络配置
+##### 最小网络配置
 
 1. **千兆管理网**: 用于管控服务端和节点之间的数据传输
 2. **万兆业务网**+**存储网**: 用于虚拟机之间、及存储服务的数据传输
 
-#### AllInOne网络配置
+##### AllInOne网络配置
 
 仅需要千兆管理网络，提供管理服务访问的网络
 
-## 管理节点配置要求
+### 管理节点要求
 
-| 配置  | 需求   | AllInOne  | 仅server  | mysql | influxdb | 管理10节点 | 管理100节点 |
-| ---- | ----- | --------- | --------- | ----- | -------- | --------- | --------- |
-| CPU     | 64位x86架构(支持Intel VT或AMD-V) | 最低2核，推荐4核以上 | 1核 | 2核 | 2核 | 2核 | 4核 |
-| 内存     | 推荐DDR4以上 | 最低4GB, 推荐8GB以上 | 2GB | 2GB | 2GB | 2GB | 4GB | 
-| 存储     | HDD或SSD | SSD, 80GB以上 | 20GB | 推荐SSD, 20GB | 40GB | | |
+| 资源  | 需求   | 
+| ---- | ----- | 
+| CPU   | 64位x86架构 | 
+| 内存   | 推荐DDR4以上 | 
+| 存储   | HDD或SSD | 
+| 网卡   | 1个千兆网卡 | 
 
-## 计算节点配置要求
+### 管理节点最小配置
 
+| 资源  | AllInOne  | 仅server  | +mysql | +influxdb | +s3 | 管理10节点 | 管理100节点 |
+| ---- | --------- | --------- | ----- | -------- | ---- | --------- | --------- |
+| CPU   | 4核 | 1核 | 1核 | 1核 | 1核 | 1核 | 4核 |
+| 内存   | 4GB | 2GB | 2GB | 2GB | 2GB | 2GB | 4GB | 
+| 存储   | 40GB | 10GB | 10GB(SSD) | 10GB | 10GB | |
 
+**说明**
 
-Code can also be shown in a block element.
+chime-stack依赖mysql提供元数据存储，依赖influxdb提供监控数据存储，根据不同的场景，规划管理节点配置, 举例如下(以下均为最小配置)：
 
-```
-foo := "bar";
-bar := "foo";
-```
+- chime-server且管理10台计算节点，所需: 2核CPU + 4GB内存 + 10GB硬盘 
+- chime-server+mysql+influxdb 且管理10台计算节点，所需: 4核CPU + 8GB内存 + 50GB硬盘
+- chime-server+mysql+influxdb+s3 且管理100台计算节点，所需: 8核CPU + 12GB内存 + 70GB硬盘
 
-Code can also use syntax highlighting.
+### 计算节点配置要求
 
-```go
-func main() {
-  input := `var foo = "bar";`
-
-  lexer := lexers.Get("javascript")
-  iterator, _ := lexer.Tokenise(nil, input)
-  style := styles.Get("github")
-  formatter := html.New(html.WithLineNumbers())
-
-  var buff bytes.Buffer
-  formatter.Format(&buff, style, iterator)
-
-  fmt.Println(buff.String())
-}
-```
-
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
-
-Inline code inside table cells should still be distinguishable.
-
-| Language    | Code               |
-|-------------|--------------------|
-| Javascript  | `var foo = "bar";` |
-| Ruby        | `foo = "bar"{`      |
-
-----------------
-
-
+| 资源  | 需求   
+| ---- | ----- | 
+| CPU   | 64位x86架构(支持Intel VT或AMD-V)，chime-agent预留2核, 剩余其它核心为虚拟化提供资源
+| 内存   | 推荐DDR4以上 | 最低4GB，其它为虚拟化资源 | 
+| 存储   | HDD或SSD | 根据实际需求规划存储容量 |
+| 网卡   | 1千兆网卡 + 最少1个万兆网卡(根据实际需求规划网卡) | 
 

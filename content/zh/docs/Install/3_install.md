@@ -1,5 +1,5 @@
 ---
-title: 安装ChimeStack
+title: 2.3 安装ChimeStack
 date: 2023-11-09
 description: 本章对介绍如何安装ChimeStack
 weight: 4

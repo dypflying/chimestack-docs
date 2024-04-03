@@ -1,5 +1,5 @@
 ---
-title: 命令行CLI
+title: 4 命令行CLI介绍
 weight: 4
 description: 介绍ChimeStack的命令行工具的使用方法
 ---

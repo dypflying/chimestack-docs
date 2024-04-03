@@ -1,5 +1,5 @@
 ---
-title: 配置要求
+title: 2.1 配置要求
 date: 2023-11-09
 description: 本章对ChimeStack云平台运行所须的基本环境配置进行说明。
 weight: 2

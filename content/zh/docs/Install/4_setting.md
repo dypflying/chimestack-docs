@@ -1,10 +1,9 @@
 ---
-title: 配置ChimeStack
+title: 2.4 配置ChimeStack
 date: 2023-11-09
 description: 本章对介绍如何快速配置ChimeStack
 weight: 5
 ---
-
 
 
 

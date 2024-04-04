@@ -5,9 +5,9 @@ description: 本章对介绍如何安装ChimeStack
 weight: 4
 ---
 
-## 2.3.1 通过ISO安装Chime-Stack 
+## 2.3.1 通过ISO安装ChimeStack 
 
-## 2.3.2 手动安装Chime-Stack 
+## 2.3.2 手动安装ChimeStack 
 
 ### 安装Chime-Stack包 
 
@@ -86,8 +86,8 @@ sudo rpm -ivh mysql-xxx.rpm
 ##### 启动mysql
 
 ```
-systemctl enable mysqld 
-systemctl start mysqld 
+sudo systemctl enable mysqld 
+sudo systemctl start mysqld 
 ```
 
 
@@ -112,7 +112,7 @@ sudo systemctl enable influxdb
 sudo systenctl start influxdb
 ```
 
-如果需要influxdb客户端程序，可从官网下载 [官方下载]（https://docs.influxdata.com/influxdb/v2/tools/influx-cli/）客户端安装包，或者从ChimeStack网站[Downloads/3rd/Influxdb-CLI](https://chimestack.io/downloads/3rd/influxdb-cli) 下载influxdb2 客户端安装包
+如果需要influxdb客户端程序，可从[官方下载](https://docs.influxdata.com/influxdb/v2/tools/influx-cli/)客户端安装包，或者从ChimeStack网站[Downloads/3rd/Influxdb-CLI](https://chimestack.io/downloads/3rd/influxdb-cli) 下载influxdb2 客户端安装包
 
 下载后安装客户端程序: 
 
@@ -123,8 +123,77 @@ sudo cp influx /usr/bin/
 
 ### 安装第三方s3服务程序
 
+ChimeStack可以对接任何支持s3协议的对象存储引擎，推荐安装minio，安装方法参考 [官方文档](https://min.io/docs/minio/linux/operations/installation.html)
 
 ### 安装qemu+libvirt
 
+安装 libvirt, qemu, genisoimage 包
 
-### 安装nfp服务
+```
+sudo dnf install qemu-kvm libvirt genisoimage 
+```
+
+或
+
+```
+sudo yum install qemu-kvm libvirt genisoimage 
+```
+
+{{% alert title="提示" color="primary" %}}
+ChimeStack需要使用libvirt8.0, qemu6.0以上版本
+{{% /alert %}}
+
+然后启动libvirtd
+```
+sudo systemctl enable libvirtd
+sudo systemctl start libvirtd
+```
+
+### 安装chrony服务
+
+{{% alert title="提示" color="primary" %}}
+CentOS 8以后已经使用chrony替代ntp 
+{{% /alert %}}
+
+安装chrony 
+
+```
+sudo yum install -y chrony
+```
+
+配置chrony服务端
+
+```
+#sudo vim /etc/chrony.conf 
+# Allow NTP client access from local network.
+allow 192.168.0.0/16
+
+```
+
+配置chrony客户端
+
+```
+#sudo vim /etc/chrony.conf 
+#config the chrony server's ip address as the chrony pool
+pool 192.168.x.x iburst
+```
+
+在服务端和客户端分别启动chronyd服务
+
+```
+sudo systemctl enable chronyd 
+sudo systemctl start chronyd
+```
+
+### 设置时区
+
+```
+#check current timezone setting
+timedatectl 
+
+#list avaialble timezones 
+timedatectl list-timezones 
+
+#set new timezone 
+sudo timedatectl set Asia/Shanghai
+```

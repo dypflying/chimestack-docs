@@ -6,62 +6,58 @@ weight: 5
 ---
 
 
+## 初始化chime-server
 
-| What      | Follows         |
-|-----------|-----------------|
-| A table   | A header        |
-| A table   | A header        |
-| A table   | A header        |
+### 配置和初始化mysql
 
-----------------
+##### 创建mysql新账户
 
-
-Tables should have bold headings and alternating shaded rows.
-
-| Artist            | Album           | Year |
-|-------------------|-----------------|------|
-| Michael Jackson   | Thriller        | 1982 |
-| Prince            | Purple Rain     | 1984 |
-| Beastie Boys      | License to Ill  | 1986 |
-
-
-Code can also be shown in a block element.
+通过mysql客户端登录mysql, 创建新账户chime，并给chime用户赋予数据库权限
 
 ```
-foo := "bar";
-bar := "foo";
+CREATE USER 'chime'@'%' IDENTIFIED BY 'chime';
+GRANT ALL PRIVILEGES ON *.* TO 'chime'@'%';
+flush privileges;
 ```
 
-Code can also use syntax highlighting.
+##### 初始化数据库
 
-```go
-func main() {
-  input := `var foo = "bar";`
-
-  lexer := lexers.Get("javascript")
-  iterator, _ := lexer.Tokenise(nil, input)
-  style := styles.Get("github")
-  formatter := html.New(html.WithLineNumbers())
-
-  var buff bytes.Buffer
-  formatter.Format(&buff, style, iterator)
-
-  fmt.Println(buff.String())
-}
-```
+通过以下命令初始化数据库并更新chime-server配置
 
 ```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
+chimeadm initserver mysql --ip <ip address> --port <port> --user <user> --password <password> --name <dbname>
 ```
 
-Inline code inside table cells should still be distinguishable.
+例如:
 
-| Language    | Code               |
-|-------------|--------------------|
-| Javascript  | `var foo = "bar";` |
-| Ruby        | `foo = "bar"{`      |
+```
+chimeadm initserver mysql --ip 127.0.0.1 --port 3306 --user chime --password chime --name chime 
+```
 
-----------------
+运行成功后，mysql数据库chime被成功初始化，同时/etc/chime/server.yaml中的数据库配置信息会被更新。
 
+
+### 配置influxdb 
+
+##### 初始化influxdb
+
+**方式一**: 通过登录web ui配置
+
+访问 "https://<influxdb service ip>:8086/"，输入用户名/密码，输入organization name和bucket name后，生成api-token，api-token需要被妥善保存，后续作为访问API的凭证。
+
+**方式二**: 通过influx cli完成初始化
+
+```
+influx setup \
+  --username chime-user \
+  --password passw0rd \
+  --token x5iGbxLx-2QKN64I3wooyZsHPtmGB4OvBspdSLuOcEBeN-_-rrnC_1GbtSrJrUD0-qSiXsYrKC0T4VF4m97ecw== \
+  --org chime \
+  --bucket chime \
+  --force
+  --name chime
+```
+
+其中如果token选项为空的话，会自动生成一个api-token，api-token需要被妥善保存，后续作为访问API的凭证。
 
 

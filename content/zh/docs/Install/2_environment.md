@@ -33,7 +33,7 @@ nmcli connection show
 然后，把需要做成bond的网口作为slave添加到新bond接口，如下将接口ens160和ens224添加到bond0 
 ```
 nmcli connection add con-name slave-160 ifname ens160 type ethernet master bond0
-nmcli connection add con-name slave-224 ifname ens160 type ethernet master bond0
+nmcli connection add con-name slave-224 ifname ens224 type ethernet master bond0
 nmcli connection show 
 ```
 

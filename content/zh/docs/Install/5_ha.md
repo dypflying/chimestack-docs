@@ -109,9 +109,149 @@ sudo systemctl restart keepalived
 ### chime-server双活(active-active)配置
 
 {{% alert title="提示" color="warning" %}}
-对于分布式系统在多活模式下，可能出现事务一致性问题，chime-server通过添加记录锁，基本实现了在多活模式下事物一致性的保障，但目前版本测试尚未充分，所以暂时不建议采用多活的配置，仍然推荐主备的配置方式。
+对于分布式系统在多活模式下，可能出现事务的一致性问题，chime-server通过对事物添加记录锁，基本保障了在多活模式下事务的一致性，但目前Dev版本测试尚未充分，所以当前不建议采用多活的配置，仍然推荐主备的配置方式实现chime-server的高可用。
 {{% /alert %}}
 
+在多活(双活)模式下，各chime-server会根据选择的load balancing算法接受请求，但只有一个服务器可以接收入口请求，也就是说，只有其中一个服务器作为路由接收所有的外部请求，然后分发到所有可达的chime-server进程响应请求。这种方式是keepalived+lvs的经典场景，即keepalived提供虚拟路由(VIP)、健康检测和故障failover功能，lvs负责负载均衡。
+
+其中lvs可以选择的三种模式是: NAT,DR和TUN。
+
+负载均衡算法有：rr(Round Robin), wrr(Weighted Round Robin), lc(Least Connection), wlc(Weighted Least Connection), sh(Source Hashing), dh(Destination Hashing), lblc(Locality-Based Least Connection)
+
+在规划的chime-server主节点上, 安装keepalived并编辑/etc/keepalived/keepalived.conf, 添加或修改以下部分: 
+
+```
+vrrp_instance VI_1 {
+    state MASTER                   # 设置当前为默认主节点
+    interface ens160               # 管理网网口的名称
+    virtual_router_id 51           # 重要，必须和其它节点的router_id一致
+    priority 255                   # 权重，不小于从节点的数值
+    advert_int 1
+    authentication {
+        auth_type PASS             # 认证方式
+        auth_pass 1111             # 认证密码
+    }
+    virtual_ipaddress {
+        192.168.231.161            # VIP地址
+    }
+}
+
+virtual_server 192.168.231.161 80 {
+    delay_loop 6
+    lb_algo rr                      # 负载均衡算法
+    lb_kind NAT                     # lvs 工作模式
+    persistence_timeout 50
+    protocol TCP
+
+    real_server 192.168.231.128 8033 {  # real server1地址和端口
+        weight
+        TCP_CHECK {                     # 通过TCP健康检测
+            connect_timeout 3         
+        }
+    }
+    real_server 192.168.231.158 8033 {  # real server2地址和端口
+        weight 1
+        TCP_CHECK {                     # 通过TCP健康检测
+            connect_timeout 3
+        }
+    }
+}
+
+virtual_server 192.168.231.161 8801 {
+    delay_loop 6
+    lb_algo rr                      # 负载均衡算法
+    lb_kind NAT                     # lvs 工作模式
+    persistence_timeout 50
+    protocol TCP
+
+    real_server 192.168.231.128 8801 {  # real server1地址和端口
+        weight
+        TCP_CHECK {                     # 通过TCP健康检测
+            connect_timeout 3         
+        }
+    }
+    real_server 192.168.231.158 8801 {  # real server2地址和端口
+        weight 1
+        TCP_CHECK {                     # 通过TCP健康检测
+            connect_timeout 3
+        }
+    }
+}
+```
+
+
+在规划的chime-server从节点上, 安装keepalived并编辑/etc/keepalived/keepalived.conf, 添加或修改以下部分: 
+
+```
+vrrp_instance VI_1 {
+    state BACKUP                   # 设置当前为默认从节点
+    interface ens160               # 管理网网口的名称
+    virtual_router_id 51           # 重要，必须和其它节点的router_id一致
+    priority 255                   # 权重，不大于主节点的数值
+    advert_int 1
+    authentication {
+        auth_type PASS             # 认证方式
+        auth_pass 1111             # 认证密码
+    }
+    virtual_ipaddress {
+        192.168.231.161            # VIP地址
+    }
+}
+
+virtual_server 192.168.231.161 80 {
+    delay_loop 6
+    lb_algo rr                      # 负载均衡算法
+    lb_kind NAT                     # lvs 工作模式
+    persistence_timeout 50
+    protocol TCP
+
+    real_server 192.168.231.128 8033 {  # real server1地址和端口
+        weight
+        TCP_CHECK {                     # 通过TCP健康检测
+            connect_timeout 3         
+        }
+    }
+    real_server 192.168.231.158 8033 {  # real server2地址和端口
+        weight 1
+        TCP_CHECK {                     # 通过TCP健康检测
+            connect_timeout 3
+        }
+    }
+}
+
+
+virtual_server 192.168.231.161 8801 {
+    delay_loop 6
+    lb_algo rr                      # 负载均衡算法
+    lb_kind NAT                     # lvs 工作模式
+    persistence_timeout 50
+    protocol TCP
+
+    real_server 192.168.231.128 8801 {  # real server1地址和端口
+        weight
+        TCP_CHECK {                     # 通过TCP健康检测
+            connect_timeout 3         
+        }
+    }
+    real_server 192.168.231.158 8801 {  # real server2地址和端口
+        weight 1
+        TCP_CHECK {                     # 通过TCP健康检测
+            connect_timeout 3
+        }
+    }
+}
+```
+
+
+配置完成后均需重启keepalived
+
+```
+sudo systemctl restart keepalived 
+```
+
+配置后即可通过VIP访问chime-server，例如通过"http://192.168.231.161/"访问Web UI，或通过"192.168.231.161:8801"访问API
+
+按示例部署的两个chime-server进程只要有一个服务可达，即可正常提供服务。两台keepalived服务器只要有一台可达，keepalived+lvs服务即可正常运行。
 
 
 ## chime-agent 高可用介绍

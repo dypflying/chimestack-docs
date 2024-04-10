@@ -310,7 +310,12 @@ chime-agent进程出现严重异常时，chime-agent进程会异常退出。chim
 
 下面简单介绍几种常用的mysql高可用架构，目前市场上有许多实现了高可用mysql(机群)的软件，但大多都是采用其中一种以下架构的实现： 
 
-1. MMM(Multi-Master Replication Manager): 多主复制机制，基于MySQL的复制机制，通过在多个 MySQL实例之间进行主从复制，实现了数据的同步和备份。
+1. MMM(Multi-Master Replication Manager): 多主复制机制，基于MySQL的复制机制，通过在多个MySQL实例之间进行主从复制，实现了数据的同步和备份。
+   
+   ![MySQL-MMM](/images/mysql-mmm.png)
+   
+   其中Google开源项目MySQL-MMM提供了MySQL主主复制配置的监控、故障转移和管理的一套可伸缩的脚本套件。[下载地址](https://mysql-mmm.org/)
+
 2. MHA(Master High Availability): 在主数据库发生故障时，能够快速自动地将备库（Slave）提升为新的主库，以保证系统的连续性和可用性。
 3. MGR(MySQL Group Replication): MySQL官方提供的一种高可用性架构，用于实现MySQL数据库的主从复制和自动故障切换。MGR基于MySQL的InnoDB存储引擎和Group Replication插件，通过使用多主复制的方式来提供高可用性和数据一致性。
 4. Mysql NDB Cluster: MySQL官方提供的一种分布式数据库解决方案，旨在提供高可用性、可扩展性和实时性能。它基于NDB(Network DataBase)存储引擎，使用多台服务器组成一个集群，提供数据的分片和复制，以实现高可用性和负载均衡。
@@ -331,10 +336,13 @@ chime-agent进程出现严重异常时，chime-agent进程会异常退出。chim
 
 ### influxdb高可用
 
+influxdb的高可用方案可以使用influx-proxy + keepalived的方案，其中influx-proxy是一个代理进程，负责双写两个或以上的influxdb实例，同时部署2套influx-proxy + keepalived，通过VIP的方式对外提供访问，influx-proxy。
+
+另外可以采取开源的influx-cluster方案(参考 [influxdb-cluster部署配置](https://github.com/chengshiwen/influxdb-cluster))或者官方付费的Influx Enterprise方案(参考 [官方Influx Enterprise部署配置](https://docs.influxdata.com/enterprise_influxdb/v1/))
+
+
 
 ### s3高可用
 
-s3的高可用依赖s3软件提供者的高可用方案，比如minio的多服务器多硬盘的配置方案
-
-#### minio高可用的配置方式
+s3的高可用依赖s3软件提供者的高可用方案，比如minio的多服务器多硬盘的配置方案, 下面介绍minio高可用的配置方式
 

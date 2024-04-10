@@ -363,10 +363,79 @@ chime-agent进程出现严重异常时，chime-agent进程会异常退出。chim
 
 #### PXC(Percona XtraDB Cluster)配置示例
 
+准备三台服务器(Node): 
+
+{{% alert title="提示" color="primary" %}}
+尽管Percona Cluster可以仅使用2个Node，但是不推荐这样配置。
+{{% /alert %}}
+
+|  Node  |  Host  |        IP       |
+|--------|--------|-----------------|
+| Node1  | host1  | 192.168.231.171 |
+| Node2  | host2  | 192.168.231.172 |
+| Node3  | host3  | 192.168.231.173 |
+
+在三台Node分别安装percona
+
 ```
 sudo yum install https://repo.percona.com/yum/percona-release-latest.noarch.rpm
 sudo percona-release setup pxc-80
 sudo yum install percona-xtradb-cluster
+```
+
+安装结束后，对于每个Node, 编辑mysql配置文件/etc/my.cnf
+
+```
+# vim /etc/my.cnf
+wsrep_provider=/usr/lib64/galera4/libgalera_smm.so
+wsrep_cluster_name=pxc-cluster
+wsrep_cluster_address=gcomm://192.168.231.171,192.168.231.172,192.168.231.173
+
+[mysqld]
+wsrep_provider_options=”socket.ssl_key=server-key.pem;socket.ssl_cert=server-cert.pem;socket.ssl_ca=ca.pem”
+
+[sst]
+encrypt=4
+ssl-key=server-key.pem
+ssl-ca=ca.pem
+ssl-cert=server-cert.pem
+```
+
+对于Node1, 添加如下配置:
+
+```
+wsrep_node_name=host1
+wsrep_node_address=192.168.231.171
+pxc_strict_mode=ENFORCING
+```
+
+对于Node2, 添加如下配置:
+
+```
+wsrep_node_name=host2
+wsrep_node_address=192.168.231.172
+```
+
+对于Node3, 添加如下配置:
+
+```
+wsrep_node_name=host3
+wsrep_node_address=192.168.231.173
+```
+
+
+
+安装配置结束后，分别启动mysql服务
+
+```
+sudo systemctl enable mysql
+sudo systemctl start mysql
+```
+
+查看节点在percona集群的状态:
+
+```
+show status like 'wsrep%';
 ```
 
 ### influxdb高可用

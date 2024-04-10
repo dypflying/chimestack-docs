@@ -326,20 +326,31 @@ chime-agent进程出现严重异常时，chime-agent进程会异常退出。chim
    
     ![MHA](/images/mysql-mha.png)
 
+    部署配置参考 [MHA作者github](https://github.com/yoshinorim/mha4mysql-manager/wiki/Installation)
+
 4. MGR(MySQL Group Replication): MySQL官方提供的一种高可用性架构，用于实现MySQL数据库的主从复制和自动故障切换。MGR基于MySQL的InnoDB存储引擎和Group Replication插件，通过使用多主复制的方式来提供高可用性和数据一致性。
    
      ![MGR](/images/mysql-mgr.png)
 
-    部署配置方法可参考 [Mysql官方Blog](https://dev.mysql.com/blog-archive/mysql-group-replication-a-quick-start-guide/)。
+    部署配置参考 [Mysql官方Blog](https://dev.mysql.com/blog-archive/mysql-group-replication-a-quick-start-guide/)。
    
 5. Mysql NDB Cluster: MySQL官方提供的一种分布式数据库解决方案，旨在提供高可用性、可扩展性和实时性能。它基于NDB(Network DataBase)存储引擎，使用多台服务器组成一个集群，提供数据的分片和复制，以实现高可用性和负载均衡。
    
    ![NDB Cluster](/images/mysql-ndb-cluster.png)
 
-   部署配置方法可参考 [Mysql官方文档](https://dev.mysql.com/doc/refman/8.3/en/mysql-cluster-installation.html)
+   部署配置可参考 [Mysql官方文档](https://dev.mysql.com/doc/refman/8.3/en/mysql-cluster-installation.html)
 
 6. Galera Cluster: 基于同步多主复制的MySQL集群解决方案。使用Galera Replication插件，通过在多个MySQL节点之间同步数据来实现高可用性和负载均衡。
-7. PXC(Percona XtraDB Cluster)是一个基于Galera Cluster的高可用性和高性能的MySQL集群解决方案。由Percona开发的，建立在Galera Replication插件之上，提供了多主复制和数据同步的功能。
+   
+    ![Galera Cluster](/images/mysql-galera-cluster.png)
+
+    部署配置可参考 [Galera官方文档](https://galeracluster.com/)
+
+7. PXC(Percona XtraDB Cluster): 基于Galera Cluster的高可用性和高性能的MySQL集群解决方案。由Percona开发的，建立在Galera Replication插件之上，提供了多主复制和数据同步的功能。
+
+    ![Percona Cluster](/images/mysql-percona-cluster.png)
+
+    安装配置方法可以参考 [Percona官方文档](https://docs.percona.com/percona-xtradb-cluster/8.0/quickstart-overview.html)
 
 除了以上几种常见的mysql高可用架构，还有以下几种可以配合mysql高可用架构一起使用数据可靠性方案: 
 
@@ -352,6 +363,11 @@ chime-agent进程出现严重异常时，chime-agent进程会异常退出。chim
 
 #### PXC(Percona XtraDB Cluster)配置示例
 
+```
+sudo yum install https://repo.percona.com/yum/percona-release-latest.noarch.rpm
+sudo percona-release setup pxc-80
+sudo yum install percona-xtradb-cluster
+```
 
 ### influxdb高可用
 

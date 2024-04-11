@@ -78,11 +78,12 @@ influx setup \
 通过以下命令更新chime-server配置
 
 ```
-chimeadm initserver influxdb --ip <ip address> --port <port> --token <token> --org <org> --bucket <bucket>
+chimeadm initserver influxdb --vip <virtual ip address> --rips <real ip addresses> --port <port> --token <token> --org <org> --bucket <bucket>
 ```
 
 命令行参数解释如下: 
-- ip address: influxdb实例的访问地址
+- vip: virtual IP访问地址(可以是keepalived的VIP地址，也可以是实际的物理地址)
+- rips: influxdb实例运行的实际物理IP，如果有多个，用逗号分隔
 - port: influxdb实例的访问端口
 - token: influxdb实例的API访问令牌
 - org: influxdb的组织名称
@@ -92,7 +93,8 @@ chimeadm initserver influxdb --ip <ip address> --port <port> --token <token> --o
 例如:
 
 ```
-chimeadm initserver influxdb --ip 127.0.0.1 \
+chimeadm initserver influxdb --vip 192.168.231.163 \
+  --rips 192.168.231.128,192.168.231.158
   --port 8086 \
   --token x5iGbxLx-2QKN64I3wooyZsHPtmGB4OvBspdSLuOcEBeN-_-rrnC_1GbtSrJrUD0-qSiXsYrKC0T4VF4m97ecw== \
   --org chime \

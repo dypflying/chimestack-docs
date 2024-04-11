@@ -360,12 +360,16 @@ chime-agent进程出现严重异常时，chime-agent进程会异常退出。chim
 
 #### Mysql双主+keepalived的部署配置方法
 
-准备两台服务器(Node)，配置两个mysql实例互为主从:
+规划两台服务器(Node)，配置两个mysql实例互为主从:
 
 |  Node  |  Host  |        IP       |
 |--------|--------|-----------------|
 | Node1  | host1  | 192.168.231.151 |
 | Node2  | host2  | 192.168.231.152 |
+
+另外，每台服务器安装keepalived服务，通过设置VIP对外提供mysql服务。
+
+规划VIP: 192.168.231.162
 
 ###### 1.配置Node2同步Node1的binlog
 
@@ -499,9 +503,80 @@ change master to xxx xxx ...
 START SLAVE;
 ```
 
+###### 5.keepalived 配置
+
+在Node1编辑 /etc/keepalived/keepalived.conf, 添加如下内容
+
+```
+vrrp_script chk_mysql {
+    script "nc -zv localhost 3306"
+    interval 2                   # default: 1s
+}
+
+vrrp_instance VI_2 {
+    state MASTER
+    interface ens160
+    virtual_router_id 52
+    priority 255
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1111
+    }
+    virtual_ipaddress {
+        192.168.231.162
+    }
+
+    track_script {
+        chk_mysql
+    }
+}
+```
+
+
+在Node2编辑 /etc/keepalived/keepalived.conf, 添加如下内容
+
+```
+vrrp_script chk_mysql {
+    script "nc -zv localhost 3306"
+    interval 2                   # default: 1s
+}
+
+vrrp_instance VI_2 {
+    state BACKUP
+    interface ens160
+    virtual_router_id 52
+    priority 254
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1111
+    }
+    virtual_ipaddress {
+        192.168.231.162
+    }
+
+    track_script {
+        chk_mysql
+    }
+}
+```
+
+然后在Node1和Node2分别重启keepalived: 
+
+```
+sudo systemctl restart keepalived
+```
+
+最后可通过mysql客户端连接VIP地址进行验证:
+
+```
+mysql -h 192.168.231.162 -u root -p
+```
+
 #### PXC(Percona XtraDB Cluster)配置示例
 
-准备三台服务器(Node): 
+规划三台服务器(Node): 
 
 |  Node  |  Host  |        IP       |
 |--------|--------|-----------------|
@@ -578,10 +653,109 @@ show status like 'wsrep%';
 
 ### influxdb高可用
 
-influxdb的高可用方案可以使用influx-proxy + keepalived的方案，其中influx-proxy是一个代理进程，负责双写两个或以上的influxdb实例，同时部署2套influx-proxy + keepalived，通过VIP的方式对外提供访问，influx-proxy。
+ChimeStack关于influxdb高可用的解决方案比较简单，通过部署双活influxdb实例+keepalived来实现高可用的目的。即部署两个influxdb实例在两台不同的服务器上，两台服务器的influxdb除了访问地址外，其它访问配置(token, org, bucket)完全相同。对influxdb的写入全部都是双写，即数据是同时写入两个influxdb中，此外，通过keepalived配置虚拟VIP并配置主从influxdb实例，当出现主influxdb故障时，VIP会切换到从服务器上。对influxdb数据的检索都是通过这个VIP访问的，这样保证了重要的报警指标数据检索的高可用性。
 
-另外可以采取开源的influx-cluster方案(参考 [influxdb-cluster部署配置](https://github.com/chengshiwen/influxdb-cluster))或者官方付费的Influx Enterprise方案(参考 [官方Influx Enterprise部署配置](https://docs.influxdata.com/enterprise_influxdb/v1/))
+架构示意图如下所示: 
 
+![Influxdb HA](/images/influxdb_ha.png)
+
+其中通过物理网口的IP地址访问的influxdb的endpoint叫做real endpoint, 通过VIP访问influxdb的endpoint叫做vip endpoint，客户端对influxdb的数据写入是直接写入全部的real endpoint，而对influxdb数据的读取是通过vip endpoint。
+
+{{% alert title="提示" color="primary" %}}
+这种部署的一个弊端是，由于网络、服务器可能出现的异常，两个influxdb的数据可能不完全一致，当发生VIP切换时，可能出现信息不一致问题。
+{{% /alert %}}
+
+###### 配置chime-server
+
+规划两台服务器(Node)运行influxdb: 
+
+|  Node  |     Host      |        IP       |
+|--------|---------------|-----------------|
+| Node1  | influx-host1  | 192.168.231.141 |
+| Node2  | influx-host2  | 192.168.231.142 |
+
+VIP: 192.168.231.143
+
+通过chimeadm配置chime-server: 
+
+```
+chimeadm initserver influxdb --vip 192.168.231.143 \
+  --rips 192.168.231.141,192.168.231.142
+  --port 8086 \
+  --token x5iGbxLx-2QKN64I3wooyZsHPtmGB4OvBspdSLuOcEBeN-_-rrnC_1GbtSrJrUD0-qSiXsYrKC0T4VF4m97ecw== \
+  --org chime \
+  --bucket chime \
+```
+
+###### 配置keepalived
+
+
+在Node1编辑 /etc/keepalived/keepalived.conf, 添加如下内容
+
+```
+vrrp_script chk_influxdb {
+    script "nc -zv localhost 8086"
+    interval 2                   # default: 1s
+}
+
+vrrp_instance VI_3 {
+    state MASTER
+    interface ens160
+    virtual_router_id 53
+    priority 255
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1111
+    }
+    virtual_ipaddress {
+        192.168.231.143
+    }
+
+    track_script {
+        chk_influxdb
+    }
+}
+```
+
+
+在Node2编辑 /etc/keepalived/keepalived.conf, 添加如下内容
+
+```
+vrrp_script chk_influxdb {
+    script "nc -zv localhost 8086"
+    interval 2                   # default: 1s
+}
+
+vrrp_instance VI_3 {
+    state BACKUP
+    interface ens160
+    virtual_router_id 53
+    priority 254
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1111
+    }
+    virtual_ipaddress {
+        192.168.231.143
+    }
+
+    track_script {
+        chk_influxdb
+    }
+}
+```
+
+然后在Node1和Node2分别重启keepalived: 
+
+```
+sudo systemctl restart keepalived
+```
+
+###### 其它高可用方案
+
+客户也可以采取开源的influx-cluster方案，具体参考 [influxdb-cluster部署配置](https://github.com/chengshiwen/influxdb-cluster)，或者influxdb官方付费版的Influxdb Enterprise方案, 具体参考 [官方Influx Enterprise部署配置](https://docs.influxdata.com/enterprise_influxdb/v1/)，这两种方案的可用性/可靠性均优于influxdb双写+keepalived的方案，但部署成本和经济成本均比较高，客户可以综合考虑比较收益和成本进行选择。
 
 
 ### s3高可用

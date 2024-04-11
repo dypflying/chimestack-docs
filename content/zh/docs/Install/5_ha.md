@@ -360,20 +360,158 @@ chime-agent进程出现严重异常时，chime-agent进程会异常退出。chim
 
 #### Mysql双主+keepalived的部署配置方法
 
+准备两台服务器(Node)，配置两个mysql实例互为主从:
+
+|  Node  |  Host  |        IP       |
+|--------|--------|-----------------|
+| Node1  | host1  | 192.168.231.151 |
+| Node2  | host2  | 192.168.231.152 |
+
+###### 1.配置Node2同步Node1的binlog
+
+在Node1上编辑/etc/my.conf, 添加如下配置
+
+```
+[mysqld]
+server-id=1
+log-bin=mysql-bin
+
+#binlog only replicate database chime and portal
+binlog-do-db=chime
+binlog-do-db=portal
+```
+
+然后重启mysqld服务
+
+```
+sudo systemctl restart mysqld 
+```
+
+在Node1上执行SQL:
+
+```
+#mysql -u root -p 
+
+CREATE USER 'chimesync'@'%' IDENTIFIED BY 'passw0rd';
+GRANT REPLICATION SLAVE ON *.* TO 'chimesync'@'%';
+FLUSH PRIVILEGES;
+```
+
+然后查询master的bin log状态: 
+
+```
+mysql> show master status \G
+*************************** 1. row ***************************
+             File: mysql-bin.000001
+         Position: 156
+     Binlog_Do_DB: 
+ Binlog_Ignore_DB: 
+Executed_Gtid_Set: 
+1 row in set (0.00 sec)
+```
+
+在Node2上执行SQL:
+
+```
+change master to master_host='192.168.231.151',master_user='chimesync',master_password='passw0rd',master_log_file='mysql-bin.000001',master_log_pos=156;
+```
+
+**注意**: master_log_file和master_log_pos需要和Node1上 "show master status" 输出的binlog状态一致。
+
+###### 2.配置Node1同步Node2的binlog
+
+在Node2上编辑/etc/my.conf, 添加如下配置
+
+```
+[mysqld]
+server-id=2
+log-bin=mysql-bin
+
+#binlog only replicate database chime and portal
+binlog-do-db=chime
+binlog-do-db=portal
+```
+
+然后重启mysqld服务
+
+```
+sudo systemctl restart mysqld 
+```
+
+在Node2上执行SQL:
+
+```
+#mysql -u root -p 
+
+CREATE USER 'chimesync'@'%' IDENTIFIED BY 'passw0rd';
+GRANT REPLICATION SLAVE ON *.* TO 'chimesync'@'%';
+FLUSH PRIVILEGES;
+```
+
+然后查询master的bin log状态: 
+
+```
+mysql> show master status \G
+*************************** 1. row ***************************
+             File: mysql-bin.000001
+         Position: 157
+     Binlog_Do_DB: 
+ Binlog_Ignore_DB: 
+Executed_Gtid_Set: 
+1 row in set (0.00 sec)
+```
+
+在Node1上执行SQL:
+
+```
+change master to master_host='192.168.231.152',master_user='chimesync',master_password='passw0rd',master_log_file='mysql-bin.000001',master_log_pos=157;
+```
+
+**注意**: master_log_file和master_log_pos需要和Node2上 "show master status" 输出的binlog状态一致。
+
+###### 3.验证node1和node2的mysql实例互为主从
+
+在node1和node2分别在chime库创建test1/test2表
+
+```
+#on node1: 
+USE chime;
+CREATE TABLE TEST1(id INT AUTO_INCREMENT PRIMARY KEY); 
+
+#on node2: 
+USE chime;
+SHOW TABLES;
+CREATE TABLE TEST2(id INT AUTO_INCREMENT PRIMARY KEY); 
+
+#on node1: 
+SHOW TABLES;
+```
+
+验证test1/test2表在两个数据库实例均能看到。
+
+###### 4.修改配置
+
+如果要修改主从配置，可以在执行修改前停止slave replication，修改后再启动slave replication，例如: 
+
+```
+STOP SLAVE;
+change master to xxx xxx ... 
+START SLAVE;
+```
 
 #### PXC(Percona XtraDB Cluster)配置示例
 
 准备三台服务器(Node): 
-
-{{% alert title="提示" color="primary" %}}
-尽管Percona Cluster可以仅使用2个Node，但是不推荐这样配置。
-{{% /alert %}}
 
 |  Node  |  Host  |        IP       |
 |--------|--------|-----------------|
 | Node1  | host1  | 192.168.231.171 |
 | Node2  | host2  | 192.168.231.172 |
 | Node3  | host3  | 192.168.231.173 |
+
+{{% alert title="提示" color="primary" %}}
+尽管Percona Cluster可以仅使用2个Node，但不推荐。
+{{% /alert %}}
 
 在三台Node分别安装percona
 

@@ -1,5 +1,5 @@
 ---
-title: 2.5 高可用配置
+title: 2.4 高可用配置
 date: 2023-11-09
 description: 本章介绍如何配置让ChimeStack高可用，包括chime-server高可用、chime-agent高可用以及依赖的mysql, influxdb和s3的高可用部署。
 weight: 6

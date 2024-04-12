@@ -1,5 +1,5 @@
 ---
-title: 2.4 配置ChimeStack
+title: 配置ChimeStack
 date: 2023-11-09
 description: 本章介绍如何快速配置并启动ChimeStack
 weight: 5
@@ -78,22 +78,21 @@ influx setup \
 通过以下命令更新chime-server配置
 
 ```
-chimeadm initserver influxdb --vip <virtual ip address> --rips <real ip addresses> --port <port> --token <token> --org <org> --bucket <bucket>
+chimeadm initserver influxdb --vip-endpoint <vip based endpoint> --real-endpoints <real service endpoints> --token <token> --org <org> --bucket <bucket>
 ```
 
 命令行参数解释如下: 
-- vip-endpoint: 通过virtual IP访问地址(可以是keepalived的VIP地址，也可以是实际的物理地址)
-- real-endpoints: influxdb运行实例的物理endpoint地址
+- vip-endpoint: 通过keepalived+lvs负载均衡设置的VIP时，vip-endpoint设置成负载均衡entry的endpoint；如果直接访问的influxdb时，vip-endpoint设置成infludb实例的endpoint。
+- real-endpoints: influxdb运行实例的endpoint地址列表(如果有多个influxdb实例，endpoint列表用逗号分隔)
 - token: influxdb实例的API访问令牌
 - org: influxdb的组织名称
 - bucket: influxdb的bucket名称
-- 
 
 例如:
 
 ```
-chimeadm initserver influxdb --vip-endpoint 192.168.231.163 \
-  --real-endpoints http://192.168.231.128:8086,http://192.168.231.158:8086
+chimeadm initserver influxdb --vip-endpoint http://192.168.231.120:8086 \
+  --real-endpoints http://192.168.231.121:8086,http://192.168.231.122:8086
   --token x5iGbxLx-2QKN64I3wooyZsHPtmGB4OvBspdSLuOcEBeN-_-rrnC_1GbtSrJrUD0-qSiXsYrKC0T4VF4m97ecw== \
   --org chime \
   --bucket chime \
@@ -117,34 +116,44 @@ chimeadm initserver s3 --ip <ip address> --port <port> --ak <ak> --sk <sk> --emb
  
 例如:
 ```
-chimeadm initserver s3 --ip 192.168.231.128 --port 9000 --ak chime --sk chime --embedded --path /storage/s3
+# use embedded minio engine 
+chimeadm initserver s3 --ip 192.168.231.100 --port 9000 --ak chime --sk chime --embedded --path /storage/s3
+
+# use 3rd s3 service 
+chimeadm initserver s3 --ip 192.168.231.101 --port 9000 --ak chime --sk chime
 ```
 
 ### 检查chime-server
 
-chimeadm提供check命令检查chime-server的配置, 并且检查mysql, influxdb和s3等依赖组件的可用性, 在server节点运行:
+通过chimeadm initserver check命令检查chime-server的配置, 并且检查mysql, influxdb和s3等依赖组件的可用性, 在server节点运行:
 
 ```
 chimeadm initserver check 
 ```
 
-如果检查成功，则chime-server可以直接启动
+如果检查成功，则说明配置完成且有效，chime-server已经准备好，可以直接启动
 
 ### 运行chime-server
 
-在server节点直接运行:
+可以通过以下两种方式启动chime-server:
 
+1. 在前台启动，方便观察输出，可用于调试阶段: 
 ```
-chime-server
+chime-server    
 ```
 
-即可启动管控服务进程，日志输出在/var/log/chime/server.log
+2. 通过systemd启动
+```
+sudo systemctl start chime-server
+```
+
+chime-server的运行日志在/var/log/chime/server.log
 
 ## 配置并启动chime-portal 
 
-chime-server程序除了包含了ChimeStack的管控服务端程序，还内嵌了一个Web UI程序(portal), Web UI可以独立于Server进程单独运行，也可以和Server运行在一个进程中，默认是运行在同一个进程中。
+chime-server二进制程序文件除了包含了ChimeStack的管控服务端程序，还内嵌了一个Web UI(portal), Web UI可以独立于Server进程单独运行，也可以和Server运行在一个进程中(默认)。
 
-下面介绍如何配置和初始化chime-portal，以及如何运行chime-portal
+下面介绍如何配置、初始化和运行chime-portal
 
 ### 配置和初始化portal数据库
 
@@ -171,7 +180,7 @@ chimeadm initportal mysql --ip 127.0.0.1 \
   --name portal
 ```
 
-运行成功后，数据库portal被成功初始化，同时/etc/chime/server.yaml中的数据库配置信息会被更新。
+运行成功后，数据库portal被成功初始化，同时/etc/chime/server.yaml中的portal数据库配置信息被更新。
 
 ### 配置portal运行参数
 
@@ -192,17 +201,18 @@ chimeadm initportal run --port <port> --api-url <api server addr: port> --prefix
 ```
 chimeadm initportal run \
   --port 8033 \
-  --api-url 192.168.231.128:8801 \
+  --api-url 192.168.231.101:8801 \
   --prefix /v1
 ```
 
 ### 检查chime-portal
 
-运行
+运行check命令检查chime-portal的配置和组件的连通性:
+
 ```
 chimeadm initportal check 
 ```
-检查chime-portal的配置，如果检查成功，则chime-portal可以直接启动
+如果检查成功，则说明配置完成，chime-portal可以启动
 
 ### 运行chime-portal
 
@@ -229,7 +239,7 @@ chime-server --cfg /etc/chime/portal.yaml #仅运行portal
 
 ### 配置chime-agent
 
-chime-agent是ChimeStack的客户端程序，运行在计算节点上(也可以和chime-server在同一节点上)。chime-agent启动时会读取agent的配置文件(/etc/chime/agent.yaml)，下面介绍如何通过chimeadm配置并启动agent
+chime-agent是ChimeStack的客户端程序，运行在计算节点上(计算节点和管理节点没有界限，可以是不同的服务器，也可以是相同的服务器)。chime-agent启动时会读取agent的配置文件(/etc/chime/agent.yaml)，下面介绍如何通过chimeadm配置并启动agent
 
 通过以下命令配置agent运行参数
 
@@ -239,7 +249,7 @@ chimeadm initagent --host [host name] --ip <ip address> --rack <rackname> --api 
 
 
 命令行参数解释如下: 
-- host(可选): 当前host的名称
+- host(可选): 当前host的名称，如果忽略chimeadm会自动生成一个host名称
 - ip: 当前节点的管理网ip
 - rack: 当前节点所在机架的名称
 - api: chime-server api服务的uri
@@ -252,30 +262,38 @@ chimeadm initagent
   --host chime-node1 \
   --ip 192.168.231.158 \
   --rack rack1 
-  --api 192.168.231.128:8801 \
+  --api 192.168.231.101:8801 \
   --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVdWlkIjoiMGZhYjZkYTQtYmU4Zi00ZGJhLTlhYzgtMTlmNGZmNTE5ZjM0IiwiYXVkIjoiY2hpbWUiLCJleHAiOjE3MTE3OTc0OTYsImlhdCI6MTcxMTc5NzQ5NiwiaXNzIjoiY2hpbWUiLCJzdWIiOiJjaGltZSJ9.DpCskpkyEHodbxPbj061iLMw1n04ibjZQ8qj5o0lRTA
 ```
 
-配置成功后，chime-server会自动下发配置给chime-agent完成其它组件访问的设置。
+配置成功后，chime-server会自动下发配置，完成其它组件访问的设置。
 
 ### 检查chime-agent
 
-运行
+运行check命令检查chime-agent的配置，以及和chime-server的连通性
 
 ```
 chimeadm initagent check 
 ```
 
-检查chime-agent的配置，以及和chime-server的联通性，成功后chime-agent即可直接运行
+如果检查成功后，说明配置完成，chime-agent可以启动
 
 ### 运行chime-agent
 
-在计算节点直接运行:
+可以通过两种方式运行chime-agent:
+
+1. 在计算节点直接运行chime-agent程序，可以观察程序输出，方便调试阶段使用
 
 ```
 chime-agent
 ```
 
-运行时日志信息在/var/log/chime/agent.log
+2. 通过systemd启动
 
-运行后，节点会自动注册到系统中，但是没有分配给具体的Cluster以及设置超分比等信息，需要在Web UI或者CLI手动添加到集群中，具体参考[节点管理](../../webui/platform/host/) 章节。
+```
+sudo systemctl start chime-agent 
+```
+
+chime-agent的运行时日志信息在/var/log/chime/agent.log
+
+运行后，节点会自动注册到系统中，但是没有分配给具体的Cluster以及缺少节点参数设置等信息，需要在Web UI或者CLI手动添加到集群中，具体参考[节点管理](../../webui/platform/host/) 章节。

@@ -1,13 +1,13 @@
 ---
-title: 2.3 安装ChimeStack
+title: 安装ChimeStack
 date: 2023-11-09
 description: 本章介绍如何安装ChimeStack
-weight: 4
+weight: 3
 ---
 
-## 2.3.1 通过ISO安装ChimeStack 
+## 通过ISO安装ChimeStack 
 
-## 2.3.2 手动安装ChimeStack 
+## 手动安装ChimeStack 
 
 ### 安装Chime-Stack包 
 
@@ -39,7 +39,7 @@ sudo ./chimestack-x.x.x.bin --force
 chime-stack(或)依赖以下第三方程序: 
 - (必须)mysql: 存储chime-server的元数据信息
 - (必须)influxdb: 存储chime-server运行时的全部监控数据
-- (可选) s3协议的对象存储程序，如minio: 提供镜像服务的存储引擎，由于chime-server内部集成了一个s3引擎，所以当缺少第三方s3服务时，可以选择用chime-server的s3引擎作为镜像服务的存储。 
+- (可选)遵守s3协议的对象存储服务软件(如minio),作为镜像服务、备份服务的存储引擎。chime-server内部已经集成了一个简单的s3引擎(minio实现)，当缺少第三方s3服务软件时，可以选择用chime-server的内嵌的s3引擎为镜像服务提供存储的基础设置软件。 
 
 #### 1.安装mysql 
 
@@ -65,7 +65,7 @@ sudo yum remove mysql-server
 
 {{% /alert %}}
 
-##### 不需要公网的安装方式
+##### 离线的安装方式
 
 mysql8.x的离线安装包可以从 [官方下载](https://dev.mysql.com/downloads/mysql/) 或者从 [Downloads/3rd/Mysql](https://chimestack.io/downloads/3rd/mysql) 获取。
 
@@ -93,7 +93,7 @@ sudo systemctl start mysqld
 
 #### 2.安装influxdb 
 
-ChimeStack要求influxdb 2.x版本
+ChimeStack要求influxdb 2.x版本，不能和influxdb 1.x的版本一起使用
 
 可从官网下载 [官方下载]（https://docs.influxdata.com/influxdb/v2/install/）influxdb官方安装包，例如:
 
@@ -102,7 +102,6 @@ curl -O https://dl.influxdata.com/influxdb/releases/influxdb2-2.7.5-1.x86_64.rpm
 ```
 
 或者从ChimeStack网站[Downloads/3rd/Influxdb](https://chimestack.io/downloads/3rd/influxdb) 下载influxdb 2.7.5安装包
-
 
 下载后运行: 
 
@@ -123,11 +122,11 @@ sudo cp influx /usr/bin/
 
 ### 安装第三方s3服务程序
 
-ChimeStack可以对接任何支持s3协议的对象存储引擎，推荐安装minio，安装方法参考 [官方文档](https://min.io/docs/minio/linux/operations/installation.html)
+ChimeStack可以对接任何支持s3协议的对象存储引擎，推荐使用minio，minio的部署配置方法参考 [官方文档](https://min.io/docs/minio/linux/operations/installation.html)
 
 ### 安装qemu+libvirt
 
-安装 libvirt, qemu, genisoimage 包
+安装 libvirt, qemu, genisoimage
 
 ```
 sudo dnf install qemu-kvm libvirt genisoimage 
@@ -143,7 +142,7 @@ sudo yum install qemu-kvm libvirt genisoimage
 ChimeStack需要使用libvirt8.0, qemu6.0以上版本
 {{% /alert %}}
 
-然后启动libvirtd
+启动libvirtd
 ```
 sudo systemctl enable libvirtd
 sudo systemctl start libvirtd

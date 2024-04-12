@@ -82,9 +82,8 @@ chimeadm initserver influxdb --vip <virtual ip address> --rips <real ip addresse
 ```
 
 命令行参数解释如下: 
-- vip: virtual IP访问地址(可以是keepalived的VIP地址，也可以是实际的物理地址)
-- rips: influxdb实例运行的实际物理IP，如果有多个，用逗号分隔
-- port: influxdb实例的访问端口
+- vip-endpoint: 通过virtual IP访问地址(可以是keepalived的VIP地址，也可以是实际的物理地址)
+- real-endpoints: influxdb运行实例的物理endpoint地址
 - token: influxdb实例的API访问令牌
 - org: influxdb的组织名称
 - bucket: influxdb的bucket名称
@@ -93,9 +92,8 @@ chimeadm initserver influxdb --vip <virtual ip address> --rips <real ip addresse
 例如:
 
 ```
-chimeadm initserver influxdb --vip 192.168.231.163 \
-  --rips 192.168.231.128,192.168.231.158
-  --port 8086 \
+chimeadm initserver influxdb --vip-endpoint 192.168.231.163 \
+  --real-endpoints http://192.168.231.128:8086,http://192.168.231.158:8086
   --token x5iGbxLx-2QKN64I3wooyZsHPtmGB4OvBspdSLuOcEBeN-_-rrnC_1GbtSrJrUD0-qSiXsYrKC0T4VF4m97ecw== \
   --org chime \
   --bucket chime \

@@ -679,9 +679,8 @@ VIP: 192.168.231.143
 通过chimeadm配置chime-server: 
 
 ```
-chimeadm initserver influxdb --vip 192.168.231.143 \
-  --rips 192.168.231.141,192.168.231.142
-  --port 8086 \
+chimeadm initserver influxdb --vip-endpoint http://192.168.231.143:8086 \
+  --real-endpoints http://192.168.231.141:8086,http://192.168.231.142:8086
   --token x5iGbxLx-2QKN64I3wooyZsHPtmGB4OvBspdSLuOcEBeN-_-rrnC_1GbtSrJrUD0-qSiXsYrKC0T4VF4m97ecw== \
   --org chime \
   --bucket chime \

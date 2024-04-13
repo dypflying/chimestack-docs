@@ -99,11 +99,12 @@ vrrp_instance VI_1 {
         auth_pass 1111             # 认证密码
     }
     virtual_ipaddress {
-        192.168.231.10            # VIP地址
+        192.168.231.10            # chime-server VIP地址
+        192.168.231.20            # chime-portal VIP地址
     }
 }
 
-virtual_server 192.168.231.10 80 {
+virtual_server 192.168.231.20 80 {
     delay_loop 6
     lb_algo rr                      # 负载均衡算法
     lb_kind NAT                     # lvs 工作模式
@@ -182,11 +183,12 @@ vrrp_instance VI_1 {
         auth_pass 1111             # 认证密码
     }
     virtual_ipaddress {
-        192.168.231.10            # VIP地址
+        192.168.231.10             # chime-server VIP地址
+        192.168.231.20             # chime-portal VIP地址
     }
 }
 
-virtual_server 192.168.231.10 80 {
+virtual_server 192.168.231.20 80 {
     delay_loop 6
     lb_algo rr                      # 负载均衡算法
     lb_kind NAT                     # lvs 工作模式
@@ -261,7 +263,7 @@ sudo systemctl restart keepalived
 ### 验证高可用
 
 通过VIP访问chime-server:
-- 通过 "http://192.168.231.10/" 访问Web UI
+- 通过 "http://192.168.231.20/" 访问Web UI
 - 通过 "192.168.231.10:8801" 访问API
 
 在server1节点运行: 
@@ -270,7 +272,7 @@ sudo systemctl restart keepalived
 ip -br a 
 ```
 
-检查VIP(192.168.231.10)期待在网卡ens160上
+确认VIP(192.168.231.10/20)在网卡ens160上
 
 停止server1的chime-server: 
 
@@ -280,7 +282,7 @@ sudo systemctl stop chime-server
 sudo pkill chime-server 
 ```
 
-在server2，检查VIP(192.168.231.10)应该在网卡ens160上，并通过VIP访问Web UI及API，确认功能正常。
+在server2，确认VIP(192.168.231.10/20)在网卡ens160上，并通过VIP访问Web UI及API，确认功能正常。
 
 然后启动server1的chime-server: 
 
@@ -290,4 +292,4 @@ sudo systemctl start chime-server
 chime-server 
 ```
 
-分别检查server1和server2，确认VIP(192.168.231.10)应该在server1的网卡ens160上，并通过VIP访问Web UI及API，功能正常。
+分别检查server1和server2，确认VIP(192.168.231.10/20)在server1的网卡ens160上，并通过VIP访问Web UI及API，功能正常。

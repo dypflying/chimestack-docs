@@ -5,7 +5,7 @@ description: 本章介绍在生产环境下的ChimeStack的部署配置方案，
 weight: 5
 ---
 
-### 理论原理
+### ChimeStack高可用架构简述
 
 在生产环境下ChimeStack的高可用方案是通过对服务分布式集群化，并引入keepalived+lvs组件对实例进行健康检查、自动failover和负载均衡等，当部分服务崩溃或者服务器宕机情况下，不影响服务的可用性及数据的可靠性。
 

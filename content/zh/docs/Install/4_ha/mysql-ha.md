@@ -47,7 +47,7 @@ binlog-do-db=portal
 sudo systemctl restart mysqld 
 ```
 
-在Node1上执行SQL:
+在server1上执行SQL:
 
 ```
 #mysql -u root -p 
@@ -76,11 +76,11 @@ Executed_Gtid_Set:
 change master to master_host='192.168.231.11',master_user='chimesync',master_password='passw0rd',master_log_file='mysql-bin.000001',master_log_pos=156;
 ```
 
-**注意**: master_log_file和master_log_pos需要和Node1上 "show master status" 输出的binlog状态一致。
+**注意**: master_log_file和master_log_pos需要和server1上 "show master status" 输出的binlog状态一致。
 
 ##### 2.配置server1同步server2的binlog
 
-在Node2上编辑/etc/my.conf, 添加如下配置
+在server2上编辑/etc/my.conf, 添加如下配置
 
 ```
 [mysqld]
@@ -98,7 +98,7 @@ binlog-do-db=portal
 sudo systemctl restart mysqld 
 ```
 
-在Node2上执行SQL:
+在server2上执行SQL:
 
 ```
 #mysql -u root -p 
@@ -121,29 +121,29 @@ Executed_Gtid_Set:
 1 row in set (0.00 sec)
 ```
 
-在Node1上执行SQL:
+在server1上执行SQL:
 
 ```
 change master to master_host='192.168.231.12',master_user='chimesync',master_password='passw0rd',master_log_file='mysql-bin.000001',master_log_pos=157;
 ```
 
-**注意**: master_log_file和master_log_pos需要和Node2上 "show master status" 输出的binlog状态一致。
+**注意**: master_log_file和master_log_pos需要和server2上 "show master status" 输出的binlog状态一致。
 
 ##### 3.验证server1和server2的mysql实例互为主从
 
 在server1和server2分别在chime库创建test1/test2表
 
 ```
-#on node1: 
+#on server1: 
 USE chime;
 CREATE TABLE TEST1(id INT AUTO_INCREMENT PRIMARY KEY); 
 
-#on node2: 
+#on server2: 
 USE chime;
 SHOW TABLES;
 CREATE TABLE TEST2(id INT AUTO_INCREMENT PRIMARY KEY); 
 
-#on node1: 
+#on server1: 
 SHOW TABLES;
 ```
 

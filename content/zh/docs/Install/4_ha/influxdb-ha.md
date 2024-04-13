@@ -42,7 +42,7 @@ chimeadm initserver influxdb --vip-endpoint http://192.168.231.40:8086 \
 ###### 配置keepalived
 
 
-在Node1编辑 /etc/keepalived/keepalived.conf, 添加如下内容
+在server1编辑 /etc/keepalived/keepalived.conf, 添加如下内容
 
 ```
 vrrp_script chk_influxdb {
@@ -71,7 +71,7 @@ vrrp_instance VI_3 {
 ```
 
 
-在Node2编辑 /etc/keepalived/keepalived.conf, 添加如下内容
+在server2编辑 /etc/keepalived/keepalived.conf, 添加如下内容
 
 ```
 vrrp_script chk_influxdb {
@@ -99,7 +99,7 @@ vrrp_instance VI_3 {
 }
 ```
 
-然后在Node1和Node2分别重启keepalived: 
+然后server1和server2分别重启keepalived: 
 
 ```
 sudo systemctl restart keepalived

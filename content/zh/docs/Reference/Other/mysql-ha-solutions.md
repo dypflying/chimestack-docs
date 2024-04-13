@@ -11,13 +11,13 @@ weight: 3
      
     两台MySQL数据库互为主从, 同过keepalived设定的VIP对外提供服务，keepalived负责mysql实例的健康检测和failover。ChimeStack默认的mysql高可用方案。
    
-    ![keepalived+dualmaster](/images/mysql-keepalived+dual-master.png)
+![keepalived+dualmaster](/images/mysql-keepalived+dual-master.png)
     
 ### 2.MMM(Multi-Master Replication Manager)
 
     多主复制机制，基于MySQL的复制机制，通过在多个MySQL实例之间进行主从复制，实现了数据的同步和备份。
    
-    ![Google-MMM](/images/mysql-mmm.png)
+![Google-MMM](/images/mysql-mmm.png)
    
     其中Google开源项目MySQL-MMM提供了MySQL主主复制配置的监控、故障转移和管理的一套可伸缩的脚本套件。[下载地址](https://mysql-mmm.org/)
 
@@ -25,7 +25,7 @@ weight: 3
     
     MHA由MHA Node(数据节点)、MHA Manager(管理节点)两部分组成。MHA Node运行在每台MySQL服务器上。MHA Manager可以单独部署在一台独立的机器上，管理多个Master-Slave集群。在主数据库发生故障时，能够快速自动地将备库（Slave）提升为新的主库，以保证系统的连续性和可用性。
    
-    ![MHA](/images/mysql-mha.png)
+![MHA](/images/mysql-mha.png)
 
     部署配置参考 [MHA作者github](https://github.com/yoshinorim/mha4mysql-manager/wiki/Installation)
 
@@ -33,7 +33,7 @@ weight: 3
     
     MySQL官方提供的一种高可用性架构，用于实现MySQL数据库的主从复制和自动故障切换。MGR基于MySQL的InnoDB存储引擎和Group Replication插件，通过使用多主复制的方式来提供高可用性和数据一致性。
    
-    ![MGR](/images/mysql-mgr.png)
+![MGR](/images/mysql-mgr.png)
 
     部署配置参考 [Mysql官方Blog](https://dev.mysql.com/blog-archive/mysql-group-replication-a-quick-start-guide/)。
    
@@ -41,7 +41,7 @@ weight: 3
     
     MySQL官方提供的一种分布式数据库解决方案，旨在提供高可用性、可扩展性和实时性能。它基于NDB(Network DataBase)存储引擎，使用多台服务器组成一个集群，提供数据的分片和复制，以实现高可用性和负载均衡。
    
-    ![NDB Cluster](/images/mysql-ndb-cluster.png)
+![NDB Cluster](/images/mysql-ndb-cluster.png)
 
     部署配置可参考 [Mysql官方文档](https://dev.mysql.com/doc/refman/8.3/en/mysql-cluster-installation.html)
 
@@ -49,7 +49,7 @@ weight: 3
      
     基于同步多主复制的MySQL集群解决方案。使用Galera Replication插件，通过在多个MySQL节点之间同步数据来实现高可用性和负载均衡。
    
-    ![Galera Cluster](/images/mysql-galera-cluster.png)
+![Galera Cluster](/images/mysql-galera-cluster.png)
 
     部署配置可参考 [Galera官方文档](https://galeracluster.com/)
 
@@ -57,7 +57,7 @@ weight: 3
 
     基于Galera Cluster的高可用性和高性能的MySQL集群解决方案。由Percona开发的，建立在Galera Replication插件之上，提供了多主复制和数据同步的功能。
 
-    ![Percona Cluster](/images/mysql-percona-cluster.png)
+![Percona Cluster](/images/mysql-percona-cluster.png)
 
     安装配置方法可以参考 [Percona官方文档](https://docs.percona.com/percona-xtradb-cluster/8.0/quickstart-overview.html)
 

@@ -1,5 +1,5 @@
 ---
-title: mysql的高可用配置
+title: mysql配置
 date: 2023-11-09
 weight: 4
 ---
@@ -14,7 +14,7 @@ weight: 4
 {{% /alert %}}
 
 
-## Mysql双主互为主备+keepalived的部署配置方法
+## 1.Mysql双主互为主备+keepalived的部署配置方法
 
 两台服务器(Node)，配置两个mysql实例互为主从:
 
@@ -25,7 +25,7 @@ weight: 4
 
 另外，每台服务器安装keepalived服务，通过设置VIP对外提供mysql服务。
 
-规划VIP: 192.168.231.10
+规划VIP: 192.168.231.30
 
 ##### 1.配置server2同步server1的binlog
 
@@ -180,7 +180,7 @@ vrrp_instance VI_2 {
         auth_pass 1111
     }
     virtual_ipaddress {
-        192.168.231.20
+        192.168.231.30
     }
 
     track_script {
@@ -209,7 +209,7 @@ vrrp_instance VI_2 {
         auth_pass 1111
     }
     virtual_ipaddress {
-        192.168.231.20
+        192.168.231.30
     }
 
     track_script {
@@ -227,10 +227,10 @@ sudo systemctl restart keepalived
 最后可通过mysql客户端连接VIP地址进行验证:
 
 ```
-mysql -h 192.168.231.20 -u root -p
+mysql -h 192.168.231.30 -u root -p
 ```
 
-## PXC(Percona XtraDB Cluster)配置示例
+## 2.PXC(Percona XtraDB Cluster)配置示例
 
 规划三台服务器(Node): 
 

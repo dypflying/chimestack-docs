@@ -5,7 +5,7 @@ weight: 3
 ---
 
 {{% alert title="提示" color="default" %}}
-本章节仅介绍chime-agent如何和chime-server一起做到计算资源的高可用，并没有介绍部署配置相关的操作。
+本章节仅介绍chime-agent如何和chime-server一起做到计算资源的高可用，并没有介绍部署配置相关的操作。如果仅需要快速部署生产环境，可先忽略本章。
 {{% /alert %}}
 
 ## chime-agent 高可用介绍

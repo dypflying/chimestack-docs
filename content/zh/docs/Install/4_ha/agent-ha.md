@@ -19,7 +19,7 @@ chime-agent进程作为运行在计算节点程序，它接收chime-server下发
 
 ChimeStack框架的设计方案主要是中央管控机制，即管控服务进程(chime-server)管理虚拟机的全生命周期，每个虚拟机的状态都会保存在chime-server的数据库中，chime-agent接收chime-server对虚拟机的的管控指令、对chime-server上报心跳、拉取虚拟机信息，下图是chime-agent高可用的示意图： 
 
-![TO-DO](chimeagent-ha.png)
+![TO-DO](/images/chime-agent-ha.png)
 
 - chime-agent在启动时，会主动向chime-server请求当前计算节点所有未删除的虚拟机的状态以及当前计算节点的状态，并且保存在chime-agent程序的内存中，一旦虚拟机的状态被客户改变，如停机、删除、启动等，chime-agent也会同步更新这个内存数据库。
 - chime-agent在运行时，每隔30s就会检查自己运行节点的虚拟机实例(qemu-kvm进程)的运行状态是否和当前内存数据库中的状态保持一致，比如发现某qemu-kvm进程异常退出，chime-agent会自动拉起该qemu-kvm进程。 

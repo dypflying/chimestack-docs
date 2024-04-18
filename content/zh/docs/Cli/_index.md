@@ -888,6 +888,181 @@ chimecli volume_spec listClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289-4
 
 ## 网络配置相关命令
 
+### 获取网络列表
+
+```
+chimecli network listNetwork --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
+```
+
+```
+{
+  "requestId": "f346cf6e-12e3-4580-bbd8-66f7bf9388b4",
+  "result": {
+    "elements": [
+      {
+        "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+        "cluster_name": "Default",
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-07-20T02:02:31Z",
+        "description": "bridge1",
+        "interface_name": "ens224",
+        "name": "br1",
+        "state": 1,
+        "type": 0,
+        "uuid": "52899f98-3963-4ae0-abde-2ea72e27f2b6",
+        "vlan_id": ""
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
+}
+```
+
+### 新建网络
+
+```
+chimecli network createNetwork --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --createNetworkRequest.Type 0 --createNetworkRequest.Name br1 --createNetworkRequest.InterfaceName ens224
+```
+
+```
+{
+  "requestId": "3abf33eb-dae3-4a61-8331-5a53163e7362",
+  "result": {
+    "network": {
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "cluster_name": "",
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "0001-01-01T00:00:00Z",
+      "description": "",
+      "interface_name": "ens224",
+      "name": "br1",
+      "state": 0,
+      "type": 0,
+      "uuid": "f2a515db-7699-4970-b13c-a8ea9840f62e",
+      "vlan_id": ""
+    }
+  }
+}
+```
+
+### 查看网络
+
+```
+chimecli network getNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6
+```
+
+```
+{
+  "requestId": "235ff7b9-3364-475f-8800-8bc064e90134",
+  "result": {
+    "network": {
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "cluster_name": "Default",
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2023-07-20T02:02:31Z",
+      "description": "bridge1",
+      "interface_name": "ens224",
+      "name": "br1",
+      "state": 1,
+      "type": 0,
+      "uuid": "52899f98-3963-4ae0-abde-2ea72e27f2b6",
+      "vlan_id": ""
+    }
+  }
+}
+```
+
+### 修改网络
+
+```
+chimecli network updateNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6 --updateNetworkRequest.Name br1 --updateNetworkRequest.Description br1-network
+```
+
+```
+{
+  "requestId": "484f5728-ee8f-44a1-a1df-4b156b9d58a5",
+  "result": {
+    "network": "ok"
+  }
+}
+```
+### 删除网络
+
+```
+chimecli network deleteNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6
+```
+
+```
+{
+  "requestId": "2594ebfe-cc1c-44a2-965c-cad7bc9fbd55",
+  "result": 1
+}
+```
+
+### 获取子网列表
+
+```
+chimecli network listSubnet --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
+```
+
+```
+{
+  "requestId": "e417211d-0676-4cf2-8fa0-d7376dc4d562",
+  "result": {
+    "elements": [
+      {
+        "cidr": "192.168.231.1/26",
+        "created_at": "2024-04-18T04:21:30Z",
+        "description": "",
+        "gateway": "192.168.231.0",
+        "name": "subnet1",
+        "network_name": "br1",
+        "network_uuid": "f2a515db-7699-4970-b13c-a8ea9840f62e",
+        "reserved_ips": "",
+        "state": 1,
+        "type": 0,
+        "uuid": "e73efdf7-d232-4556-ba95-3851100a47b7"
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
+}
+```
+
+### 新建子网
+
+```
+chimecli network createSubnet --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e --createSubnetRequest.CIDR 192.168.231.200/30 --createSubnetRequest.Name subnet2
+```
+
+```
+{
+  "requestId": "77f9400f-b573-4f6b-a17d-2b331a4212c9",
+  "result": {
+    "subnet": {
+      "cidr": "192.168.231.200/30",
+      "created_at": "2024-04-18T04:28:28.794229055Z",
+      "description": "",
+      "gateway": "192.168.231.200",
+      "name": "subnet2",
+      "network_name": "",
+      "network_uuid": "f2a515db-7699-4970-b13c-a8ea9840f62e",
+      "reserved_ips": "",
+      "state": 1,
+      "type": 0,
+      "uuid": "fed410bf-da50-490f-a045-314b08dc8ad5"
+    }
+  }
+}
+```
+### 查看子网
+
+### 更新子网
+
+### 删除子网
+
 
 ## 存储池相关命令
 

@@ -1059,16 +1059,430 @@ chimecli network createSubnet --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e
 ```
 ### 查看子网
 
+```
+chimecli network getSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5
+```
+
+```
+{
+  "requestId": "3e6498f2-3a89-403d-b3d5-f03063f921a9",
+  "result": {
+    "subnet": {
+      "cidr": "192.168.231.200/30",
+      "created_at": "2024-04-18T04:28:29Z",
+      "description": "",
+      "gateway": "192.168.231.200",
+      "name": "subnet2",
+      "network_name": "br1",
+      "network_uuid": "f2a515db-7699-4970-b13c-a8ea9840f62e",
+      "reserved_ips": "",
+      "state": 1,
+      "type": 0,
+      "uuid": "fed410bf-da50-490f-a045-314b08dc8ad5"
+    }
+  }
+}
+```
+
 ### 更新子网
+
+```
+chimecli network updateSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5 --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e --createSubnetRequest.CIDR 192.168.231.200/32 --createSubnetRequest.ReservedIps 192.168.231.128,192.168.231.158 --createSubnetRequest.Name subnet2
+```
+
+```
+{
+  "requestId": "4e5ff592-6c71-426f-a9ed-6691972d7443",
+  "result": {
+    "subnet": "ok"
+  }
+}
+```
 
 ### 删除子网
 
+```
+chimecli network deleteSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5
+```
+
+```
+{
+  "requestId": "e5a8a943-cabc-4959-ad6d-eac97f384839",
+  "result": 1
+}
+```
 
 ## 存储池相关命令
 
+### 获取存储池列表
+
+```
+chimecli storage_pool listStoragePool --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
+```
+
+```
+{
+  "requestId": "1b5d3610-baae-40ec-834f-18a690b91366",
+  "result": {
+    "elements": [
+      {
+        "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+        "backend_path": "/hyperc/backend",
+        "cluster_name": "Default",
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-06-25T19:10:18Z",
+        "description": "local storage pool2aa",
+        "image_cache_path": "/hyperc/cache",
+        "name": "Local Storage Pool",
+        "physical_size": 0,
+        "reserved_size": 0,
+        "state": 1,
+        "total_size": 0,
+        "type": 0,
+        "used_size": 0,
+        "uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a"
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
+}
+```
+
+### 新建存储池
+
+```
+chimecli storage_pool createStoragePool --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --createStoragePoolRequest.BackendPath /chime/backend --createStoragePoolRequest.ImageCachePath /chime/cache --createStoragePoolRequest.Name new-storagepool --createStoragePoolRequest.PhysicalSize 1048576000 --createStoragePoolRequest.ReservedSize 0 --createStoragePoolRequest.SizeRatio 2 --createStoragePoolRequest.Type 0
+```
+
+```
+{
+  "requestId": "6b511a24-c98f-4619-99cf-21adba3063f7",
+  "result": {
+    "storage_pool": {
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "backend_path": "/chime/backend",
+      "cluster_name": "",
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-18T07:29:07.754159689Z",
+      "description": "",
+      "image_cache_path": "/chime/cache",
+      "name": "new-storagepool",
+      "physical_size": 1048576000,
+      "reserved_size": 0,
+      "state": 1,
+      "total_size": 2097152000,
+      "type": 0,
+      "used_size": 0,
+      "uuid": "97329a52-44c4-44ac-af4f-fb45c95b618b"
+    }
+  }
+}
+```
+
+### 查看存储池
+
+```
+chimecli storage_pool getStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4f-fb45c95b618b
+```
+
+```
+{
+  "requestId": "f50f9372-da7d-41c5-8cc9-713a8dcd492c",
+  "result": {
+    "storage_pool": {
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "backend_path": "/chime/backend",
+      "cluster_name": "Default",
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-18T07:29:08Z",
+      "description": "",
+      "image_cache_path": "/chime/cache",
+      "name": "new-storagepool",
+      "physical_size": 1048576000,
+      "reserved_size": 0,
+      "state": 1,
+      "total_size": 2097152000,
+      "type": 0,
+      "used_size": 0,
+      "uuid": "97329a52-44c4-44ac-af4f-fb45c95b618b"
+    }
+  }
+}
+```
+### 更新存储池
+
+```
+chimecli storage_pool updateStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4f-fb45c95b618b --createStoragePoolRequest.BackendPath /chime/backend1 --createStoragePoolRequest.ImageCachePath /chime/cache --createStoragePoolRequest.PhysicalSize 104857600 --createStoragePoolRequest.SizeRatio 3 --createStoragePoolRequest.Type 0 --createStoragePoolRequest.Name new-storagepool
+```
+
+```
+{
+  "requestId": "d42d4a0b-f3e9-450e-a95e-d9d7cffd9a91",
+  "result": {
+    "storage_pool": "ok"
+  }
+}
+```
+
+### 删除存储池
+
+```
+chimecli storage_pool deleteStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4f-fb45c95b618b
+```
+
+```
+{
+  "requestId": "a76eed93-e64f-4ce7-8bad-acd2e1fd52fa",
+  "result": 1
+}
+```
 
 ## 镜像相关命令
 
+### 镜像列表
+
+```
+chimecli image listImage
+```
+
+```
+{
+  "requestId": "452bc768-61e6-4885-ac74-74f481a920c8",
+  "result": {
+    "elements": [
+      {
+        "boot_type": "bios",
+        "bucket_name": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+        "bucket_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+        "created_at": "2023-10-12T08:05:25Z",
+        "description": "aaaaa",
+        "format": "qcow2",
+        "install_url": "file:///root/images/centos7_cloudinit.qcow2",
+        "name": "centos_admin",
+        "operation": "",
+        "os_arch": "x86_64",
+        "os_detail": "CentOS 7.x",
+        "os_type": "CentOS",
+        "shared": 0,
+        "state": 1,
+        "uuid": "af9f5fe3-127a-43be-9a8b-acc6f50d263c"
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
+}
+```
+
+### 新建公有镜像
+
+```
+chimecli image createPublicImage \
+    --createImageRequest.Format qcow2 \
+    --createImageRequest.Name centos \
+    --createImageRequest.OsType CentOS \
+    --createImageRequest.OsDetail 'CentOS 8.x' \
+    --createImageRequest.InstallUrl file:///root/images/centos7_cloudinit.qcow2
+```
+
+```
+{
+  "requestId": "a25c2320-7a41-44f8-a782-2f062ba41b6b",
+  "result": {
+    "image": {
+      "boot_type": "",
+      "bucket_name": "",
+      "bucket_uuid": "public",
+      "created_at": "0001-01-01T00:00:00Z",
+      "description": "",
+      "format": "qcow2",
+      "install_url": "file:///root/images/centos7_cloudinit.qcow2",
+      "name": "centos",
+      "operation": "",
+      "os_arch": "",
+      "os_detail": "CentOS 8.x",
+      "os_type": "CentOS",
+      "shared": 0,
+      "state": 0,
+      "uuid": "fb11078f-8af8-4247-adfe-295459f29646"
+    }
+  }
+}
+```
+
+### 新建私有镜像
+
+```
+chimecli image createUserImage \
+    --createImageRequest.Format qcow2 \
+    --createImageRequest.Name centos \
+    --createImageRequest.OsType CentOS \
+    --createImageRequest.OsDetail 'CentOS 8.x' \
+    --createImageRequest.InstallUrl file:///root/images/centos7_cloudinit.qcow2
+```
+
+```
+{
+  "requestId": "2054dce8-aa03-4734-8989-547ca6d4d2a5",
+  "result": {
+    "image": {
+      "boot_type": "",
+      "bucket_name": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+      "bucket_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+      "created_at": "0001-01-01T00:00:00Z",
+      "description": "",
+      "format": "qcow2",
+      "install_url": "file:///root/images/centos7_cloudinit.qcow2",
+      "name": "centos",
+      "operation": "",
+      "os_arch": "",
+      "os_detail": "CentOS 8.x",
+      "os_type": "CentOS",
+      "shared": 0,
+      "state": 0,
+      "uuid": "2054dce8-aa03-4734-8989-547ca6d4d2a5"
+    }
+  }
+}
+```
+
+### 查询镜像
+
+```
+chimecli image getImage --ImageUuid fb11078f-8af8-4247-adfe-295459f29646
+```
+
+```
+{
+  "requestId": "e2b6cff1-6677-4ccb-b239-adeb26e6d7d0",
+  "result": {
+    "image": {
+      "boot_type": "",
+      "bucket_name": "public",
+      "bucket_uuid": "public",
+      "created_at": "2024-04-18T08:44:42Z",
+      "description": "",
+      "format": "qcow2",
+      "install_url": "file:///root/images/centos7_cloudinit.qcow2",
+      "name": "centos",
+      "operation": "",
+      "os_arch": "",
+      "os_detail": "CentOS 8.x",
+      "os_type": "CentOS",
+      "shared": 0,
+      "state": 1,
+      "uuid": "fb11078f-8af8-4247-adfe-295459f29646"
+    }
+  }
+}
+```
+
+### 更新镜像
+
+```
+chimecli image updateImage \
+    --ImageUuid fb11078f-8af8-4247-adfe-295459f29646 \
+    --updateImageRequest.Name centos-test
+```
+
+```
+{
+  "requestId": "136bdfad-2ee1-49fd-a754-c2b5c33876a2",
+  "result": {
+    "image": "ok"
+  }
+}
+```
+
+### 删除镜像
+
+```
+chimecli image deleteImage --ImageUuid fb11078f-8af8-4247-adfe-295459f29646
+```
+
+```
+{
+  "requestId": "8c6fbd16-83a3-47f7-a10f-b0f5ab76f74c",
+  "result": 0
+}
+```
+
+### 镜像源列表
+
+```
+chimecli image listImageBucket
+```
+
+```
+{
+  "requestId": "c4c019ab-cd37-4c43-b57b-0a4634f1e100",
+  "result": {
+    "elements": [
+      {
+        "bucket_name": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+        "created_at": "2023-10-12T08:05:25Z",
+        "description": "",
+        "image_count": 1,
+        "name": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+        "state": 1,
+        "type": 1,
+        "user_name": "admin",
+        "uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c"
+      },
+      {
+        "bucket_name": "39a6b9e4-bda8-4d39-ae51-1b270a796b36",
+        "created_at": "2023-10-09T18:51:18Z",
+        "description": "",
+        "image_count": 3,
+        "name": "39a6b9e4-bda8-4d39-ae51-1b270a796b36",
+        "state": 1,
+        "type": 1,
+        "user_name": "user",
+        "uuid": "39a6b9e4-bda8-4d39-ae51-1b270a796b36"
+      },
+      {
+        "bucket_name": "public",
+        "created_at": "2023-06-19T02:27:36Z",
+        "description": "public image bucket",
+        "image_count": 6,
+        "name": "public",
+        "state": 1,
+        "type": 0,
+        "user_name": "",
+        "uuid": "public"
+      }
+    ],
+    "size": 3,
+    "total": 3
+  }
+}
+```
+
+### 查看镜像源
+
+```
+chimecli image getImageBucket --ImageBucketUuid 9c15f4cb-5f6d-4e45-818f-a4315c54240c
+```
+
+```
+{
+  "requestId": "4f7d20b4-0051-48ea-949b-e8acae9d40ee",
+  "result": {
+    "imagebucket": {
+      "bucket_name": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+      "created_at": "2023-10-12T08:05:25Z",
+      "description": "",
+      "image_count": 1,
+      "name": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+      "state": 1,
+      "type": 1,
+      "user_name": "admin",
+      "uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c"
+    }
+  }
+}
+```
 
 ## 报警相关命令
 

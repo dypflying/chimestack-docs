@@ -1486,9 +1486,281 @@ chimecli image getImageBucket --ImageBucketUuid 9c15f4cb-5f6d-4e45-818f-a4315c54
 
 ## 报警相关命令
 
+### 报警列表
 
-## 统计相关命令
+```
+chimecli alert listAlert
+```
 
+```
+{
+  "requestId": "2b5b041d-686a-4873-b5eb-49ea2a9b9632",
+  "result": {
+    "elements": [
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:16:00Z",
+        "description": "host name: host-a428263d, cpu usage: 0.86",
+        "name": "Host CPU Usage Larger Than 50%",
+        "priority": 1,
+        "rule_uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 1,
+        "state": 0,
+        "uuid": "07c8983f-f467-4223-b101-aa820585444a"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:16:00Z",
+        "description": "host name: host-a428263d, memory usage: 21.43",
+        "name": "Host Memory Usage Larger Than 80%",
+        "priority": 2,
+        "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 2,
+        "state": 0,
+        "uuid": "37469f5c-c686-4977-bbc9-424788d8f6fe"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:15:00Z",
+        "description": "host name: host-a428263d, cpu usage: 0.73",
+        "name": "Host CPU Usage Larger Than 50%",
+        "priority": 1,
+        "rule_uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 1,
+        "state": 0,
+        "uuid": "2e8bbe77-5864-44a2-921c-e1ee88ed6e23"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:15:00Z",
+        "description": "host name: host-a428263d, memory usage: 21.43",
+        "name": "Host Memory Usage Larger Than 80%",
+        "priority": 2,
+        "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 2,
+        "state": 0,
+        "uuid": "3a7de398-f1e5-4e22-9180-d0b38280de5d"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:14:00Z",
+        "description": "host name: host-a428263d, cpu usage: 0.67",
+        "name": "Host CPU Usage Larger Than 50%",
+        "priority": 1,
+        "rule_uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 1,
+        "state": 0,
+        "uuid": "a5004518-afd0-42a4-92b8-c49cc76feacb"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:14:00Z",
+        "description": "host name: host-a428263d, memory usage: 21.43",
+        "name": "Host Memory Usage Larger Than 80%",
+        "priority": 2,
+        "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 2,
+        "state": 0,
+        "uuid": "6e949a1d-fe8f-4834-bdb6-d696d0bd4f0f"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:13:00Z",
+        "description": "host name: host-a428263d, cpu usage: 0.63",
+        "name": "Host CPU Usage Larger Than 50%",
+        "priority": 1,
+        "rule_uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 1,
+        "state": 0,
+        "uuid": "723729cd-9911-452a-9afb-97540fdc7252"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:13:00Z",
+        "description": "host name: host-a428263d, memory usage: 21.43",
+        "name": "Host Memory Usage Larger Than 80%",
+        "priority": 2,
+        "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 2,
+        "state": 0,
+        "uuid": "3c7e8f49-f0f9-44ee-86b5-ea9dc4ba9730"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:12:00Z",
+        "description": "host name: host-a428263d, memory usage: 21.43",
+        "name": "Host Memory Usage Larger Than 80%",
+        "priority": 2,
+        "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 2,
+        "state": 0,
+        "uuid": "e1be82ff-6067-4644-8e40-dac1a7b9b86e"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:12:00Z",
+        "description": "host name: host-a428263d, cpu usage: 0.63",
+        "name": "Host CPU Usage Larger Than 50%",
+        "priority": 1,
+        "rule_uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 1,
+        "state": 0,
+        "uuid": "c24f4240-6e5e-418b-911f-fa46fe173888"
+      }
+    ],
+    "size": 10,
+    "total": 28219
+  }
+}
+```
+
+### 查看报警详情
+
+```
+chimecli alert getAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e
+```
+
+```
+{
+  "requestId": "f2cdbe5d-60a3-4f6b-bdc6-2b07e389454f",
+  "result": {
+    "alert": {
+      "comment": "",
+      "created_at": "2024-04-18T09:12:00Z",
+      "description": "host name: host-a428263d, memory usage: 21.43",
+      "name": "Host Memory Usage Larger Than 80%",
+      "priority": 2,
+      "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
+      "severity": 2,
+      "state": 0,
+      "uuid": "e1be82ff-6067-4644-8e40-dac1a7b9b86e"
+    }
+  }
+}
+```
+
+### 接受报警
+
+```
+chimecli alert acceptAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e --acceptAlertRequest.Comment "accepted"
+```
+
+```
+{
+  "requestId": "799f65c8-dd20-4b4c-94f9-0cdc92bd8119",
+  "result": "ok"
+}
+```
+
+### 删除报警
+
+```
+chimecli alert deleteAlert --AlertUuid c24f4240-6e5e-418b-911f-fa46fe173888
+```
+
+```
+{
+  "requestId": "9a59e8a7-4c9f-4a8b-9c4f-1676c057274a",
+  "result": 0
+}
+```
+
+### 查看报警规则列表
+
+```
+chimecli alert listAlertRule
+```
+
+```
+{
+  "requestId": "e95e66ce-538a-43ee-9162-9ceb6a1cb083",
+  "result": {
+    "elements": [
+      {
+        "aggregate": "3",
+        "created_at": "2023-10-18T05:33:22Z",
+        "cron": "0 */1 * * * *",
+        "field": "vm_uuid|used_avg",
+        "match": "vm_metrics_aggr|used_avg|>|10.0",
+        "name": "Instance Memory Usage Larger Than 80%",
+        "priority": 2,
+        "severity": 2,
+        "state": 1,
+        "template": "vm uuid: {{vm_uuid}}, memory usage: {{used_avg}}",
+        "uuid": "da08b82e-6d77-11ee-b5ce-000c29dc11fc"
+      },
+      {
+        "aggregate": "3",
+        "created_at": "2023-10-18T01:36:19Z",
+        "cron": "0 */1 * * * *",
+        "field": "host|used_avg",
+        "match": "host_metrics_aggr|used_avg|>|10.0",
+        "name": "Host Memory Usage Larger Than 80%",
+        "priority": 2,
+        "severity": 2,
+        "state": 1,
+        "template": "host name: {{host}}, memory usage: {{used_avg}}",
+        "uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc"
+      },
+      {
+        "aggregate": "3",
+        "created_at": "2023-10-18T01:34:01Z",
+        "cron": "0 */1 * * * *",
+        "field": "host|total_avg",
+        "match": "host_metrics_aggr|total_avg|>|10.0",
+        "name": "Host CPU Usage Larger Than 80%",
+        "priority": 2,
+        "severity": 2,
+        "state": 1,
+        "template": "host name: {{host}}, cpu usage: {{total_avg}}",
+        "uuid": "6a7730cf-6d56-11ee-b5ce-000c29dc11fc"
+      },
+      {
+        "aggregate": "3",
+        "created_at": "2023-10-18T01:33:48Z",
+        "cron": "0 */1 * * * *",
+        "field": "host|total_avg",
+        "match": "host_metrics_aggr|total_avg|>|0.3",
+        "name": "Host CPU Usage Larger Than 50%",
+        "priority": 1,
+        "severity": 1,
+        "state": 1,
+        "template": "host name: {{host}}, cpu usage: {{total_avg}}",
+        "uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc"
+      }
+    ],
+    "size": 4,
+    "total": 4
+  }
+}
+```
+
+### 查看报警规则详情
+
+```
+chimecli alert getAlertRule --RuleUuid 62deb6e7-6d56-11ee-b5ce-000c29dc11fc
+```
+
+```
+{
+  "requestId": "813dd88f-7b09-4e27-8149-039e94c1f008",
+  "result": {
+    "alert": {
+      "aggregate": "3",
+      "created_at": "2023-10-18T01:33:48Z",
+      "cron": "0 */1 * * * *",
+      "field": "host|total_avg",
+      "match": "host_metrics_aggr|total_avg|>|0.3",
+      "name": "Host CPU Usage Larger Than 50%",
+      "priority": 1,
+      "severity": 1,
+      "state": 1,
+      "template": "host name: {{host}}, cpu usage: {{total_avg}}",
+      "uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc"
+    }
+  }
+}
+```
 
 ## 虚拟机操作相关命令
 

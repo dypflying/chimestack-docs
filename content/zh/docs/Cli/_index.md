@@ -420,9 +420,471 @@ chimecli host listClient
 
 ## 计算规格相关命令
 
+### 获取计算规格列表
+
+```
+chimecli instance_spec listInstanceSpec
+```
+
+```
+{
+  "requestId": "8279a707-8df9-43ef-a183-0c74fb0e7c37",
+  "result": {
+    "elements": [
+      {
+        "cluster_count": 1,
+        "created_at": "2023-08-27T18:55:03Z",
+        "description": "instance_spec22aa",
+        "memory": 536870912,
+        "name": "instance_spec2",
+        "state": 1,
+        "type": 0,
+        "uuid": "ac8bf72c-2c94-4695-97c8-cc3977ae8f11",
+        "vcpus": 1
+      },
+      {
+        "cluster_count": 3,
+        "created_at": "2023-08-10T17:04:27Z",
+        "description": "4 vcpus, 8g memory",
+        "memory": 8589934592,
+        "name": "Large(4C8G)",
+        "state": 1,
+        "type": 0,
+        "uuid": "0b06e1d5-0d55-4c04-9837-dc0e74254f21",
+        "vcpus": 1
+      },
+      {
+        "cluster_count": 3,
+        "created_at": "2023-08-10T17:04:18Z",
+        "description": "2 vcpus, 4g memory",
+        "memory": 4294967296,
+        "name": "Medium(2C4G)",
+        "state": 1,
+        "type": 0,
+        "uuid": "13f1fb24-2344-48ca-adc2-e7ccaa792a86",
+        "vcpus": 1
+      },
+      {
+        "cluster_count": 3,
+        "created_at": "2023-06-25T00:43:55Z",
+        "description": "1 vcpus, 1G memory",
+        "memory": 1073741824,
+        "name": "Mini(1C1G)",
+        "state": 1,
+        "type": 0,
+        "uuid": "cd047e9d-2720-4397-84e5-777e4a39a531",
+        "vcpus": 1
+      }
+    ],
+    "size": 4,
+    "total": 4
+  }
+}
+```
+
+### 新建计算规格
+
+```
+chimecli instance_spec createInstanceSpec --createInstanceSpecRequest.Name test-spec --createInstanceSpecRequest.Type 1 --createInstanceSpecRequest.Vcpus 1 --createInstanceSpecRequest.Memory 16777216
+```
+
+```
+{
+  "requestId": "544abc7a-9a56-4275-9de6-54b0fef875ad",
+  "result": {
+    "instance_spec": {
+      "cluster_count": 0,
+      "created_at": "2024-04-18T00:20:28.771276054Z",
+      "description": "",
+      "memory": 16777216,
+      "name": "test-spec",
+      "state": 1,
+      "type": 1,
+      "uuid": "849075e3-7b00-498d-9061-83996f3d370c",
+      "vcpus": 1
+    }
+  }
+}
+```
+
+### 查看计算规格
+
+```
+chimecli instance_spec getInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
+```
+
+```
+{
+  "requestId": "891d47c6-92d6-44db-a48f-8c4312ba9f56",
+  "result": {
+    "instance_spec": {
+      "cluster_count": 0,
+      "created_at": "2024-04-18T00:20:29Z",
+      "description": "",
+      "memory": 16777216,
+      "name": "test-spec",
+      "state": 1,
+      "type": 1,
+      "uuid": "849075e3-7b00-498d-9061-83996f3d370c",
+      "vcpus": 1
+    }
+  }
+}
+```
+
+
+### 修改计算规格
+
+```
+chimecli instance_spec updateInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c --createInstanceSpecRequest.Type 1 --createInstanceSpecRequest.Vcpus 2 --createInstanceSpecRequest.Name test-spec --createInstanceSpecRequest.Memory 16777216
+```
+
+```
+{
+  "requestId": "7c5d3460-83b5-48e8-84bd-a3a8b912c908",
+  "result": {
+    "instance_spec": "ok"
+  }
+}
+```
+
+### 删除计算规格
+
+```
+chimecli instance_spec deleteInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c 
+{"requestId":"1b24222f-0158-4d10-84c8-c478157e2465","result":1}
+```
+
+```
+{
+  "requestId": "1b24222f-0158-4d10-84c8-c478157e2465",
+  "result": 1
+}
+```
+
+### 关联计算规格到集群
+
+```
+chimecli instance_spec createClusterInstanceSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --createClusterInstanceSpecRequest.InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
+```
+
+```
+{
+  "requestId": "3a5673a2-6c6c-4096-a8f1-6caa18d7c74e",
+  "result": {
+    "cluster_instance_spec_relation": {
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-18T08:49:37.401057582+08:00",
+      "instance_spec_uuid": "849075e3-7b00-498d-9061-83996f3d370c"
+    }
+  }
+}
+```
+
+### 解除计算规格和集群的关联
+
+```
+chimecli instance_spec deleteClusterInstanceSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
+```
+
+```
+{
+  "requestId": "ebf4f99d-37fb-45f2-935e-ba99052a3af7",
+  "result": 1
+}
+```
+
+### 查看集群的计算规格列表
+
+```
+chimecli instance_spec listClusterInstanceSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
+```
+
+```
+{
+  "requestId": "a4be9b2b-4080-4cdf-8536-d2ceead7e514",
+  "result": {
+    "elements": [
+      {
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-09-08T01:39:31Z",
+        "instance_spec_name": "instance_spec2",
+        "instance_spec_uuid": "ac8bf72c-2c94-4695-97c8-cc3977ae8f11",
+        "memory": 536870912,
+        "vcpus": 1
+      },
+      {
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-08-28T23:10:41Z",
+        "instance_spec_name": "Large(4C8G)",
+        "instance_spec_uuid": "0b06e1d5-0d55-4c04-9837-dc0e74254f21",
+        "memory": 8589934592,
+        "vcpus": 1
+      },
+      {
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-08-24T19:26:02Z",
+        "instance_spec_name": "Mini(1C1G)",
+        "instance_spec_uuid": "cd047e9d-2720-4397-84e5-777e4a39a531",
+        "memory": 1073741824,
+        "vcpus": 1
+      },
+      {
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-08-24T19:16:52Z",
+        "instance_spec_name": "Medium(2C4G)",
+        "instance_spec_uuid": "13f1fb24-2344-48ca-adc2-e7ccaa792a86",
+        "memory": 4294967296,
+        "vcpus": 1
+      }
+    ],
+    "size": 4,
+    "total": 4
+  }
+}
+```
 
 ## 存储规格相关命令
 
+### 获取存储规格列表
+
+```
+chimecli volume_spec listVolumeSpec
+```
+
+```
+{
+  "requestId": "30b85eb5-fdb5-48c7-9bee-e7049aa2dce5",
+  "result": {
+    "elements": [
+      {
+        "cluster_count": 2,
+        "created_at": "2023-08-27T19:28:05Z",
+        "description": "aaaaaa",
+        "max_iops": 1000,
+        "max_throughput": 314572800,
+        "min_iops": 100,
+        "min_throughput": 31457280,
+        "name": "test",
+        "state": 1,
+        "step_iops": 10,
+        "step_throughput": 10485760,
+        "storage_pool_name": "Local Storage Pool",
+        "storage_pool_uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a",
+        "uuid": "9fb4dc3a-88ec-4360-a823-55b0f19bf146"
+      },
+      {
+        "cluster_count": 2,
+        "created_at": "2023-08-17T02:50:29Z",
+        "description": "performance volume specification1",
+        "max_iops": 10000,
+        "max_throughput": 524288000,
+        "min_iops": 1000,
+        "min_throughput": 52428800,
+        "name": "Performance",
+        "state": 1,
+        "step_iops": 100,
+        "step_throughput": 5242880,
+        "storage_pool_name": "Local Storage Pool",
+        "storage_pool_uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a",
+        "uuid": "af52a0fe-f1fc-483c-9197-aead9786a73a"
+      },
+      {
+        "cluster_count": 1,
+        "created_at": "2023-06-25T19:22:10Z",
+        "description": "standard volume spec",
+        "max_iops": 5000,
+        "max_throughput": 104857600,
+        "min_iops": 500,
+        "min_throughput": 10485760,
+        "name": "Standard",
+        "state": 1,
+        "step_iops": 50,
+        "step_throughput": 1048576,
+        "storage_pool_name": "Local Storage Pool",
+        "storage_pool_uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a",
+        "uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+      }
+    ],
+    "size": 3,
+    "total": 3
+  }
+}
+```
+
+### 新建存储规格
+
+```
+chimecli volume_spec createVolumeSpec --createVolumeSpecRequest.Name test-volume-spec --createVolumeSpecRequest.MaxIops 1000 --createVolumeSpecRequest.MinIops 500 --createVolumeSpecRequest.StepIops 10 --createVolumeSpecRequest.MaxThroughput 104857600 --createVolumeSpecRequest.MinThroughput 10485760 --createVolumeSpecRequest.StepThroughput 1048576 --createVolumeSpecRequest.StoragePoolUuid f5165a18-e6b3-42b4-8efc-ad496f318a0a
+```
+
+```
+{
+  "requestId": "64467277-5058-458d-867f-8b1ac46cb8e1",
+  "result": {
+    "volume_spec": {
+      "cluster_count": 0,
+      "created_at": "2024-04-18T01:10:08.048543501Z",
+      "description": "",
+      "max_iops": 1000,
+      "max_throughput": 104857600,
+      "min_iops": 500,
+      "min_throughput": 10485760,
+      "name": "test-volume-spec",
+      "state": 1,
+      "step_iops": 10,
+      "step_throughput": 1048576,
+      "storage_pool_name": "",
+      "storage_pool_uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a",
+      "uuid": "c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa"
+    }
+  }
+}
+```
+
+### 查看存储规格
+
+```
+chimecli volume_spec getVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
+```
+
+```
+{
+  "requestId": "68bb6050-b78f-4012-ba01-4834e3116be3",
+  "result": {
+    "volume_spec": {
+      "cluster_count": 0,
+      "created_at": "2024-04-18T01:10:08Z",
+      "description": "",
+      "max_iops": 1000,
+      "max_throughput": 104857600,
+      "min_iops": 500,
+      "min_throughput": 10485760,
+      "name": "test-volume-spec",
+      "state": 1,
+      "step_iops": 10,
+      "step_throughput": 1048576,
+      "storage_pool_name": "Local Storage Pool",
+      "storage_pool_uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a",
+      "uuid": "c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa"
+    }
+  }
+}
+```
+
+### 修改存储规格
+
+```
+chimecli volume_spec updateVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa --createVolumeSpecRequest.Name test-volume-spec --createVolumeSpecRequest.MaxIops 1000 --createVolumeSpecRequest.MinIops 500 --createVolumeSpecRequest.StepIops 10 --createVolumeSpecRequest.MaxThroughput 104857600 --createVolumeSpecRequest.MinThroughput 10485760 --createVolumeSpecRequest.StepThroughput 10485760 --createVolumeSpecRequest.StoragePoolUuid f5165a18-e6b3-42b4-8efc-ad496f318a0a
+```
+
+```
+{
+  "requestId": "6594c3cb-2a6a-4fcc-85d1-00746b29c980",
+  "result": {
+    "volume_spec": "ok"
+  }
+}
+```
+
+### 删除存储规格
+
+```
+chimecli volume_spec deleteVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
+```
+
+```
+{
+  "requestId": "7f7800e9-0057-44a5-9340-c46fda540dbe",
+  "result": 1
+}
+```
+
+
+### 关联存储规格到集群
+
+```
+chimecli volume_spec createClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --createClusterVolumeSpecRequest.VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
+```
+
+```
+{
+  "requestId": "2850087e-9e72-4cf7-986b-64a7d5cb88b4",
+  "result": {
+    "cluster_volume_spec_relation": {
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-18T09:29:46.257989386+08:00",
+      "volume_spec_uuid": "c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa"
+    }
+  }
+}
+```
+
+### 解除关联存储规格和集群
+
+```
+chimecli volume_spec deleteClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
+```
+
+```
+{
+  "requestId": "85e088bc-9b81-4172-b3ee-0f61da006106",
+  "result": 1
+}
+```
+### 查看集群的存储规格列表
+
+```
+chimecli volume_spec listClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
+```
+
+```
+{
+  "requestId": "b6c98def-9d89-40cd-a59a-4caf4dc15de0",
+  "result": {
+    "elements": [
+      {
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-08-28T23:21:26Z",
+        "max_iops": 1000,
+        "max_throughput": 314572800,
+        "min_iops": 100,
+        "min_throughput": 31457280,
+        "step_iops": 10,
+        "step_throughput": 10485760,
+        "volume_spec_name": "test",
+        "volume_spec_uuid": "9fb4dc3a-88ec-4360-a823-55b0f19bf146"
+      },
+      {
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-08-17T02:50:41Z",
+        "max_iops": 10000,
+        "max_throughput": 524288000,
+        "min_iops": 1000,
+        "min_throughput": 52428800,
+        "step_iops": 100,
+        "step_throughput": 5242880,
+        "volume_spec_name": "Performance",
+        "volume_spec_uuid": "af52a0fe-f1fc-483c-9197-aead9786a73a"
+      },
+      {
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-08-11T01:58:10Z",
+        "max_iops": 5000,
+        "max_throughput": 104857600,
+        "min_iops": 500,
+        "min_throughput": 10485760,
+        "step_iops": 50,
+        "step_throughput": 1048576,
+        "volume_spec_name": "Standard",
+        "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+      }
+    ],
+    "size": 3,
+    "total": 3
+  }
+}
+```
 
 ## 网络配置相关命令
 

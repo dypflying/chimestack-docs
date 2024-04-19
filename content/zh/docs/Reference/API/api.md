@@ -44,19 +44,6 @@ list alerts
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -219,19 +206,6 @@ describe a alert
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -291,19 +265,6 @@ delete a alert
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -361,19 +322,6 @@ accept a alert
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -428,19 +376,6 @@ list alert rules
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -545,19 +480,6 @@ describe a alert rule
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -613,19 +535,6 @@ describe alert statistic
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getalertstatistic-responses">Responses</h3>
 
@@ -675,19 +584,6 @@ user auth
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="auth-responses">Responses</h3>
 
@@ -736,19 +632,6 @@ user login
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="login-responses">Responses</h3>
 
@@ -796,19 +679,6 @@ user logout
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="logout-responses">Responses</h3>
 
@@ -852,19 +722,6 @@ list users
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="listuser-responses">Responses</h3>
 
@@ -916,19 +773,6 @@ create an user
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="createuser-responses">Responses</h3>
 
@@ -967,19 +811,6 @@ describe an user
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getuser-responses">Responses</h3>
 
@@ -1018,19 +849,6 @@ delete an user
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="deleteuser-responses">Responses</h3>
 
@@ -1083,19 +901,6 @@ update an user
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="updateuser-responses">Responses</h3>
 
@@ -1134,19 +939,6 @@ describe a user default
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getuserdefault-responses">Responses</h3>
 
@@ -1196,19 +988,6 @@ update user default
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="updateuserdefault-responses">Responses</h3>
 
@@ -1256,19 +1035,6 @@ This will show all available azs by default.
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -1353,7 +1119,6 @@ This will create an available az.
 ```json
 {
   "requestId": "ae40a6b7-b806-4590-8da2-2b4b3cc78896",
-  "error": null,
   "result": {
     "az": {
       "uuid": "f85ea8ba-912a-4639-801a-c464bc831e9c",
@@ -1404,19 +1169,6 @@ This will describe an available az.
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -1474,19 +1226,6 @@ This will delete an available az.
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -1548,19 +1287,6 @@ This will update an available az.
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -1612,19 +1338,6 @@ This will disable an available az.
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -1676,19 +1389,6 @@ This will enable an available az.
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -1751,19 +1451,6 @@ This will show clusters
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -1856,19 +1543,6 @@ This will create a cluster in a specified Az
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -1932,19 +1606,6 @@ This will describe a cluster
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -2008,19 +1669,6 @@ This will delete a cluster
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -2085,19 +1733,6 @@ This will update a cluster.
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -2150,19 +1785,6 @@ This will disable a cluster
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -2215,19 +1837,6 @@ This will enable a cluster
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -2290,19 +1899,6 @@ This will show hosts
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -2413,19 +2009,6 @@ This will create a host
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -2498,19 +2081,6 @@ This will describe a host
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -2583,19 +2153,6 @@ This will delete a host
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -2661,19 +2218,6 @@ This will update a host.
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -2727,19 +2271,6 @@ This will disable a host
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -2793,19 +2324,6 @@ This will enable a host
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -2859,19 +2377,6 @@ This will suspend a host
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -2931,19 +2436,6 @@ This will show available clients
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -3025,19 +2517,6 @@ describe host inventory statistic
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="gethoststatistic-responses">Responses</h3>
 
@@ -3084,19 +2563,6 @@ list instance spec relations
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -3192,19 +2658,6 @@ create new instance spec relation
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -3260,19 +2713,6 @@ delete an instance spec relation
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -3325,19 +2765,6 @@ list instance specs
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -3447,19 +2874,6 @@ create an instance spec
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -3519,19 +2933,6 @@ describe an instance spec
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -3591,19 +2992,6 @@ delete an instance spec
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -3665,19 +3053,6 @@ update instance spec
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -3738,19 +3113,6 @@ list networks
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -3830,19 +3192,6 @@ create a network
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -3906,19 +3255,6 @@ describe a network
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -3982,19 +3318,6 @@ delete a network
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -4055,19 +3378,6 @@ update a network
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -4126,19 +3436,6 @@ list subnets
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -4220,19 +3517,6 @@ create a subnet
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -4297,19 +3581,6 @@ describe a subnet
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -4374,19 +3645,6 @@ delete a subnet
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -4451,19 +3709,6 @@ update a subnet
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -4520,19 +3765,6 @@ list nics
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -4617,19 +3849,6 @@ create a nic
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -4697,19 +3916,6 @@ describe nic
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -4778,19 +3984,6 @@ delete a nic
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -4849,19 +4042,6 @@ update a nic
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -4905,19 +4085,6 @@ describe nic statistic
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getnicstatistic-responses">Responses</h3>
 
@@ -4965,19 +4132,6 @@ list storage pools
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -5065,19 +4219,6 @@ create a storage pool
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -5145,19 +4286,6 @@ describe a storage pool
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -5225,19 +4353,6 @@ delete a storage pool
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -5304,19 +4419,6 @@ update a storage pool
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -5371,19 +4473,6 @@ list all storage pools
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="liststoragepoolall-responses">Responses</h3>
 
@@ -5423,19 +4512,6 @@ describe storage pool inventory statistic
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getstoragepoolstatistic-responses">Responses</h3>
 
@@ -5485,19 +4561,6 @@ list volumes
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -5597,19 +4660,6 @@ create new volume
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -5690,19 +4740,6 @@ describe a volume
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -5784,19 +4821,6 @@ delete a volume
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -5857,19 +4881,6 @@ update a volume
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -5924,19 +4935,6 @@ list all snapshots
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="listsnapshot-responses">Responses</h3>
 
@@ -5981,19 +4979,6 @@ list snapshots of a volume
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -6069,19 +5054,6 @@ create a snapshot
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -6143,19 +5115,6 @@ get a snapshot
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -6217,19 +5176,6 @@ delete a snapshot
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -6289,19 +5235,6 @@ update a snapshot
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -6352,19 +5285,6 @@ restore volume from a snapshot
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -6437,19 +5357,6 @@ describe volume statistic
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getvolumestatistic-responses">Responses</h3>
 
@@ -6495,19 +5402,6 @@ list volume spec relations
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -6607,19 +5501,6 @@ create new volume spec relation
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -6675,19 +5556,6 @@ delete an volume spec relation
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -6740,19 +5608,6 @@ list volume specs
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -6870,19 +5725,6 @@ create a volume spec
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -6947,19 +5789,6 @@ describe a volume spec
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -7024,19 +5853,6 @@ delete a volume spec
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -7102,19 +5918,6 @@ update volume spec
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -7166,19 +5969,6 @@ get server config
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getconfig-responses">Responses</h3>
 
@@ -7229,19 +6019,6 @@ list images
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -7328,19 +6105,6 @@ create a public image
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -7423,19 +6187,6 @@ create a user image
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -7501,19 +6252,6 @@ describe a image
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -7579,19 +6317,6 @@ delete a image
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -7656,19 +6381,6 @@ update an image
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -7712,19 +6424,6 @@ describe s3 inventory statistic
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getimagestatistic-responses">Responses</h3>
 
@@ -7769,19 +6468,6 @@ list image buckets
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -7879,19 +6565,6 @@ create a image bucket
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -7951,19 +6624,6 @@ describe a image bucket
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -8023,19 +6683,6 @@ delete a image bucket
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="deleteimagebucket-responses">Responses</h3>
 
@@ -8078,19 +6725,6 @@ get vm cpu statistics
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getcpustats-responses">Responses</h3>
 
@@ -8131,19 +6765,6 @@ get vm disk i/o statistics
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getdiskiostats-responses">Responses</h3>
 
@@ -8184,19 +6805,6 @@ get interface net i/o statistics
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getinterfacenetiostats-responses">Responses</h3>
 
@@ -8237,19 +6845,6 @@ get vm memory statistics
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getmemorystats-responses">Responses</h3>
 
@@ -8290,19 +6885,6 @@ get vm network i/o statistics
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getnetiostats-responses">Responses</h3>
 
@@ -8342,19 +6924,6 @@ get total cpu statistics
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="gettotalcpustats-responses">Responses</h3>
 
@@ -8394,19 +6963,6 @@ get total disk i/o statistics
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="gettotaldiskiostats-responses">Responses</h3>
 
@@ -8446,19 +7002,6 @@ get total memory statistics
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="gettotalmemorystats-responses">Responses</h3>
 
@@ -8498,19 +7041,6 @@ get total network i/o statistics
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="gettotalnetiostats-responses">Responses</h3>
 
@@ -8550,19 +7080,6 @@ get user total cpu statistics
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getusercpustats-responses">Responses</h3>
 
@@ -8602,19 +7119,6 @@ get user total memory statistics
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getusermemorystats-responses">Responses</h3>
 
@@ -8655,19 +7159,6 @@ get volume disk i/o statistics
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getvolumediskiostats-responses">Responses</h3>
 
@@ -8717,19 +7208,6 @@ list vms
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -8850,19 +7328,6 @@ create a vm
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -9017,19 +7482,6 @@ describe a vm
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -9155,19 +7607,6 @@ delete a vm
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -9228,19 +7667,6 @@ update a vm
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -9300,19 +7726,6 @@ attach a volume to the vm
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -9372,19 +7785,6 @@ attach a nic to the vm
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -9444,19 +7844,6 @@ detach a volume from the vm
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -9516,19 +7903,6 @@ detach a nic from the vm
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -9578,19 +7952,6 @@ start a vm
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -9640,19 +8001,6 @@ stop a vm
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 > OpenApiResponse
 
@@ -9702,19 +8050,6 @@ get a vm vnc information
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getvmvnc-responses">Responses</h3>
 
@@ -9747,19 +8082,6 @@ describe vm statistic
 
 > Example responses
 
-> 200 Response
-
-```json
-{
-  "error": {
-    "code": 0,
-    "message": "string",
-    "status": "string"
-  },
-  "requestId": "string",
-  "result": null
-}
-```
 
 <h3 id="getvmstatistic-responses">Responses</h3>
 

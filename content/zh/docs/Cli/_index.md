@@ -2451,3 +2451,163 @@ chimecli volume deleteSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e
 ```
 
 ## 弹性网卡相关命令
+
+### 查看弹性网卡列表
+
+
+```
+chimecli network listNic --state 2
+```
+
+```
+{
+  "requestId": "3ef89c92-2abb-47b5-a6a4-3a2f913802df",
+  "result": {
+    "elements": [
+      {
+        "attached_vms": [],
+        "created_at": "2024-04-18T13:41:51Z",
+        "description": "",
+        "gateway": "192.168.231.0",
+        "ip": "192.168.231.1",
+        "mac": "52:54:00:1a:26:0d",
+        "name": "primary-nic-vm1",
+        "netmask": "255.255.255.192",
+        "network_name": "br1",
+        "network_type": 0,
+        "operation": "",
+        "primary": 1,
+        "state": 2,
+        "subnet_cidr": "192.168.231.1/26",
+        "subnet_name": "subnet1",
+        "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
+        "uuid": "9579970a-ff8b-450b-b4ac-e062f3338bd9"
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
+}
+```
+
+### 新建弹性网卡
+
+```
+chimecli network createNic --createNicRequest.SubnetUuid e73efdf7-d232-4556-ba95-3851100a47b7 --createNicRequest.Name test-nic
+```
+
+```
+{
+  "requestId": "e926a987-2073-4258-8739-41b60bd637a4",
+  "result": {
+    "nic": {
+      "attached_vms": [],
+      "created_at": "0001-01-01T00:00:00Z",
+      "description": "",
+      "gateway": "192.168.231.0",
+      "ip": "192.168.231.2",
+      "mac": "52:54:00:8a:31:6a",
+      "name": "test-nic",
+      "netmask": "255.255.255.192",
+      "network_name": "br1",
+      "network_type": 0,
+      "operation": "",
+      "primary": 0,
+      "state": 0,
+      "subnet_cidr": "",
+      "subnet_name": "",
+      "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
+      "uuid": "16655315-8684-4e22-bd5f-4d8d30618629"
+    }
+  }
+}
+```
+### 查看弹性网卡
+
+```
+chimecli network getNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
+```
+
+```
+{
+  "requestId": "e47884dd-973f-469c-95a9-f704c8f4f925",
+  "result": {
+    "nic": {
+      "attached_vms": [],
+      "created_at": "2024-04-19T04:04:30Z",
+      "description": "",
+      "gateway": "192.168.231.0",
+      "ip": "192.168.231.2",
+      "mac": "52:54:00:8a:31:6a",
+      "name": "test-nic",
+      "netmask": "255.255.255.192",
+      "network_name": "br1",
+      "network_type": 0,
+      "operation": "",
+      "primary": 0,
+      "state": 1,
+      "subnet_cidr": "192.168.231.1/26",
+      "subnet_name": "subnet1",
+      "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
+      "uuid": "16655315-8684-4e22-bd5f-4d8d30618629"
+    }
+  }
+}
+```
+
+### 更新弹性网卡
+
+```
+chimecli network updateNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629 --updateNicRequest.Name 'test-nic-new'
+```
+
+```
+{
+  "requestId": "edce4af3-c02f-4e73-823f-cca75b9870a5",
+  "result": {
+    "vm": "ok"
+  }
+}
+```
+
+### 删除弹性网卡
+
+```
+chimecli network deleteNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
+```
+
+```
+{
+  "requestId": "3269c569-e2f1-408c-b0e5-06ba7eeadf0f",
+  "result": 1
+}
+```
+
+### 挂载弹性网卡
+
+```
+chimecli compute attachNicToVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --attachNicRequest.NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
+```
+
+```
+{
+  "requestId": "a939c0ef-ec0c-4e71-b29b-c900d929f5d0",
+  "result": {
+    "vm": "ok"
+  }
+}
+```
+### 卸载弹性网卡
+
+```
+chimecli compute detachNicFromVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --detachNicRequest.NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
+```
+
+```
+{
+  "requestId": "c6eac3d4-67e8-4e39-a585-3d64a352c2ac",
+  "result": {
+    "vm": "ok"
+  }
+}
+```

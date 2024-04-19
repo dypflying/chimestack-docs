@@ -1764,6 +1764,690 @@ chimecli alert getAlertRule --RuleUuid 62deb6e7-6d56-11ee-b5ce-000c29dc11fc
 
 ## 虚拟机操作相关命令
 
+### 虚拟机列表
+
+```
+chimecli compute listVm --state 1
+```
+
+```
+{
+  "requestId": "dd66fcff-67e4-4d9c-abd2-410bc8f558b6",
+  "result": {
+    "elements": [
+      {
+        "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+        "boot_type": "",
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2024-04-18T13:41:51Z",
+        "description": "",
+        "host_ip": "",
+        "host_name": "",
+        "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+        "hyper_type": "",
+        "image_name": "",
+        "memory": 1073741824,
+        "name": "vm1",
+        "nics": [],
+        "operation": "",
+        "os_arch": "",
+        "os_detail": "",
+        "os_type": "",
+        "spec_type": 0,
+        "state": 1,
+        "tags": null,
+        "uuid": "7a46560b-c00b-4acc-a677-4dcfbfa11a77",
+        "vcpus": 1,
+        "volumes": []
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
+}
+```
+
+### 创建虚拟机
+
+```
+chimecli compute createVm --Body  \
+'{  
+  "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865", 
+  "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774", 
+  "instance_spec_uuid": "cd047e9d-2720-4397-84e5-777e4a39a531", 
+  "name": "dennis12", 
+  "volumes": [ 
+    { 
+      "name": "rootvolume", 
+      "size": 10, 
+      "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f", 
+      "image_uuid": "993933dc-f0e2-4bd6-966f-0b4872ea93cc", 
+      "root": 1 
+    }, 
+    { 
+      "name": "datavolume", 
+      "size": 20, 
+      "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f", 
+      "root": 0 
+    } 
+  ], 
+  "nics": [ 
+    { 
+      "name": "rootnic", 
+      "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7" 
+    } 
+  ] 
+}'
+```
+
+```
+{
+  "requestId": "e8bbddd9-2520-4d46-81ea-720e48bad3b1",
+  "result": {
+    "vm": {
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "boot_type": "",
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "0001-01-01T00:00:00Z",
+      "description": "",
+      "host_ip": "",
+      "host_name": "",
+      "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+      "hyper_type": "kvm",
+      "image_name": "",
+      "memory": 1073741824,
+      "name": "dennis12",
+      "nics": [
+        {
+          "attached_vms": [],
+          "created_at": "0001-01-01T00:00:00Z",
+          "description": "",
+          "gateway": "",
+          "ip": "",
+          "mac": "",
+          "name": "rootnic",
+          "netmask": "",
+          "network_name": "br1",
+          "network_type": 0,
+          "operation": "",
+          "primary": 0,
+          "state": 0,
+          "subnet_cidr": "",
+          "subnet_name": "",
+          "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
+          "uuid": "a88d3234-f2e7-4055-9f6a-e961d8a23328"
+        }
+      ],
+      "operation": "",
+      "os_arch": "",
+      "os_detail": "",
+      "os_type": "",
+      "spec_type": 0,
+      "state": 0,
+      "tags": null,
+      "uuid": "4be21239-293c-4989-b637-4df104f17caf",
+      "vcpus": 1,
+      "volumes": [
+        {
+          "attached_vms": [],
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "cdrom": 0,
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "0001-01-01T00:00:00Z",
+          "description": "",
+          "host_ip": "",
+          "host_name": "",
+          "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "image_name": "",
+          "image_uuid": "993933dc-f0e2-4bd6-966f-0b4872ea93cc",
+          "iops": 500,
+          "name": "rootvolume",
+          "operation": "e8bbddd9-2520-4d46-81ea-720e48bad3b1",
+          "parent_version": 0,
+          "root": 1,
+          "size": 10,
+          "snapshot_count": 0,
+          "snapshots": [],
+          "spec_name": "",
+          "state": 0,
+          "storage_pool_name": "",
+          "storage_pool_type": 0,
+          "throughput": 10485760,
+          "user_uuid": "",
+          "uuid": "9379b2e5-45dd-4760-84d4-f0a5ce90a0e3",
+          "version": 0,
+          "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+        },
+        {
+          "attached_vms": [],
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "cdrom": 0,
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "0001-01-01T00:00:00Z",
+          "description": "",
+          "host_ip": "",
+          "host_name": "",
+          "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "image_name": "",
+          "image_uuid": "",
+          "iops": 500,
+          "name": "datavolume",
+          "operation": "e8bbddd9-2520-4d46-81ea-720e48bad3b1",
+          "parent_version": 0,
+          "root": 0,
+          "size": 20,
+          "snapshot_count": 0,
+          "snapshots": [],
+          "spec_name": "",
+          "state": 0,
+          "storage_pool_name": "",
+          "storage_pool_type": 0,
+          "throughput": 10485760,
+          "user_uuid": "",
+          "uuid": "a27a7c9b-adfa-483a-bd34-d5e7725d19ca",
+          "version": 0,
+          "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+        }
+      ]
+    }
+  }
+}
+```
+
+### 查看虚拟机详情
+
+```
+chimecli compute describeVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --
+```
+
+```
+{
+  "requestId": "f419f343-d0f2-4f3a-926b-990d9323c896",
+  "result": {
+    "vm": {
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "boot_type": "bios",
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-18T13:41:51Z",
+      "description": "",
+      "host_ip": "192.168.231.128",
+      "host_name": "host-a428263d",
+      "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+      "hyper_type": "",
+      "image_name": "centos7_cloudinit.qcow2",
+      "memory": 1073741824,
+      "name": "vm1",
+      "nics": [
+        {
+          "attached_vms": [],
+          "created_at": "2024-04-18T13:41:51Z",
+          "description": "",
+          "gateway": "192.168.231.0",
+          "ip": "192.168.231.1",
+          "mac": "52:54:00:1a:26:0d",
+          "name": "primary-nic-vm1",
+          "netmask": "255.255.255.192",
+          "network_name": "br1",
+          "network_type": 0,
+          "operation": "",
+          "primary": 1,
+          "state": 2,
+          "subnet_cidr": "192.168.231.1/26",
+          "subnet_name": "subnet1",
+          "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
+          "uuid": "9579970a-ff8b-450b-b4ac-e062f3338bd9"
+        }
+      ],
+      "operation": "",
+      "os_arch": "x86_64",
+      "os_detail": "CentOS 7.x",
+      "os_type": "CentOS",
+      "spec_type": 0,
+      "state": 1,
+      "tags": null,
+      "uuid": "7a46560b-c00b-4acc-a677-4dcfbfa11a77",
+      "vcpus": 1,
+      "volumes": [
+        {
+          "attached_vms": [],
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "cdrom": 0,
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "2024-04-18T13:41:51Z",
+          "description": "",
+          "host_ip": "",
+          "host_name": "",
+          "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "image_name": "centos7_cloudinit.qcow2",
+          "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
+          "iops": 1000,
+          "name": "root-volume-vm1",
+          "operation": "",
+          "parent_version": -1,
+          "root": 1,
+          "size": 21474836480,
+          "snapshot_count": 0,
+          "snapshots": [],
+          "spec_name": "",
+          "state": 2,
+          "storage_pool_name": "",
+          "storage_pool_type": 0,
+          "throughput": 20971520,
+          "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+          "uuid": "c3d9c7b0-df2a-4713-8175-a74f3d94573c",
+          "version": 0,
+          "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+        }
+      ]
+    }
+  }
+}
+```
+
+### 启动虚拟机
+
+```
+chimecli compute startVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
+```
+
+```
+{
+  "requestId": "c4214cf2-094a-4797-ad59-87f99a833239",
+  "result": {
+    "vm": "ok"
+  }
+}
+```
+
+### 停止虚拟机
+
+```
+chimecli compute stopVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
+```
+
+```
+{
+  "requestId": "ab8daf9f-e4ad-4c1d-b5bc-58bfb4b1ed43",
+  "result": {
+    "vm": "ok"
+  }
+}
+```
+
+### 更新虚拟机
+
+```
+chimecli compute updateVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf --updateVmRequest.Name test-vm
+```
+
+```
+{
+  "requestId": "34847e46-2d0e-4ef0-ba76-65e02b7431e4",
+  "result": {
+    "vm": "ok"
+  }
+}
+```
+### 删除虚拟机
+
+```
+chimecli compute deleteVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf
+```
+
+```
+{
+  "requestId": "3bb72de6-3d03-425b-a004-6b4e1f12c851",
+  "result": {
+    "vm": "ok"
+  }
+}
+```
 ## 云硬盘相关命令
+
+### 查看云硬盘列表
+
+```
+chimecli volume listVolume --state 2
+```
+
+```
+{
+  "requestId": "a93a9e10-706a-443c-9564-ed2d8c829aca",
+  "result": {
+    "elements": [
+      {
+        "attached_vms": [],
+        "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+        "cdrom": 0,
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2024-04-18T13:41:51Z",
+        "description": "",
+        "host_ip": "",
+        "host_name": "",
+        "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+        "image_name": "",
+        "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
+        "iops": 1000,
+        "name": "root-volume-vm1",
+        "operation": "",
+        "parent_version": -1,
+        "root": 1,
+        "size": 21474836480,
+        "snapshot_count": 0,
+        "snapshots": [],
+        "spec_name": "Standard",
+        "state": 2,
+        "storage_pool_name": "Local Storage Pool",
+        "storage_pool_type": 0,
+        "throughput": 20971520,
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+        "uuid": "c3d9c7b0-df2a-4713-8175-a74f3d94573c",
+        "version": 0,
+        "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
+}
+```
+
+### 新建云硬盘
+
+```
+chimecli volume createVolume --createVolumeRequest.VolumeSpecUuid 38112d5c-7f13-438a-aec5-d14de51bd30f --createVolumeRequest.HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a --createVolumeRequest.Name test-volume --createVolumeRequest.Size 21474836480 --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
+```
+
+```
+{
+  "requestId": "2022deeb-e756-4c28-a7e3-0e32e4661100",
+  "result": {
+    "volume": {
+      "attached_vms": [],
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "cdrom": 0,
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "0001-01-01T00:00:00Z",
+      "description": "",
+      "host_ip": "",
+      "host_name": "",
+      "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+      "image_name": "",
+      "image_uuid": "",
+      "iops": 1000,
+      "name": "test-volume",
+      "operation": "Creating#2022deeb-e756-4c28-a7e3-0e32e4661100",
+      "parent_version": 0,
+      "root": 0,
+      "size": 21474836480,
+      "snapshot_count": 0,
+      "snapshots": [],
+      "spec_name": "",
+      "state": 0,
+      "storage_pool_name": "",
+      "storage_pool_type": 0,
+      "throughput": 20971520,
+      "user_uuid": "",
+      "uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
+      "version": 0,
+      "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+    }
+  }
+}
+```
+### 查看云硬盘
+
+```
+chimecli volume getVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
+```
+
+```
+{
+  "requestId": "2ab9af2c-fc26-49ee-a5e7-a045849d6fac",
+  "result": {
+    "volume": {
+      "attached_vms": [],
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "cdrom": 0,
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-19T01:31:30Z",
+      "description": "",
+      "host_ip": "192.168.231.128",
+      "host_name": "host-a428263d",
+      "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+      "image_name": "",
+      "image_uuid": "",
+      "iops": 1000,
+      "name": "test-volume",
+      "operation": "",
+      "parent_version": -1,
+      "root": 0,
+      "size": 21474836480,
+      "snapshot_count": 0,
+      "snapshots": [],
+      "spec_name": "Standard",
+      "state": 1,
+      "storage_pool_name": "Local Storage Pool",
+      "storage_pool_type": 0,
+      "throughput": 20971520,
+      "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+      "uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
+      "version": 0,
+      "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+    }
+  }
+}
+```
+
+### 更新云硬盘
+
+```
+chimecli volume updateVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f --updateVolumeRequest.Name 'test-volume' --updateVolumeRequest.Description 'volume description'
+```
+
+```
+{
+  "requestId": "ded9e524-20d4-4a45-843b-d6cd13b76ec0",
+  "result": {
+    "vm": "ok"
+  }
+}
+`
+
+### 删除云硬盘
+
+```
+chimecli volume deleteVolume --VolumeUuid 9379b2e5-45dd-4760-84d4-f0a5ce90a0e3
+```
+
+```
+{
+  "requestId": "bb931734-6051-486b-b0fb-b33f63de2d29",
+  "result": 1
+}
+```
+
+### 挂载云硬盘
+
+```
+chimecli compute attachVolumeToVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --attachVolumeRequest.VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
+```
+
+```
+{
+  "requestId": "df148989-d472-4f7a-ae83-5c5ac77d8a52",
+  "result": {
+    "vm": "ok"
+  }
+}
+```
+
+### 卸载云硬盘
+
+```
+chimecli compute detachVolumeFromVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --detachVolumeRequest.VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
+```
+
+```
+{
+  "requestId": "cb41cf74-b3bc-4522-9e8c-0bddd379f1e6",
+  "result": {
+    "vm": "ok"
+  }
+}
+```
+
+### 创建快照
+
+```
+chimecli volume createSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f --createSnapshotRequest.Name 'test-snapshot'
+```
+
+```
+{
+  "requestId": "90d98138-f25a-4a52-b277-21c2a095cae3",
+  "result": {
+    "snapshot": {
+      "created_at": "0001-01-01T00:00:00Z",
+      "description": "",
+      "name": "test-snapshot",
+      "operation": "Creating#90d98138-f25a-4a52-b277-21c2a095cae3",
+      "parent_volume_version": 0,
+      "state": 0,
+      "user_uuid": "",
+      "uuid": "fec61438-370b-4c19-9333-6ce6ab016e69",
+      "volume_uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
+      "volume_version": 0
+    }
+  }
+}
+```
+
+### 查看云盘快照列表
+
+```
+bin/chimecli volume listVolumeSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
+```
+
+```
+{
+  "requestId": "34e920ef-5b25-4052-b1f4-b6742215a0e8",
+  "result": {
+    "elements": [
+      {
+        "created_at": "2024-04-19T02:27:44Z",
+        "description": "",
+        "name": "test-snapshot",
+        "operation": "",
+        "parent_volume_version": -1,
+        "state": 1,
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+        "uuid": "fec61438-370b-4c19-9333-6ce6ab016e69",
+        "volume_uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
+        "volume_version": 0
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
+}
+```
+### 查看快照详情
+
+```
+chimecli volume  getSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69
+```
+
+```
+{
+  "requestId": "a03f1ff3-4827-4b51-bdda-68ba94400203",
+  "result": {
+    "snapshot": {
+      "created_at": "2024-04-19T02:27:44Z",
+      "description": "",
+      "name": "test-snapshot",
+      "operation": "",
+      "parent_volume_version": -1,
+      "state": 1,
+      "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+      "uuid": "fec61438-370b-4c19-9333-6ce6ab016e69",
+      "volume_uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
+      "volume_version": 0
+    }
+  }
+}
+```
+
+### 更新快照
+
+```
+chimecli volume  updateSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69 --createSnapshotRequest.Name 'test-snapshot' --createSnapshotRequest.Description 'snapshot description'
+```
+
+```
+{
+  "requestId": "78527034-0b25-416c-b510-2bef0c68d4e2",
+  "result": {
+    "snapshot": "ok"
+  }
+}
+```
+
+### 从快照恢复到云盘
+
+```
+chimecli volume restoreVolume fec61438-370b-4c19-9333-6ce6ab016e69 --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f 
+```
+
+```
+{
+  "requestId": "8a315f3d-bdec-485f-a017-1855b1f98328",
+  "result": {
+    "volume": {
+      "attached_vms": [],
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "cdrom": 0,
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-19T01:31:30Z",
+      "description": "volume description",
+      "host_ip": "",
+      "host_name": "",
+      "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+      "image_name": "",
+      "image_uuid": "",
+      "iops": 1000,
+      "name": "test-volume",
+      "operation": "Restoring#8a315f3d-bdec-485f-a017-1855b1f98328",
+      "parent_version": 0,
+      "root": 0,
+      "size": 21474836480,
+      "snapshot_count": 0,
+      "snapshots": [],
+      "spec_name": "",
+      "state": 1,
+      "storage_pool_name": "",
+      "storage_pool_type": 0,
+      "throughput": 20971520,
+      "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+      "uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
+      "version": 2,
+      "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+    }
+  }
+}
+```
+
+### 删除快照
+
+```
+chimecli volume deleteSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69
+```
+
+```
+{
+  "requestId": "3198bfaf-dfb6-478a-8ef7-abf7396372df",
+  "result": "ok"
+}
+```
 
 ## 弹性网卡相关命令

@@ -58,6 +58,130 @@ list alerts
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "2b5b041d-686a-4873-b5eb-49ea2a9b9632",
+  "result": {
+    "elements": [
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:16:00Z",
+        "description": "host name: host-a428263d, cpu usage: 0.86",
+        "name": "Host CPU Usage Larger Than 50%",
+        "priority": 1,
+        "rule_uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 1,
+        "state": 0,
+        "uuid": "07c8983f-f467-4223-b101-aa820585444a"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:16:00Z",
+        "description": "host name: host-a428263d, memory usage: 21.43",
+        "name": "Host Memory Usage Larger Than 80%",
+        "priority": 2,
+        "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 2,
+        "state": 0,
+        "uuid": "37469f5c-c686-4977-bbc9-424788d8f6fe"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:15:00Z",
+        "description": "host name: host-a428263d, cpu usage: 0.73",
+        "name": "Host CPU Usage Larger Than 50%",
+        "priority": 1,
+        "rule_uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 1,
+        "state": 0,
+        "uuid": "2e8bbe77-5864-44a2-921c-e1ee88ed6e23"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:15:00Z",
+        "description": "host name: host-a428263d, memory usage: 21.43",
+        "name": "Host Memory Usage Larger Than 80%",
+        "priority": 2,
+        "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 2,
+        "state": 0,
+        "uuid": "3a7de398-f1e5-4e22-9180-d0b38280de5d"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:14:00Z",
+        "description": "host name: host-a428263d, cpu usage: 0.67",
+        "name": "Host CPU Usage Larger Than 50%",
+        "priority": 1,
+        "rule_uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 1,
+        "state": 0,
+        "uuid": "a5004518-afd0-42a4-92b8-c49cc76feacb"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:14:00Z",
+        "description": "host name: host-a428263d, memory usage: 21.43",
+        "name": "Host Memory Usage Larger Than 80%",
+        "priority": 2,
+        "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 2,
+        "state": 0,
+        "uuid": "6e949a1d-fe8f-4834-bdb6-d696d0bd4f0f"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:13:00Z",
+        "description": "host name: host-a428263d, cpu usage: 0.63",
+        "name": "Host CPU Usage Larger Than 50%",
+        "priority": 1,
+        "rule_uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 1,
+        "state": 0,
+        "uuid": "723729cd-9911-452a-9afb-97540fdc7252"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:13:00Z",
+        "description": "host name: host-a428263d, memory usage: 21.43",
+        "name": "Host Memory Usage Larger Than 80%",
+        "priority": 2,
+        "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 2,
+        "state": 0,
+        "uuid": "3c7e8f49-f0f9-44ee-86b5-ea9dc4ba9730"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:12:00Z",
+        "description": "host name: host-a428263d, memory usage: 21.43",
+        "name": "Host Memory Usage Larger Than 80%",
+        "priority": 2,
+        "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 2,
+        "state": 0,
+        "uuid": "e1be82ff-6067-4644-8e40-dac1a7b9b86e"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-04-18T09:12:00Z",
+        "description": "host name: host-a428263d, cpu usage: 0.63",
+        "name": "Host CPU Usage Larger Than 50%",
+        "priority": 1,
+        "rule_uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc",
+        "severity": 1,
+        "state": 0,
+        "uuid": "c24f4240-6e5e-418b-911f-fa46fe173888"
+      }
+    ],
+    "size": 10,
+    "total": 28219
+  }
+}
+```
+
 <h3 id="listalert-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -109,6 +233,27 @@ describe a alert
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "f2cdbe5d-60a3-4f6b-bdc6-2b07e389454f",
+  "result": {
+    "alert": {
+      "comment": "",
+      "created_at": "2024-04-18T09:12:00Z",
+      "description": "host name: host-a428263d, memory usage: 21.43",
+      "name": "Host Memory Usage Larger Than 80%",
+      "priority": 2,
+      "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
+      "severity": 2,
+      "state": 0,
+      "uuid": "e1be82ff-6067-4644-8e40-dac1a7b9b86e"
+    }
+  }
+}
+```
+
 <h3 id="getalert-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -157,6 +302,15 @@ delete a alert
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "9a59e8a7-4c9f-4a8b-9c4f-1676c057274a",
+  "result": 0
 }
 ```
 
@@ -221,6 +375,15 @@ accept a alert
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "799f65c8-dd20-4b4c-94f9-0cdc92bd8119",
+  "result": "ok"
+}
+```
+
 <h3 id="acceptalert-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -279,6 +442,72 @@ list alert rules
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "e95e66ce-538a-43ee-9162-9ceb6a1cb083",
+  "result": {
+    "elements": [
+      {
+        "aggregate": "3",
+        "created_at": "2023-10-18T05:33:22Z",
+        "cron": "0 */1 * * * *",
+        "field": "vm_uuid|used_avg",
+        "match": "vm_metrics_aggr|used_avg|>|10.0",
+        "name": "Instance Memory Usage Larger Than 80%",
+        "priority": 2,
+        "severity": 2,
+        "state": 1,
+        "template": "vm uuid: {{vm_uuid}}, memory usage: {{used_avg}}",
+        "uuid": "da08b82e-6d77-11ee-b5ce-000c29dc11fc"
+      },
+      {
+        "aggregate": "3",
+        "created_at": "2023-10-18T01:36:19Z",
+        "cron": "0 */1 * * * *",
+        "field": "host|used_avg",
+        "match": "host_metrics_aggr|used_avg|>|10.0",
+        "name": "Host Memory Usage Larger Than 80%",
+        "priority": 2,
+        "severity": 2,
+        "state": 1,
+        "template": "host name: {{host}}, memory usage: {{used_avg}}",
+        "uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc"
+      },
+      {
+        "aggregate": "3",
+        "created_at": "2023-10-18T01:34:01Z",
+        "cron": "0 */1 * * * *",
+        "field": "host|total_avg",
+        "match": "host_metrics_aggr|total_avg|>|10.0",
+        "name": "Host CPU Usage Larger Than 80%",
+        "priority": 2,
+        "severity": 2,
+        "state": 1,
+        "template": "host name: {{host}}, cpu usage: {{total_avg}}",
+        "uuid": "6a7730cf-6d56-11ee-b5ce-000c29dc11fc"
+      },
+      {
+        "aggregate": "3",
+        "created_at": "2023-10-18T01:33:48Z",
+        "cron": "0 */1 * * * *",
+        "field": "host|total_avg",
+        "match": "host_metrics_aggr|total_avg|>|0.3",
+        "name": "Host CPU Usage Larger Than 50%",
+        "priority": 1,
+        "severity": 1,
+        "state": 1,
+        "template": "host name: {{host}}, cpu usage: {{total_avg}}",
+        "uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc"
+      }
+    ],
+    "size": 4,
+    "total": 4
+  }
+}
+```
+
 <h3 id="listalertrule-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -327,6 +556,29 @@ describe a alert rule
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "813dd88f-7b09-4e27-8149-039e94c1f008",
+  "result": {
+    "alert": {
+      "aggregate": "3",
+      "created_at": "2023-10-18T01:33:48Z",
+      "cron": "0 */1 * * * *",
+      "field": "host|total_avg",
+      "match": "host_metrics_aggr|total_avg|>|0.3",
+      "name": "Host CPU Usage Larger Than 50%",
+      "priority": 1,
+      "severity": 1,
+      "state": 1,
+      "template": "host name: {{host}}, cpu usage: {{total_avg}}",
+      "uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc"
+    }
+  }
 }
 ```
 
@@ -1018,6 +1270,34 @@ This will show all available azs by default.
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "c569a02d-066e-4265-a7fe-bcd698322a11",
+  "result": {
+    "elements": [
+      {
+        "created_at": "2023-06-29T03:46:02Z",
+        "description": "default zone",
+        "name": "Default",
+        "state": 1,
+        "uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865"
+      },
+      {
+        "created_at": "2023-06-28T21:50:11Z",
+        "description": "backup zone",
+        "name": "Backup Zone",
+        "state": 1,
+        "uuid": "43340503-02e3-4223-bee3-2548957bc22b"
+      }
+    ],
+    "size": 2,
+    "total": 2
+  }
+}
+```
+
 <h3 id="listaz-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -1138,6 +1418,23 @@ This will describe an available az.
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "e2c8d21e-835a-4673-aa38-fa1e58018319",
+  "result": {
+    "az": {
+      "created_at": "2023-06-29T03:46:02Z",
+      "description": "default zone",
+      "name": "Default",
+      "state": 1,
+      "uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865"
+    }
+  }
+}
+```
+
 <h3 id="getaz-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -1188,6 +1485,15 @@ This will delete an available az.
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "011f145a-ca14-41cb-b0c5-e665efd29f53",
+  "result": 1
 }
 ```
 
@@ -1256,6 +1562,17 @@ This will update an available az.
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "196aa7d1-7271-448d-85d8-8dc7ac56c4d1",
+  "result": {
+    "az": "ok"
+  }
+}
+```
+
 <h3 id="updateaz-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -1309,6 +1626,17 @@ This will disable an available az.
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "b5b05590-8627-4035-b62a-33e685f1a302",
+  "result": {
+    "az": "ok"
+  }
+}
+```
+
 <h3 id="disableaz-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -1359,6 +1687,17 @@ This will enable an available az.
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "a56faede-7169-46db-ae4e-1c43ffe3f55d",
+  "result": {
+    "az": "ok"
+  }
 }
 ```
 
@@ -1423,6 +1762,44 @@ This will show clusters
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "0ef1d20c-3a78-4b16-b337-696bb601267b",
+  "result": {
+    "elements": [
+      {
+        "arch": "x86_64",
+        "az_name": "Default",
+        "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+        "created_at": "2023-08-17T19:54:43Z",
+        "description": "dummy cluster",
+        "hypervisor_type": "kvm",
+        "name": "Dummy Cluster",
+        "state": 1,
+        "type": 1,
+        "uuid": "6635fcef-438b-45cb-b4a8-949d39936870"
+      },
+      {
+        "arch": "x86_64",
+        "az_name": "Default",
+        "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+        "created_at": "2023-06-15T08:02:31Z",
+        "description": "default cluster 2",
+        "hypervisor_type": "kvm",
+        "name": "Default",
+        "state": 1,
+        "type": 0,
+        "uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774"
+      }
+    ],
+    "size": 2,
+    "total": 2
+  }
 }
 ```
 
@@ -1493,6 +1870,28 @@ This will create a cluster in a specified Az
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "8e3592e3-6581-4923-8292-e57418d128ad",
+  "result": {
+    "cluster": {
+      "arch": "x86",
+      "az_name": "",
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "created_at": "2024-04-17T08:46:42.227101717Z",
+      "description": "",
+      "hypervisor_type": "kvm",
+      "name": "test-cluster",
+      "state": 1,
+      "type": 1,
+      "uuid": "e359211d-a882-4609-baad-db57557fdf2e"
+    }
+  }
+}
+```
+
 <h3 id="createcluster-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -1547,6 +1946,28 @@ This will describe a cluster
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "c48142ad-7ffa-4cbb-8a97-f9f7b757bb1e",
+  "result": {
+    "cluster": {
+      "arch": "x86",
+      "az_name": "Default",
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "created_at": "2024-04-17T08:46:42Z",
+      "description": "",
+      "hypervisor_type": "kvm",
+      "name": "test-cluster",
+      "state": 1,
+      "type": 1,
+      "uuid": "e359211d-a882-4609-baad-db57557fdf2e"
+    }
+  }
+}
+```
+
 <h3 id="getcluster-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -1598,6 +2019,15 @@ This will delete a cluster
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "39aa34ae-2a76-4409-b96a-212802364638",
+  "result": 1
 }
 ```
 
@@ -1669,6 +2099,17 @@ This will update a cluster.
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "3bcdefae-d54a-4681-9004-fd163b997c90",
+  "result": {
+    "cluster": "ok"
+  }
+}
+```
+
 <h3 id="updatecluster-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -1723,6 +2164,17 @@ This will disable a cluster
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "0abc7fc0-eff4-45ec-870e-cb65a6abf2d7",
+  "result": {
+    "cluster": "ok"
+  }
+}
+```
+
 <h3 id="disablecluster-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -1774,6 +2226,17 @@ This will enable a cluster
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "43684ea3-d36b-479d-9793-4fa98fb8b214",
+  "result": {
+    "cluster": "ok"
+  }
 }
 ```
 
@@ -1838,6 +2301,60 @@ This will show hosts
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "4fbe3aaa-e491-4dc2-8eb3-f821a17b9883",
+  "result": {
+    "elements": [
+      {
+        "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+        "cluster_name": "Default",
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2024-04-11T10:57:34Z",
+        "description": "",
+        "manage_ip": "192.168.231.128",
+        "name": "host-a428263d",
+        "physical_memory": 0,
+        "physical_vcpus": 0,
+        "rack_name": "rack1",
+        "reserved_memory": 0,
+        "reserved_vcpus": 0,
+        "state": 0,
+        "total_memory": 0,
+        "total_vcpus": 0,
+        "used_memory": 0,
+        "used_vcpus": 0,
+        "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a"
+      },
+      {
+        "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+        "cluster_name": "Default",
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2024-04-01T11:18:54Z",
+        "description": "",
+        "manage_ip": "192.168.231.158",
+        "name": "dennis",
+        "physical_memory": 0,
+        "physical_vcpus": 0,
+        "rack_name": "rack1",
+        "reserved_memory": 0,
+        "reserved_vcpus": 0,
+        "state": 1,
+        "total_memory": 0,
+        "total_vcpus": 0,
+        "used_memory": 0,
+        "used_vcpus": 0,
+        "uuid": "a4824bcd-1112-449d-8d3e-3ff8b1323d9e"
+      }
+    ],
+    "size": 2,
+    "total": 2
+  }
 }
 ```
 
@@ -1910,6 +2427,36 @@ This will create a host
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "d46b51f4-cb00-48bf-812d-6db4e589dd03",
+  "result": {
+    "host": {
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "cluster_name": "",
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-17T11:28:46.881807766Z",
+      "description": "",
+      "manage_ip": "192.168.231.128",
+      "name": "host-a428263d",
+      "physical_memory": 8291913728,
+      "physical_vcpus": 4,
+      "rack_name": "rack1",
+      "reserved_memory": 1024,
+      "reserved_vcpus": 1,
+      "state": 1,
+      "total_memory": 16583827456,
+      "total_vcpus": 8,
+      "used_memory": 0,
+      "used_vcpus": 0,
+      "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a"
+    }
+  }
+}
+```
+
 <h3 id="createhost-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -1965,6 +2512,36 @@ This will describe a host
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "843a98df-ab5d-43ed-8d86-84e7a09b3c42",
+  "result": {
+    "host": {
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "cluster_name": "Default",
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-11T10:57:34Z",
+      "description": "",
+      "manage_ip": "192.168.231.128",
+      "name": "host-a428263d",
+      "physical_memory": 8291917824,
+      "physical_vcpus": 4,
+      "rack_name": "rack1",
+      "reserved_memory": 0,
+      "reserved_vcpus": 0,
+      "state": 0,
+      "total_memory": 16583835648,
+      "total_vcpus": 8,
+      "used_memory": 1073741824,
+      "used_vcpus": 1,
+      "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a"
+    }
+  }
+}
+```
+
 <h3 id="gethost-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -2017,6 +2594,15 @@ This will delete a host
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "b363317b-6299-426c-8412-178aeaf42326",
+  "result": 1
 }
 ```
 
@@ -2089,6 +2675,17 @@ This will update a host.
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "c6ad8b13-9e99-4441-b3a0-ac6a1b611306",
+  "result": {
+    "host": "ok"
+  }
+}
+```
+
 <h3 id="updatehost-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -2141,6 +2738,17 @@ This will disable a host
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "63514320-0abc-41ac-97ee-6b5df5fc7424",
+  "result": {
+    "host": "ok"
+  }
 }
 ```
 
@@ -2199,6 +2807,17 @@ This will enable a host
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "217560f4-41af-4c61-b61f-4998cbc2f07f",
+  "result": {
+    "host": "ok"
+  }
+}
+```
+
 <h3 id="enablehost-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -2251,6 +2870,17 @@ This will suspend a host
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "cc9484e2-7e7c-4aaa-82f1-8492f05a34ec",
+  "result": {
+    "host": "ok"
+  }
 }
 ```
 
@@ -2312,6 +2942,48 @@ This will show available clients
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "bac39ae5-b097-4780-b122-383c1cc13295",
+  "result": {
+    "elements": [
+      {
+        "active_domains": 0,
+        "created_at": "2024-04-11T10:56:57Z",
+        "description": "",
+        "domains": 0,
+        "heartbeat_at": "2024-04-17T11:32:48Z",
+        "manage_ip": "192.168.231.128",
+        "name": "host-a428263d",
+        "rack_name": "rack1",
+        "state": 1,
+        "used_memory": 0,
+        "used_vcpus": 0,
+        "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a"
+      },
+      {
+        "active_domains": 0,
+        "created_at": "2024-04-01T11:07:49Z",
+        "description": "",
+        "domains": 0,
+        "heartbeat_at": "2024-04-15T11:29:33Z",
+        "manage_ip": "192.168.231.158",
+        "name": "dennis",
+        "rack_name": "rack1",
+        "state": 1,
+        "used_memory": 0,
+        "used_vcpus": 0,
+        "uuid": "a4824bcd-1112-449d-8d3e-3ff8b1323d9e"
+      }
+    ],
+    "size": 2,
+    "total": 2
+  }
 }
 ```
 
@@ -2426,6 +3098,52 @@ list instance spec relations
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "a4be9b2b-4080-4cdf-8536-d2ceead7e514",
+  "result": {
+    "elements": [
+      {
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-09-08T01:39:31Z",
+        "instance_spec_name": "instance_spec2",
+        "instance_spec_uuid": "ac8bf72c-2c94-4695-97c8-cc3977ae8f11",
+        "memory": 536870912,
+        "vcpus": 1
+      },
+      {
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-08-28T23:10:41Z",
+        "instance_spec_name": "Large(4C8G)",
+        "instance_spec_uuid": "0b06e1d5-0d55-4c04-9837-dc0e74254f21",
+        "memory": 8589934592,
+        "vcpus": 1
+      },
+      {
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-08-24T19:26:02Z",
+        "instance_spec_name": "Mini(1C1G)",
+        "instance_spec_uuid": "cd047e9d-2720-4397-84e5-777e4a39a531",
+        "memory": 1073741824,
+        "vcpus": 1
+      },
+      {
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-08-24T19:16:52Z",
+        "instance_spec_name": "Medium(2C4G)",
+        "instance_spec_uuid": "13f1fb24-2344-48ca-adc2-e7ccaa792a86",
+        "memory": 4294967296,
+        "vcpus": 1
+      }
+    ],
+    "size": 4,
+    "total": 4
+  }
+}
+```
+
 <h3 id="listclusterinstancespecrelation-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -2488,6 +3206,21 @@ create new instance spec relation
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "3a5673a2-6c6c-4096-a8f1-6caa18d7c74e",
+  "result": {
+    "cluster_instance_spec_relation": {
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-18T08:49:37.401057582+08:00",
+      "instance_spec_uuid": "849075e3-7b00-498d-9061-83996f3d370c"
+    }
+  }
+}
+```
+
 <h3 id="createclusterinstancespecrelation-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -2538,6 +3271,15 @@ delete an instance spec relation
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "ebf4f99d-37fb-45f2-935e-ba99052a3af7",
+  "result": 1
 }
 ```
 
@@ -2594,6 +3336,64 @@ list instance specs
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "8279a707-8df9-43ef-a183-0c74fb0e7c37",
+  "result": {
+    "elements": [
+      {
+        "cluster_count": 1,
+        "created_at": "2023-08-27T18:55:03Z",
+        "description": "instance_spec22aa",
+        "memory": 536870912,
+        "name": "instance_spec2",
+        "state": 1,
+        "type": 0,
+        "uuid": "ac8bf72c-2c94-4695-97c8-cc3977ae8f11",
+        "vcpus": 1
+      },
+      {
+        "cluster_count": 3,
+        "created_at": "2023-08-10T17:04:27Z",
+        "description": "4 vcpus, 8g memory",
+        "memory": 8589934592,
+        "name": "Large(4C8G)",
+        "state": 1,
+        "type": 0,
+        "uuid": "0b06e1d5-0d55-4c04-9837-dc0e74254f21",
+        "vcpus": 1
+      },
+      {
+        "cluster_count": 3,
+        "created_at": "2023-08-10T17:04:18Z",
+        "description": "2 vcpus, 4g memory",
+        "memory": 4294967296,
+        "name": "Medium(2C4G)",
+        "state": 1,
+        "type": 0,
+        "uuid": "13f1fb24-2344-48ca-adc2-e7ccaa792a86",
+        "vcpus": 1
+      },
+      {
+        "cluster_count": 3,
+        "created_at": "2023-06-25T00:43:55Z",
+        "description": "1 vcpus, 1G memory",
+        "memory": 1073741824,
+        "name": "Mini(1C1G)",
+        "state": 1,
+        "type": 0,
+        "uuid": "cd047e9d-2720-4397-84e5-777e4a39a531",
+        "vcpus": 1
+      }
+    ],
+    "size": 4,
+    "total": 4
+  }
 }
 ```
 
@@ -2661,6 +3461,27 @@ create an instance spec
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "544abc7a-9a56-4275-9de6-54b0fef875ad",
+  "result": {
+    "instance_spec": {
+      "cluster_count": 0,
+      "created_at": "2024-04-18T00:20:28.771276054Z",
+      "description": "",
+      "memory": 16777216,
+      "name": "test-spec",
+      "state": 1,
+      "type": 1,
+      "uuid": "849075e3-7b00-498d-9061-83996f3d370c",
+      "vcpus": 1
+    }
+  }
+}
+```
+
 <h3 id="createinstancespec-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -2712,6 +3533,27 @@ describe an instance spec
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "891d47c6-92d6-44db-a48f-8c4312ba9f56",
+  "result": {
+    "instance_spec": {
+      "cluster_count": 0,
+      "created_at": "2024-04-18T00:20:29Z",
+      "description": "",
+      "memory": 16777216,
+      "name": "test-spec",
+      "state": 1,
+      "type": 1,
+      "uuid": "849075e3-7b00-498d-9061-83996f3d370c",
+      "vcpus": 1
+    }
+  }
+}
+```
+
 <h3 id="getinstancespec-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -2760,6 +3602,15 @@ delete an instance spec
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "1b24222f-0158-4d10-84c8-c478157e2465",
+  "result": 1
 }
 ```
 
@@ -2828,6 +3679,17 @@ update instance spec
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "7c5d3460-83b5-48e8-84bd-a3a8b912c908",
+  "result": {
+    "instance_spec": "ok"
+  }
+}
+```
+
 <h3 id="updateinstancespec-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -2887,6 +3749,33 @@ list networks
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "f346cf6e-12e3-4580-bbd8-66f7bf9388b4",
+  "result": {
+    "elements": [
+      {
+        "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+        "cluster_name": "Default",
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-07-20T02:02:31Z",
+        "description": "bridge1",
+        "interface_name": "ens224",
+        "name": "br1",
+        "state": 1,
+        "type": 0,
+        "uuid": "52899f98-3963-4ae0-abde-2ea72e27f2b6",
+        "vlan_id": ""
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
 }
 ```
 
@@ -2955,6 +3844,29 @@ create a network
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "3abf33eb-dae3-4a61-8331-5a53163e7362",
+  "result": {
+    "network": {
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "cluster_name": "",
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "0001-01-01T00:00:00Z",
+      "description": "",
+      "interface_name": "ens224",
+      "name": "br1",
+      "state": 0,
+      "type": 0,
+      "uuid": "f2a515db-7699-4970-b13c-a8ea9840f62e",
+      "vlan_id": ""
+    }
+  }
+}
+```
+
 <h3 id="createnetwork-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -3008,6 +3920,29 @@ describe a network
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "235ff7b9-3364-475f-8800-8bc064e90134",
+  "result": {
+    "network": {
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "cluster_name": "Default",
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2023-07-20T02:02:31Z",
+      "description": "bridge1",
+      "interface_name": "ens224",
+      "name": "br1",
+      "state": 1,
+      "type": 0,
+      "uuid": "52899f98-3963-4ae0-abde-2ea72e27f2b6",
+      "vlan_id": ""
+    }
+  }
+}
+```
+
 <h3 id="getnetwork-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -3058,6 +3993,15 @@ delete a network
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "2594ebfe-cc1c-44a2-965c-cad7bc9fbd55",
+  "result": 1
 }
 ```
 
@@ -3125,6 +4069,17 @@ update a network
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "484f5728-ee8f-44a1-a1df-4b156b9d58a5",
+  "result": {
+    "network": "ok"
+  }
+}
+```
+
 <h3 id="updatenetwork-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -3182,6 +4137,33 @@ list subnets
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "e417211d-0676-4cf2-8fa0-d7376dc4d562",
+  "result": {
+    "elements": [
+      {
+        "cidr": "192.168.231.1/26",
+        "created_at": "2024-04-18T04:21:30Z",
+        "description": "",
+        "gateway": "192.168.231.0",
+        "name": "subnet1",
+        "network_name": "br1",
+        "network_uuid": "f2a515db-7699-4970-b13c-a8ea9840f62e",
+        "reserved_ips": "",
+        "state": 1,
+        "type": 0,
+        "uuid": "e73efdf7-d232-4556-ba95-3851100a47b7"
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
 }
 ```
 
@@ -3252,6 +4234,29 @@ create a subnet
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "77f9400f-b573-4f6b-a17d-2b331a4212c9",
+  "result": {
+    "subnet": {
+      "cidr": "192.168.231.200/30",
+      "created_at": "2024-04-18T04:28:28.794229055Z",
+      "description": "",
+      "gateway": "192.168.231.200",
+      "name": "subnet2",
+      "network_name": "",
+      "network_uuid": "f2a515db-7699-4970-b13c-a8ea9840f62e",
+      "reserved_ips": "",
+      "state": 1,
+      "type": 0,
+      "uuid": "fed410bf-da50-490f-a045-314b08dc8ad5"
+    }
+  }
+}
+```
+
 <h3 id="createsubnet-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -3306,6 +4311,29 @@ describe a subnet
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "3e6498f2-3a89-403d-b3d5-f03063f921a9",
+  "result": {
+    "subnet": {
+      "cidr": "192.168.231.200/30",
+      "created_at": "2024-04-18T04:28:29Z",
+      "description": "",
+      "gateway": "192.168.231.200",
+      "name": "subnet2",
+      "network_name": "br1",
+      "network_uuid": "f2a515db-7699-4970-b13c-a8ea9840f62e",
+      "reserved_ips": "",
+      "state": 1,
+      "type": 0,
+      "uuid": "fed410bf-da50-490f-a045-314b08dc8ad5"
+    }
+  }
+}
+```
+
 <h3 id="getsubnet-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -3357,6 +4385,15 @@ delete a subnet
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "e5a8a943-cabc-4959-ad6d-eac97f384839",
+  "result": 1
 }
 ```
 
@@ -3428,6 +4465,17 @@ update a subnet
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "4e5ff592-6c71-426f-a9ed-6691972d7443",
+  "result": {
+    "subnet": "ok"
+  }
+}
+```
+
 <h3 id="updatesubnet-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -3483,6 +4531,39 @@ list nics
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "3ef89c92-2abb-47b5-a6a4-3a2f913802df",
+  "result": {
+    "elements": [
+      {
+        "attached_vms": [],
+        "created_at": "2024-04-18T13:41:51Z",
+        "description": "",
+        "gateway": "192.168.231.0",
+        "ip": "192.168.231.1",
+        "mac": "52:54:00:1a:26:0d",
+        "name": "primary-nic-vm1",
+        "netmask": "255.255.255.192",
+        "network_name": "br1",
+        "network_type": 0,
+        "operation": "",
+        "primary": 1,
+        "state": 2,
+        "subnet_cidr": "192.168.231.1/26",
+        "subnet_name": "subnet1",
+        "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
+        "uuid": "9579970a-ff8b-450b-b4ac-e062f3338bd9"
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
 }
 ```
 
@@ -3550,6 +4631,35 @@ create a nic
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "e926a987-2073-4258-8739-41b60bd637a4",
+  "result": {
+    "nic": {
+      "attached_vms": [],
+      "created_at": "0001-01-01T00:00:00Z",
+      "description": "",
+      "gateway": "192.168.231.0",
+      "ip": "192.168.231.2",
+      "mac": "52:54:00:8a:31:6a",
+      "name": "test-nic",
+      "netmask": "255.255.255.192",
+      "network_name": "br1",
+      "network_type": 0,
+      "operation": "",
+      "primary": 0,
+      "state": 0,
+      "subnet_cidr": "",
+      "subnet_name": "",
+      "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
+      "uuid": "16655315-8684-4e22-bd5f-4d8d30618629"
+    }
+  }
+}
+```
+
 <h3 id="createnic-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -3598,6 +4708,35 @@ describe nic
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "e47884dd-973f-469c-95a9-f704c8f4f925",
+  "result": {
+    "nic": {
+      "attached_vms": [],
+      "created_at": "2024-04-19T04:04:30Z",
+      "description": "",
+      "gateway": "192.168.231.0",
+      "ip": "192.168.231.2",
+      "mac": "52:54:00:8a:31:6a",
+      "name": "test-nic",
+      "netmask": "255.255.255.192",
+      "network_name": "br1",
+      "network_type": 0,
+      "operation": "",
+      "primary": 0,
+      "state": 1,
+      "subnet_cidr": "192.168.231.1/26",
+      "subnet_name": "subnet1",
+      "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
+      "uuid": "16655315-8684-4e22-bd5f-4d8d30618629"
+    }
+  }
 }
 ```
 
@@ -3650,6 +4789,15 @@ delete a nic
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "3269c569-e2f1-408c-b0e5-06ba7eeadf0f",
+  "result": 1
 }
 ```
 
@@ -3712,6 +4860,17 @@ update a nic
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "edce4af3-c02f-4e73-823f-cca75b9870a5",
+  "result": {
+    "vm": "ok"
+  }
 }
 ```
 
@@ -3820,6 +4979,37 @@ list storage pools
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "1b5d3610-baae-40ec-834f-18a690b91366",
+  "result": {
+    "elements": [
+      {
+        "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+        "backend_path": "/hyperc/backend",
+        "cluster_name": "Default",
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-06-25T19:10:18Z",
+        "description": "local storage pool2aa",
+        "image_cache_path": "/hyperc/cache",
+        "name": "Local Storage Pool",
+        "physical_size": 0,
+        "reserved_size": 0,
+        "state": 1,
+        "total_size": 0,
+        "type": 0,
+        "used_size": 0,
+        "uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a"
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
+}
+```
+
 <h3 id="liststoragepool-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -3889,6 +5079,33 @@ create a storage pool
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "6b511a24-c98f-4619-99cf-21adba3063f7",
+  "result": {
+    "storage_pool": {
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "backend_path": "/chime/backend",
+      "cluster_name": "",
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-18T07:29:07.754159689Z",
+      "description": "",
+      "image_cache_path": "/chime/cache",
+      "name": "new-storagepool",
+      "physical_size": 1048576000,
+      "reserved_size": 0,
+      "state": 1,
+      "total_size": 2097152000,
+      "type": 0,
+      "used_size": 0,
+      "uuid": "97329a52-44c4-44ac-af4f-fb45c95b618b"
+    }
+  }
+}
+```
+
 <h3 id="createstoragepool-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -3942,6 +5159,33 @@ describe a storage pool
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "f50f9372-da7d-41c5-8cc9-713a8dcd492c",
+  "result": {
+    "storage_pool": {
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "backend_path": "/chime/backend",
+      "cluster_name": "Default",
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-18T07:29:08Z",
+      "description": "",
+      "image_cache_path": "/chime/cache",
+      "name": "new-storagepool",
+      "physical_size": 1048576000,
+      "reserved_size": 0,
+      "state": 1,
+      "total_size": 2097152000,
+      "type": 0,
+      "used_size": 0,
+      "uuid": "97329a52-44c4-44ac-af4f-fb45c95b618b"
+    }
+  }
+}
+```
+
 <h3 id="getstoragepool-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -3992,6 +5236,15 @@ delete a storage pool
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "a76eed93-e64f-4ce7-8bad-acd2e1fd52fa",
+  "result": 1
 }
 ```
 
@@ -4062,6 +5315,17 @@ update a storage pool
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "d42d4a0b-f3e9-450e-a95e-d9d7cffd9a91",
+  "result": {
+    "storage_pool": "ok"
+  }
 }
 ```
 
@@ -4235,6 +5499,50 @@ list volumes
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "a93a9e10-706a-443c-9564-ed2d8c829aca",
+  "result": {
+    "elements": [
+      {
+        "attached_vms": [],
+        "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+        "cdrom": 0,
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2024-04-18T13:41:51Z",
+        "description": "",
+        "host_ip": "",
+        "host_name": "",
+        "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+        "image_name": "",
+        "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
+        "iops": 1000,
+        "name": "root-volume-vm1",
+        "operation": "",
+        "parent_version": -1,
+        "root": 1,
+        "size": 21474836480,
+        "snapshot_count": 0,
+        "snapshots": [],
+        "spec_name": "Standard",
+        "state": 2,
+        "storage_pool_name": "Local Storage Pool",
+        "storage_pool_type": 0,
+        "throughput": 20971520,
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+        "uuid": "c3d9c7b0-df2a-4713-8175-a74f3d94573c",
+        "version": 0,
+        "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
+}
+```
+
 <h3 id="listvolume-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -4303,6 +5611,46 @@ create new volume
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "2022deeb-e756-4c28-a7e3-0e32e4661100",
+  "result": {
+    "volume": {
+      "attached_vms": [],
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "cdrom": 0,
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "0001-01-01T00:00:00Z",
+      "description": "",
+      "host_ip": "",
+      "host_name": "",
+      "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+      "image_name": "",
+      "image_uuid": "",
+      "iops": 1000,
+      "name": "test-volume",
+      "operation": "Creating#2022deeb-e756-4c28-a7e3-0e32e4661100",
+      "parent_version": 0,
+      "root": 0,
+      "size": 21474836480,
+      "snapshot_count": 0,
+      "snapshots": [],
+      "spec_name": "",
+      "state": 0,
+      "storage_pool_name": "",
+      "storage_pool_type": 0,
+      "throughput": 20971520,
+      "user_uuid": "",
+      "uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
+      "version": 0,
+      "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+    }
+  }
+}
+```
+
 <h3 id="createvolume-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -4353,6 +5701,46 @@ describe a volume
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "2ab9af2c-fc26-49ee-a5e7-a045849d6fac",
+  "result": {
+    "volume": {
+      "attached_vms": [],
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "cdrom": 0,
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-19T01:31:30Z",
+      "description": "",
+      "host_ip": "192.168.231.128",
+      "host_name": "host-a428263d",
+      "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+      "image_name": "",
+      "image_uuid": "",
+      "iops": 1000,
+      "name": "test-volume",
+      "operation": "",
+      "parent_version": -1,
+      "root": 0,
+      "size": 21474836480,
+      "snapshot_count": 0,
+      "snapshots": [],
+      "spec_name": "Standard",
+      "state": 1,
+      "storage_pool_name": "Local Storage Pool",
+      "storage_pool_type": 0,
+      "throughput": 20971520,
+      "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+      "uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
+      "version": 0,
+      "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+    }
+  }
 }
 ```
 
@@ -4407,6 +5795,15 @@ delete a volume
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "bb931734-6051-486b-b0fb-b33f63de2d29",
+  "result": 1
 }
 ```
 
@@ -4471,6 +5868,17 @@ update a volume
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "ded9e524-20d4-4a45-843b-d6cd13b76ec0",
+  "result": {
+    "vm": "ok"
+  }
 }
 ```
 
@@ -4587,6 +5995,32 @@ list snapshots of a volume
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "34e920ef-5b25-4052-b1f4-b6742215a0e8",
+  "result": {
+    "elements": [
+      {
+        "created_at": "2024-04-19T02:27:44Z",
+        "description": "",
+        "name": "test-snapshot",
+        "operation": "",
+        "parent_volume_version": -1,
+        "state": 1,
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+        "uuid": "fec61438-370b-4c19-9333-6ce6ab016e69",
+        "volume_uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
+        "volume_version": 0
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
+}
+```
+
 <h3 id="listvolumesnapshot-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -4649,6 +6083,28 @@ create a snapshot
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "90d98138-f25a-4a52-b277-21c2a095cae3",
+  "result": {
+    "snapshot": {
+      "created_at": "0001-01-01T00:00:00Z",
+      "description": "",
+      "name": "test-snapshot",
+      "operation": "Creating#90d98138-f25a-4a52-b277-21c2a095cae3",
+      "parent_volume_version": 0,
+      "state": 0,
+      "user_uuid": "",
+      "uuid": "fec61438-370b-4c19-9333-6ce6ab016e69",
+      "volume_uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
+      "volume_version": 0
+    }
+  }
+}
+```
+
 <h3 id="createsnapshot-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -4701,6 +6157,28 @@ get a snapshot
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "a03f1ff3-4827-4b51-bdda-68ba94400203",
+  "result": {
+    "snapshot": {
+      "created_at": "2024-04-19T02:27:44Z",
+      "description": "",
+      "name": "test-snapshot",
+      "operation": "",
+      "parent_volume_version": -1,
+      "state": 1,
+      "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+      "uuid": "fec61438-370b-4c19-9333-6ce6ab016e69",
+      "volume_uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
+      "volume_version": 0
+    }
+  }
+}
+```
+
 <h3 id="getsnapshot-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -4750,6 +6228,15 @@ delete a snapshot
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "3198bfaf-dfb6-478a-8ef7-abf7396372df",
+  "result": "ok"
 }
 ```
 
@@ -4816,6 +6303,17 @@ update a snapshot
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "78527034-0b25-416c-b510-2bef0c68d4e2",
+  "result": {
+    "snapshot": "ok"
+  }
+}
+```
+
 <h3 id="updatesnapshot-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -4865,6 +6363,46 @@ restore volume from a snapshot
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "8a315f3d-bdec-485f-a017-1855b1f98328",
+  "result": {
+    "volume": {
+      "attached_vms": [],
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "cdrom": 0,
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-19T01:31:30Z",
+      "description": "volume description",
+      "host_ip": "",
+      "host_name": "",
+      "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+      "image_name": "",
+      "image_uuid": "",
+      "iops": 1000,
+      "name": "test-volume",
+      "operation": "Restoring#8a315f3d-bdec-485f-a017-1855b1f98328",
+      "parent_version": 0,
+      "root": 0,
+      "size": 21474836480,
+      "snapshot_count": 0,
+      "snapshots": [],
+      "spec_name": "",
+      "state": 1,
+      "storage_pool_name": "",
+      "storage_pool_type": 0,
+      "throughput": 20971520,
+      "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+      "uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
+      "version": 2,
+      "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+    }
+  }
 }
 ```
 
@@ -4971,6 +6509,56 @@ list volume spec relations
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "b6c98def-9d89-40cd-a59a-4caf4dc15de0",
+  "result": {
+    "elements": [
+      {
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-08-28T23:21:26Z",
+        "max_iops": 1000,
+        "max_throughput": 314572800,
+        "min_iops": 100,
+        "min_throughput": 31457280,
+        "step_iops": 10,
+        "step_throughput": 10485760,
+        "volume_spec_name": "test",
+        "volume_spec_uuid": "9fb4dc3a-88ec-4360-a823-55b0f19bf146"
+      },
+      {
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-08-17T02:50:41Z",
+        "max_iops": 10000,
+        "max_throughput": 524288000,
+        "min_iops": 1000,
+        "min_throughput": 52428800,
+        "step_iops": 100,
+        "step_throughput": 5242880,
+        "volume_spec_name": "Performance",
+        "volume_spec_uuid": "af52a0fe-f1fc-483c-9197-aead9786a73a"
+      },
+      {
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2023-08-11T01:58:10Z",
+        "max_iops": 5000,
+        "max_throughput": 104857600,
+        "min_iops": 500,
+        "min_throughput": 10485760,
+        "step_iops": 50,
+        "step_throughput": 1048576,
+        "volume_spec_name": "Standard",
+        "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+      }
+    ],
+    "size": 3,
+    "total": 3
+  }
+}
+```
+
 <h3 id="listclustervolumespecrelation-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -5033,6 +6621,21 @@ create new volume spec relation
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "2850087e-9e72-4cf7-986b-64a7d5cb88b4",
+  "result": {
+    "cluster_volume_spec_relation": {
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-18T09:29:46.257989386+08:00",
+      "volume_spec_uuid": "c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa"
+    }
+  }
+}
+```
+
 <h3 id="createclustervolumespecrelation-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -5083,6 +6686,15 @@ delete an volume spec relation
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "85e088bc-9b81-4172-b3ee-0f61da006106",
+  "result": 1
 }
 ```
 
@@ -5139,6 +6751,68 @@ list volume specs
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "30b85eb5-fdb5-48c7-9bee-e7049aa2dce5",
+  "result": {
+    "elements": [
+      {
+        "cluster_count": 2,
+        "created_at": "2023-08-27T19:28:05Z",
+        "description": "aaaaaa",
+        "max_iops": 1000,
+        "max_throughput": 314572800,
+        "min_iops": 100,
+        "min_throughput": 31457280,
+        "name": "test",
+        "state": 1,
+        "step_iops": 10,
+        "step_throughput": 10485760,
+        "storage_pool_name": "Local Storage Pool",
+        "storage_pool_uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a",
+        "uuid": "9fb4dc3a-88ec-4360-a823-55b0f19bf146"
+      },
+      {
+        "cluster_count": 2,
+        "created_at": "2023-08-17T02:50:29Z",
+        "description": "performance volume specification1",
+        "max_iops": 10000,
+        "max_throughput": 524288000,
+        "min_iops": 1000,
+        "min_throughput": 52428800,
+        "name": "Performance",
+        "state": 1,
+        "step_iops": 100,
+        "step_throughput": 5242880,
+        "storage_pool_name": "Local Storage Pool",
+        "storage_pool_uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a",
+        "uuid": "af52a0fe-f1fc-483c-9197-aead9786a73a"
+      },
+      {
+        "cluster_count": 1,
+        "created_at": "2023-06-25T19:22:10Z",
+        "description": "standard volume spec",
+        "max_iops": 5000,
+        "max_throughput": 104857600,
+        "min_iops": 500,
+        "min_throughput": 10485760,
+        "name": "Standard",
+        "state": 1,
+        "step_iops": 50,
+        "step_throughput": 1048576,
+        "storage_pool_name": "Local Storage Pool",
+        "storage_pool_uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a",
+        "uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+      }
+    ],
+    "size": 3,
+    "total": 3
+  }
 }
 ```
 
@@ -5210,6 +6884,32 @@ create a volume spec
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "64467277-5058-458d-867f-8b1ac46cb8e1",
+  "result": {
+    "volume_spec": {
+      "cluster_count": 0,
+      "created_at": "2024-04-18T01:10:08.048543501Z",
+      "description": "",
+      "max_iops": 1000,
+      "max_throughput": 104857600,
+      "min_iops": 500,
+      "min_throughput": 10485760,
+      "name": "test-volume-spec",
+      "state": 1,
+      "step_iops": 10,
+      "step_throughput": 1048576,
+      "storage_pool_name": "",
+      "storage_pool_uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a",
+      "uuid": "c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa"
+    }
+  }
+}
+```
+
 <h3 id="createvolumespec-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -5261,6 +6961,32 @@ describe a volume spec
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "68bb6050-b78f-4012-ba01-4834e3116be3",
+  "result": {
+    "volume_spec": {
+      "cluster_count": 0,
+      "created_at": "2024-04-18T01:10:08Z",
+      "description": "",
+      "max_iops": 1000,
+      "max_throughput": 104857600,
+      "min_iops": 500,
+      "min_throughput": 10485760,
+      "name": "test-volume-spec",
+      "state": 1,
+      "step_iops": 10,
+      "step_throughput": 1048576,
+      "storage_pool_name": "Local Storage Pool",
+      "storage_pool_uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a",
+      "uuid": "c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa"
+    }
+  }
+}
+```
+
 <h3 id="getvolumespec-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -5309,6 +7035,15 @@ delete a volume spec
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "7f7800e9-0057-44a5-9340-c46fda540dbe",
+  "result": 1
 }
 ```
 
@@ -5378,6 +7113,17 @@ update volume spec
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "6594c3cb-2a6a-4fcc-85d1-00746b29c980",
+  "result": {
+    "volume_spec": "ok"
+  }
 }
 ```
 
@@ -5497,6 +7243,37 @@ list images
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "452bc768-61e6-4885-ac74-74f481a920c8",
+  "result": {
+    "elements": [
+      {
+        "boot_type": "bios",
+        "bucket_name": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+        "bucket_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+        "created_at": "2023-10-12T08:05:25Z",
+        "description": "aaaaa",
+        "format": "qcow2",
+        "install_url": "file:///root/images/centos7_cloudinit.qcow2",
+        "name": "centos_admin",
+        "operation": "",
+        "os_arch": "x86_64",
+        "os_detail": "CentOS 7.x",
+        "os_type": "CentOS",
+        "shared": 0,
+        "state": 1,
+        "uuid": "af9f5fe3-127a-43be-9a8b-acc6f50d263c"
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
+}
+```
+
 <h3 id="listimage-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -5562,6 +7339,33 @@ create a public image
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "a25c2320-7a41-44f8-a782-2f062ba41b6b",
+  "result": {
+    "image": {
+      "boot_type": "",
+      "bucket_name": "",
+      "bucket_uuid": "public",
+      "created_at": "0001-01-01T00:00:00Z",
+      "description": "",
+      "format": "qcow2",
+      "install_url": "file:///root/images/centos7_cloudinit.qcow2",
+      "name": "centos",
+      "operation": "",
+      "os_arch": "",
+      "os_detail": "CentOS 8.x",
+      "os_type": "CentOS",
+      "shared": 0,
+      "state": 0,
+      "uuid": "fb11078f-8af8-4247-adfe-295459f29646"
+    }
+  }
 }
 ```
 
@@ -5633,6 +7437,33 @@ create a user image
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "2054dce8-aa03-4734-8989-547ca6d4d2a5",
+  "result": {
+    "image": {
+      "boot_type": "",
+      "bucket_name": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+      "bucket_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+      "created_at": "0001-01-01T00:00:00Z",
+      "description": "",
+      "format": "qcow2",
+      "install_url": "file:///root/images/centos7_cloudinit.qcow2",
+      "name": "centos",
+      "operation": "",
+      "os_arch": "",
+      "os_detail": "CentOS 8.x",
+      "os_type": "CentOS",
+      "shared": 0,
+      "state": 0,
+      "uuid": "2054dce8-aa03-4734-8989-547ca6d4d2a5"
+    }
+  }
+}
+```
+
 <h3 id="createuserimage-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -5684,6 +7515,33 @@ describe a image
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "e2b6cff1-6677-4ccb-b239-adeb26e6d7d0",
+  "result": {
+    "image": {
+      "boot_type": "",
+      "bucket_name": "public",
+      "bucket_uuid": "public",
+      "created_at": "2024-04-18T08:44:42Z",
+      "description": "",
+      "format": "qcow2",
+      "install_url": "file:///root/images/centos7_cloudinit.qcow2",
+      "name": "centos",
+      "operation": "",
+      "os_arch": "",
+      "os_detail": "CentOS 8.x",
+      "os_type": "CentOS",
+      "shared": 0,
+      "state": 1,
+      "uuid": "fb11078f-8af8-4247-adfe-295459f29646"
+    }
+  }
+}
+```
+
 <h3 id="getimage-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -5732,6 +7590,15 @@ delete a image
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "8c6fbd16-83a3-47f7-a10f-b0f5ab76f74c",
+  "result": 0
 }
 ```
 
@@ -5800,6 +7667,17 @@ update an image
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "136bdfad-2ee1-49fd-a754-c2b5c33876a2",
+  "result": {
+    "image": "ok"
+  }
 }
 ```
 
@@ -5905,6 +7783,53 @@ list image buckets
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "c4c019ab-cd37-4c43-b57b-0a4634f1e100",
+  "result": {
+    "elements": [
+      {
+        "bucket_name": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+        "created_at": "2023-10-12T08:05:25Z",
+        "description": "",
+        "image_count": 1,
+        "name": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+        "state": 1,
+        "type": 1,
+        "user_name": "admin",
+        "uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c"
+      },
+      {
+        "bucket_name": "39a6b9e4-bda8-4d39-ae51-1b270a796b36",
+        "created_at": "2023-10-09T18:51:18Z",
+        "description": "",
+        "image_count": 3,
+        "name": "39a6b9e4-bda8-4d39-ae51-1b270a796b36",
+        "state": 1,
+        "type": 1,
+        "user_name": "user",
+        "uuid": "39a6b9e4-bda8-4d39-ae51-1b270a796b36"
+      },
+      {
+        "bucket_name": "public",
+        "created_at": "2023-06-19T02:27:36Z",
+        "description": "public image bucket",
+        "image_count": 6,
+        "name": "public",
+        "state": 1,
+        "type": 0,
+        "user_name": "",
+        "uuid": "public"
+      }
+    ],
+    "size": 3,
+    "total": 3
+  }
+}
+```
+
 <h3 id="listimagebucket-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -5968,6 +7893,27 @@ create a image bucket
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "30d27042-5db8-45a6-9a9e-3122627e348f",
+  "result": {
+    "imagebucket": {
+      "bucket_name": "test-bucket",
+      "created_at": "2024-04-18T08:31:40.361909182Z",
+      "description": "",
+      "image_count": 0,
+      "name": "test-bucket",
+      "state": 1,
+      "type": 0,
+      "user_name": "",
+      "uuid": "af706772-097c-49c7-979d-8a987e258306"
+    }
+  }
+}
+```
+
 <h3 id="createimagebucket-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -6016,6 +7962,27 @@ describe a image bucket
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "4f7d20b4-0051-48ea-949b-e8acae9d40ee",
+  "result": {
+    "imagebucket": {
+      "bucket_name": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+      "created_at": "2023-10-12T08:05:25Z",
+      "description": "",
+      "image_count": 1,
+      "name": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+      "state": 1,
+      "type": 1,
+      "user_name": "admin",
+      "uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c"
+    }
+  }
 }
 ```
 
@@ -6764,6 +8731,45 @@ list vms
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "dd66fcff-67e4-4d9c-abd2-410bc8f558b6",
+  "result": {
+    "elements": [
+      {
+        "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+        "boot_type": "",
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2024-04-18T13:41:51Z",
+        "description": "",
+        "host_ip": "",
+        "host_name": "",
+        "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+        "hyper_type": "",
+        "image_name": "",
+        "memory": 1073741824,
+        "name": "vm1",
+        "nics": [],
+        "operation": "",
+        "os_arch": "",
+        "os_detail": "",
+        "os_type": "",
+        "spec_type": 0,
+        "state": 1,
+        "tags": null,
+        "uuid": "7a46560b-c00b-4acc-a677-4dcfbfa11a77",
+        "vcpus": 1,
+        "volumes": []
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
+}
+```
+
 <h3 id="listvm-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -6858,6 +8864,122 @@ create a vm
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "e8bbddd9-2520-4d46-81ea-720e48bad3b1",
+  "result": {
+    "vm": {
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "boot_type": "",
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "0001-01-01T00:00:00Z",
+      "description": "",
+      "host_ip": "",
+      "host_name": "",
+      "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+      "hyper_type": "kvm",
+      "image_name": "",
+      "memory": 1073741824,
+      "name": "dennis12",
+      "nics": [
+        {
+          "attached_vms": [],
+          "created_at": "0001-01-01T00:00:00Z",
+          "description": "",
+          "gateway": "",
+          "ip": "",
+          "mac": "",
+          "name": "rootnic",
+          "netmask": "",
+          "network_name": "br1",
+          "network_type": 0,
+          "operation": "",
+          "primary": 0,
+          "state": 0,
+          "subnet_cidr": "",
+          "subnet_name": "",
+          "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
+          "uuid": "a88d3234-f2e7-4055-9f6a-e961d8a23328"
+        }
+      ],
+      "operation": "",
+      "os_arch": "",
+      "os_detail": "",
+      "os_type": "",
+      "spec_type": 0,
+      "state": 0,
+      "tags": null,
+      "uuid": "4be21239-293c-4989-b637-4df104f17caf",
+      "vcpus": 1,
+      "volumes": [
+        {
+          "attached_vms": [],
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "cdrom": 0,
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "0001-01-01T00:00:00Z",
+          "description": "",
+          "host_ip": "",
+          "host_name": "",
+          "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "image_name": "",
+          "image_uuid": "993933dc-f0e2-4bd6-966f-0b4872ea93cc",
+          "iops": 500,
+          "name": "rootvolume",
+          "operation": "e8bbddd9-2520-4d46-81ea-720e48bad3b1",
+          "parent_version": 0,
+          "root": 1,
+          "size": 10,
+          "snapshot_count": 0,
+          "snapshots": [],
+          "spec_name": "",
+          "state": 0,
+          "storage_pool_name": "",
+          "storage_pool_type": 0,
+          "throughput": 10485760,
+          "user_uuid": "",
+          "uuid": "9379b2e5-45dd-4760-84d4-f0a5ce90a0e3",
+          "version": 0,
+          "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+        },
+        {
+          "attached_vms": [],
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "cdrom": 0,
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "0001-01-01T00:00:00Z",
+          "description": "",
+          "host_ip": "",
+          "host_name": "",
+          "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "image_name": "",
+          "image_uuid": "",
+          "iops": 500,
+          "name": "datavolume",
+          "operation": "e8bbddd9-2520-4d46-81ea-720e48bad3b1",
+          "parent_version": 0,
+          "root": 0,
+          "size": 20,
+          "snapshot_count": 0,
+          "snapshots": [],
+          "spec_name": "",
+          "state": 0,
+          "storage_pool_name": "",
+          "storage_pool_type": 0,
+          "throughput": 10485760,
+          "user_uuid": "",
+          "uuid": "a27a7c9b-adfa-483a-bd34-d5e7725d19ca",
+          "version": 0,
+          "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+        }
+      ]
+    }
+  }
+}
+```
+
 <h3 id="createvm-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -6906,6 +9028,92 @@ describe a vm
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "f419f343-d0f2-4f3a-926b-990d9323c896",
+  "result": {
+    "vm": {
+      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "boot_type": "bios",
+      "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+      "created_at": "2024-04-18T13:41:51Z",
+      "description": "",
+      "host_ip": "192.168.231.128",
+      "host_name": "host-a428263d",
+      "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+      "hyper_type": "",
+      "image_name": "centos7_cloudinit.qcow2",
+      "memory": 1073741824,
+      "name": "vm1",
+      "nics": [
+        {
+          "attached_vms": [],
+          "created_at": "2024-04-18T13:41:51Z",
+          "description": "",
+          "gateway": "192.168.231.0",
+          "ip": "192.168.231.1",
+          "mac": "52:54:00:1a:26:0d",
+          "name": "primary-nic-vm1",
+          "netmask": "255.255.255.192",
+          "network_name": "br1",
+          "network_type": 0,
+          "operation": "",
+          "primary": 1,
+          "state": 2,
+          "subnet_cidr": "192.168.231.1/26",
+          "subnet_name": "subnet1",
+          "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
+          "uuid": "9579970a-ff8b-450b-b4ac-e062f3338bd9"
+        }
+      ],
+      "operation": "",
+      "os_arch": "x86_64",
+      "os_detail": "CentOS 7.x",
+      "os_type": "CentOS",
+      "spec_type": 0,
+      "state": 1,
+      "tags": null,
+      "uuid": "7a46560b-c00b-4acc-a677-4dcfbfa11a77",
+      "vcpus": 1,
+      "volumes": [
+        {
+          "attached_vms": [],
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "cdrom": 0,
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "2024-04-18T13:41:51Z",
+          "description": "",
+          "host_ip": "",
+          "host_name": "",
+          "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "image_name": "centos7_cloudinit.qcow2",
+          "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
+          "iops": 1000,
+          "name": "root-volume-vm1",
+          "operation": "",
+          "parent_version": -1,
+          "root": 1,
+          "size": 21474836480,
+          "snapshot_count": 0,
+          "snapshots": [],
+          "spec_name": "",
+          "state": 2,
+          "storage_pool_name": "",
+          "storage_pool_type": 0,
+          "throughput": 20971520,
+          "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+          "uuid": "c3d9c7b0-df2a-4713-8175-a74f3d94573c",
+          "version": 0,
+          "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+        }
+      ]
+    }
+  }
 }
 ```
 
@@ -6958,6 +9166,17 @@ delete a vm
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "3bb72de6-3d03-425b-a004-6b4e1f12c851",
+  "result": {
+    "vm": "ok"
+  }
 }
 ```
 
@@ -7023,6 +9242,17 @@ update a vm
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "34847e46-2d0e-4ef0-ba76-65e02b7431e4",
+  "result": {
+    "vm": "ok"
+  }
+}
+```
+
 <h3 id="updatevm-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -7081,6 +9311,17 @@ attach a volume to the vm
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "df148989-d472-4f7a-ae83-5c5ac77d8a52",
+  "result": {
+    "vm": "ok"
+  }
 }
 ```
 
@@ -7145,6 +9386,17 @@ attach a nic to the vm
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "a939c0ef-ec0c-4e71-b29b-c900d929f5d0",
+  "result": {
+    "vm": "ok"
+  }
+}
+```
+
 <h3 id="attachnictovm-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -7203,6 +9455,17 @@ detach a volume from the vm
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "cb41cf74-b3bc-4522-9e8c-0bddd379f1e6",
+  "result": {
+    "vm": "ok"
+  }
 }
 ```
 
@@ -7267,6 +9530,17 @@ detach a nic from the vm
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "c6eac3d4-67e8-4e39-a585-3d64a352c2ac",
+  "result": {
+    "vm": "ok"
+  }
+}
+```
+
 <h3 id="detachnicfromvm-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -7318,6 +9592,17 @@ start a vm
 }
 ```
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "c4214cf2-094a-4797-ad59-87f99a833239",
+  "result": {
+    "vm": "ok"
+  }
+}
+```
+
 <h3 id="startvm-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -7366,6 +9651,17 @@ stop a vm
   },
   "requestId": "string",
   "result": null
+}
+```
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "ab8daf9f-e4ad-4c1d-b5bc-58bfb4b1ed43",
+  "result": {
+    "vm": "ok"
+  }
 }
 ```
 

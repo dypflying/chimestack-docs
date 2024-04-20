@@ -33,14 +33,14 @@ list alerts
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|integer(int64)|false|none|
-|severity|query|integer(int64)|false|none|
-|priority|query|integer(int64)|false|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
+|severity|query|integer(int64)|false|filter by the 'severity' field|
+|priority|query|integer(int64)|false|filter by the 'priority' field|
 
 > Example responses
 
@@ -196,13 +196,13 @@ Accept: application/json
 
 `GET /alert/{AlertUuid}`
 
-describe a alert
+get an alert's detailed information
 
 <h3 id="getalert-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AlertUuid|path|string|true|none|
+|AlertUuid|path|string|true|the alert's UUID|
 
 > Example responses
 
@@ -255,13 +255,13 @@ Accept: application/json
 
 `DELETE /alert/{AlertUuid}`
 
-delete a alert
+delete an alert
 
 <h3 id="deletealert-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AlertUuid|path|string|true|none|
+|AlertUuid|path|string|true|the alert's UUID|
 
 > Example responses
 
@@ -303,7 +303,7 @@ Accept: application/json
 
 `PUT /alert/{AlertUuid}/accept`
 
-accept a alert
+accept an alert
 
 > Body parameter
 
@@ -318,7 +318,7 @@ accept a alert
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |AlertUuid|path|string|true|none|
-|body|body|[AcceptAlertRequest](#schemaacceptalertrequest)|false|none|
+|body|body|[AcceptAlertRequest](#schemaacceptalertrequest)|false|the http body of the post request|
 
 > Example responses
 
@@ -365,14 +365,14 @@ list alert rules
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|integer(int64)|false|none|
-|severity|query|integer(int64)|false|none|
-|priority|query|integer(int64)|false|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
+|severity|query|integer(int64)|false|filter by the 'severity' field|
+|priority|query|integer(int64)|false|filter by the 'priority' field|
 
 > Example responses
 
@@ -470,13 +470,13 @@ Accept: application/json
 
 `GET /alert_rule/{RuleUuid}`
 
-describe a alert rule
+get an alert rule's detailed information
 
 <h3 id="getalertrule-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|RuleUuid|path|string|true|none|
+|RuleUuid|path|string|true|the alert rule's UUID|
 
 > Example responses
 
@@ -531,7 +531,7 @@ Accept: application/json
 
 `GET /alert_statistic`
 
-describe alert statistic
+get alerts' statistical information
 
 > Example responses
 
@@ -580,7 +580,7 @@ user auth
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[AuthRequest](#schemaauthrequest)|false|none|
+|body|body|[AuthRequest](#schemaauthrequest)|false|the http post body|
 
 > Example responses
 
@@ -628,7 +628,7 @@ user login
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[LoginRequest](#schemaloginrequest)|false|none|
+|body|body|[LoginRequest](#schemaloginrequest)|false|the http post body|
 
 > Example responses
 
@@ -675,7 +675,7 @@ user logout
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[AuthRequest](#schemaauthrequest)|false|none|
+|body|body|[AuthRequest](#schemaauthrequest)|false|the http post body|
 
 > Example responses
 
@@ -713,12 +713,12 @@ list users
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|role|query|integer(int64)|false|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|role|query|integer(int64)|false|filter by the user's role(0:normal user, 1: readonly administrator, 2:administrator, 3: super administrator)|
 
 > Example responses
 
@@ -769,7 +769,7 @@ create an user
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[CreateUserRequest](#schemacreateuserrequest)|false|none|
+|body|body|[CreateUserRequest](#schemacreateuserrequest)|false|the http post body|
 
 > Example responses
 
@@ -807,7 +807,7 @@ describe an user
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|UserUuid|path|string|true|none|
+|UserUuid|path|string|true|the user's uuid|
 
 > Example responses
 
@@ -845,7 +845,7 @@ delete an user
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|UserUuid|path|string|true|none|
+|UserUuid|path|string|true|the user's uuid|
 
 > Example responses
 
@@ -896,8 +896,8 @@ update an user
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|UserUuid|path|string|true|none|
-|body|body|[CreateUserRequest](#schemacreateuserrequest)|false|none|
+|UserUuid|path|string|true|the user's uuid|
+|body|body|[CreateUserRequest](#schemacreateuserrequest)|false|the http post body|
 
 > Example responses
 
@@ -935,7 +935,7 @@ describe a user default
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|UserUuid|path|string|true|none|
+|UserUuid|path|string|true|the user's uuid|
 
 > Example responses
 
@@ -983,8 +983,8 @@ update user default
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|UserUuid|path|string|true|none|
-|body|body|[CreateUserDefaultRequest](#schemacreateuserdefaultrequest)|true|This text will appear as description of your request body.|
+|UserUuid|path|string|true|the user's uuid|
+|body|body|[CreateUserDefaultRequest](#schemacreateuserdefaultrequest)|true|the http post body|
 
 > Example responses
 
@@ -1026,12 +1026,12 @@ This will show all available azs by default.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|integer(int64)|false|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
 
 > Example responses
 
@@ -1110,7 +1110,7 @@ This will create an available az.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[CreateAzRequest](#schemacreateazrequest)|false|This text will appear as description of your request body.|
+|body|body|[CreateAzRequest](#schemacreateazrequest)|false|the http post body|
 
 > Example responses
 
@@ -1165,7 +1165,7 @@ This will describe an available az.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
 
 > Example responses
 
@@ -1222,7 +1222,7 @@ This will delete an available az.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
 
 > Example responses
 
@@ -1282,8 +1282,8 @@ This will update an available az.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|body|body|[CreateAzRequest](#schemacreateazrequest)|true|This text will appear as description of your request body.|
+|AzUuid|path|string|true|the AZ's uuid|
+|body|body|[CreateAzRequest](#schemacreateazrequest)|true|the http post body|
 
 > Example responses
 
@@ -1334,7 +1334,7 @@ This will disable an available az.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
 
 > Example responses
 
@@ -1385,7 +1385,7 @@ This will enable an available az.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
 
 > Example responses
 
@@ -1438,16 +1438,16 @@ This will show clusters
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|integer(int64)|false|none|
-|type|query|integer(int64)|false|none|
-|hypervisor_type|query|string|false|none|
-|arch|query|string|false|none|
-|AzUuid|path|string|true|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
+|type|query|integer(int64)|false|filter by the cluster's type (0: hyperconveged, 1:computing only, 2: storage only)|
+|hypervisor_type|query|string|false|filter by the cluster's hypervisor type|
+|arch|query|string|false|filter by the cluster's architecture|
+|AzUuid|path|string|true|filter by the AZ's uuid|
 
 > Example responses
 
@@ -1538,8 +1538,8 @@ This will create a cluster in a specified Az
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|body|body|[CreateClusterRequest](#schemacreateclusterrequest)|false|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|body|body|[CreateClusterRequest](#schemacreateclusterrequest)|false|the http post body|
 
 > Example responses
 
@@ -1601,8 +1601,8 @@ This will describe a cluster
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
 
 > Example responses
 
@@ -1664,8 +1664,8 @@ This will delete a cluster
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
 
 > Example responses
 
@@ -1727,9 +1727,9 @@ This will update a cluster.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|body|body|[CreateClusterRequest](#schemacreateclusterrequest)|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|body|body|[CreateClusterRequest](#schemacreateclusterrequest)|true|the http post body|
 
 > Example responses
 
@@ -1780,8 +1780,8 @@ This will disable a cluster
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
 
 > Example responses
 
@@ -1832,8 +1832,8 @@ This will enable a cluster
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
 
 > Example responses
 
@@ -1886,16 +1886,16 @@ This will show hosts
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|integer(int64)|false|none|
-|rack_name|query|string|false|none|
-|manage_ip|query|string|false|none|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
+|rack_name|query|string|false|filter by the rack's name|
+|manage_ip|query|string|false|filter by the host's management IP address|
+|AzUuid|path|string|true|filter by the AZ's uuid|
+|ClusterUuid|path|string|true|filter by the cluster's uuid|
 
 > Example responses
 
@@ -2003,9 +2003,9 @@ This will create a host
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|body|body|[CreateHostRequest](#schemacreatehostrequest)|false|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|body|body|[CreateHostRequest](#schemacreatehostrequest)|false|the http post body|
 
 > Example responses
 
@@ -2075,9 +2075,9 @@ This will describe a host
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|HostUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|HostUuid|path|string|true|the host's uuid|
 
 > Example responses
 
@@ -2147,9 +2147,9 @@ This will delete a host
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|HostUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|HostUuid|path|string|true|the host's uuid|
 
 > Example responses
 
@@ -2211,10 +2211,10 @@ This will update a host.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|HostUuid|path|string|true|none|
-|body|body|[UpdateHostRequest](#schemaupdatehostrequest)|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|HostUuid|path|string|true|the host's uuid|
+|body|body|[UpdateHostRequest](#schemaupdatehostrequest)|true|the http post body|
 
 > Example responses
 
@@ -2265,9 +2265,9 @@ This will disable a host
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|HostUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|HostUuid|path|string|true|the host's uuid|
 
 > Example responses
 
@@ -2318,9 +2318,9 @@ This will enable a host
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|HostUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|HostUuid|path|string|true|the host's uuid|
 
 > Example responses
 
@@ -2371,9 +2371,9 @@ This will suspend a host
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|HostUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|HostUuid|path|string|true|the host's uuid|
 
 > Example responses
 
@@ -2424,15 +2424,15 @@ This will show available clients
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|integer(int64)|false|none|
-|rack_name|query|string|false|none|
-|manage_ip|query|string|false|none|
-|all|query|integer(int64)|false|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
+|rack_name|query|string|false|filter by the rack's name|
+|manage_ip|query|string|false|filter by the client's management IP address|
+|all|query|integer(int64)|false|retrieve all the clients|
 
 > Example responses
 
@@ -2512,8 +2512,16 @@ describe host inventory statistic
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|cluster_uuid|query|string|false|in:qeury|
-|host_uuid|query|string|false|in:qeury|
+|cluster_uuid|query|string|false|the cluster's uuid|
+|host_uuid|query|string|false|the host's uuid|
+
+#### Detailed descriptions
+
+**cluster_uuid**: the cluster's uuid
+in:qeury
+
+**host_uuid**: the host's uuid
+in:qeury
 
 > Example responses
 
@@ -2553,13 +2561,13 @@ list instance spec relations
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
 
 > Example responses
 
@@ -2652,9 +2660,9 @@ create new instance spec relation
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|body|body|[CreateClusterInstanceSpecRequest](#schemacreateclusterinstancespecrequest)|false|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|body|body|[CreateClusterInstanceSpecRequest](#schemacreateclusterinstancespecrequest)|false|the http post body|
 
 > Example responses
 
@@ -2707,9 +2715,9 @@ delete an instance spec relation
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|InstanceSpecUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|InstanceSpecUuid|path|string|true|the instance specification's uuid|
 
 > Example responses
 
@@ -2756,12 +2764,12 @@ list instance specs
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|type|query|integer(int64)|false|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|type|query|integer(int64)|false|filter by the instance specification's type(0: shared, 1: dedicated)|
 
 > Example responses
 
@@ -2870,7 +2878,7 @@ create an instance spec
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[CreateInstanceSpecRequest](#schemacreateinstancespecrequest)|false|none|
+|body|body|[CreateInstanceSpecRequest](#schemacreateinstancespecrequest)|false|the http post body|
 
 > Example responses
 
@@ -2929,7 +2937,7 @@ describe an instance spec
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|InstanceSpecUuid|path|string|true|none|
+|InstanceSpecUuid|path|string|true|the instance specification's uuid|
 
 > Example responses
 
@@ -2988,7 +2996,7 @@ delete an instance spec
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|InstanceSpecUuid|path|string|true|none|
+|InstanceSpecUuid|path|string|true|the instance specification's uuid|
 
 > Example responses
 
@@ -3048,8 +3056,8 @@ update instance spec
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|InstanceSpecUuid|path|string|true|none|
-|body|body|[CreateInstanceSpecRequest](#schemacreateinstancespecrequest)|true|none|
+|InstanceSpecUuid|path|string|true|the instance specification's uuid|
+|body|body|[CreateInstanceSpecRequest](#schemacreateinstancespecrequest)|true|the http post body|
 
 > Example responses
 
@@ -3100,16 +3108,16 @@ list networks
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|integer(int64)|false|none|
-|type|query|integer(int64)|false|none|
-|interface_name|query|string|false|none|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
+|type|query|integer(int64)|false|filter by network type(0: classical network, 1:vlan, 2:vxlan)|
+|interface_name|query|string|false|filter by network interface's name|
+|AzUuid|path|string|true|filter by AZ's uuid|
+|ClusterUuid|path|string|true|filter by the cluster's uuid|
 
 > Example responses
 
@@ -3186,9 +3194,9 @@ create a network
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|body|body|[CreateNetworkRequest](#schemacreatenetworkrequest)|false|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|body|body|[CreateNetworkRequest](#schemacreatenetworkrequest)|false|the http post body|
 
 > Example responses
 
@@ -3249,9 +3257,9 @@ describe a network
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|NetworkUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|NetworkUuid|path|string|true|the network's uuid|
 
 > Example responses
 
@@ -3312,9 +3320,9 @@ delete a network
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|NetworkUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|NetworkUuid|path|string|true|the network's uuid|
 
 > Example responses
 
@@ -3371,10 +3379,10 @@ update a network
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|NetworkUuid|path|string|true|none|
-|body|body|[UpdateNetworkRequest](#schemaupdatenetworkrequest)|false|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|NetworkUuid|path|string|true|the network's uuid|
+|body|body|[UpdateNetworkRequest](#schemaupdatenetworkrequest)|false|the http post body|
 
 > Example responses
 
@@ -3423,16 +3431,16 @@ list subnets
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|integer(int64)|false|none|
-|type|query|integer(int64)|false|none|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|NetworkUuid|path|string|true|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
+|type|query|integer(int64)|false|filter by subnet's type|
+|AzUuid|path|string|true|filter by AZ's uuid|
+|ClusterUuid|path|string|true|filter by cluster's uuid|
+|NetworkUuid|path|string|true|filter by network's uuid|
 
 > Example responses
 
@@ -3510,10 +3518,10 @@ create a subnet
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|NetworkUuid|path|string|true|none|
-|body|body|[CreateSubnetRequest](#schemacreatesubnetrequest)|false|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|NetworkUuid|path|string|true|the network's uuid|
+|body|body|[CreateSubnetRequest](#schemacreatesubnetrequest)|false|the http post body|
 
 > Example responses
 
@@ -3574,10 +3582,10 @@ describe a subnet
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|NetworkUuid|path|string|true|none|
-|SubnetUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|NetworkUuid|path|string|true|the network's uuid|
+|SubnetUuid|path|string|true|the subnet's uuid|
 
 > Example responses
 
@@ -3638,10 +3646,10 @@ delete a subnet
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|NetworkUuid|path|string|true|none|
-|SubnetUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|NetworkUuid|path|string|true|the network's uuid|
+|SubnetUuid|path|string|true|the subnet's uuid|
 
 > Example responses
 
@@ -3701,11 +3709,11 @@ update a subnet
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|NetworkUuid|path|string|true|none|
-|SubnetUuid|path|string|true|none|
-|body|body|[CreateSubnetRequest](#schemacreatesubnetrequest)|false|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|NetworkUuid|path|string|true|the network's uuid|
+|SubnetUuid|path|string|true|the subnet's uuid|
+|body|body|[CreateSubnetRequest](#schemacreatesubnetrequest)|false|the http post body|
 
 > Example responses
 
@@ -3754,14 +3762,14 @@ list nics
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|string|false|none|
-|uuid|query|string|false|none|
-|subnet_uuid|query|string|false|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
+|uuid|query|string|false|filter by the network interface's uuid|
+|subnet_uuid|query|string|false|filter by the subnet's uuid|
 
 > Example responses
 
@@ -3845,7 +3853,7 @@ create a nic
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[CreateNicRequest](#schemacreatenicrequest)|false|none|
+|body|body|[CreateNicRequest](#schemacreatenicrequest)|false|the http post body|
 
 > Example responses
 
@@ -3912,7 +3920,7 @@ describe nic
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|NicUuid|path|string|true|none|
+|NicUuid|path|string|true|the network interface's uuid|
 
 > Example responses
 
@@ -3979,8 +3987,8 @@ delete a nic
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|NicUuid|path|string|true|none|
-|force_del|query|string|false|none|
+|NicUuid|path|string|true|the network interface's uuid|
+|force_del|query|string|false|whether to force delete the network interface from the OS|
 
 > Example responses
 
@@ -4037,8 +4045,8 @@ update a nic
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|NicUuid|path|string|true|none|
-|body|body|[UpdateNicRequest](#schemaupdatenicrequest)|false|none|
+|NicUuid|path|string|true|the network interface's uuid|
+|body|body|[UpdateNicRequest](#schemaupdatenicrequest)|false|the http post body|
 
 > Example responses
 
@@ -4120,15 +4128,15 @@ list storage pools
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|integer(int64)|false|none|
-|type|query|integer(int64)|false|none|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
+|type|query|integer(int64)|false|filter the storage pool's type (0: local, 1: iscsi, 2: ceph)|
+|AzUuid|path|string|true|filter by the AZ's uuid|
+|ClusterUuid|path|string|true|filter by the cluster's uuid|
 
 > Example responses
 
@@ -4213,9 +4221,9 @@ create a storage pool
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|body|body|[CreateStoragePoolRequest](#schemacreatestoragepoolrequest)|false|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|body|body|[CreateStoragePoolRequest](#schemacreatestoragepoolrequest)|false|the http post body|
 
 > Example responses
 
@@ -4280,9 +4288,9 @@ describe a storage pool
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|StoragePoolUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|StoragePoolUuid|path|string|true|the storage pool's uuid|
 
 > Example responses
 
@@ -4347,9 +4355,9 @@ delete a storage pool
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|StoragePoolUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|StoragePoolUuid|path|string|true|the storage pool's uuid|
 
 > Example responses
 
@@ -4412,10 +4420,10 @@ update a storage pool
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|StoragePoolUuid|path|string|true|none|
-|body|body|[CreateStoragePoolRequest](#schemacreatestoragepoolrequest)|false|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|StoragePoolUuid|path|string|true|the storage pool's uuid|
+|body|body|[CreateStoragePoolRequest](#schemacreatestoragepoolrequest)|false|the http post body|
 
 > Example responses
 
@@ -4464,12 +4472,12 @@ list all storage pools
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|integer(int64)|false|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
 
 > Example responses
 
@@ -4507,8 +4515,16 @@ describe storage pool inventory statistic
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|cluster_uuid|query|string|false|in:qeury|
-|storage_pool_uuid|query|string|false|in:qeury|
+|cluster_uuid|query|string|false|the cluster's uuid|
+|storage_pool_uuid|query|string|false|the storage pool's uuid|
+
+#### Detailed descriptions
+
+**cluster_uuid**: the cluster's uuid
+in:qeury
+
+**storage_pool_uuid**: the storage pool's uuid
+in:qeury
 
 > Example responses
 
@@ -4548,16 +4564,16 @@ list volumes
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|string|false|none|
-|uuid|query|string|false|none|
-|host_uuid|query|string|false|none|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
+|uuid|query|string|false|filter by volume's uuid|
+|host_uuid|query|string|false|filter by host's uuid|
+|AzUuid|path|string|true|filter by AZ's uuid|
+|ClusterUuid|path|string|true|filter by cluster's uuid|
 
 > Example responses
 
@@ -4654,9 +4670,9 @@ create new volume
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|body|body|[CreateVolumeRequest](#schemacreatevolumerequest)|false|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|body|body|[CreateVolumeRequest](#schemacreatevolumerequest)|false|the http post body|
 
 > Example responses
 
@@ -4734,9 +4750,9 @@ describe a volume
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VolumeUuid|path|string|true|none|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
+|VolumeUuid|path|string|true|the volume's uuid|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
 
 > Example responses
 
@@ -4814,10 +4830,10 @@ delete a volume
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VolumeUuid|path|string|true|none|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|force_del|query|string|false|none|
+|VolumeUuid|path|string|true|the volume's uuid|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|force_del|query|string|false|whether to delete the physical volume in the node|
 
 > Example responses
 
@@ -4874,10 +4890,10 @@ update a volume
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VolumeUuid|path|string|true|none|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|body|body|[UpdateVolumeRequest](#schemaupdatevolumerequest)|false|none|
+|VolumeUuid|path|string|true|the volume's uuid|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|body|body|[UpdateVolumeRequest](#schemaupdatevolumerequest)|false|the http post body|
 
 > Example responses
 
@@ -4926,12 +4942,12 @@ list all snapshots
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|string|false|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
 
 > Example responses
 
@@ -4969,13 +4985,13 @@ list snapshots of a volume
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|integer(int64)|false|none|
-|VolumeUuid|path|string|true|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
+|VolumeUuid|path|string|true|filter by tge volume's uuid|
 
 > Example responses
 
@@ -5049,8 +5065,8 @@ create a snapshot
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VolumeUuid|path|string|true|none|
-|body|body|[CreateSnapshotRequest](#schemacreatesnapshotrequest)|false|none|
+|VolumeUuid|path|string|true|the volume's uuid|
+|body|body|[CreateSnapshotRequest](#schemacreatesnapshotrequest)|false|the http post body|
 
 > Example responses
 
@@ -5110,8 +5126,8 @@ get a snapshot
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VolumeUuid|path|string|true|none|
-|SnapshotUuid|path|string|true|none|
+|VolumeUuid|path|string|true|the volume's uuid|
+|SnapshotUuid|path|string|true|the snapshot's uuid|
 
 > Example responses
 
@@ -5171,8 +5187,8 @@ delete a snapshot
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VolumeUuid|path|string|true|none|
-|SnapshotUuid|path|string|true|none|
+|VolumeUuid|path|string|true|the volume's uuid|
+|SnapshotUuid|path|string|true|the snapshot's uuid|
 
 > Example responses
 
@@ -5229,9 +5245,9 @@ update a snapshot
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VolumeUuid|path|string|true|none|
-|SnapshotUuid|path|string|true|none|
-|body|body|[CreateSnapshotRequest](#schemacreatesnapshotrequest)|false|none|
+|VolumeUuid|path|string|true|the volume's uuid|
+|SnapshotUuid|path|string|true|the snapshot's uuid|
+|body|body|[CreateSnapshotRequest](#schemacreatesnapshotrequest)|false|the http post body|
 
 > Example responses
 
@@ -5280,8 +5296,8 @@ restore volume from a snapshot
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VolumeUuid|path|string|true|none|
-|SnapshotUuid|path|string|true|none|
+|VolumeUuid|path|string|true|the volume's uuid|
+|SnapshotUuid|path|string|true|the snapshot's uuid|
 
 > Example responses
 
@@ -5392,13 +5408,13 @@ list volume spec relations
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
 
 > Example responses
 
@@ -5495,9 +5511,9 @@ create new volume spec relation
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|body|body|[CreateClusterVolumeSpecRequest](#schemacreateclustervolumespecrequest)|false|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|body|body|[CreateClusterVolumeSpecRequest](#schemacreateclustervolumespecrequest)|false|the http post body|
 
 > Example responses
 
@@ -5550,9 +5566,9 @@ delete an volume spec relation
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|AzUuid|path|string|true|none|
-|ClusterUuid|path|string|true|none|
-|VolumeSpecUuid|path|string|true|none|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|VolumeSpecUuid|path|string|true|the volume specification's uuid|
 
 > Example responses
 
@@ -5599,12 +5615,12 @@ list volume specs
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|storage_pool_uuid|query|string|false|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|storage_pool_uuid|query|string|false|filter by the storage pool's uuid|
 
 > Example responses
 
@@ -5721,7 +5737,7 @@ create a volume spec
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[CreateVolumeSpecRequest](#schemacreatevolumespecrequest)|false|none|
+|body|body|[CreateVolumeSpecRequest](#schemacreatevolumespecrequest)|false|the http post body|
 
 > Example responses
 
@@ -5785,7 +5801,7 @@ describe a volume spec
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VolumeSpecUuid|path|string|true|none|
+|VolumeSpecUuid|path|string|true|the volume specification's uuid|
 
 > Example responses
 
@@ -5849,7 +5865,7 @@ delete a volume spec
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VolumeSpecUuid|path|string|true|none|
+|VolumeSpecUuid|path|string|true|the volume specification's uuid|
 
 > Example responses
 
@@ -5913,8 +5929,8 @@ update volume spec
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VolumeSpecUuid|path|string|true|none|
-|body|body|[CreateVolumeSpecRequest](#schemacreatevolumespecrequest)|true|none|
+|VolumeSpecUuid|path|string|true|the volume specification's uuid|
+|body|body|[CreateVolumeSpecRequest](#schemacreatevolumespecrequest)|true|the http post body|
 
 > Example responses
 
@@ -5965,7 +5981,7 @@ get server config
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|Token|query|string|true|none|
+|Token|query|string|true|the api access token string|
 
 > Example responses
 
@@ -6005,17 +6021,17 @@ list images
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|string|false|none|
-|format|query|string|false|none|
-|os_type|query|string|false|none|
-|type|query|integer(int64)|false|none|
-|uuid|query|string|false|none|
-|bucket_uuid|query|string|false|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
+|format|query|string|false|filter by the 'format' field|
+|os_type|query|string|false|filter by the 'os_type' field|
+|type|query|integer(int64)|false|filter by the 'type' field|
+|uuid|query|string|false|filter by the 'uuid' field|
+|bucket_uuid|query|string|false|filter by the 'bucket_uuid' field|
 
 > Example responses
 
@@ -6101,7 +6117,7 @@ create a public image
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[CreateImageRequest](#schemacreateimagerequest)|false|none|
+|body|body|[CreateImageRequest](#schemacreateimagerequest)|false|the http body of the post request|
 
 > Example responses
 
@@ -6161,7 +6177,7 @@ Accept: application/json
 
 `POST /image/user`
 
-create a user image
+create a user's private image
 
 > Body parameter
 
@@ -6183,7 +6199,7 @@ create a user image
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[CreateImageRequest](#schemacreateimagerequest)|false|none|
+|body|body|[CreateImageRequest](#schemacreateimagerequest)|false|the http body of the post request|
 
 > Example responses
 
@@ -6242,13 +6258,13 @@ Accept: application/json
 
 `GET /image/{ImageUuid}`
 
-describe a image
+get an image's detailed information
 
 <h3 id="getimage-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|ImageUuid|path|string|true|none|
+|ImageUuid|path|string|true|the image's uuid|
 
 > Example responses
 
@@ -6307,13 +6323,13 @@ Accept: application/json
 
 `DELETE /image/{ImageUuid}`
 
-delete a image
+delete an image
 
 <h3 id="deleteimage-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|ImageUuid|path|string|true|none|
+|ImageUuid|path|string|true|the image's uuid|
 
 > Example responses
 
@@ -6355,7 +6371,7 @@ Accept: application/json
 
 `PATCH /image/{ImageUuid}`
 
-update an image
+update an image's information
 
 > Body parameter
 
@@ -6377,7 +6393,7 @@ update an image
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |ImageUuid|path|string|true|none|
-|body|body|[UpdateImageRequest](#schemaupdateimagerequest)|false|none|
+|body|body|[UpdateImageRequest](#schemaupdateimagerequest)|false|the http body of the post request|
 
 > Example responses
 
@@ -6420,7 +6436,7 @@ Accept: application/json
 
 `GET /image_statistic`
 
-describe s3 inventory statistic
+get s3-inventory's statistical information
 
 > Example responses
 
@@ -6458,13 +6474,13 @@ list image buckets
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|integer(int64)|false|none|
-|type|query|integer(int64)|false|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
+|type|query|integer(int64)|false|filter by the 'type' field|
 
 > Example responses
 
@@ -6544,7 +6560,7 @@ Accept: application/json
 
 `POST /imagebucket`
 
-create a image bucket
+create an image bucket
 
 > Body parameter
 
@@ -6561,7 +6577,7 @@ create a image bucket
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[CreateImageBucketRequest](#schemacreateimagebucketrequest)|false|none|
+|body|body|[CreateImageBucketRequest](#schemacreateimagebucketrequest)|false|the http body of the post request|
 
 > Example responses
 
@@ -6614,13 +6630,13 @@ Accept: application/json
 
 `GET /imagebucket/{ImageBucketUuid}`
 
-describe a image bucket
+get an image bucket's detailed information
 
 <h3 id="getimagebucket-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|ImageBucketUuid|path|string|true|none|
+|ImageBucketUuid|path|string|true|the image bucket's uuid|
 
 > Example responses
 
@@ -6673,13 +6689,13 @@ Accept: application/json
 
 `DELETE /imagebucket/{ImageBucketUuid}`
 
-delete a image bucket
+delete an image bucket
 
 <h3 id="deleteimagebucket-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|ImageBucketUuid|path|string|true|none|
+|ImageBucketUuid|path|string|true|the image bucket's uuid|
 
 > Example responses
 
@@ -6705,7 +6721,7 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/cpu HTTP/1.1
+GET http://api.yourchimestack.com:8801/v1/metrics/cpu?range=0&window=0&vm_uuid=string HTTP/1.1
 Host: api.yourchimestack.com:8801
 Accept: application/json
 
@@ -6719,9 +6735,9 @@ get vm cpu statistics
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|range|query|integer(int64)|false|none|
-|window|query|integer(int64)|false|none|
-|vm_uuid|query|string|false|none|
+|range|query|integer(int64)|true|the time range for querying the statistics|
+|window|query|integer(int64)|true|the time window for aggregating the statistics|
+|vm_uuid|query|string|true|the virtual machine's uuid|
 
 > Example responses
 
@@ -6745,7 +6761,7 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/disk_io HTTP/1.1
+GET http://api.yourchimestack.com:8801/v1/metrics/disk_io?range=0&window=0&vm_uuid=string HTTP/1.1
 Host: api.yourchimestack.com:8801
 Accept: application/json
 
@@ -6759,9 +6775,9 @@ get vm disk i/o statistics
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|range|query|integer(int64)|false|none|
-|window|query|integer(int64)|false|none|
-|vm_uuid|query|string|false|none|
+|range|query|integer(int64)|true|the time range for querying the statistics|
+|window|query|integer(int64)|true|the time window for aggregating the statistics|
+|vm_uuid|query|string|true|the virtual machine's uuid|
 
 > Example responses
 
@@ -6785,7 +6801,7 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/interface_net_io HTTP/1.1
+GET http://api.yourchimestack.com:8801/v1/metrics/interface_net_io?range=0&window=0&interface_uuid=string HTTP/1.1
 Host: api.yourchimestack.com:8801
 Accept: application/json
 
@@ -6799,9 +6815,9 @@ get interface net i/o statistics
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|range|query|integer(int64)|false|none|
-|window|query|integer(int64)|false|none|
-|interface_uuid|query|string|false|none|
+|range|query|integer(int64)|true|the time range for querying the statistics|
+|window|query|integer(int64)|true|the time window for aggregating the statistics|
+|interface_uuid|query|string|true|the network interface's uuid|
 
 > Example responses
 
@@ -6825,7 +6841,7 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/memory HTTP/1.1
+GET http://api.yourchimestack.com:8801/v1/metrics/memory?range=0&window=0&vm_uuid=string HTTP/1.1
 Host: api.yourchimestack.com:8801
 Accept: application/json
 
@@ -6839,9 +6855,9 @@ get vm memory statistics
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|range|query|integer(int64)|false|none|
-|window|query|integer(int64)|false|none|
-|vm_uuid|query|string|false|none|
+|range|query|integer(int64)|true|the time range for querying the statistics|
+|window|query|integer(int64)|true|the time window for aggregating the statistics|
+|vm_uuid|query|string|true|the virtual machine's uuid|
 
 > Example responses
 
@@ -6865,7 +6881,7 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/net_io HTTP/1.1
+GET http://api.yourchimestack.com:8801/v1/metrics/net_io?range=0&window=0&vm_uuid=string HTTP/1.1
 Host: api.yourchimestack.com:8801
 Accept: application/json
 
@@ -6879,9 +6895,9 @@ get vm network i/o statistics
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|range|query|integer(int64)|false|none|
-|window|query|integer(int64)|false|none|
-|vm_uuid|query|string|false|none|
+|range|query|integer(int64)|true|the time range for querying the statistics|
+|window|query|integer(int64)|true|the time window for aggregating the statistics|
+|vm_uuid|query|string|true|the virtual machine's uuid|
 
 > Example responses
 
@@ -6905,7 +6921,7 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/total_cpu HTTP/1.1
+GET http://api.yourchimestack.com:8801/v1/metrics/total_cpu?range=0&window=0 HTTP/1.1
 Host: api.yourchimestack.com:8801
 Accept: application/json
 
@@ -6919,8 +6935,8 @@ get total cpu statistics
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|range|query|integer(int64)|false|none|
-|window|query|integer(int64)|false|none|
+|range|query|integer(int64)|true|the time range for querying the statistics|
+|window|query|integer(int64)|true|the time window for aggregating the statistics|
 
 > Example responses
 
@@ -6944,7 +6960,7 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/total_disk_io HTTP/1.1
+GET http://api.yourchimestack.com:8801/v1/metrics/total_disk_io?range=0&window=0 HTTP/1.1
 Host: api.yourchimestack.com:8801
 Accept: application/json
 
@@ -6958,8 +6974,8 @@ get total disk i/o statistics
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|range|query|integer(int64)|false|none|
-|window|query|integer(int64)|false|none|
+|range|query|integer(int64)|true|the time range for querying the statistics|
+|window|query|integer(int64)|true|the time window for aggregating the statistics|
 
 > Example responses
 
@@ -6983,7 +6999,7 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/total_memory HTTP/1.1
+GET http://api.yourchimestack.com:8801/v1/metrics/total_memory?range=0&window=0 HTTP/1.1
 Host: api.yourchimestack.com:8801
 Accept: application/json
 
@@ -6997,8 +7013,8 @@ get total memory statistics
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|range|query|integer(int64)|false|none|
-|window|query|integer(int64)|false|none|
+|range|query|integer(int64)|true|the time range for querying the statistics|
+|window|query|integer(int64)|true|the time window for aggregating the statistics|
 
 > Example responses
 
@@ -7022,7 +7038,7 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/total_net_io HTTP/1.1
+GET http://api.yourchimestack.com:8801/v1/metrics/total_net_io?range=0&window=0 HTTP/1.1
 Host: api.yourchimestack.com:8801
 Accept: application/json
 
@@ -7036,8 +7052,8 @@ get total network i/o statistics
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|range|query|integer(int64)|false|none|
-|window|query|integer(int64)|false|none|
+|range|query|integer(int64)|true|the time range for querying the statistics|
+|window|query|integer(int64)|true|the time window for aggregating the statistics|
 
 > Example responses
 
@@ -7061,7 +7077,7 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/user_cpu HTTP/1.1
+GET http://api.yourchimestack.com:8801/v1/metrics/user_cpu?range=0&window=0 HTTP/1.1
 Host: api.yourchimestack.com:8801
 Accept: application/json
 
@@ -7075,8 +7091,8 @@ get user total cpu statistics
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|range|query|integer(int64)|false|none|
-|window|query|integer(int64)|false|none|
+|range|query|integer(int64)|true|the time range for querying the statistics|
+|window|query|integer(int64)|true|the time window for aggregating the statistics|
 
 > Example responses
 
@@ -7100,7 +7116,7 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/user_memory HTTP/1.1
+GET http://api.yourchimestack.com:8801/v1/metrics/user_memory?range=0&window=0 HTTP/1.1
 Host: api.yourchimestack.com:8801
 Accept: application/json
 
@@ -7114,8 +7130,8 @@ get user total memory statistics
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|range|query|integer(int64)|false|none|
-|window|query|integer(int64)|false|none|
+|range|query|integer(int64)|true|the time range for querying the statistics|
+|window|query|integer(int64)|true|the time window for aggregating the statistics|
 
 > Example responses
 
@@ -7139,7 +7155,7 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/volume_disk_io HTTP/1.1
+GET http://api.yourchimestack.com:8801/v1/metrics/volume_disk_io?range=0&window=0&volume_uuid=string HTTP/1.1
 Host: api.yourchimestack.com:8801
 Accept: application/json
 
@@ -7153,9 +7169,9 @@ get volume disk i/o statistics
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|range|query|integer(int64)|false|none|
-|window|query|integer(int64)|false|none|
-|volume_uuid|query|string|false|none|
+|range|query|integer(int64)|true|the time range for querying the statistics|
+|window|query|integer(int64)|true|the time window for aggregating the statistics|
+|volume_uuid|query|string|true|the volume's uuid|
 
 > Example responses
 
@@ -7195,16 +7211,16 @@ list vms
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|page|query|integer(int64)|false|none|
-|size|query|integer(int64)|false|none|
-|sort|query|string|false|none|
-|order|query|string|false|none|
-|name|query|string|false|none|
-|state|query|string|false|none|
-|uuid|query|string|false|none|
-|host_uuid|query|string|false|none|
-|az_uuid|query|string|false|none|
-|cluster_uuid|query|string|false|none|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|state|query|integer(int64)|false|filter by the 'state' field|
+|uuid|query|string|false|filter by the 'uuid' field|
+|host_uuid|query|string|false|filter by the 'host_uuid' field|
+|az_uuid|query|string|false|filter by the 'az_uuid' field|
+|cluster_uuid|query|string|false|filter by the 'cluster_uuid' field|
 
 > Example responses
 
@@ -7324,7 +7340,7 @@ create a vm
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[CreateVmRequest](#schemacreatevmrequest)|false|none|
+|body|body|[CreateVmRequest](#schemacreatevmrequest)|false|the http post body|
 
 > Example responses
 
@@ -7478,7 +7494,7 @@ describe a vm
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VmUuid|path|string|true|none|
+|VmUuid|path|string|true|the virtual machine's uuid|
 
 > Example responses
 
@@ -7602,8 +7618,8 @@ delete a vm
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VmUuid|path|string|true|none|
-|force_del|query|string|false|none|
+|VmUuid|path|string|true|the virtual machine's uuid|
+|force_del|query|string|false|if forceDel is set to true, the physical volumes are deleted as well as the virtual machine|
 
 > Example responses
 
@@ -7662,8 +7678,8 @@ update a vm
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VmUuid|path|string|true|none|
-|body|body|[UpdateVmRequest](#schemaupdatevmrequest)|false|none|
+|VmUuid|path|string|true|the virtual machine's uuid|
+|body|body|[UpdateVmRequest](#schemaupdatevmrequest)|false|the http post body|
 
 > Example responses
 
@@ -7721,8 +7737,8 @@ attach a volume to the vm
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VmUuid|path|string|true|none|
-|body|body|[AttachVolumeRequest](#schemaattachvolumerequest)|false|none|
+|VmUuid|path|string|true|the virtual machine's uuid|
+|body|body|[AttachVolumeRequest](#schemaattachvolumerequest)|false|the http post body|
 
 > Example responses
 
@@ -7780,8 +7796,8 @@ attach a nic to the vm
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VmUuid|path|string|true|none|
-|body|body|[AttachNicRequest](#schemaattachnicrequest)|false|none|
+|VmUuid|path|string|true|the virtual machine's uuid|
+|body|body|[AttachNicRequest](#schemaattachnicrequest)|false|the http post body|
 
 > Example responses
 
@@ -7839,8 +7855,8 @@ detach a volume from the vm
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VmUuid|path|string|true|none|
-|body|body|[DetachVolumeRequest](#schemadetachvolumerequest)|false|none|
+|VmUuid|path|string|true|the virtual machine's uuid|
+|body|body|[DetachVolumeRequest](#schemadetachvolumerequest)|false|the http post body|
 
 > Example responses
 
@@ -7898,8 +7914,8 @@ detach a nic from the vm
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VmUuid|path|string|true|none|
-|body|body|[DetachNicRequest](#schemadetachnicrequest)|false|none|
+|VmUuid|path|string|true|the virtual machine's uuid|
+|body|body|[DetachNicRequest](#schemadetachnicrequest)|false|the http post body|
 
 > Example responses
 
@@ -7948,7 +7964,7 @@ start a vm
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VmUuid|path|string|true|none|
+|VmUuid|path|string|true|the virtual machine's uuid|
 
 > Example responses
 
@@ -7997,7 +8013,7 @@ stop a vm
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VmUuid|path|string|true|none|
+|VmUuid|path|string|true|the virtual machine's uuid|
 
 > Example responses
 
@@ -8046,7 +8062,7 @@ get a vm vnc information
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|VmUuid|path|string|true|none|
+|VmUuid|path|string|true|the virtual machine's uuid|
 
 > Example responses
 
@@ -8115,7 +8131,7 @@ api_key
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|comment|string|false|none|none|
+|comment|string|false|none|comment for the alert's acception|
 
 ### AttachNicRequest
 <!-- backwards compatibility -->
@@ -8135,7 +8151,7 @@ api_key
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|nic_uuid|string|false|none|none|
+|nic_uuid|string|false|none|the network interface's uuid|
 
 ### AttachVolumeRequest
 <!-- backwards compatibility -->
@@ -8155,7 +8171,7 @@ api_key
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|volume_uuid|string|false|none|none|
+|volume_uuid|string|false|none|the virtual machine's uuid|
 
 ### AuthRequest
 <!-- backwards compatibility -->
@@ -8175,7 +8191,7 @@ api_key
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|token|string|false|none|none|
+|token|string|false|none|the authorized token string|
 
 ### CommonError
 <!-- backwards compatibility -->
@@ -8223,8 +8239,8 @@ az request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|description|string|false|none|none|
-|name|string|false|none|none|
+|description|string|false|none|description for the AZ|
+|name|string|false|none|the AZ's name|
 |parent|string|false|none|none|
 
 ### CreateCdromRequest
@@ -8249,11 +8265,11 @@ az request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|bootable|integer(int64)|false|none|none|
-|host_uuid|string|false|none|none|
-|image_uuid|string|false|none|none|
-|name|string|false|none|none|
-|volume_spec_uuid|string|false|none|none|
+|bootable|integer(int64)|false|none|whether to boot the VM from the cdrom, default is 0 (not)|
+|host_uuid|string|false|none|the host's uuid|
+|image_uuid|string|false|none|the image's uuid|
+|name|string|false|none|the cdrom's name|
+|volume_spec_uuid|string|false|none|the volume specification's Uuid|
 
 ### CreateClusterInstanceSpecRequest
 <!-- backwards compatibility -->
@@ -8275,7 +8291,7 @@ cluster instance spec relation request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|instance_spec_uuid|string|false|none|none|
+|instance_spec_uuid|string|false|none|the instance specification's Uuid|
 
 ### CreateClusterRequest
 <!-- backwards compatibility -->
@@ -8301,11 +8317,11 @@ cluster request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|arch|string|false|none|none|
-|description|string|false|none|none|
-|hypervisor_type|string|false|none|none|
-|name|string|false|none|none|
-|type|integer(int64)|false|none|none|
+|arch|string|false|none|the cluster's architecture, like x86_64, arm, ...|
+|description|string|false|none|description for the cluster|
+|hypervisor_type|string|false|none|the cluster's hypervisor type, like kvm (default), xen, ...|
+|name|string|false|none|the cluster's name|
+|type|integer(int64)|false|none|the cluster's type|
 
 ### CreateClusterVolumeSpecRequest
 <!-- backwards compatibility -->
@@ -8327,7 +8343,7 @@ cluster volume spec relation request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|volume_spec_uuid|string|false|none|none|
+|volume_spec_uuid|string|false|none|the volume specification's Uuid|
 
 ### CreateHostRequest
 <!-- backwards compatibility -->
@@ -8354,12 +8370,12 @@ host request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|cpu_ratio|number(float)|false|none|none|
-|description|string|false|none|none|
-|memory_ratio|number(float)|false|none|none|
-|reserved_memory|integer(int64)|false|none|none|
-|reserved_vcpus|integer(int64)|false|none|none|
-|uuid|string|false|none|none|
+|cpu_ratio|number(float)|false|none|the CPU's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical CPUs in the node.|
+|description|string|false|none|description for the host|
+|memory_ratio|number(float)|false|none|the memory's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical memory in the node.|
+|reserved_memory|integer(int64)|false|none|the reserverd memory number, which will not be allocated to virtual machines.|
+|reserved_vcpus|integer(int64)|false|none|the reserverd CPU number, which will not be allocated to virtual machines.|
+|uuid|string|false|none|the host's Uuid|
 
 ### CreateImageBucketRequest
 <!-- backwards compatibility -->
@@ -8384,10 +8400,10 @@ image bucket request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|bucket_name|string|false|none|none|
-|description|string|false|none|none|
-|name|string|false|none|none|
-|type|integer(int64)|false|none|none|
+|bucket_name|string|false|none|the bucket's name from the S3's service|
+|description|string|false|none|description for the image bucket|
+|name|string|false|none|the image bucket's name|
+|type|integer(int64)|false|none|the image bucket's type, can be 'private' or 'public'|
 
 ### CreateImageRequest
 <!-- backwards compatibility -->
@@ -8415,15 +8431,15 @@ image bucket request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|boot_type|string|false|none|none|
-|description|string|false|none|none|
-|format|string|false|none|none|
-|install_url|string|false|none|none|
-|name|string|false|none|none|
-|os_arch|string|false|none|none|
-|os_detail|string|false|none|none|
-|os_type|string|false|none|none|
-|shared|integer(int64)|false|none|none|
+|boot_type|string|false|none|the boot type of the image, can be UEFI or legacy|
+|description|string|false|none|description for the image|
+|format|string|false|none|the image's format, like raw, qcow2, ...|
+|install_url|string|false|none|the installation uri of the image to be fetched, it can be a sftp url or a file local path in the server's running node|
+|name|string|false|none|the image's name|
+|os_arch|string|false|none|the architecture of the OS, like x86_64, arm, ...|
+|os_detail|string|false|none|the version of the OS, like CentOS 7, CentOS 8, ...|
+|os_type|string|false|none|the operation system's type, like Windows, Linux, ...|
+|shared|integer(int64)|false|none|whether the image is shared with other accounts or not|
 
 ### CreateInstanceSpecRequest
 <!-- backwards compatibility -->
@@ -8449,11 +8465,11 @@ instance spec request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|description|string|false|none|none|
-|memory|integer(int64)|false|none|none|
-|name|string|false|none|none|
-|type|integer(int64)|false|none|none|
-|vcpus|integer(int64)|false|none|none|
+|description|string|false|none|description for the instance specification|
+|memory|integer(int64)|false|none|the number of memory|
+|name|string|false|none|the instance specification's name|
+|type|integer(int64)|false|none|the instance specification's type, 0: shared resource, 1: dedicated resource|
+|vcpus|integer(int64)|false|none|the number of vCPUs|
 
 ### CreateNetworkRequest
 <!-- backwards compatibility -->
@@ -8476,10 +8492,10 @@ instance spec request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|description|string|false|none|none|
-|interface_name|string|false|none|none|
-|name|string|false|none|none|
-|type|integer(int64)|false|none|none|
+|description|string|false|none|description for the network|
+|interface_name|string|false|none|the unified interface name which the network uses in the node|
+|name|string|false|none|the network's name|
+|type|integer(int64)|false|none|the network's type, can be: classical, vlan and vxlan|
 
 ### CreateNicRequest
 <!-- backwards compatibility -->
@@ -8503,11 +8519,11 @@ instance spec request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|description|string|false|none|none|
-|ip|string|false|none|none|
-|name|string|false|none|none|
-|primary|integer(int64)|false|none|none|
-|subnet_uuid|string|false|none|none|
+|description|string|false|none|description for the nic|
+|ip|string|false|none|the IP address of the nic|
+|name|string|false|none|the virtual network interface's name|
+|primary|integer(int64)|false|none|whether the nic is the primary nic, which can not be removed from a virtual machine|
+|subnet_uuid|string|false|none|the subnet's Uuid, which the nic belongs to|
 
 ### CreateSnapshotRequest
 <!-- backwards compatibility -->
@@ -8528,8 +8544,8 @@ instance spec request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|description|string|false|none|none|
-|name|string|false|none|none|
+|description|string|false|none|description for the snapshot|
+|name|string|false|none|the snapshot's name|
 
 ### CreateStoragePoolRequest
 <!-- backwards compatibility -->
@@ -8556,14 +8572,14 @@ instance spec request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|backend_path|string|false|none|none|
-|description|string|false|none|none|
-|image_cache_path|string|false|none|none|
-|name|string|false|none|none|
-|physical_size|integer(int64)|false|none|none|
-|reserved_size|integer(int64)|false|none|none|
-|size_ratio|number(float)|false|none|none|
-|type|integer(int64)|false|none|none|
+|backend_path|string|false|none|the backend path of the physical storage in nodes (only for local storage)|
+|description|string|false|none|description for the storage pool|
+|image_cache_path|string|false|none|the image cache path of the physical storage in nodes (only for local storage)|
+|name|string|false|none|the storage pool's name|
+|physical_size|integer(int64)|false|none|the physical size of the storage|
+|reserved_size|integer(int64)|false|none|the reserverd storage size, which will not be allocated to virtual machines.|
+|size_ratio|number(float)|false|none|the storage's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical storage|
+|type|integer(int64)|false|none|the storage pool's type, 0: local, 1:iscsi, 2:ceph|
 
 ### CreateSubnetRequest
 <!-- backwards compatibility -->
@@ -8587,11 +8603,11 @@ instance spec request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|cidr|string|false|none|none|
-|description|string|false|none|none|
-|gateway|string|false|none|none|
-|name|string|false|none|none|
-|reserved_ips|string|false|none|none|
+|cidr|string|false|none|the CIDR value, e.g. 192.168.231.1/24|
+|description|string|false|none|description for the subnet|
+|gateway|string|false|none|the gateway of the subnet|
+|name|string|false|none|the subnet's name|
+|reserved_ips|string|false|none|the reserved ips inside the subnet, which will not be assigned to virtual machines|
 
 ### CreateUserDefaultRequest
 <!-- backwards compatibility -->
@@ -8614,8 +8630,8 @@ user default request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|az_uuid|string|false|none|none|
-|clusters_uuid|string|false|none|none|
+|az_uuid|string|false|none|the AZ's uuid|
+|clusters_uuid|string|false|none|the cluster's uuid|
 
 ### CreateUserRequest
 <!-- backwards compatibility -->
@@ -8641,11 +8657,11 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|avatar|string|false|none|none|
-|name|string|false|none|none|
-|nick_name|string|false|none|none|
-|password|string|false|none|none|
-|role|integer(int64)|false|none|none|
+|avatar|string|false|none|the user's avatar|
+|name|string|false|none|the user's name|
+|nick_name|string|false|none|the user's nickname|
+|password|string|false|none|the user's login password|
+|role|integer(int64)|false|none|the user's role, 0: normal user, 1: readonly administrator, 2: administrator, 3: super administrator|
 
 ### CreateVmRequest
 <!-- backwards compatibility -->
@@ -8699,17 +8715,17 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|az_uuid|string|false|none|none|
+|az_uuid|string|false|none|the AZ's uuid|
 |cdrom|[CreateCdromRequest](#schemacreatecdromrequest)|false|none|none|
-|cluster_uuid|string|false|none|none|
-|description|string|false|none|none|
-|host_uuid|string|false|none|none|
-|instance_spec_uuid|string|false|none|none|
-|name|string|false|none|none|
-|nics|[[CreateNicRequest](#schemacreatenicrequest)]|false|none|none|
-|password|string|false|none|none|
-|vnc_password|string|false|none|none|
-|volumes|[[CreateVolumeRequest](#schemacreatevolumerequest)]|false|none|none|
+|cluster_uuid|string|false|none|the cluster's uuid|
+|description|string|false|none|description for the virtual machine|
+|host_uuid|string|false|none|the host's uuid|
+|instance_spec_uuid|string|false|none|the instace specification's uuid|
+|name|string|false|none|the virtual machine's name|
+|nics|[[CreateNicRequest](#schemacreatenicrequest)]|false|none|the network interfaces of the virtual machine|
+|password|string|false|none|the SSH password of the root user|
+|vnc_password|string|false|none|the VNC password|
+|volumes|[[CreateVolumeRequest](#schemacreatevolumerequest)]|false|none|the volumes of the virutal machine|
 
 ### CreateVolumeRequest
 <!-- backwards compatibility -->
@@ -8735,13 +8751,13 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|description|string|false|none|none|
-|host_uuid|string|false|none|none|
-|image_uuid|string|false|none|none|
-|name|string|false|none|none|
-|root|integer(int64)|false|none|none|
-|size|integer(int64)|false|none|none|
-|volume_spec_uuid|string|false|none|none|
+|description|string|false|none|description for the volume|
+|host_uuid|string|false|none|the host's uuid if the volume is on local storage|
+|image_uuid|string|false|none|the image's uuid|
+|name|string|false|none|the volume's name|
+|root|integer(int64)|false|none|whether the volume is the root volume, which is not removable|
+|size|integer(int64)|false|none|the size of the volume in bytes|
+|volume_spec_uuid|string|false|none|the volume specification's Uuid|
 
 ### CreateVolumeSpecRequest
 <!-- backwards compatibility -->
@@ -8769,15 +8785,15 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|description|string|false|none|none|
-|max_iops|integer(int64)|false|none|none|
-|max_throughput|integer(int64)|false|none|none|
-|min_iops|integer(int64)|false|none|none|
-|min_throughput|integer(int64)|false|none|none|
-|name|string|false|none|none|
-|step_iops|integer(int64)|false|none|none|
-|step_throughput|integer(int64)|false|none|none|
-|storage_pool_uuid|string|false|none|none|
+|description|string|false|none|description for the volume specification|
+|max_iops|integer(int64)|false|none|the max iops value of the volume specification|
+|max_throughput|integer(int64)|false|none|the max throughput value of the volume specification|
+|min_iops|integer(int64)|false|none|the min iops value of the volume specification|
+|min_throughput|integer(int64)|false|none|the min throughput value of the volume specification|
+|name|string|false|none|the volume specification's name|
+|step_iops|integer(int64)|false|none|the step iops value of the volume specification|
+|step_throughput|integer(int64)|false|none|the step throughput value of the volume specification|
+|storage_pool_uuid|string|false|none|the storage pool's Uuid|
 
 ### DetachNicRequest
 <!-- backwards compatibility -->
@@ -8797,7 +8813,7 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|nic_uuid|string|false|none|none|
+|nic_uuid|string|false|none|the network interface's uuid|
 
 ### DetachVolumeRequest
 <!-- backwards compatibility -->
@@ -8817,7 +8833,7 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|volume_uuid|string|false|none|none|
+|volume_uuid|string|false|none|the virtual machine's uuid|
 
 ### LoginRequest
 <!-- backwards compatibility -->
@@ -8838,8 +8854,8 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|password|string|false|none|none|
-|user_name|string|false|none|none|
+|password|string|false|none|the password for authing|
+|user_name|string|false|none|the username for authing|
 
 ### OpenApiResponse
 <!-- backwards compatibility -->
@@ -8891,11 +8907,11 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|cpu_ratio|number(float)|false|none|none|
-|description|string|false|none|none|
-|memory_ratio|number(float)|false|none|none|
-|reserved_memory|integer(int64)|false|none|none|
-|reserved_vcpus|integer(int64)|false|none|none|
+|cpu_ratio|number(float)|false|none|the CPU's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical CPUs in the node.|
+|description|string|false|none|description for the host|
+|memory_ratio|number(float)|false|none|the memory's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical memory in the node.|
+|reserved_memory|integer(int64)|false|none|the reserverd memory number, which will not be allocated to virtual machines.|
+|reserved_vcpus|integer(int64)|false|none|the reserverd CPU number, which will not be allocated to virtual machines.|
 
 ### UpdateImageRequest
 <!-- backwards compatibility -->
@@ -8922,14 +8938,14 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|boot_type|string|false|none|none|
-|description|string|false|none|none|
-|format|string|false|none|none|
-|name|string|false|none|none|
-|os_arch|string|false|none|none|
-|os_detail|string|false|none|none|
-|os_type|string|false|none|none|
-|shared|integer(int64)|false|none|none|
+|boot_type|string|false|none|the boot type of the image, can be UEFI or legacy|
+|description|string|false|none|description for the image|
+|format|string|false|none|the image's format, like raw, qcow2, ...|
+|name|string|false|none|the image's name|
+|os_arch|string|false|none|the architecture of the OS, like x86_64, arm, ...|
+|os_detail|string|false|none|the version of the OS, like CentOS 7, CentOS 8, ...|
+|os_type|string|false|none|the operation system's type, like Windows, Linux, ...|
+|shared|integer(int64)|false|none|whether the image is shared with other accounts or not|
 
 ### UpdateNetworkRequest
 <!-- backwards compatibility -->
@@ -8950,8 +8966,8 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|description|string|false|none|none|
-|name|string|false|none|none|
+|description|string|false|none|description for the network|
+|name|string|false|none|the network's name|
 
 ### UpdateNicRequest
 <!-- backwards compatibility -->
@@ -8972,8 +8988,8 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|description|string|false|none|none|
-|name|string|false|none|none|
+|description|string|false|none|description for the nic|
+|name|string|false|none|the nic's name|
 
 ### UpdateVmRequest
 <!-- backwards compatibility -->
@@ -8994,8 +9010,8 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|description|string|false|none|none|
-|name|string|false|none|none|
+|description|string|false|none|description for the virutal machine|
+|name|string|false|none|the virutal machine's name|
 
 ### UpdateVolumeRequest
 <!-- backwards compatibility -->
@@ -9016,6 +9032,6 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|description|string|false|none|none|
-|name|string|false|none|none|
+|description|string|false|none|description for the volume|
+|name|string|false|none|the volume's name|
 

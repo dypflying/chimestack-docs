@@ -1,5 +1,5 @@
 ---
-title: ChimeStack API手册
+title: API
 weight: 2
-description: Chime API使用介绍
+description: Chime API Reference
 ---

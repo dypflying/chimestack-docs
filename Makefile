@@ -10,3 +10,4 @@ regular:
 	sed -i '/<!-- Generator/,+16 d' ${INPUT_FILE}
 	sed -i '/> 200 Response/,+12 d' ${INPUT_FILE}
 	sed -i '/To perform this operation/,+1 d' ${INPUT_FILE}
+	sed -i 's/^title: ChimeStack API v0\.0\.1/title: API Version 0.0.1/' ${INPUT_FILE}

@@ -1,5 +1,5 @@
 ---
-title: ChimeStack API v0.0.1
+title: API Version 0.0.1
 language_tabs:
   - http: HTTP
 toc_footers: []

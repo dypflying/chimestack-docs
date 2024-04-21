@@ -19,9 +19,10 @@ headingLevel: 2
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/alert HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/alert HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -177,8 +178,6 @@ list alerts
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getAlert
@@ -188,9 +187,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/alert/{AlertUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/alert/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -236,8 +236,6 @@ get an alert's detailed information
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteAlert
@@ -247,9 +245,10 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/alert/{AlertUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/alert/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -283,8 +282,6 @@ delete an alert
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### acceptAlert
@@ -294,11 +291,14 @@ api_key
 > Code samples
 
 ```http
-PUT http://api.yourchimestack.com:8801/v1/alert/{AlertUuid}/accept HTTP/1.1
-Host: api.yourchimestack.com:8801
+PUT /v1/alert/string/accept HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 30
 
+{"comment":"accept the alert"}
 ```
 
 `PUT /alert/{AlertUuid}/accept`
@@ -309,7 +309,7 @@ accept an alert
 
 ```json
 {
-  "comment": "string"
+  "comment": "accept the alert"
 }
 ```
 
@@ -340,8 +340,6 @@ accept an alert
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### listAlertRule
@@ -351,9 +349,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/alert_rule HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/alert_rule HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -451,8 +450,6 @@ list alert rules
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getAlertRule
@@ -462,9 +459,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/alert_rule/{RuleUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/alert_rule/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -512,8 +510,6 @@ get an alert rule's detailed information
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getAlertStatistic
@@ -523,9 +519,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/alert_statistic HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/alert_statistic HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -544,8 +541,6 @@ get alerts' statistical information
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ## User
@@ -557,16 +552,19 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/auth HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/auth HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 18
 
+{"token":"string"}
 ```
 
 `POST /auth`
 
-user auth
+user's authentification
 
 > Body parameter
 
@@ -593,8 +591,6 @@ user auth
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### login
@@ -604,23 +600,26 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/login HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/login HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 48
 
+{"password":"chime123","user_name":"chime-user"}
 ```
 
 `POST /login`
 
-user login
+user's login method
 
 > Body parameter
 
 ```json
 {
-  "password": "string",
-  "user_name": "string"
+  "password": "chime123",
+  "user_name": "chime-user"
 }
 ```
 
@@ -641,8 +640,6 @@ user login
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### logout
@@ -652,16 +649,19 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/logout HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/logout HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 18
 
+{"token":"string"}
 ```
 
 `POST /logout`
 
-user logout
+user's  logout method
 
 > Body parameter
 
@@ -688,8 +688,6 @@ user logout
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### listUser
@@ -699,9 +697,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/user HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/user HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -731,8 +730,6 @@ list users
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createUser
@@ -742,26 +739,29 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/user HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/user HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 112
 
+{"avatar":"file:///avatar/user.png","name":"chime-user","nick_name":"Chime User","password":"chime123","role":2}
 ```
 
 `POST /user`
 
-create an user
+create a user
 
 > Body parameter
 
 ```json
 {
-  "avatar": "string",
-  "name": "string",
-  "nick_name": "string",
-  "password": "string",
-  "role": 0
+  "avatar": "file:///avatar/user.png",
+  "name": "chime-user",
+  "nick_name": "Chime User",
+  "password": "chime123",
+  "role": 2
 }
 ```
 
@@ -782,8 +782,6 @@ create an user
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getUser
@@ -793,15 +791,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/user/{UserUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/user/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /user/{UserUuid}`
 
-describe an user
+get a user's detailed information
 
 <h3 id="getuser-parameters">Parameters</h3>
 
@@ -820,8 +819,6 @@ describe an user
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteUser
@@ -831,15 +828,16 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/user/{UserUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/user/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `DELETE /user/{UserUuid}`
 
-delete an user
+delete a user
 
 <h3 id="deleteuser-parameters">Parameters</h3>
 
@@ -858,8 +856,6 @@ delete an user
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### updateUser
@@ -869,26 +865,29 @@ api_key
 > Code samples
 
 ```http
-PATCH http://api.yourchimestack.com:8801/v1/user/{UserUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+PATCH /v1/user/string HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 112
 
+{"avatar":"file:///avatar/user.png","name":"chime-user","nick_name":"Chime User","password":"chime123","role":2}
 ```
 
 `PATCH /user/{UserUuid}`
 
-update an user
+update a user
 
 > Body parameter
 
 ```json
 {
-  "avatar": "string",
-  "name": "string",
-  "nick_name": "string",
-  "password": "string",
-  "role": 0
+  "avatar": "file:///avatar/user.png",
+  "name": "chime-user",
+  "nick_name": "Chime User",
+  "password": "chime123",
+  "role": 2
 }
 ```
 
@@ -910,8 +909,6 @@ update an user
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getUserDefault
@@ -921,15 +918,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/user/{UserUuid}/default HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/user/string/default HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /user/{UserUuid}/default`
 
-describe a user default
+get a user's default setting information
 
 <h3 id="getuserdefault-parameters">Parameters</h3>
 
@@ -948,8 +946,6 @@ describe a user default
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### updateUserDefault
@@ -959,23 +955,26 @@ api_key
 > Code samples
 
 ```http
-PATCH http://api.yourchimestack.com:8801/v1/user/{UserUuid}/default HTTP/1.1
-Host: api.yourchimestack.com:8801
+PATCH /v1/user/string/default HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 105
 
+{"az_uuid":"cbd2819b-b49a-47ad-9fa4-307774d97865","clusters_uuid":"65bbc21f-0289-4bbf-9517-6b8da9688774"}
 ```
 
 `PATCH /user/{UserUuid}/default`
 
-update user default
+update user's default setting
 
 > Body parameter
 
 ```json
 {
-  "az_uuid": "string",
-  "clusters_uuid": "string"
+  "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+  "clusters_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774"
 }
 ```
 
@@ -997,8 +996,6 @@ update user default
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ## Az
@@ -1010,15 +1007,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /az`
 
-*Lists available zones*
+*lists available zones*
 
 This will show all available azs by default.
 
@@ -1072,8 +1070,6 @@ This will show all available azs by default.
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createAz
@@ -1083,16 +1079,19 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/az HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/az HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 66
 
+{"description":"an AZ example","name":"default","parent":"string"}
 ```
 
 `POST /az`
 
-*create available zone*
+*create an available zone*
 
 This will create an available az.
 
@@ -1100,8 +1099,8 @@ This will create an available az.
 
 ```json
 {
-  "description": "string",
-  "name": "string",
+  "description": "an AZ example",
+  "name": "default",
   "parent": "string"
 }
 ```
@@ -1138,8 +1137,6 @@ This will create an available az.
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getAz
@@ -1149,15 +1146,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az/{AzUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /az/{AzUuid}`
 
-*describe an available zone*
+*get an available zone's detail information*
 
 This will describe an available az.
 
@@ -1195,8 +1193,6 @@ This will describe an available az.
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteAz
@@ -1206,9 +1202,10 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/az/{AzUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/az/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -1244,8 +1241,6 @@ This will delete an available az.
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### updateAz
@@ -1255,11 +1250,14 @@ api_key
 > Code samples
 
 ```http
-PATCH http://api.yourchimestack.com:8801/v1/az/{AzUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+PATCH /v1/az/string HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 66
 
+{"description":"an AZ example","name":"default","parent":"string"}
 ```
 
 `PATCH /az/{AzUuid}`
@@ -1272,8 +1270,8 @@ This will update an available az.
 
 ```json
 {
-  "description": "string",
-  "name": "string",
+  "description": "an AZ example",
+  "name": "default",
   "parent": "string"
 }
 ```
@@ -1307,8 +1305,6 @@ This will update an available az.
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### disableAz
@@ -1318,9 +1314,10 @@ api_key
 > Code samples
 
 ```http
-PUT http://api.yourchimestack.com:8801/v1/az/{AzUuid}/disable HTTP/1.1
-Host: api.yourchimestack.com:8801
+PUT /v1/az/string/disable HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -1358,8 +1355,6 @@ This will disable an available az.
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### enableAz
@@ -1369,9 +1364,10 @@ api_key
 > Code samples
 
 ```http
-PUT http://api.yourchimestack.com:8801/v1/az/{AzUuid}/enable HTTP/1.1
-Host: api.yourchimestack.com:8801
+PUT /v1/az/string/enable HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -1409,8 +1405,6 @@ This will enable an available az.
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ## Cluster
@@ -1422,15 +1416,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az/string/cluster HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /az/{AzUuid}/cluster`
 
-*Lists clusters*
+*lists clusters*
 
 This will show clusters
 
@@ -1498,8 +1493,6 @@ This will show clusters
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createCluster
@@ -1509,16 +1502,19 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/az/string/cluster HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 101
 
+{"arch":"x86_64","description":"a cluster example","hypervisor_type":"kvm","name":"default","type":0}
 ```
 
 `POST /az/{AzUuid}/cluster`
 
-*create a cluster in a specified Az*
+*create a cluster*
 
 This will create a cluster in a specified Az
 
@@ -1526,10 +1522,10 @@ This will create a cluster in a specified Az
 
 ```json
 {
-  "arch": "string",
-  "description": "string",
-  "hypervisor_type": "string",
-  "name": "string",
+  "arch": "x86_64",
+  "description": "a cluster example",
+  "hypervisor_type": "kvm",
+  "name": "default",
   "type": 0
 }
 ```
@@ -1574,8 +1570,6 @@ This will create a cluster in a specified Az
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getCluster
@@ -1585,15 +1579,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az/string/cluster/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /az/{AzUuid}/cluster/{ClusterUuid}`
 
-*describe a cluster*
+*get a cluster's detailed information*
 
 This will describe a cluster
 
@@ -1637,8 +1632,6 @@ This will describe a cluster
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteCluster
@@ -1648,9 +1641,10 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/az/string/cluster/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -1687,8 +1681,6 @@ This will delete a cluster
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### updateCluster
@@ -1698,11 +1690,14 @@ api_key
 > Code samples
 
 ```http
-PATCH http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+PATCH /v1/az/string/cluster/string HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 101
 
+{"arch":"x86_64","description":"a cluster example","hypervisor_type":"kvm","name":"default","type":0}
 ```
 
 `PATCH /az/{AzUuid}/cluster/{ClusterUuid}`
@@ -1715,10 +1710,10 @@ This will update a cluster.
 
 ```json
 {
-  "arch": "string",
-  "description": "string",
-  "hypervisor_type": "string",
-  "name": "string",
+  "arch": "x86_64",
+  "description": "a cluster example",
+  "hypervisor_type": "kvm",
+  "name": "default",
   "type": 0
 }
 ```
@@ -1753,8 +1748,6 @@ This will update a cluster.
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### disableCluster
@@ -1764,9 +1757,10 @@ api_key
 > Code samples
 
 ```http
-PUT http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/disable HTTP/1.1
-Host: api.yourchimestack.com:8801
+PUT /v1/az/string/cluster/string/disable HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -1805,8 +1799,6 @@ This will disable a cluster
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### enableCluster
@@ -1816,9 +1808,10 @@ api_key
 > Code samples
 
 ```http
-PUT http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/enable HTTP/1.1
-Host: api.yourchimestack.com:8801
+PUT /v1/az/string/cluster/string/enable HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -1857,8 +1850,6 @@ This will enable a cluster
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ## Host
@@ -1870,15 +1861,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/host HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az/string/cluster/string/host HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /az/{AzUuid}/cluster/{ClusterUuid}/host`
 
-*Lists hosts*
+*lists hosts*
 
 This will show hosts
 
@@ -1962,8 +1954,6 @@ This will show hosts
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createHost
@@ -1973,11 +1963,14 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/host HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/az/string/cluster/string/host HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 157
 
+{"cpu_ratio":2,"description":"a host example","memory_ratio":2,"reserved_memory":1073741824,"reserved_vcpus":1,"uuid":"a428263d-64a9-4653-8d7e-556c20c0d77a"}
 ```
 
 `POST /az/{AzUuid}/cluster/{ClusterUuid}/host`
@@ -1990,12 +1983,12 @@ This will create a host
 
 ```json
 {
-  "cpu_ratio": 0.1,
-  "description": "string",
-  "memory_ratio": 0.1,
-  "reserved_memory": 0,
-  "reserved_vcpus": 0,
-  "uuid": "string"
+  "cpu_ratio": 2,
+  "description": "a host example",
+  "memory_ratio": 2,
+  "reserved_memory": 1073741824,
+  "reserved_vcpus": 1,
+  "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a"
 }
 ```
 
@@ -2048,8 +2041,6 @@ This will create a host
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getHost
@@ -2059,15 +2050,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/host/{HostUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az/string/cluster/string/host/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /az/{AzUuid}/cluster/{ClusterUuid}/host/{HostUuid}`
 
-*describe a host*
+*get a host's detailed information*
 
 This will describe a host
 
@@ -2120,8 +2112,6 @@ This will describe a host
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteHost
@@ -2131,9 +2121,10 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/host/{HostUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/az/string/cluster/string/host/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -2171,8 +2162,6 @@ This will delete a host
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### updateHost
@@ -2182,11 +2171,14 @@ api_key
 > Code samples
 
 ```http
-PATCH http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/host/{HostUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+PATCH /v1/az/string/cluster/string/host/string HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 111
 
+{"cpu_ratio":2,"description":"a host example","memory_ratio":2,"reserved_memory":1073741824,"reserved_vcpus":1}
 ```
 
 `PATCH /az/{AzUuid}/cluster/{ClusterUuid}/host/{HostUuid}`
@@ -2199,11 +2191,11 @@ This will update a host.
 
 ```json
 {
-  "cpu_ratio": 0.1,
-  "description": "string",
-  "memory_ratio": 0.1,
-  "reserved_memory": 0,
-  "reserved_vcpus": 0
+  "cpu_ratio": 2,
+  "description": "a host example",
+  "memory_ratio": 2,
+  "reserved_memory": 1073741824,
+  "reserved_vcpus": 1
 }
 ```
 
@@ -2238,8 +2230,6 @@ This will update a host.
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### disableHost
@@ -2249,9 +2239,10 @@ api_key
 > Code samples
 
 ```http
-PUT http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/host/{HostUuid}/disable HTTP/1.1
-Host: api.yourchimestack.com:8801
+PUT /v1/az/string/cluster/string/host/string/disable HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -2291,8 +2282,6 @@ This will disable a host
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### enableHost
@@ -2302,9 +2291,10 @@ api_key
 > Code samples
 
 ```http
-PUT http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/host/{HostUuid}/enable HTTP/1.1
-Host: api.yourchimestack.com:8801
+PUT /v1/az/string/cluster/string/host/string/enable HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -2344,8 +2334,6 @@ This will enable a host
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### suspendHost
@@ -2355,9 +2343,10 @@ api_key
 > Code samples
 
 ```http
-PUT http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/host/{HostUuid}/suspend HTTP/1.1
-Host: api.yourchimestack.com:8801
+PUT /v1/az/string/cluster/string/host/string/suspend HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -2397,8 +2386,6 @@ This will suspend a host
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### listClient
@@ -2408,15 +2395,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/client HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/client HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /client`
 
-*Lists available client*
+*list clients*
 
 This will show available clients
 
@@ -2487,8 +2475,6 @@ This will show available clients
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getHostStatistic
@@ -2498,15 +2484,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/host_statistic HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/host_statistic HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /host_statistic`
 
-describe host inventory statistic
+get a host's usage statistical information
 
 <h3 id="gethoststatistic-parameters">Parameters</h3>
 
@@ -2534,8 +2521,6 @@ in:qeury
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ## InstanceSpec
@@ -2547,15 +2532,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/instance_spec_relation HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az/string/cluster/string/instance_spec_relation HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /az/{AzUuid}/cluster/{ClusterUuid}/instance_spec_relation`
 
-list instance spec relations
+list instance specifications registered in the cluster
 
 <h3 id="listclusterinstancespecrelation-parameters">Parameters</h3>
 
@@ -2626,8 +2612,6 @@ list instance spec relations
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createClusterInstanceSpecRelation
@@ -2637,22 +2621,25 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/instance_spec_relation HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/az/string/cluster/string/instance_spec_relation HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 61
 
+{"instance_spec_uuid":"cd047e9d-2720-4397-84e5-777e4a39a531"}
 ```
 
 `POST /az/{AzUuid}/cluster/{ClusterUuid}/instance_spec_relation`
 
-create new instance spec relation
+register an instance specification to a cluster
 
 > Body parameter
 
 ```json
 {
-  "instance_spec_uuid": "string"
+  "instance_spec_uuid": "cd047e9d-2720-4397-84e5-777e4a39a531"
 }
 ```
 
@@ -2690,8 +2677,6 @@ create new instance spec relation
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteClusterInstanceSpecRelation
@@ -2701,15 +2686,16 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/instance_spec_relation/{InstanceSpecUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/az/string/cluster/string/instance_spec_relation/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `DELETE /az/{AzUuid}/cluster/{ClusterUuid}/instance_spec_relation/{InstanceSpecUuid}`
 
-delete an instance spec relation
+unregister an instance specification from a cluster
 
 <h3 id="deleteclusterinstancespecrelation-parameters">Parameters</h3>
 
@@ -2739,8 +2725,6 @@ delete an instance spec relation
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### listInstanceSpec
@@ -2750,15 +2734,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/instance_spec HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/instance_spec HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /instance_spec`
 
-list instance specs
+list instance specifications
 
 <h3 id="listinstancespec-parameters">Parameters</h3>
 
@@ -2840,8 +2825,6 @@ list instance specs
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createInstanceSpec
@@ -2851,26 +2834,29 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/instance_spec HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/instance_spec HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 105
 
+{"description":"an instance specification example","memory":4294967296,"name":"Small","type":0,"vcpus":2}
 ```
 
 `POST /instance_spec`
 
-create an instance spec
+create an instance specification
 
 > Body parameter
 
 ```json
 {
-  "description": "string",
-  "memory": 0,
-  "name": "string",
+  "description": "an instance specification example",
+  "memory": 4294967296,
+  "name": "Small",
   "type": 0,
-  "vcpus": 0
+  "vcpus": 2
 }
 ```
 
@@ -2912,8 +2898,6 @@ create an instance spec
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getInstanceSpec
@@ -2923,15 +2907,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/instance_spec/{InstanceSpecUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/instance_spec/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /instance_spec/{InstanceSpecUuid}`
 
-describe an instance spec
+get an instance specification's detail information
 
 <h3 id="getinstancespec-parameters">Parameters</h3>
 
@@ -2971,8 +2956,6 @@ describe an instance spec
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteInstanceSpec
@@ -2982,15 +2965,16 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/instance_spec/{InstanceSpecUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/instance_spec/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `DELETE /instance_spec/{InstanceSpecUuid}`
 
-delete an instance spec
+delete an instance specification
 
 <h3 id="deleteinstancespec-parameters">Parameters</h3>
 
@@ -3018,8 +3002,6 @@ delete an instance spec
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### updateInstanceSpec
@@ -3029,26 +3011,29 @@ api_key
 > Code samples
 
 ```http
-PATCH http://api.yourchimestack.com:8801/v1/instance_spec/{InstanceSpecUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+PATCH /v1/instance_spec/string HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 105
 
+{"description":"an instance specification example","memory":4294967296,"name":"Small","type":0,"vcpus":2}
 ```
 
 `PATCH /instance_spec/{InstanceSpecUuid}`
 
-update instance spec
+update an instance specification
 
 > Body parameter
 
 ```json
 {
-  "description": "string",
-  "memory": 0,
-  "name": "string",
+  "description": "an instance specification example",
+  "memory": 4294967296,
+  "name": "Small",
   "type": 0,
-  "vcpus": 0
+  "vcpus": 2
 }
 ```
 
@@ -3081,8 +3066,6 @@ update instance spec
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ## Network
@@ -3094,9 +3077,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/network HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az/string/cluster/string/network HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -3157,8 +3141,6 @@ list networks
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createNetwork
@@ -3168,11 +3150,14 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/network HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/az/string/cluster/string/network HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 81
 
+{"description":"default network","interface_name":"ens224","name":"br1","type":0}
 ```
 
 `POST /az/{AzUuid}/cluster/{ClusterUuid}/network`
@@ -3183,9 +3168,9 @@ create a network
 
 ```json
 {
-  "description": "string",
-  "interface_name": "string",
-  "name": "string",
+  "description": "default network",
+  "interface_name": "ens224",
+  "name": "br1",
   "type": 0
 }
 ```
@@ -3232,8 +3217,6 @@ create a network
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getNetwork
@@ -3243,15 +3226,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/network/{NetworkUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az/string/cluster/string/network/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /az/{AzUuid}/cluster/{ClusterUuid}/network/{NetworkUuid}`
 
-describe a network
+get network's detailed information
 
 <h3 id="getnetwork-parameters">Parameters</h3>
 
@@ -3295,8 +3279,6 @@ describe a network
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteNetwork
@@ -3306,9 +3288,10 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/network/{NetworkUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/az/string/cluster/string/network/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -3344,8 +3327,6 @@ delete a network
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### updateNetwork
@@ -3355,11 +3336,14 @@ api_key
 > Code samples
 
 ```http
-PATCH http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/network/{NetworkUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+PATCH /v1/az/string/cluster/string/network/string HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 48
 
+{"description":"a network example","name":"br1"}
 ```
 
 `PATCH /az/{AzUuid}/cluster/{ClusterUuid}/network/{NetworkUuid}`
@@ -3370,8 +3354,8 @@ update a network
 
 ```json
 {
-  "description": "string",
-  "name": "string"
+  "description": "a network example",
+  "name": "br1"
 }
 ```
 
@@ -3406,8 +3390,6 @@ update a network
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### listSubnet
@@ -3417,9 +3399,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/network/{NetworkUuid}/subnet HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az/string/cluster/string/network/string/subnet HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -3480,8 +3463,6 @@ list subnets
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createSubnet
@@ -3491,11 +3472,14 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/network/{NetworkUuid}/subnet HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/az/string/cluster/string/network/string/subnet HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 166
 
+{"cidr":"192.168.231.1/24","description":"a subnet example","gateway":"192.168.231.2","name":"subnet1","reserved_ips":"192.168.231.254,192.168.231.1-192.168.231.100"}
 ```
 
 `POST /az/{AzUuid}/cluster/{ClusterUuid}/network/{NetworkUuid}/subnet`
@@ -3506,11 +3490,11 @@ create a subnet
 
 ```json
 {
-  "cidr": "string",
-  "description": "string",
-  "gateway": "string",
-  "name": "string",
-  "reserved_ips": "string"
+  "cidr": "192.168.231.1/24",
+  "description": "a subnet example",
+  "gateway": "192.168.231.2",
+  "name": "subnet1",
+  "reserved_ips": "192.168.231.254,192.168.231.1-192.168.231.100"
 }
 ```
 
@@ -3557,8 +3541,6 @@ create a subnet
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getSubnet
@@ -3568,15 +3550,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/network/{NetworkUuid}/subnet/{SubnetUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az/string/cluster/string/network/string/subnet/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /az/{AzUuid}/cluster/{ClusterUuid}/network/{NetworkUuid}/subnet/{SubnetUuid}`
 
-describe a subnet
+get a subnet's detailed information
 
 <h3 id="getsubnet-parameters">Parameters</h3>
 
@@ -3621,8 +3604,6 @@ describe a subnet
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteSubnet
@@ -3632,9 +3613,10 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/network/{NetworkUuid}/subnet/{SubnetUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/az/string/cluster/string/network/string/subnet/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -3671,8 +3653,6 @@ delete a subnet
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### updateSubnet
@@ -3682,11 +3662,14 @@ api_key
 > Code samples
 
 ```http
-PATCH http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/network/{NetworkUuid}/subnet/{SubnetUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+PATCH /v1/az/string/cluster/string/network/string/subnet/string HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 166
 
+{"cidr":"192.168.231.1/24","description":"a subnet example","gateway":"192.168.231.2","name":"subnet1","reserved_ips":"192.168.231.254,192.168.231.1-192.168.231.100"}
 ```
 
 `PATCH /az/{AzUuid}/cluster/{ClusterUuid}/network/{NetworkUuid}/subnet/{SubnetUuid}`
@@ -3697,11 +3680,11 @@ update a subnet
 
 ```json
 {
-  "cidr": "string",
-  "description": "string",
-  "gateway": "string",
-  "name": "string",
-  "reserved_ips": "string"
+  "cidr": "192.168.231.1/24",
+  "description": "a subnet example",
+  "gateway": "192.168.231.2",
+  "name": "subnet1",
+  "reserved_ips": "192.168.231.254,192.168.231.1-192.168.231.100"
 }
 ```
 
@@ -3737,8 +3720,6 @@ update a subnet
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### listNic
@@ -3748,15 +3729,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/nic HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/nic HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /nic`
 
-list nics
+list network interfaces
 
 <h3 id="listnic-parameters">Parameters</h3>
 
@@ -3815,8 +3797,6 @@ list nics
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createNic
@@ -3826,26 +3806,29 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/nic HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/nic HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 146
 
+{"description":"a network interface example","ip":"192.168.231.20","name":"nic1","primary":0,"subnet_uuid":"e73efdf7-d232-4556-ba95-3851100a47b7"}
 ```
 
 `POST /nic`
 
-create a nic
+create a network interface
 
 > Body parameter
 
 ```json
 {
-  "description": "string",
-  "ip": "string",
-  "name": "string",
+  "description": "a network interface example",
+  "ip": "192.168.231.20",
+  "name": "nic1",
   "primary": 0,
-  "subnet_uuid": "string"
+  "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7"
 }
 ```
 
@@ -3895,8 +3878,6 @@ create a nic
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getNic
@@ -3906,15 +3887,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/nic/{NicUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/nic/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /nic/{NicUuid}`
 
-describe nic
+get a network interface's detailed information
 
 <h3 id="getnic-parameters">Parameters</h3>
 
@@ -3962,8 +3944,6 @@ describe nic
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteNic
@@ -3973,15 +3953,16 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/nic/{NicUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/nic/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `DELETE /nic/{NicUuid}`
 
-delete a nic
+delete a network interface
 
 <h3 id="deletenic-parameters">Parameters</h3>
 
@@ -4010,8 +3991,6 @@ delete a nic
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### updateNic
@@ -4021,23 +4000,26 @@ api_key
 > Code samples
 
 ```http
-PATCH http://api.yourchimestack.com:8801/v1/nic/{NicUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+PATCH /v1/nic/string HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 59
 
+{"description":"a network interface example","name":"nic1"}
 ```
 
 `PATCH /nic/{NicUuid}`
 
-update a nic
+update a network interface
 
 > Body parameter
 
 ```json
 {
-  "description": "string",
-  "name": "string"
+  "description": "a network interface example",
+  "name": "nic1"
 }
 ```
 
@@ -4070,8 +4052,6 @@ update a nic
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getNicStatistic
@@ -4081,15 +4061,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/nic_statistic HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/nic_statistic HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /nic_statistic`
 
-describe nic statistic
+get a newwork interface's statistical information
 
 > Example responses
 
@@ -4101,8 +4082,6 @@ describe nic statistic
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ## StoragePool
@@ -4114,9 +4093,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/storage_pool HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az/string/cluster/string/storage_pool HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -4180,8 +4160,6 @@ list storage pools
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createStoragePool
@@ -4191,11 +4169,14 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/storage_pool HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/az/string/cluster/string/storage_pool HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 205
 
+{"backend_path":"/chime/backend","description":"a storage pool example","image_cache_path":"/chime/cache","name":"local storage pool","physical_size":107374182400,"reserved_size":0,"size_ratio":2,"type":0}
 ```
 
 `POST /az/{AzUuid}/cluster/{ClusterUuid}/storage_pool`
@@ -4206,13 +4187,13 @@ create a storage pool
 
 ```json
 {
-  "backend_path": "string",
-  "description": "string",
-  "image_cache_path": "string",
-  "name": "string",
-  "physical_size": 0,
+  "backend_path": "/chime/backend",
+  "description": "a storage pool example",
+  "image_cache_path": "/chime/cache",
+  "name": "local storage pool",
+  "physical_size": 107374182400,
   "reserved_size": 0,
-  "size_ratio": 0.1,
+  "size_ratio": 2,
   "type": 0
 }
 ```
@@ -4263,8 +4244,6 @@ create a storage pool
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getStoragePool
@@ -4274,15 +4253,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/storage_pool/{StoragePoolUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az/string/cluster/string/storage_pool/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /az/{AzUuid}/cluster/{ClusterUuid}/storage_pool/{StoragePoolUuid}`
 
-describe a storage pool
+get a storage pool's detailed information
 
 <h3 id="getstoragepool-parameters">Parameters</h3>
 
@@ -4330,8 +4310,6 @@ describe a storage pool
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteStoragePool
@@ -4341,9 +4319,10 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/storage_pool/{StoragePoolUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/az/string/cluster/string/storage_pool/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -4379,8 +4358,6 @@ delete a storage pool
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### updateStoragePool
@@ -4390,11 +4367,14 @@ api_key
 > Code samples
 
 ```http
-PATCH http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/storage_pool/{StoragePoolUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+PATCH /v1/az/string/cluster/string/storage_pool/string HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 205
 
+{"backend_path":"/chime/backend","description":"a storage pool example","image_cache_path":"/chime/cache","name":"local storage pool","physical_size":107374182400,"reserved_size":0,"size_ratio":2,"type":0}
 ```
 
 `PATCH /az/{AzUuid}/cluster/{ClusterUuid}/storage_pool/{StoragePoolUuid}`
@@ -4405,13 +4385,13 @@ update a storage pool
 
 ```json
 {
-  "backend_path": "string",
-  "description": "string",
-  "image_cache_path": "string",
-  "name": "string",
-  "physical_size": 0,
+  "backend_path": "/chime/backend",
+  "description": "a storage pool example",
+  "image_cache_path": "/chime/cache",
+  "name": "local storage pool",
+  "physical_size": 107374182400,
   "reserved_size": 0,
-  "size_ratio": 0.1,
+  "size_ratio": 2,
   "type": 0
 }
 ```
@@ -4447,8 +4427,6 @@ update a storage pool
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### listStoragePoolAll
@@ -4458,9 +4436,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/storage_pool HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/storage_pool HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -4490,8 +4469,6 @@ list all storage pools
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getStoragePoolStatistic
@@ -4501,15 +4478,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/storage_pool_statistic HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/storage_pool_statistic HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /storage_pool_statistic`
 
-describe storage pool inventory statistic
+get a storage pool's usage statistical information
 
 <h3 id="getstoragepoolstatistic-parameters">Parameters</h3>
 
@@ -4537,8 +4515,6 @@ in:qeury
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ## Volume
@@ -4550,9 +4526,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/volume HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az/string/cluster/string/volume HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -4630,8 +4607,6 @@ list volumes
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createVolume
@@ -4641,28 +4616,31 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/volume HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/az/string/cluster/string/volume HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 245
 
+{"description":"a volume example","host_uuid":"a4824bcd-1112-449d-8d3e-3ff8b1323d9e","image_uuid":"f9600f11-cb97-4ed7-90ab-0928a089b129","name":"test-volume","root":0,"size":107374182400,"volume_spec_uuid":"af52a0fe-f1fc-483c-9197-aead9786a73a"}
 ```
 
 `POST /az/{AzUuid}/cluster/{ClusterUuid}/volume`
 
-create new volume
+create a volume
 
 > Body parameter
 
 ```json
 {
-  "description": "string",
-  "host_uuid": "string",
-  "image_uuid": "string",
-  "name": "string",
+  "description": "a volume example",
+  "host_uuid": "a4824bcd-1112-449d-8d3e-3ff8b1323d9e",
+  "image_uuid": "f9600f11-cb97-4ed7-90ab-0928a089b129",
+  "name": "test-volume",
   "root": 0,
-  "size": 0,
-  "volume_spec_uuid": "string"
+  "size": 107374182400,
+  "volume_spec_uuid": "af52a0fe-f1fc-483c-9197-aead9786a73a"
 }
 ```
 
@@ -4725,8 +4703,6 @@ create new volume
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getVolume
@@ -4736,15 +4712,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/volume/{VolumeUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az/string/cluster/string/volume/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /az/{AzUuid}/cluster/{ClusterUuid}/volume/{VolumeUuid}`
 
-describe a volume
+get a volume's detailed information
 
 <h3 id="getvolume-parameters">Parameters</h3>
 
@@ -4805,8 +4782,6 @@ describe a volume
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteVolume
@@ -4816,9 +4791,10 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/volume/{VolumeUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/az/string/cluster/string/volume/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -4855,8 +4831,6 @@ delete a volume
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### updateVolume
@@ -4866,11 +4840,14 @@ api_key
 > Code samples
 
 ```http
-PATCH http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/volume/{VolumeUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+PATCH /v1/az/string/cluster/string/volume/string HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 55
 
+{"description":"a volume example","name":"test-volume"}
 ```
 
 `PATCH /az/{AzUuid}/cluster/{ClusterUuid}/volume/{VolumeUuid}`
@@ -4881,8 +4858,8 @@ update a volume
 
 ```json
 {
-  "description": "string",
-  "name": "string"
+  "description": "a volume example",
+  "name": "test-volume"
 }
 ```
 
@@ -4917,8 +4894,6 @@ update a volume
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### listSnapshot
@@ -4928,9 +4903,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/snapshot HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/snapshot HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -4960,8 +4936,6 @@ list all snapshots
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### listVolumeSnapshot
@@ -4971,15 +4945,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/volume/{VolumeUuid}/snapshot HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/volume/string/snapshot HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /volume/{VolumeUuid}/snapshot`
 
-list snapshots of a volume
+list snapshots belong to the volume
 
 <h3 id="listvolumesnapshot-parameters">Parameters</h3>
 
@@ -5030,8 +5005,6 @@ list snapshots of a volume
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createSnapshot
@@ -5041,11 +5014,14 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/volume/{VolumeUuid}/snapshot HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/volume/string/snapshot HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 59
 
+{"description":"a snapshot example","name":"test-snapshot"}
 ```
 
 `POST /volume/{VolumeUuid}/snapshot`
@@ -5056,8 +5032,8 @@ create a snapshot
 
 ```json
 {
-  "description": "string",
-  "name": "string"
+  "description": "a snapshot example",
+  "name": "test-snapshot"
 }
 ```
 
@@ -5101,8 +5077,6 @@ create a snapshot
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getSnapshot
@@ -5112,15 +5086,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/volume/{VolumeUuid}/snapshot/{SnapshotUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/volume/string/snapshot/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /volume/{VolumeUuid}/snapshot/{SnapshotUuid}`
 
-get a snapshot
+get a snapshot's detail information
 
 <h3 id="getsnapshot-parameters">Parameters</h3>
 
@@ -5162,8 +5137,6 @@ get a snapshot
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteSnapshot
@@ -5173,9 +5146,10 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/volume/{VolumeUuid}/snapshot/{SnapshotUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/volume/string/snapshot/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -5210,8 +5184,6 @@ delete a snapshot
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### updateSnapshot
@@ -5221,11 +5193,14 @@ api_key
 > Code samples
 
 ```http
-PATCH http://api.yourchimestack.com:8801/v1/volume/{VolumeUuid}/snapshot/{SnapshotUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+PATCH /v1/volume/string/snapshot/string HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 59
 
+{"description":"a snapshot example","name":"test-snapshot"}
 ```
 
 `PATCH /volume/{VolumeUuid}/snapshot/{SnapshotUuid}`
@@ -5236,8 +5211,8 @@ update a snapshot
 
 ```json
 {
-  "description": "string",
-  "name": "string"
+  "description": "a snapshot example",
+  "name": "test-snapshot"
 }
 ```
 
@@ -5271,8 +5246,6 @@ update a snapshot
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### restoreVolume
@@ -5282,9 +5255,10 @@ api_key
 > Code samples
 
 ```http
-PUT http://api.yourchimestack.com:8801/v1/volume/{VolumeUuid}/snapshot/{SnapshotUuid}/restore HTTP/1.1
-Host: api.yourchimestack.com:8801
+PUT /v1/volume/string/snapshot/string/restore HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -5350,8 +5324,6 @@ restore volume from a snapshot
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getVolumeStatistic
@@ -5361,15 +5333,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/volume_statistic HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/volume_statistic HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /volume_statistic`
 
-describe volume statistic
+get a volume's usage statistical information
 
 > Example responses
 
@@ -5381,8 +5354,6 @@ describe volume statistic
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ## VolumeSpec
@@ -5394,15 +5365,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/volume_spec_relation HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/az/string/cluster/string/volume_spec_relation HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /az/{AzUuid}/cluster/{ClusterUuid}/volume_spec_relation`
 
-list volume spec relations
+list volume specifications
 
 <h3 id="listclustervolumespecrelation-parameters">Parameters</h3>
 
@@ -5477,8 +5449,6 @@ list volume spec relations
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createClusterVolumeSpecRelation
@@ -5488,22 +5458,25 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/volume_spec_relation HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/az/string/cluster/string/volume_spec_relation HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 59
 
+{"volume_spec_uuid":"af52a0fe-f1fc-483c-9197-aead9786a73a"}
 ```
 
 `POST /az/{AzUuid}/cluster/{ClusterUuid}/volume_spec_relation`
 
-create new volume spec relation
+register a volume specification to the cluster
 
 > Body parameter
 
 ```json
 {
-  "volume_spec_uuid": "string"
+  "volume_spec_uuid": "af52a0fe-f1fc-483c-9197-aead9786a73a"
 }
 ```
 
@@ -5541,8 +5514,6 @@ create new volume spec relation
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteClusterVolumeSpecRelation
@@ -5552,15 +5523,16 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/az/{AzUuid}/cluster/{ClusterUuid}/volume_spec_relation/{VolumeSpecUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/az/string/cluster/string/volume_spec_relation/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `DELETE /az/{AzUuid}/cluster/{ClusterUuid}/volume_spec_relation/{VolumeSpecUuid}`
 
-delete an volume spec relation
+unregister a volume specification from the cluster
 
 <h3 id="deleteclustervolumespecrelation-parameters">Parameters</h3>
 
@@ -5590,8 +5562,6 @@ delete an volume spec relation
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### listVolumeSpec
@@ -5601,15 +5571,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/volume_spec HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/volume_spec HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /volume_spec`
 
-list volume specs
+list volume specifications
 
 <h3 id="listvolumespec-parameters">Parameters</h3>
 
@@ -5695,8 +5666,6 @@ list volume specs
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createVolumeSpec
@@ -5706,30 +5675,33 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/volume_spec HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/volume_spec HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 253
 
+{"description":"a volume specification example","max_iops":10000,"max_throughput":524288000,"min_iops":1000,"min_throughput":52428800,"name":"Standard","step_iops":100,"step_throughput":5242880,"storage_pool_uuid":"f5165a18-e6b3-42b4-8efc-ad496f318a0a"}
 ```
 
 `POST /volume_spec`
 
-create a volume spec
+create a volume specification
 
 > Body parameter
 
 ```json
 {
-  "description": "string",
-  "max_iops": 0,
-  "max_throughput": 0,
-  "min_iops": 0,
-  "min_throughput": 0,
-  "name": "string",
-  "step_iops": 0,
-  "step_throughput": 0,
-  "storage_pool_uuid": "string"
+  "description": "a volume specification example",
+  "max_iops": 10000,
+  "max_throughput": 524288000,
+  "min_iops": 1000,
+  "min_throughput": 52428800,
+  "name": "Standard",
+  "step_iops": 100,
+  "step_throughput": 5242880,
+  "storage_pool_uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a"
 }
 ```
 
@@ -5776,8 +5748,6 @@ create a volume spec
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getVolumeSpec
@@ -5787,15 +5757,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/volume_spec/{VolumeSpecUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/volume_spec/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /volume_spec/{VolumeSpecUuid}`
 
-describe a volume spec
+get a volume specification's detailed information
 
 <h3 id="getvolumespec-parameters">Parameters</h3>
 
@@ -5840,8 +5811,6 @@ describe a volume spec
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteVolumeSpec
@@ -5851,15 +5820,16 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/volume_spec/{VolumeSpecUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/volume_spec/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `DELETE /volume_spec/{VolumeSpecUuid}`
 
-delete a volume spec
+delete a volume specification
 
 <h3 id="deletevolumespec-parameters">Parameters</h3>
 
@@ -5887,8 +5857,6 @@ delete a volume spec
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### updateVolumeSpec
@@ -5898,30 +5866,33 @@ api_key
 > Code samples
 
 ```http
-PATCH http://api.yourchimestack.com:8801/v1/volume_spec/{VolumeSpecUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+PATCH /v1/volume_spec/string HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 253
 
+{"description":"a volume specification example","max_iops":10000,"max_throughput":524288000,"min_iops":1000,"min_throughput":52428800,"name":"Standard","step_iops":100,"step_throughput":5242880,"storage_pool_uuid":"f5165a18-e6b3-42b4-8efc-ad496f318a0a"}
 ```
 
 `PATCH /volume_spec/{VolumeSpecUuid}`
 
-update volume spec
+update volume specification
 
 > Body parameter
 
 ```json
 {
-  "description": "string",
-  "max_iops": 0,
-  "max_throughput": 0,
-  "min_iops": 0,
-  "min_throughput": 0,
-  "name": "string",
-  "step_iops": 0,
-  "step_throughput": 0,
-  "storage_pool_uuid": "string"
+  "description": "a volume specification example",
+  "max_iops": 10000,
+  "max_throughput": 524288000,
+  "min_iops": 1000,
+  "min_throughput": 52428800,
+  "name": "Standard",
+  "step_iops": 100,
+  "step_throughput": 5242880,
+  "storage_pool_uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a"
 }
 ```
 
@@ -5954,8 +5925,6 @@ update volume spec
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ## Config
@@ -5967,15 +5936,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/config?Token=string HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/config?Token=string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /config`
 
-get server config
+get server's configuration information
 
 <h3 id="getconfig-parameters">Parameters</h3>
 
@@ -5994,8 +5964,6 @@ get server config
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ## Image
@@ -6007,9 +5975,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/image HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/image HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -6075,8 +6044,6 @@ list images
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createPublicImage
@@ -6086,11 +6053,14 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/image/public HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/image/public HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 209
 
+{"boot_type":"legacy","description":"centos image","format":"qcow2","install_url":"sftp://username:password@host:/path","name":"centos","os_arch":"x86_64","os_detail":"CentOS 8.5","os_type":"Linux","shared":0}
 ```
 
 `POST /image/public`
@@ -6101,14 +6071,14 @@ create a public image
 
 ```json
 {
-  "boot_type": "string",
-  "description": "string",
-  "format": "string",
-  "install_url": "string",
-  "name": "string",
-  "os_arch": "string",
-  "os_detail": "string",
-  "os_type": "string",
+  "boot_type": "legacy",
+  "description": "centos image",
+  "format": "qcow2",
+  "install_url": "sftp://username:password@host:/path",
+  "name": "centos",
+  "os_arch": "x86_64",
+  "os_detail": "CentOS 8.5",
+  "os_type": "Linux",
   "shared": 0
 }
 ```
@@ -6157,8 +6127,6 @@ create a public image
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createUserImage
@@ -6168,11 +6136,14 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/image/user HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/image/user HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 209
 
+{"boot_type":"legacy","description":"centos image","format":"qcow2","install_url":"sftp://username:password@host:/path","name":"centos","os_arch":"x86_64","os_detail":"CentOS 8.5","os_type":"Linux","shared":0}
 ```
 
 `POST /image/user`
@@ -6183,14 +6154,14 @@ create a user's private image
 
 ```json
 {
-  "boot_type": "string",
-  "description": "string",
-  "format": "string",
-  "install_url": "string",
-  "name": "string",
-  "os_arch": "string",
-  "os_detail": "string",
-  "os_type": "string",
+  "boot_type": "legacy",
+  "description": "centos image",
+  "format": "qcow2",
+  "install_url": "sftp://username:password@host:/path",
+  "name": "centos",
+  "os_arch": "x86_64",
+  "os_detail": "CentOS 8.5",
+  "os_type": "Linux",
   "shared": 0
 }
 ```
@@ -6239,8 +6210,6 @@ create a user's private image
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getImage
@@ -6250,9 +6219,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/image/{ImageUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/image/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -6304,8 +6274,6 @@ get an image's detailed information
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteImage
@@ -6315,9 +6283,10 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/image/{ImageUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/image/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -6351,8 +6320,6 @@ delete an image
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### updateImage
@@ -6362,11 +6329,14 @@ api_key
 > Code samples
 
 ```http
-PATCH http://api.yourchimestack.com:8801/v1/image/{ImageUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+PATCH /v1/image/string HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 157
 
+{"boot_type":"legacy","description":"centos image","format":"qcow2","name":"centos","os_arch":"x86_64","os_detail":"CentOS 8.5","os_type":"Linux","shared":0}
 ```
 
 `PATCH /image/{ImageUuid}`
@@ -6377,13 +6347,13 @@ update an image's information
 
 ```json
 {
-  "boot_type": "string",
-  "description": "string",
-  "format": "string",
-  "name": "string",
-  "os_arch": "string",
-  "os_detail": "string",
-  "os_type": "string",
+  "boot_type": "legacy",
+  "description": "centos image",
+  "format": "qcow2",
+  "name": "centos",
+  "os_arch": "x86_64",
+  "os_detail": "CentOS 8.5",
+  "os_type": "Linux",
   "shared": 0
 }
 ```
@@ -6417,8 +6387,6 @@ update an image's information
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getImageStatistic
@@ -6428,9 +6396,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/image_statistic HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/image_statistic HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -6449,8 +6418,6 @@ get s3-inventory's statistical information
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### listImageBucket
@@ -6460,9 +6427,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/imagebucket HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/imagebucket HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -6540,8 +6508,6 @@ list image buckets
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createImageBucket
@@ -6551,11 +6517,14 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/imagebucket HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/imagebucket HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 87
 
+{"bucket_name":"public","description":"a public image bucket","name":"public","type":0}
 ```
 
 `POST /imagebucket`
@@ -6566,9 +6535,9 @@ create an image bucket
 
 ```json
 {
-  "bucket_name": "string",
-  "description": "string",
-  "name": "string",
+  "bucket_name": "public",
+  "description": "a public image bucket",
+  "name": "public",
   "type": 0
 }
 ```
@@ -6611,8 +6580,6 @@ create an image bucket
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getImageBucket
@@ -6622,9 +6589,10 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/imagebucket/{ImageBucketUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/imagebucket/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -6670,8 +6638,6 @@ get an image bucket's detailed information
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteImageBucket
@@ -6681,9 +6647,10 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/imagebucket/{ImageBucketUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/imagebucket/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
@@ -6708,8 +6675,6 @@ delete an image bucket
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ## Metrics
@@ -6721,15 +6686,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/cpu?range=0&window=0&vm_uuid=string HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/metrics/cpu?range=0&window=0&vm_uuid=string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /metrics/cpu`
 
-get vm cpu statistics
+get virtual machime's cpu usage statistical information
 
 <h3 id="getcpustats-parameters">Parameters</h3>
 
@@ -6750,8 +6716,6 @@ get vm cpu statistics
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getDiskIOStats
@@ -6761,15 +6725,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/disk_io?range=0&window=0&vm_uuid=string HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/metrics/disk_io?range=0&window=0&vm_uuid=string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /metrics/disk_io`
 
-get vm disk i/o statistics
+get virtual machine's disk i/o statistical information
 
 <h3 id="getdiskiostats-parameters">Parameters</h3>
 
@@ -6790,8 +6755,6 @@ get vm disk i/o statistics
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getInterfaceNetIOStats
@@ -6801,15 +6764,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/interface_net_io?range=0&window=0&interface_uuid=string HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/metrics/interface_net_io?range=0&window=0&interface_uuid=string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /metrics/interface_net_io`
 
-get interface net i/o statistics
+get network interface's i/o statistical information
 
 <h3 id="getinterfacenetiostats-parameters">Parameters</h3>
 
@@ -6830,8 +6794,6 @@ get interface net i/o statistics
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getMemoryStats
@@ -6841,15 +6803,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/memory?range=0&window=0&vm_uuid=string HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/metrics/memory?range=0&window=0&vm_uuid=string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /metrics/memory`
 
-get vm memory statistics
+get virtual machine's memory usage statistical information
 
 <h3 id="getmemorystats-parameters">Parameters</h3>
 
@@ -6870,8 +6833,6 @@ get vm memory statistics
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getNetIOStats
@@ -6881,15 +6842,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/net_io?range=0&window=0&vm_uuid=string HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/metrics/net_io?range=0&window=0&vm_uuid=string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /metrics/net_io`
 
-get vm network i/o statistics
+get virtual machine's network i/o statistical information
 
 <h3 id="getnetiostats-parameters">Parameters</h3>
 
@@ -6910,8 +6872,6 @@ get vm network i/o statistics
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getTotalCpuStats
@@ -6921,15 +6881,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/total_cpu?range=0&window=0 HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/metrics/total_cpu?range=0&window=0 HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /metrics/total_cpu`
 
-get total cpu statistics
+get the overall cpu's usage statistical information
 
 <h3 id="gettotalcpustats-parameters">Parameters</h3>
 
@@ -6949,8 +6910,6 @@ get total cpu statistics
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getTotalDiskIOStats
@@ -6960,15 +6919,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/total_disk_io?range=0&window=0 HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/metrics/total_disk_io?range=0&window=0 HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /metrics/total_disk_io`
 
-get total disk i/o statistics
+get the overall storage i/o statistical information
 
 <h3 id="gettotaldiskiostats-parameters">Parameters</h3>
 
@@ -6988,8 +6948,6 @@ get total disk i/o statistics
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getTotalMemoryStats
@@ -6999,15 +6957,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/total_memory?range=0&window=0 HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/metrics/total_memory?range=0&window=0 HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /metrics/total_memory`
 
-get total memory statistics
+get the overall memory's usage statistical information
 
 <h3 id="gettotalmemorystats-parameters">Parameters</h3>
 
@@ -7027,8 +6986,6 @@ get total memory statistics
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getTotalNetIOStats
@@ -7038,15 +6995,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/total_net_io?range=0&window=0 HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/metrics/total_net_io?range=0&window=0 HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /metrics/total_net_io`
 
-get total network i/o statistics
+get the overall network i/o statistical information
 
 <h3 id="gettotalnetiostats-parameters">Parameters</h3>
 
@@ -7066,8 +7024,6 @@ get total network i/o statistics
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getUserCpuStats
@@ -7077,15 +7033,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/user_cpu?range=0&window=0 HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/metrics/user_cpu?range=0&window=0 HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /metrics/user_cpu`
 
-get user total cpu statistics
+get user's overall cpu usage statistical information
 
 <h3 id="getusercpustats-parameters">Parameters</h3>
 
@@ -7105,8 +7062,6 @@ get user total cpu statistics
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getUserMemoryStats
@@ -7116,15 +7071,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/user_memory?range=0&window=0 HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/metrics/user_memory?range=0&window=0 HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /metrics/user_memory`
 
-get user total memory statistics
+get user's overall memory usage statistical information
 
 <h3 id="getusermemorystats-parameters">Parameters</h3>
 
@@ -7144,8 +7100,6 @@ get user total memory statistics
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getVolumeDiskIOStats
@@ -7155,15 +7109,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/metrics/volume_disk_io?range=0&window=0&volume_uuid=string HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/metrics/volume_disk_io?range=0&window=0&volume_uuid=string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /metrics/volume_disk_io`
 
-get volume disk i/o statistics
+get volume's i/o statistical information
 
 <h3 id="getvolumediskiostats-parameters">Parameters</h3>
 
@@ -7184,8 +7139,6 @@ get volume disk i/o statistics
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ## Compute
@@ -7197,15 +7150,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/vm HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/vm HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /vm`
 
-list vms
+list virtual machines
 
 <h3 id="listvm-parameters">Parameters</h3>
 
@@ -7272,8 +7226,6 @@ list vms
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### createVm
@@ -7283,54 +7235,57 @@ api_key
 > Code samples
 
 ```http
-POST http://api.yourchimestack.com:8801/v1/vm HTTP/1.1
-Host: api.yourchimestack.com:8801
+POST /v1/vm HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 940
 
+{"az_uuid":"cbd2819b-b49a-47ad-9fa4-307774d97865","cdrom":{"bootable":1,"host_uuid":"a4824bcd-1112-449d-8d3e-3ff8b1323d9e","image_uuid":"f9600f11-cb97-4ed7-90ab-0928a089b129","name":"test-cdrom","volume_spec_uuid":"af52a0fe-f1fc-483c-9197-aead9786a73a"},"cluster_uuid":"65bbc21f-0289-4bbf-9517-6b8da9688774","description":"a virutal machine example","host_uuid":"a428263d-64a9-4653-8d7e-556c20c0d77a","instance_spec_uuid":"cd047e9d-2720-4397-84e5-777e4a39a531","name":"test-vm","nics":[{"description":"a network interface example","ip":"192.168.231.20","name":"nic1","primary":0,"subnet_uuid":"e73efdf7-d232-4556-ba95-3851100a47b7"}],"password":"chime123","vnc_password":"chime123","volumes":[{"description":"a volume example","host_uuid":"a4824bcd-1112-449d-8d3e-3ff8b1323d9e","image_uuid":"f9600f11-cb97-4ed7-90ab-0928a089b129","name":"test-volume","root":0,"size":107374182400,"volume_spec_uuid":"af52a0fe-f1fc-483c-9197-aead9786a73a"}]}
 ```
 
 `POST /vm`
 
-create a vm
+create a virtual machine
 
 > Body parameter
 
 ```json
 {
-  "az_uuid": "string",
+  "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
   "cdrom": {
-    "bootable": 0,
-    "host_uuid": "string",
-    "image_uuid": "string",
-    "name": "string",
-    "volume_spec_uuid": "string"
+    "bootable": 1,
+    "host_uuid": "a4824bcd-1112-449d-8d3e-3ff8b1323d9e",
+    "image_uuid": "f9600f11-cb97-4ed7-90ab-0928a089b129",
+    "name": "test-cdrom",
+    "volume_spec_uuid": "af52a0fe-f1fc-483c-9197-aead9786a73a"
   },
-  "cluster_uuid": "string",
-  "description": "string",
-  "host_uuid": "string",
-  "instance_spec_uuid": "string",
-  "name": "string",
+  "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+  "description": "a virutal machine example",
+  "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+  "instance_spec_uuid": "cd047e9d-2720-4397-84e5-777e4a39a531",
+  "name": "test-vm",
   "nics": [
     {
-      "description": "string",
-      "ip": "string",
-      "name": "string",
+      "description": "a network interface example",
+      "ip": "192.168.231.20",
+      "name": "nic1",
       "primary": 0,
-      "subnet_uuid": "string"
+      "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7"
     }
   ],
-  "password": "string",
-  "vnc_password": "string",
+  "password": "chime123",
+  "vnc_password": "chime123",
   "volumes": [
     {
-      "description": "string",
-      "host_uuid": "string",
-      "image_uuid": "string",
-      "name": "string",
+      "description": "a volume example",
+      "host_uuid": "a4824bcd-1112-449d-8d3e-3ff8b1323d9e",
+      "image_uuid": "f9600f11-cb97-4ed7-90ab-0928a089b129",
+      "name": "test-volume",
       "root": 0,
-      "size": 0,
-      "volume_spec_uuid": "string"
+      "size": 107374182400,
+      "volume_spec_uuid": "af52a0fe-f1fc-483c-9197-aead9786a73a"
     }
   ]
 }
@@ -7469,8 +7424,6 @@ create a vm
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### describeVm
@@ -7480,15 +7433,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/vm/{VmUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/vm/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /vm/{VmUuid}`
 
-describe a vm
+get a virtual machine's detailed information
 
 <h3 id="describevm-parameters">Parameters</h3>
 
@@ -7593,8 +7547,6 @@ describe a vm
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### deleteVm
@@ -7604,15 +7556,16 @@ api_key
 > Code samples
 
 ```http
-DELETE http://api.yourchimestack.com:8801/v1/vm/{VmUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+DELETE /v1/vm/string HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `DELETE /vm/{VmUuid}`
 
-delete a vm
+delete a virtual machine
 
 <h3 id="deletevm-parameters">Parameters</h3>
 
@@ -7643,8 +7596,6 @@ delete a vm
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### updateVm
@@ -7654,23 +7605,26 @@ api_key
 > Code samples
 
 ```http
-PATCH http://api.yourchimestack.com:8801/v1/vm/{VmUuid} HTTP/1.1
-Host: api.yourchimestack.com:8801
+PATCH /v1/vm/string HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 60
 
+{"description":"a virtual machine example","name":"test-vm"}
 ```
 
 `PATCH /vm/{VmUuid}`
 
-update a vm
+update a virtual machine
 
 > Body parameter
 
 ```json
 {
-  "description": "string",
-  "name": "string"
+  "description": "a virtual machine example",
+  "name": "test-vm"
 }
 ```
 
@@ -7703,8 +7657,6 @@ update a vm
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### attachVolumeToVm
@@ -7714,22 +7666,25 @@ api_key
 > Code samples
 
 ```http
-PUT http://api.yourchimestack.com:8801/v1/vm/{VmUuid}/attach_disk HTTP/1.1
-Host: api.yourchimestack.com:8801
+PUT /v1/vm/string/attach_disk HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 54
 
+{"volume_uuid":"cd047e9d-2720-4397-84e5-777e4a39a531"}
 ```
 
 `PUT /vm/{VmUuid}/attach_disk`
 
-attach a volume to the vm
+attach a volume to the virtual machine
 
 > Body parameter
 
 ```json
 {
-  "volume_uuid": "string"
+  "volume_uuid": "cd047e9d-2720-4397-84e5-777e4a39a531"
 }
 ```
 
@@ -7762,8 +7717,6 @@ attach a volume to the vm
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### attachNicToVm
@@ -7773,22 +7726,25 @@ api_key
 > Code samples
 
 ```http
-PUT http://api.yourchimestack.com:8801/v1/vm/{VmUuid}/attach_nic HTTP/1.1
-Host: api.yourchimestack.com:8801
+PUT /v1/vm/string/attach_nic HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 51
 
+{"nic_uuid":"4be21239-293c-4989-b637-4df104f17caf"}
 ```
 
 `PUT /vm/{VmUuid}/attach_nic`
 
-attach a nic to the vm
+attach a network interface to the virtual machine
 
 > Body parameter
 
 ```json
 {
-  "nic_uuid": "string"
+  "nic_uuid": "4be21239-293c-4989-b637-4df104f17caf"
 }
 ```
 
@@ -7821,8 +7777,6 @@ attach a nic to the vm
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### detachVolumeFromVm
@@ -7832,22 +7786,25 @@ api_key
 > Code samples
 
 ```http
-PUT http://api.yourchimestack.com:8801/v1/vm/{VmUuid}/detach_disk HTTP/1.1
-Host: api.yourchimestack.com:8801
+PUT /v1/vm/string/detach_disk HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 54
 
+{"volume_uuid":"cd047e9d-2720-4397-84e5-777e4a39a531"}
 ```
 
 `PUT /vm/{VmUuid}/detach_disk`
 
-detach a volume from the vm
+detach a volume from the virtual machine
 
 > Body parameter
 
 ```json
 {
-  "volume_uuid": "string"
+  "volume_uuid": "cd047e9d-2720-4397-84e5-777e4a39a531"
 }
 ```
 
@@ -7880,8 +7837,6 @@ detach a volume from the vm
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### detachNicFromVm
@@ -7891,22 +7846,25 @@ api_key
 > Code samples
 
 ```http
-PUT http://api.yourchimestack.com:8801/v1/vm/{VmUuid}/detach_nic HTTP/1.1
-Host: api.yourchimestack.com:8801
+PUT /v1/vm/string/detach_nic HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 51
 
+{"nic_uuid":"4be21239-293c-4989-b637-4df104f17caf"}
 ```
 
 `PUT /vm/{VmUuid}/detach_nic`
 
-detach a nic from the vm
+detach a network interface from the virtual machine
 
 > Body parameter
 
 ```json
 {
-  "nic_uuid": "string"
+  "nic_uuid": "4be21239-293c-4989-b637-4df104f17caf"
 }
 ```
 
@@ -7939,8 +7897,6 @@ detach a nic from the vm
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### startVm
@@ -7950,15 +7906,16 @@ api_key
 > Code samples
 
 ```http
-PUT http://api.yourchimestack.com:8801/v1/vm/{VmUuid}/start HTTP/1.1
-Host: api.yourchimestack.com:8801
+PUT /v1/vm/string/start HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `PUT /vm/{VmUuid}/start`
 
-start a vm
+start a virtual machine
 
 <h3 id="startvm-parameters">Parameters</h3>
 
@@ -7988,8 +7945,6 @@ start a vm
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### stopVm
@@ -7999,15 +7954,16 @@ api_key
 > Code samples
 
 ```http
-PUT http://api.yourchimestack.com:8801/v1/vm/{VmUuid}/stop HTTP/1.1
-Host: api.yourchimestack.com:8801
+PUT /v1/vm/string/stop HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `PUT /vm/{VmUuid}/stop`
 
-stop a vm
+stop a virtual machine
 
 <h3 id="stopvm-parameters">Parameters</h3>
 
@@ -8037,8 +7993,6 @@ stop a vm
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getVmVnc
@@ -8048,15 +8002,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/vm/{VmUuid}/vnc HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/vm/string/vnc HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /vm/{VmUuid}/vnc`
 
-get a vm vnc information
+get a virtual machine's VNC connection information
 
 <h3 id="getvmvnc-parameters">Parameters</h3>
 
@@ -8075,8 +8030,6 @@ get a vm vnc information
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ### getVmStatistic
@@ -8086,15 +8039,16 @@ api_key
 > Code samples
 
 ```http
-GET http://api.yourchimestack.com:8801/v1/vm_statistic HTTP/1.1
-Host: api.yourchimestack.com:8801
+GET /v1/vm_statistic HTTP/1.1
 Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
 
 ```
 
 `GET /vm_statistic`
 
-describe vm statistic
+get a virtual machine's overall statistical information
 
 > Example responses
 
@@ -8107,8 +8061,6 @@ describe vm statistic
 |default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
 
 <aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
 </aside>
 
 ## Schema Reference
@@ -8122,7 +8074,7 @@ api_key
 
 ```json
 {
-  "comment": "string"
+  "comment": "accept the alert"
 }
 
 ```
@@ -8142,7 +8094,7 @@ api_key
 
 ```json
 {
-  "nic_uuid": "string"
+  "nic_uuid": "4be21239-293c-4989-b637-4df104f17caf"
 }
 
 ```
@@ -8151,7 +8103,7 @@ api_key
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|nic_uuid|string|false|none|the network interface's uuid|
+|nic_uuid|string|true|none|the network interface's uuid|
 
 ### AttachVolumeRequest
 <!-- backwards compatibility -->
@@ -8162,7 +8114,7 @@ api_key
 
 ```json
 {
-  "volume_uuid": "string"
+  "volume_uuid": "cd047e9d-2720-4397-84e5-777e4a39a531"
 }
 
 ```
@@ -8171,7 +8123,7 @@ api_key
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|volume_uuid|string|false|none|the virtual machine's uuid|
+|volume_uuid|string|true|none|the virtual machine's uuid|
 
 ### AuthRequest
 <!-- backwards compatibility -->
@@ -8191,7 +8143,7 @@ api_key
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|token|string|false|none|the authorized token string|
+|token|string|true|none|the authorized token string|
 
 ### CommonError
 <!-- backwards compatibility -->
@@ -8226,8 +8178,8 @@ api_key
 
 ```json
 {
-  "description": "string",
-  "name": "string",
+  "description": "an AZ example",
+  "name": "default",
   "parent": "string"
 }
 
@@ -8240,7 +8192,7 @@ az request
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |description|string|false|none|description for the AZ|
-|name|string|false|none|the AZ's name|
+|name|string|true|none|the AZ's name|
 |parent|string|false|none|none|
 
 ### CreateCdromRequest
@@ -8252,11 +8204,11 @@ az request
 
 ```json
 {
-  "bootable": 0,
-  "host_uuid": "string",
-  "image_uuid": "string",
-  "name": "string",
-  "volume_spec_uuid": "string"
+  "bootable": 1,
+  "host_uuid": "a4824bcd-1112-449d-8d3e-3ff8b1323d9e",
+  "image_uuid": "f9600f11-cb97-4ed7-90ab-0928a089b129",
+  "name": "test-cdrom",
+  "volume_spec_uuid": "af52a0fe-f1fc-483c-9197-aead9786a73a"
 }
 
 ```
@@ -8267,9 +8219,9 @@ az request
 |---|---|---|---|---|
 |bootable|integer(int64)|false|none|whether to boot the VM from the cdrom, default is 0 (not)|
 |host_uuid|string|false|none|the host's uuid|
-|image_uuid|string|false|none|the image's uuid|
-|name|string|false|none|the cdrom's name|
-|volume_spec_uuid|string|false|none|the volume specification's Uuid|
+|image_uuid|string|true|none|the image's uuid|
+|name|string|true|none|the cdrom's name|
+|volume_spec_uuid|string|true|none|the volume specification's Uuid|
 
 ### CreateClusterInstanceSpecRequest
 <!-- backwards compatibility -->
@@ -8280,7 +8232,7 @@ az request
 
 ```json
 {
-  "instance_spec_uuid": "string"
+  "instance_spec_uuid": "cd047e9d-2720-4397-84e5-777e4a39a531"
 }
 
 ```
@@ -8291,7 +8243,7 @@ cluster instance spec relation request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|instance_spec_uuid|string|false|none|the instance specification's Uuid|
+|instance_spec_uuid|string|true|none|the instance specification's Uuid|
 
 ### CreateClusterRequest
 <!-- backwards compatibility -->
@@ -8302,10 +8254,10 @@ cluster instance spec relation request
 
 ```json
 {
-  "arch": "string",
-  "description": "string",
-  "hypervisor_type": "string",
-  "name": "string",
+  "arch": "x86_64",
+  "description": "a cluster example",
+  "hypervisor_type": "kvm",
+  "name": "default",
   "type": 0
 }
 
@@ -8320,7 +8272,7 @@ cluster request
 |arch|string|false|none|the cluster's architecture, like x86_64, arm, ...|
 |description|string|false|none|description for the cluster|
 |hypervisor_type|string|false|none|the cluster's hypervisor type, like kvm (default), xen, ...|
-|name|string|false|none|the cluster's name|
+|name|string|true|none|the cluster's name|
 |type|integer(int64)|false|none|the cluster's type|
 
 ### CreateClusterVolumeSpecRequest
@@ -8332,7 +8284,7 @@ cluster request
 
 ```json
 {
-  "volume_spec_uuid": "string"
+  "volume_spec_uuid": "af52a0fe-f1fc-483c-9197-aead9786a73a"
 }
 
 ```
@@ -8343,7 +8295,7 @@ cluster volume spec relation request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|volume_spec_uuid|string|false|none|the volume specification's Uuid|
+|volume_spec_uuid|string|true|none|the volume specification's Uuid|
 
 ### CreateHostRequest
 <!-- backwards compatibility -->
@@ -8354,12 +8306,12 @@ cluster volume spec relation request
 
 ```json
 {
-  "cpu_ratio": 0.1,
-  "description": "string",
-  "memory_ratio": 0.1,
-  "reserved_memory": 0,
-  "reserved_vcpus": 0,
-  "uuid": "string"
+  "cpu_ratio": 2,
+  "description": "a host example",
+  "memory_ratio": 2,
+  "reserved_memory": 1073741824,
+  "reserved_vcpus": 1,
+  "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a"
 }
 
 ```
@@ -8375,7 +8327,7 @@ host request
 |memory_ratio|number(float)|false|none|the memory's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical memory in the node.|
 |reserved_memory|integer(int64)|false|none|the reserverd memory number, which will not be allocated to virtual machines.|
 |reserved_vcpus|integer(int64)|false|none|the reserverd CPU number, which will not be allocated to virtual machines.|
-|uuid|string|false|none|the host's Uuid|
+|uuid|string|true|none|the host's Uuid|
 
 ### CreateImageBucketRequest
 <!-- backwards compatibility -->
@@ -8386,9 +8338,9 @@ host request
 
 ```json
 {
-  "bucket_name": "string",
-  "description": "string",
-  "name": "string",
+  "bucket_name": "public",
+  "description": "a public image bucket",
+  "name": "public",
   "type": 0
 }
 
@@ -8402,7 +8354,7 @@ image bucket request
 |---|---|---|---|---|
 |bucket_name|string|false|none|the bucket's name from the S3's service|
 |description|string|false|none|description for the image bucket|
-|name|string|false|none|the image bucket's name|
+|name|string|true|none|the image bucket's name|
 |type|integer(int64)|false|none|the image bucket's type, can be 'private' or 'public'|
 
 ### CreateImageRequest
@@ -8414,14 +8366,14 @@ image bucket request
 
 ```json
 {
-  "boot_type": "string",
-  "description": "string",
-  "format": "string",
-  "install_url": "string",
-  "name": "string",
-  "os_arch": "string",
-  "os_detail": "string",
-  "os_type": "string",
+  "boot_type": "legacy",
+  "description": "centos image",
+  "format": "qcow2",
+  "install_url": "sftp://username:password@host:/path",
+  "name": "centos",
+  "os_arch": "x86_64",
+  "os_detail": "CentOS 8.5",
+  "os_type": "Linux",
   "shared": 0
 }
 
@@ -8434,8 +8386,8 @@ image bucket request
 |boot_type|string|false|none|the boot type of the image, can be UEFI or legacy|
 |description|string|false|none|description for the image|
 |format|string|false|none|the image's format, like raw, qcow2, ...|
-|install_url|string|false|none|the installation uri of the image to be fetched, it can be a sftp url or a file local path in the server's running node|
-|name|string|false|none|the image's name|
+|install_url|string|true|none|the installation uri of the image to be fetched, it can be a sftp url or a file local path in the server's running node|
+|name|string|true|none|the image's name|
 |os_arch|string|false|none|the architecture of the OS, like x86_64, arm, ...|
 |os_detail|string|false|none|the version of the OS, like CentOS 7, CentOS 8, ...|
 |os_type|string|false|none|the operation system's type, like Windows, Linux, ...|
@@ -8450,11 +8402,11 @@ image bucket request
 
 ```json
 {
-  "description": "string",
-  "memory": 0,
-  "name": "string",
+  "description": "an instance specification example",
+  "memory": 4294967296,
+  "name": "Small",
   "type": 0,
-  "vcpus": 0
+  "vcpus": 2
 }
 
 ```
@@ -8466,10 +8418,10 @@ instance spec request
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |description|string|false|none|description for the instance specification|
-|memory|integer(int64)|false|none|the number of memory|
-|name|string|false|none|the instance specification's name|
+|memory|integer(int64)|true|none|the number of memory|
+|name|string|true|none|the instance specification's name|
 |type|integer(int64)|false|none|the instance specification's type, 0: shared resource, 1: dedicated resource|
-|vcpus|integer(int64)|false|none|the number of vCPUs|
+|vcpus|integer(int64)|true|none|the number of vCPUs|
 
 ### CreateNetworkRequest
 <!-- backwards compatibility -->
@@ -8480,9 +8432,9 @@ instance spec request
 
 ```json
 {
-  "description": "string",
-  "interface_name": "string",
-  "name": "string",
+  "description": "default network",
+  "interface_name": "ens224",
+  "name": "br1",
   "type": 0
 }
 
@@ -8493,8 +8445,8 @@ instance spec request
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |description|string|false|none|description for the network|
-|interface_name|string|false|none|the unified interface name which the network uses in the node|
-|name|string|false|none|the network's name|
+|interface_name|string|true|none|the unified interface name which the network uses in the node|
+|name|string|true|none|the network's name|
 |type|integer(int64)|false|none|the network's type, can be: classical, vlan and vxlan|
 
 ### CreateNicRequest
@@ -8506,11 +8458,11 @@ instance spec request
 
 ```json
 {
-  "description": "string",
-  "ip": "string",
-  "name": "string",
+  "description": "a network interface example",
+  "ip": "192.168.231.20",
+  "name": "nic1",
   "primary": 0,
-  "subnet_uuid": "string"
+  "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7"
 }
 
 ```
@@ -8521,9 +8473,9 @@ instance spec request
 |---|---|---|---|---|
 |description|string|false|none|description for the nic|
 |ip|string|false|none|the IP address of the nic|
-|name|string|false|none|the virtual network interface's name|
+|name|string|true|none|the virtual network interface's name|
 |primary|integer(int64)|false|none|whether the nic is the primary nic, which can not be removed from a virtual machine|
-|subnet_uuid|string|false|none|the subnet's Uuid, which the nic belongs to|
+|subnet_uuid|string|true|none|the subnet's Uuid, which the nic belongs to|
 
 ### CreateSnapshotRequest
 <!-- backwards compatibility -->
@@ -8534,8 +8486,8 @@ instance spec request
 
 ```json
 {
-  "description": "string",
-  "name": "string"
+  "description": "a snapshot example",
+  "name": "test-snapshot"
 }
 
 ```
@@ -8545,7 +8497,7 @@ instance spec request
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |description|string|false|none|description for the snapshot|
-|name|string|false|none|the snapshot's name|
+|name|string|true|none|the snapshot's name|
 
 ### CreateStoragePoolRequest
 <!-- backwards compatibility -->
@@ -8556,13 +8508,13 @@ instance spec request
 
 ```json
 {
-  "backend_path": "string",
-  "description": "string",
-  "image_cache_path": "string",
-  "name": "string",
-  "physical_size": 0,
+  "backend_path": "/chime/backend",
+  "description": "a storage pool example",
+  "image_cache_path": "/chime/cache",
+  "name": "local storage pool",
+  "physical_size": 107374182400,
   "reserved_size": 0,
-  "size_ratio": 0.1,
+  "size_ratio": 2,
   "type": 0
 }
 
@@ -8575,8 +8527,8 @@ instance spec request
 |backend_path|string|false|none|the backend path of the physical storage in nodes (only for local storage)|
 |description|string|false|none|description for the storage pool|
 |image_cache_path|string|false|none|the image cache path of the physical storage in nodes (only for local storage)|
-|name|string|false|none|the storage pool's name|
-|physical_size|integer(int64)|false|none|the physical size of the storage|
+|name|string|true|none|the storage pool's name|
+|physical_size|integer(int64)|true|none|the physical size of the storage|
 |reserved_size|integer(int64)|false|none|the reserverd storage size, which will not be allocated to virtual machines.|
 |size_ratio|number(float)|false|none|the storage's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical storage|
 |type|integer(int64)|false|none|the storage pool's type, 0: local, 1:iscsi, 2:ceph|
@@ -8590,11 +8542,11 @@ instance spec request
 
 ```json
 {
-  "cidr": "string",
-  "description": "string",
-  "gateway": "string",
-  "name": "string",
-  "reserved_ips": "string"
+  "cidr": "192.168.231.1/24",
+  "description": "a subnet example",
+  "gateway": "192.168.231.2",
+  "name": "subnet1",
+  "reserved_ips": "192.168.231.254,192.168.231.1-192.168.231.100"
 }
 
 ```
@@ -8603,10 +8555,10 @@ instance spec request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|cidr|string|false|none|the CIDR value, e.g. 192.168.231.1/24|
+|cidr|string|true|none|the CIDR value, e.g. 192.168.231.1/24|
 |description|string|false|none|description for the subnet|
 |gateway|string|false|none|the gateway of the subnet|
-|name|string|false|none|the subnet's name|
+|name|string|true|none|the subnet's name|
 |reserved_ips|string|false|none|the reserved ips inside the subnet, which will not be assigned to virtual machines|
 
 ### CreateUserDefaultRequest
@@ -8618,8 +8570,8 @@ instance spec request
 
 ```json
 {
-  "az_uuid": "string",
-  "clusters_uuid": "string"
+  "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+  "clusters_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774"
 }
 
 ```
@@ -8630,8 +8582,8 @@ user default request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|az_uuid|string|false|none|the AZ's uuid|
-|clusters_uuid|string|false|none|the cluster's uuid|
+|az_uuid|string|true|none|the AZ's uuid|
+|clusters_uuid|string|true|none|the cluster's uuid|
 
 ### CreateUserRequest
 <!-- backwards compatibility -->
@@ -8642,11 +8594,11 @@ user default request
 
 ```json
 {
-  "avatar": "string",
-  "name": "string",
-  "nick_name": "string",
-  "password": "string",
-  "role": 0
+  "avatar": "file:///avatar/user.png",
+  "name": "chime-user",
+  "nick_name": "Chime User",
+  "password": "chime123",
+  "role": 2
 }
 
 ```
@@ -8658,8 +8610,8 @@ user  request
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |avatar|string|false|none|the user's avatar|
-|name|string|false|none|the user's name|
-|nick_name|string|false|none|the user's nickname|
+|name|string|true|none|the user's name|
+|nick_name|string|true|none|the user's nickname|
 |password|string|false|none|the user's login password|
 |role|integer(int64)|false|none|the user's role, 0: normal user, 1: readonly administrator, 2: administrator, 3: super administrator|
 
@@ -8672,39 +8624,39 @@ user  request
 
 ```json
 {
-  "az_uuid": "string",
+  "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
   "cdrom": {
-    "bootable": 0,
-    "host_uuid": "string",
-    "image_uuid": "string",
-    "name": "string",
-    "volume_spec_uuid": "string"
+    "bootable": 1,
+    "host_uuid": "a4824bcd-1112-449d-8d3e-3ff8b1323d9e",
+    "image_uuid": "f9600f11-cb97-4ed7-90ab-0928a089b129",
+    "name": "test-cdrom",
+    "volume_spec_uuid": "af52a0fe-f1fc-483c-9197-aead9786a73a"
   },
-  "cluster_uuid": "string",
-  "description": "string",
-  "host_uuid": "string",
-  "instance_spec_uuid": "string",
-  "name": "string",
+  "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+  "description": "a virutal machine example",
+  "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+  "instance_spec_uuid": "cd047e9d-2720-4397-84e5-777e4a39a531",
+  "name": "test-vm",
   "nics": [
     {
-      "description": "string",
-      "ip": "string",
-      "name": "string",
+      "description": "a network interface example",
+      "ip": "192.168.231.20",
+      "name": "nic1",
       "primary": 0,
-      "subnet_uuid": "string"
+      "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7"
     }
   ],
-  "password": "string",
-  "vnc_password": "string",
+  "password": "chime123",
+  "vnc_password": "chime123",
   "volumes": [
     {
-      "description": "string",
-      "host_uuid": "string",
-      "image_uuid": "string",
-      "name": "string",
+      "description": "a volume example",
+      "host_uuid": "a4824bcd-1112-449d-8d3e-3ff8b1323d9e",
+      "image_uuid": "f9600f11-cb97-4ed7-90ab-0928a089b129",
+      "name": "test-volume",
       "root": 0,
-      "size": 0,
-      "volume_spec_uuid": "string"
+      "size": 107374182400,
+      "volume_spec_uuid": "af52a0fe-f1fc-483c-9197-aead9786a73a"
     }
   ]
 }
@@ -8715,17 +8667,17 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|az_uuid|string|false|none|the AZ's uuid|
+|az_uuid|string|true|none|the AZ's uuid|
 |cdrom|[CreateCdromRequest](#schemacreatecdromrequest)|false|none|none|
-|cluster_uuid|string|false|none|the cluster's uuid|
+|cluster_uuid|string|true|none|the cluster's uuid|
 |description|string|false|none|description for the virtual machine|
 |host_uuid|string|false|none|the host's uuid|
-|instance_spec_uuid|string|false|none|the instace specification's uuid|
-|name|string|false|none|the virtual machine's name|
-|nics|[[CreateNicRequest](#schemacreatenicrequest)]|false|none|the network interfaces of the virtual machine|
+|instance_spec_uuid|string|true|none|the instace specification's uuid|
+|name|string|true|none|the virtual machine's name|
+|nics|[[CreateNicRequest](#schemacreatenicrequest)]|true|none|the network interfaces of the virtual machine|
 |password|string|false|none|the SSH password of the root user|
 |vnc_password|string|false|none|the VNC password|
-|volumes|[[CreateVolumeRequest](#schemacreatevolumerequest)]|false|none|the volumes of the virutal machine|
+|volumes|[[CreateVolumeRequest](#schemacreatevolumerequest)]|true|none|the volumes of the virutal machine|
 
 ### CreateVolumeRequest
 <!-- backwards compatibility -->
@@ -8736,13 +8688,13 @@ user  request
 
 ```json
 {
-  "description": "string",
-  "host_uuid": "string",
-  "image_uuid": "string",
-  "name": "string",
+  "description": "a volume example",
+  "host_uuid": "a4824bcd-1112-449d-8d3e-3ff8b1323d9e",
+  "image_uuid": "f9600f11-cb97-4ed7-90ab-0928a089b129",
+  "name": "test-volume",
   "root": 0,
-  "size": 0,
-  "volume_spec_uuid": "string"
+  "size": 107374182400,
+  "volume_spec_uuid": "af52a0fe-f1fc-483c-9197-aead9786a73a"
 }
 
 ```
@@ -8754,10 +8706,10 @@ user  request
 |description|string|false|none|description for the volume|
 |host_uuid|string|false|none|the host's uuid if the volume is on local storage|
 |image_uuid|string|false|none|the image's uuid|
-|name|string|false|none|the volume's name|
+|name|string|true|none|the volume's name|
 |root|integer(int64)|false|none|whether the volume is the root volume, which is not removable|
-|size|integer(int64)|false|none|the size of the volume in bytes|
-|volume_spec_uuid|string|false|none|the volume specification's Uuid|
+|size|integer(int64)|true|none|the size of the volume in bytes|
+|volume_spec_uuid|string|true|none|the volume specification's Uuid|
 
 ### CreateVolumeSpecRequest
 <!-- backwards compatibility -->
@@ -8768,15 +8720,15 @@ user  request
 
 ```json
 {
-  "description": "string",
-  "max_iops": 0,
-  "max_throughput": 0,
-  "min_iops": 0,
-  "min_throughput": 0,
-  "name": "string",
-  "step_iops": 0,
-  "step_throughput": 0,
-  "storage_pool_uuid": "string"
+  "description": "a volume specification example",
+  "max_iops": 10000,
+  "max_throughput": 524288000,
+  "min_iops": 1000,
+  "min_throughput": 52428800,
+  "name": "Standard",
+  "step_iops": 100,
+  "step_throughput": 5242880,
+  "storage_pool_uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a"
 }
 
 ```
@@ -8786,14 +8738,14 @@ user  request
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |description|string|false|none|description for the volume specification|
-|max_iops|integer(int64)|false|none|the max iops value of the volume specification|
-|max_throughput|integer(int64)|false|none|the max throughput value of the volume specification|
-|min_iops|integer(int64)|false|none|the min iops value of the volume specification|
-|min_throughput|integer(int64)|false|none|the min throughput value of the volume specification|
-|name|string|false|none|the volume specification's name|
-|step_iops|integer(int64)|false|none|the step iops value of the volume specification|
-|step_throughput|integer(int64)|false|none|the step throughput value of the volume specification|
-|storage_pool_uuid|string|false|none|the storage pool's Uuid|
+|max_iops|integer(int64)|true|none|none|
+|max_throughput|integer(int64)|true|none|the max throughput value of the volume specification|
+|min_iops|integer(int64)|true|none|the min iops value of the volume specification|
+|min_throughput|integer(int64)|true|none|the min throughput value of the volume specification|
+|name|string|true|none|the volume specification's name|
+|step_iops|integer(int64)|true|none|the step iops value of the volume specification|
+|step_throughput|integer(int64)|true|none|the step throughput value of the volume specification|
+|storage_pool_uuid|string|true|none|the storage pool's Uuid|
 
 ### DetachNicRequest
 <!-- backwards compatibility -->
@@ -8804,7 +8756,7 @@ user  request
 
 ```json
 {
-  "nic_uuid": "string"
+  "nic_uuid": "4be21239-293c-4989-b637-4df104f17caf"
 }
 
 ```
@@ -8813,7 +8765,7 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|nic_uuid|string|false|none|the network interface's uuid|
+|nic_uuid|string|true|none|the network interface's uuid|
 
 ### DetachVolumeRequest
 <!-- backwards compatibility -->
@@ -8824,7 +8776,7 @@ user  request
 
 ```json
 {
-  "volume_uuid": "string"
+  "volume_uuid": "cd047e9d-2720-4397-84e5-777e4a39a531"
 }
 
 ```
@@ -8833,7 +8785,7 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|volume_uuid|string|false|none|the virtual machine's uuid|
+|volume_uuid|string|true|none|the virtual machine's uuid|
 
 ### LoginRequest
 <!-- backwards compatibility -->
@@ -8844,8 +8796,8 @@ user  request
 
 ```json
 {
-  "password": "string",
-  "user_name": "string"
+  "password": "chime123",
+  "user_name": "chime-user"
 }
 
 ```
@@ -8854,8 +8806,8 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|password|string|false|none|the password for authing|
-|user_name|string|false|none|the username for authing|
+|password|string|true|none|the password for authing|
+|user_name|string|true|none|the username for authing|
 
 ### OpenApiResponse
 <!-- backwards compatibility -->
@@ -8894,11 +8846,11 @@ user  request
 
 ```json
 {
-  "cpu_ratio": 0.1,
-  "description": "string",
-  "memory_ratio": 0.1,
-  "reserved_memory": 0,
-  "reserved_vcpus": 0
+  "cpu_ratio": 2,
+  "description": "a host example",
+  "memory_ratio": 2,
+  "reserved_memory": 1073741824,
+  "reserved_vcpus": 1
 }
 
 ```
@@ -8922,13 +8874,13 @@ user  request
 
 ```json
 {
-  "boot_type": "string",
-  "description": "string",
-  "format": "string",
-  "name": "string",
-  "os_arch": "string",
-  "os_detail": "string",
-  "os_type": "string",
+  "boot_type": "legacy",
+  "description": "centos image",
+  "format": "qcow2",
+  "name": "centos",
+  "os_arch": "x86_64",
+  "os_detail": "CentOS 8.5",
+  "os_type": "Linux",
   "shared": 0
 }
 
@@ -8941,7 +8893,7 @@ user  request
 |boot_type|string|false|none|the boot type of the image, can be UEFI or legacy|
 |description|string|false|none|description for the image|
 |format|string|false|none|the image's format, like raw, qcow2, ...|
-|name|string|false|none|the image's name|
+|name|string|true|none|the image's name|
 |os_arch|string|false|none|the architecture of the OS, like x86_64, arm, ...|
 |os_detail|string|false|none|the version of the OS, like CentOS 7, CentOS 8, ...|
 |os_type|string|false|none|the operation system's type, like Windows, Linux, ...|
@@ -8956,8 +8908,8 @@ user  request
 
 ```json
 {
-  "description": "string",
-  "name": "string"
+  "description": "a network example",
+  "name": "br1"
 }
 
 ```
@@ -8967,7 +8919,7 @@ user  request
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |description|string|false|none|description for the network|
-|name|string|false|none|the network's name|
+|name|string|true|none|the network's name|
 
 ### UpdateNicRequest
 <!-- backwards compatibility -->
@@ -8978,8 +8930,8 @@ user  request
 
 ```json
 {
-  "description": "string",
-  "name": "string"
+  "description": "a network interface example",
+  "name": "nic1"
 }
 
 ```
@@ -8989,7 +8941,7 @@ user  request
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |description|string|false|none|description for the nic|
-|name|string|false|none|the nic's name|
+|name|string|true|none|the nic's name|
 
 ### UpdateVmRequest
 <!-- backwards compatibility -->
@@ -9000,8 +8952,8 @@ user  request
 
 ```json
 {
-  "description": "string",
-  "name": "string"
+  "description": "a virtual machine example",
+  "name": "test-vm"
 }
 
 ```
@@ -9022,8 +8974,8 @@ user  request
 
 ```json
 {
-  "description": "string",
-  "name": "string"
+  "description": "a volume example",
+  "name": "test-volume"
 }
 
 ```

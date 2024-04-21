@@ -3767,7 +3767,7 @@ list nics
 |sort|query|string|false|the field to be sorted by|
 |order|query|string|false|'asc' or 'desc' of sorting|
 |name|query|string|false|filter by the 'name' field|
-|state|query|integer(int64)|false|filter by the 'state' field|
+|state|query|string|false|filter by the 'state' field|
 |uuid|query|string|false|filter by the network interface's uuid|
 |subnet_uuid|query|string|false|filter by the subnet's uuid|
 
@@ -4569,7 +4569,7 @@ list volumes
 |sort|query|string|false|the field to be sorted by|
 |order|query|string|false|'asc' or 'desc' of sorting|
 |name|query|string|false|filter by the 'name' field|
-|state|query|integer(int64)|false|filter by the 'state' field|
+|state|query|string|false|filter by the 'state' field|
 |uuid|query|string|false|filter by volume's uuid|
 |host_uuid|query|string|false|filter by host's uuid|
 |AzUuid|path|string|true|filter by AZ's uuid|
@@ -4947,7 +4947,7 @@ list all snapshots
 |sort|query|string|false|the field to be sorted by|
 |order|query|string|false|'asc' or 'desc' of sorting|
 |name|query|string|false|filter by the 'name' field|
-|state|query|integer(int64)|false|filter by the 'state' field|
+|state|query|string|false|filter by the 'state' field|
 
 > Example responses
 
@@ -6026,7 +6026,7 @@ list images
 |sort|query|string|false|the field to be sorted by|
 |order|query|string|false|'asc' or 'desc' of sorting|
 |name|query|string|false|filter by the 'name' field|
-|state|query|integer(int64)|false|filter by the 'state' field|
+|state|query|string|false|filter by the 'state' field|
 |format|query|string|false|filter by the 'format' field|
 |os_type|query|string|false|filter by the 'os_type' field|
 |type|query|integer(int64)|false|filter by the 'type' field|
@@ -7216,7 +7216,7 @@ list vms
 |sort|query|string|false|the field to be sorted by|
 |order|query|string|false|'asc' or 'desc' of sorting|
 |name|query|string|false|filter by the 'name' field|
-|state|query|integer(int64)|false|filter by the 'state' field|
+|state|query|string|false|filter by the 'state' field|
 |uuid|query|string|false|filter by the 'uuid' field|
 |host_uuid|query|string|false|filter by the 'host_uuid' field|
 |az_uuid|query|string|false|filter by the 'az_uuid' field|

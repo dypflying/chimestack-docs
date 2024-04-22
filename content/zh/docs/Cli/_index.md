@@ -261,7 +261,7 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateClusterRequest](#schemacreateclusterrequest)|true|the http post body|
 
-**命令行替代body参数**:
+**CreateClusterRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -706,6 +706,8 @@ Flags:
 |HostUuid|string|true|the host's uuid|
 |body|[UpdateHostRequest](#schemaupdatehostrequest)|true|the http post body|
 
+
+**UpdateHostRequest参数**: 
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1240,6 +1242,8 @@ Flags:
 |InstanceSpecUuid|string|true|the instance specification's uuid|
 |body|[CreateInstanceSpecRequest](#schemacreateinstancespecrequest)|true|the http post body|
 
+**CreateInstanceSpecRequest参数**:
+
 |Name|Type|Required|Description|
 |---|---|---|---|
 |CreateInstanceSpecRequest.Description|string|false|description for the instance specification|
@@ -1630,7 +1634,7 @@ Flags:
 |Name|Type|Required|Description|
 |---|---|---|---|
 |createVolumeSpecRequest.Description|string|false|description for the volume specification|
-|createVolumeSpecRequest.MaxIops|integer|true|none|
+|createVolumeSpecRequest.MaxIops|integer|true|the max iops value of the volume specification|
 |createVolumeSpecRequest.MaxThroughput|integer|true|the max throughput value of the volume specification|
 |createVolumeSpecRequest.MinIops|integer|true|the min iops value of the volume specification|
 |createVolumeSpecRequest.MinThroughput|integer|true|the min throughput value of the volume specification|
@@ -1763,10 +1767,12 @@ Flags:
 |VolumeSpecUuid|string|true|the volume specification's uuid|
 |body|[CreateVolumeSpecRequest](#schemacreatevolumespecrequest)|true|the http post body|
 
+**CreateVolumeSpecRequest参数**:
+
 |Name|Type|Required|Description|
 |---|---|---|---|
 |createVolumeSpecRequest.Description|string|false|description for the volume specification|
-|createVolumeSpecRequest.MaxIops|integer|true|none|
+|createVolumeSpecRequest.MaxIops|integer|true|the max iops value of the volume specification|
 |createVolumeSpecRequest.MaxThroughput|integer|true|the max throughput value of the volume specification|
 |createVolumeSpecRequest.MinIops|integer|true|the min iops value of the volume specification|
 |createVolumeSpecRequest.MinThroughput|integer|true|the min throughput value of the volume specification|
@@ -2065,13 +2071,13 @@ Flags:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|page|integer(int64)|false|the page number of the results in paging|
-|size|integer(int64)|false|the page size of the results in paging|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
 |sort|string|false|the field to be sorted by|
 |order|string|false|'asc' or 'desc' of sorting|
 |name|string|false|filter by the 'name' field|
-|state|integer(int64)|false|filter by the 'state' field|
-|type|integer(int64)|false|filter by network type(0: classical network, 1:vlan, 2:vxlan)|
+|state|integer|false|filter by the 'state' field|
+|type|integer|false|filter by network type(0: classical network, 1:vlan, 2:vxlan)|
 |interface_name|string|false|filter by network interface's name|
 |AzUuid|string|true|filter by AZ's uuid|
 |ClusterUuid|string|true|filter by the cluster's uuid|
@@ -2270,6 +2276,8 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |NetworkUuid|string|true|the network's uuid|
 |body|[UpdateNetworkRequest](#schemaupdatenetworkrequest)|false|the http post body|
+
+**UpdateNetworkRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2585,6 +2593,8 @@ Flags:
 |SubnetUuid|string|true|the subnet's uuid|
 |body|[CreateSubnetRequest](#schemacreatesubnetrequest)|false|the http post body|
 
+**CreateSubnetRequest参数**:
+
 |Name|Type|Required|Description|
 |---|---|---|---|
 |createSubnetRequest.Cidr|string|true|the CIDR value, e.g. 192.168.231.1/24|
@@ -2668,14 +2678,51 @@ chimecli network deleteSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5
 
 #### 命令原型
 
+```
+chimecli storage_pool listStoragePool --help
+list storage pools
+
+Usage:
+  chimecli storage_pool listStoragePool [flags]
+
+Flags:
+      --AzUuid string        Required. filter by the AZ's uuid
+      --ClusterUuid string   Required. filter by the cluster's uuid
+  -h, --help                 help for listStoragePool
+      --name string          filter by the 'name' field
+      --order string         'asc' or 'desc' of sorting
+      --page int             the page number of the results in paging
+      --size int             the page size of the results in paging
+      --sort string          the field to be sorted by
+      --state int            filter by the 'state' field
+      --type int             filter the storage pool's type (0: local, 1: iscsi, 2: ceph)
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|integer|false|filter by the 'state' field|
+|type|integer|false|filter the storage pool's type (0: local, 1: iscsi, 2: ceph)|
+|AzUuid|string|true|filter by the AZ's uuid|
+|ClusterUuid|string|true|filter by the cluster's uuid|
 
 #### 示例
 
 命令行:
+
 ```
-chimecli storage_pool listStoragePool --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
+chimecli storage_pool listStoragePool \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
+
+返回:
 
 ```
 {
@@ -2710,14 +2757,64 @@ chimecli storage_pool listStoragePool --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97
 
 #### 命令原型
 
+```
+chimecli storage_pool createStoragePool --help
+create a storage pool
+
+Usage:
+  chimecli storage_pool createStoragePool [flags]
+
+Flags:
+      --AzUuid string                                    Required. the AZ's uuid
+      --Body string                                      Optional json string for [Body]. the http post body
+      --ClusterUuid string                               Required. the cluster's uuid
+      --createStoragePoolRequest.BackendPath string      the backend path of the physical storage in nodes (only for local storage)
+      --createStoragePoolRequest.Description string      description for the storage pool
+      --createStoragePoolRequest.ImageCachePath string   the image cache path of the physical storage in nodes (only for local storage)
+      --createStoragePoolRequest.Name string             Required. the storage pool's name
+      --createStoragePoolRequest.PhysicalSize int        Required. the physical size of the storage
+      --createStoragePoolRequest.ReservedSize int        the reserverd storage size, which will not be allocated to virtual machines.
+      --createStoragePoolRequest.SizeRatio float32       the storage's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical storage
+      --createStoragePoolRequest.Type int                the storage pool's type, 0: local, 1:iscsi, 2:ceph
+  -h, --help   
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|body|[CreateStoragePoolRequest](#schemacreatestoragepoolrequest)|false|the http post body|
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createStoragePoolRequest.BackendPath|string|false|the backend path of the physical storage in nodes (only for local storage)|
+|createStoragePoolRequest.Description|string|false|description for the storage pool|
+|createStoragePoolRequest.ImageCachePath|string|false|the image cache path of the physical storage in nodes (only for local storage)|
+|createStoragePoolRequest.Name|string|true|the storage pool's name|
+|createStoragePoolRequest.PhysicalSize|integer|true|the physical size of the storage|
+|createStoragePoolRequest.ReservedSize|integer|false|the reserverd storage size, which will not be allocated to virtual machines.|
+|createStoragePoolRequest.SizeRatio|float|false|the storage's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical storage|
+|createStoragePoolRequest.Type|integer|false|the storage pool's type, 0: local, 1:iscsi, 2:ceph|
 
 #### 示例
 
 命令行:
+
 ```
-chimecli storage_pool createStoragePool --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --createStoragePoolRequest.BackendPath /chime/backend --createStoragePoolRequest.ImageCachePath /chime/cache --createStoragePoolRequest.Name new-storagepool --createStoragePoolRequest.PhysicalSize 1048576000 --createStoragePoolRequest.ReservedSize 0 --createStoragePoolRequest.SizeRatio 2 --createStoragePoolRequest.Type 0
+chimecli storage_pool createStoragePool \
+  --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 \
+  --createStoragePoolRequest.BackendPath /chime/backend \
+  --createStoragePoolRequest.ImageCachePath /chime/cache \
+  --createStoragePoolRequest.Name new-storagepool \
+  --createStoragePoolRequest.PhysicalSize 1048576000 \
+  --createStoragePoolRequest.ReservedSize 0 \
+  --createStoragePoolRequest.SizeRatio 2 \
+  --createStoragePoolRequest.Type 0
 ```
+
+返回:
 
 ```
 {
@@ -2748,14 +2845,37 @@ chimecli storage_pool createStoragePool --ClusterUuid 65bbc21f-0289-4bbf-9517-6b
 
 #### 命令原型
 
+```
+chimecli storage_pool getStoragePool --help
+get a storage pool's detailed information
+
+Usage:
+  chimecli storage_pool getStoragePool [flags]
+
+Flags:
+      --AzUuid string            Required. the AZ's uuid
+      --ClusterUuid string       Required. the cluster's uuid
+      --StoragePoolUuid string   Required. the storage pool's uuid
+  -h, --help                     help for getStoragePool
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|StoragePoolUuid|string|true|the storage pool's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli storage_pool getStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4f-fb45c95b618b
 ```
+
+返回:
 
 ```
 {
@@ -2781,18 +2901,72 @@ chimecli storage_pool getStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4f-f
   }
 }
 ```
+
 ### 更新存储池
 
 #### 命令原型
 
+```
+chimecli storage_pool updateStoragePool --help
+update a storage pool
+
+Usage:
+  chimecli storage_pool updateStoragePool [flags]
+
+Flags:
+      --AzUuid string                                    Required. the AZ's uuid
+      --Body string                                      Optional json string for [Body]. the http post body
+      --ClusterUuid string                               Required. the cluster's uuid
+      --StoragePoolUuid string                           Required. the storage pool's uuid
+      --createStoragePoolRequest.BackendPath string      the backend path of the physical storage in nodes (only for local storage)
+      --createStoragePoolRequest.Description string      description for the storage pool
+      --createStoragePoolRequest.ImageCachePath string   the image cache path of the physical storage in nodes (only for local storage)
+      --createStoragePoolRequest.Name string             Required. the storage pool's name
+      --createStoragePoolRequest.PhysicalSize int        Required. the physical size of the storage
+      --createStoragePoolRequest.ReservedSize int        the reserverd storage size, which will not be allocated to virtual machines.
+      --createStoragePoolRequest.SizeRatio float32       the storage's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical storage
+      --createStoragePoolRequest.Type int                the storage pool's type, 0: local, 1:iscsi, 2:ceph
+  -h, --help   
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|StoragePoolUuid|string|true|the storage pool's uuid|
+|body|[CreateStoragePoolRequest](#schemacreatestoragepoolrequest)|false|the http post body|
+
+**CreateStoragePoolRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createStoragePoolRequest.BackendPath|string|false|the backend path of the physical storage in nodes (only for local storage)|
+|createStoragePoolRequest.Description|string|false|description for the storage pool|
+|createStoragePoolRequest.ImageCachePath|string|false|the image cache path of the physical storage in nodes (only for local storage)|
+|createStoragePoolRequest.Name|string|true|the storage pool's name|
+|createStoragePoolRequest.PhysicalSize|integer|true|the physical size of the storage|
+|createStoragePoolRequest.ReservedSize|integer|false|the reserverd storage size, which will not be allocated to virtual machines.|
+|createStoragePoolRequest.SizeRatio|float|false|the storage's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical storage|
+|createStoragePoolRequest.Type|integer|false|the storage pool's type, 0: local, 1:iscsi, 2:ceph|
 
 #### 示例
 
 命令行:
+
 ```
-chimecli storage_pool updateStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4f-fb45c95b618b --createStoragePoolRequest.BackendPath /chime/backend1 --createStoragePoolRequest.ImageCachePath /chime/cache --createStoragePoolRequest.PhysicalSize 104857600 --createStoragePoolRequest.SizeRatio 3 --createStoragePoolRequest.Type 0 --createStoragePoolRequest.Name new-storagepool
+chimecli storage_pool updateStoragePool \
+  --StoragePoolUuid 97329a52-44c4-44ac-af4f-fb45c95b618b \
+  --createStoragePoolRequest.BackendPath /chime/backend1 \
+  --createStoragePoolRequest.ImageCachePath /chime/cache \
+  --createStoragePoolRequest.PhysicalSize 104857600 \
+  --createStoragePoolRequest.SizeRatio 3 \
+  --createStoragePoolRequest.Type 0 \
+  --createStoragePoolRequest.Name new-storagepool
 ```
+
+返回:
 
 ```
 {
@@ -2807,14 +2981,37 @@ chimecli storage_pool updateStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4
 
 #### 命令原型
 
+```
+chimecli storage_pool deleteStoragePool --help
+delete a storage pool
+
+Usage:
+  chimecli storage_pool deleteStoragePool [flags]
+
+Flags:
+      --AzUuid string            Required. the AZ's uuid
+      --ClusterUuid string       Required. the cluster's uuid
+      --StoragePoolUuid string   Required. the storage pool's uuid
+  -h, --help 
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|StoragePoolUuid|string|true|the storage pool's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli storage_pool deleteStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4f-fb45c95b618b
 ```
+
+返回:
 
 ```
 {
@@ -2829,7 +3026,43 @@ chimecli storage_pool deleteStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4
 
 #### 命令原型
 
+```
+chimecli image listImage --help
+list images
+
+Usage:
+  chimecli image listImage [flags]
+
+Flags:
+      --bucket_uuid string   filter by the 'bucket_uuid' field
+      --format string        filter by the 'format' field
+  -h, --help                 help for listImage
+      --name string          filter by the 'name' field
+      --order string         'asc' or 'desc' of sorting
+      --os_type string       filter by the 'os_type' field
+      --page int             the page number of the results in paging
+      --size int             the page size of the results in paging
+      --sort string          the field to be sorted by
+      --state string         filter by the 'state' field
+      --type int             filter by the 'type' field
+      --uuid string          filter by the 'uuid' field
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|string|false|filter by the 'state' field|
+|format|string|false|filter by the 'format' field|
+|os_type|string|false|filter by the 'os_type' field|
+|type|integer|false|filter by the 'type' field|
+|uuid|string|false|filter by the 'uuid' field|
+|bucket_uuid|string|false|filter by the 'bucket_uuid' field|
 
 #### 示例
 
@@ -2838,6 +3071,8 @@ chimecli storage_pool deleteStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4
 ```
 chimecli image listImage
 ```
+
+返回: 
 
 ```
 {
@@ -2872,7 +3107,44 @@ chimecli image listImage
 
 #### 命令原型
 
+```
+chimecli image createPublicImage --help
+create a public image
+
+Usage:
+  chimecli image createPublicImage [flags]
+
+Flags:
+      --Body string                             Optional json string for [Body]. the http body of the post request
+      --createImageRequest.BootType string      the boot type of the image, can be UEFI or legacy
+      --createImageRequest.Description string   description for the image
+      --createImageRequest.Format string        the image's format, like raw, qcow2, ...
+      --createImageRequest.InstallUrl string    Required. the installation uri of the image to be fetched, it can be a sftp url or a file local path in the server's running node
+      --createImageRequest.Name string          Required. the image's name
+      --createImageRequest.OsArch string        the architecture of the OS, like x86_64, arm, ...
+      --createImageRequest.OsDetail string      the version of the OS, like CentOS 7, CentOS 8, ...
+      --createImageRequest.OsType string        the operation system's type, like Windows, Linux, ...
+      --createImageRequest.Shared int           whether the image is shared with other accounts or not
+  -h, --help                                    help for createPublicImage
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|body|[CreateImageRequest](#schemacreateimagerequest)|false|the http body of the post request|
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createImageRequest.BootType|string|false|the boot type of the image, can be UEFI or legacy|
+|createImageRequest.Description|string|false|description for the image|
+|createImageRequest.Format|string|false|the image's format, like raw, qcow2, ...|
+|createImageRequest.InstallUrl|string|true|the installation uri of the image to be fetched, it can be a sftp url or a file local path in the server's running node|
+|createImageRequest.Name|string|true|the image's name|
+|createImageRequest.OsArch|string|false|the architecture of the OS, like x86_64, arm, ...|
+|createImageRequest.OsDetail|string|false|the version of the OS, like CentOS 7, CentOS 8, ...|
+|createImageRequest.OsType|string|false|the operation system's type, like Windows, Linux, ...|
+|createImageRequest.Shared|integer|false|whether the image is shared with other accounts or not|
 
 #### 示例
 
@@ -2886,6 +3158,8 @@ chimecli image createPublicImage \
     --createImageRequest.OsDetail 'CentOS 8.x' \
     --createImageRequest.InstallUrl file:///root/images/centos7_cloudinit.qcow2
 ```
+
+返回:
 
 ```
 {
@@ -2916,11 +3190,49 @@ chimecli image createPublicImage \
 
 #### 命令原型
 
+```
+chimecli image createUserImage --help
+create a user's private image
+
+Usage:
+  chimecli image createUserImage [flags]
+
+Flags:
+      --Body string                             Optional json string for [Body]. the http body of the post request
+      --createImageRequest.BootType string      the boot type of the image, can be UEFI or legacy
+      --createImageRequest.Description string   description for the image
+      --createImageRequest.Format string        the image's format, like raw, qcow2, ...
+      --createImageRequest.InstallUrl string    Required. the installation uri of the image to be fetched, it can be a sftp url or a file local path in the server's running node
+      --createImageRequest.Name string          Required. the image's name
+      --createImageRequest.OsArch string        the architecture of the OS, like x86_64, arm, ...
+      --createImageRequest.OsDetail string      the version of the OS, like CentOS 7, CentOS 8, ...
+      --createImageRequest.OsType string        the operation system's type, like Windows, Linux, ...
+      --createImageRequest.Shared int           whether the image is shared with other accounts or not
+  -h, --help   
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|body|[CreateImageRequest](#schemacreateimagerequest)|false|the http body of the post request|
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createImageRequest.BootType|string|false|the boot type of the image, can be UEFI or legacy|
+|createImageRequest.Description|string|false|description for the image|
+|createImageRequest.Format|string|false|the image's format, like raw, qcow2, ...|
+|createImageRequest.InstallUrl|string|true|the installation uri of the image to be fetched, it can be a sftp url or a file local path in the server's running node|
+|createImageRequest.Name|string|true|the image's name|
+|createImageRequest.OsArch|string|false|the architecture of the OS, like x86_64, arm, ...|
+|createImageRequest.OsDetail|string|false|the version of the OS, like CentOS 7, CentOS 8, ...|
+|createImageRequest.OsType|string|false|the operation system's type, like Windows, Linux, ...|
+|createImageRequest.Shared|integer|false|whether the image is shared with other accounts or not|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli image createUserImage \
     --createImageRequest.Format qcow2 \
@@ -2929,6 +3241,8 @@ chimecli image createUserImage \
     --createImageRequest.OsDetail 'CentOS 8.x' \
     --createImageRequest.InstallUrl file:///root/images/centos7_cloudinit.qcow2
 ```
+
+返回:
 
 ```
 {
@@ -2959,14 +3273,33 @@ chimecli image createUserImage \
 
 #### 命令原型
 
+```
+chimecli image getImage --help
+get an image's detailed information
+
+Usage:
+  chimecli image getImage [flags]
+
+Flags:
+      --ImageUuid string   Required. the image's uuid
+  -h, --help               help for getImage
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|ImageUuid|string|true|the image's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli image getImage --ImageUuid fb11078f-8af8-4247-adfe-295459f29646
 ```
+
+返回:
 
 ```
 {
@@ -2997,16 +3330,58 @@ chimecli image getImage --ImageUuid fb11078f-8af8-4247-adfe-295459f29646
 
 #### 命令原型
 
+```
+chimecli image updateImage --help
+update an image's information
+
+Usage:
+  chimecli image updateImage [flags]
+
+Flags:
+      --Body string                             Optional json string for [Body]. the http body of the post request
+      --ImageUuid string                        Required. 
+  -h, --help                                    help for updateImage
+      --updateImageRequest.BootType string      the boot type of the image, can be UEFI or legacy
+      --updateImageRequest.Description string   description for the image
+      --updateImageRequest.Format string        the image's format, like raw, qcow2, ...
+      --updateImageRequest.Name string          Required. the image's name
+      --updateImageRequest.OsArch string        the architecture of the OS, like x86_64, arm, ...
+      --updateImageRequest.OsDetail string      the version of the OS, like CentOS 7, CentOS 8, ...
+      --updateImageRequest.OsType string        the operation system's type, like Windows, Linux, ...
+      --updateImageRequest.Shared int           whether the image is shared with other accounts or not
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|ImageUuid|string|true||
+|body|[UpdateImageRequest](#schemaupdateimagerequest)|false|the http body of the post request|
+
+**UpdateImageRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|updateImageRequest.BootType|string|false|the boot type of the image, can be UEFI or legacy|
+|updateImageRequest.Description|string|false|description for the image|
+|updateImageRequest.Format|string|false|the image's format, like raw, qcow2, ...|
+|updateImageRequest.Name|string|true|the image's name|
+|updateImageRequest.OsArch|string|false|the architecture of the OS, like x86_64, arm, ...|
+|updateImageRequest.OsDetail|string|false|the version of the OS, like CentOS 7, CentOS 8, ...|
+|updateImageRequest.OsType|string|false|the operation system's type, like Windows, Linux, ...|
+|updateImageRequest.Shared|integer|false|whether the image is shared with other accounts or not|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli image updateImage \
     --ImageUuid fb11078f-8af8-4247-adfe-295459f29646 \
     --updateImageRequest.Name centos-test
 ```
+
+返回:
 
 ```
 {
@@ -3021,7 +3396,23 @@ chimecli image updateImage \
 
 #### 命令原型
 
+```
+chimecli image deleteImage --help
+delete an image
+
+Usage:
+  chimecli image deleteImage [flags]
+
+Flags:
+      --ImageUuid string   Required. the image's uuid
+  -h, --help               help for deleteImage
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|ImageUuid|string|true|the image's uuid|
 
 #### 示例
 
@@ -3030,6 +3421,8 @@ chimecli image updateImage \
 ```
 chimecli image deleteImage --ImageUuid fb11078f-8af8-4247-adfe-295459f29646
 ```
+
+返回:
 
 ```
 {
@@ -3042,7 +3435,35 @@ chimecli image deleteImage --ImageUuid fb11078f-8af8-4247-adfe-295459f29646
 
 #### 命令原型
 
+```
+chimecli image listImageBucket --help
+list image buckets
+
+Usage:
+  chimecli image listImageBucket [flags]
+
+Flags:
+  -h, --help           help for listImageBucket
+      --name string    filter by the 'name' field
+      --order string   'asc' or 'desc' of sorting
+      --page int       the page number of the results in paging
+      --size int       the page size of the results in paging
+      --sort string    the field to be sorted by
+      --state int      filter by the 'state' field
+      --type int       filter by the 'type' field
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|integer|false|filter by the 'state' field|
+|type|integer|false|filter by the 'type' field|
 
 #### 示例
 
@@ -3051,6 +3472,8 @@ chimecli image deleteImage --ImageUuid fb11078f-8af8-4247-adfe-295459f29646
 ```
 chimecli image listImageBucket
 ```
+
+返回:
 
 ```
 {
@@ -3101,7 +3524,23 @@ chimecli image listImageBucket
 
 #### 命令原型
 
+```
+chimecli image getImageBucket --help
+get an image bucket's detailed information
+
+Usage:
+  chimecli image getImageBucket [flags]
+
+Flags:
+      --ImageBucketUuid string   Required. the image bucket's uuid
+  -h, --help                     help for getImageBucket
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|ImageBucketUuid|string|true|the image bucket's uuid|
 
 #### 示例
 
@@ -3110,6 +3549,8 @@ chimecli image listImageBucket
 ```
 chimecli image getImageBucket --ImageBucketUuid 9c15f4cb-5f6d-4e45-818f-a4315c54240c
 ```
+
+返回:
 
 ```
 {
@@ -3136,7 +3577,37 @@ chimecli image getImageBucket --ImageBucketUuid 9c15f4cb-5f6d-4e45-818f-a4315c54
 
 #### 命令原型
 
+```
+chimecli alert listAlert --help
+list alerts
+
+Usage:
+  chimecli alert listAlert [flags]
+
+Flags:
+  -h, --help           help for listAlert
+      --name string    filter by the 'name' field
+      --order string   'asc' or 'desc' of sorting
+      --page int       the page number of the results in paging
+      --priority int   filter by the 'priority' field
+      --severity int   filter by the 'severity' field
+      --size int       the page size of the results in paging
+      --sort string    the field to be sorted by
+      --state int      filter by the 'state' field
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|integer|false|filter by the 'state' field|
+|severity|integer|false|filter by the 'severity' field|
+|priority|integer|false|filter by the 'priority' field|
 
 #### 示例
 
@@ -3145,6 +3616,8 @@ chimecli image getImageBucket --ImageBucketUuid 9c15f4cb-5f6d-4e45-818f-a4315c54
 ```
 chimecli alert listAlert
 ```
+
+返回:
 
 ```
 {
@@ -3272,7 +3745,23 @@ chimecli alert listAlert
 
 #### 命令原型
 
+```
+chimecli alert getAlert --help
+get an alert's detailed information
+
+Usage:
+  chimecli alert getAlert [flags]
+
+Flags:
+      --AlertUuid string   Required. the alert's UUID
+  -h, --help               help for getAlert
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AlertUuid|string|true|the alert's UUID|
 
 #### 示例
 
@@ -3281,6 +3770,8 @@ chimecli alert listAlert
 ```
 chimecli alert getAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e
 ```
+
+返回:
 
 ```
 {
@@ -3305,7 +3796,30 @@ chimecli alert getAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e
 
 #### 命令原型
 
+```
+chimecli alert acceptAlert --help
+accept an alert
+
+Usage:
+  chimecli alert acceptAlert [flags]
+
+Flags:
+      --AlertUuid string                    Required. 
+      --Body string                         Optional json string for [Body]. the http body of the post request
+      --acceptAlertRequest.Comment string   comment for the alert's acception
+  -h, --help                                help for acceptAlert
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AlertUuid|string|true||
+|body|[AcceptAlertRequest](#schemaacceptalertrequest)|false|the http body of the post request|
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|acceptAlertRequest.Comment|string|false|comment for the alert's acception|
 
 #### 示例
 
@@ -3314,6 +3828,8 @@ chimecli alert getAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e
 ```
 chimecli alert acceptAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e --acceptAlertRequest.Comment "accepted"
 ```
+
+返回:
 
 ```
 {
@@ -3326,7 +3842,23 @@ chimecli alert acceptAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e --ac
 
 #### 命令原型
 
+```
+chimecli alert deleteAlert --help
+delete an alert
+
+Usage:
+  chimecli alert deleteAlert [flags]
+
+Flags:
+      --AlertUuid string   Required. the alert's UUID
+  -h, --help               help for deleteAlert
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AlertUuid|string|true|the alert's UUID|
 
 #### 示例
 
@@ -3335,6 +3867,8 @@ chimecli alert acceptAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e --ac
 ```
 chimecli alert deleteAlert --AlertUuid c24f4240-6e5e-418b-911f-fa46fe173888
 ```
+
+返回:
 
 ```
 {
@@ -3347,7 +3881,37 @@ chimecli alert deleteAlert --AlertUuid c24f4240-6e5e-418b-911f-fa46fe173888
 
 #### 命令原型
 
+```
+chimecli alert listAlertRule --help
+list alert rules
+
+Usage:
+  chimecli alert listAlertRule [flags]
+
+Flags:
+  -h, --help           help for listAlertRule
+      --name string    filter by the 'name' field
+      --order string   'asc' or 'desc' of sorting
+      --page int       the page number of the results in paging
+      --priority int   filter by the 'priority' field
+      --severity int   filter by the 'severity' field
+      --size int       the page size of the results in paging
+      --sort string    the field to be sorted by
+      --state int      filter by the 'state' field
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|integer|false|filter by the 'state' field|
+|severity|integer|false|filter by the 'severity' field|
+|priority|integer|false|filter by the 'priority' field|
 
 #### 示例
 
@@ -3356,6 +3920,8 @@ chimecli alert deleteAlert --AlertUuid c24f4240-6e5e-418b-911f-fa46fe173888
 ```
 chimecli alert listAlertRule
 ```
+
+返回:
 
 ```
 {
@@ -3425,7 +3991,23 @@ chimecli alert listAlertRule
 
 #### 命令原型
 
+```
+chimecli alert getAlertRule --help
+get an alert rule's detailed information
+
+Usage:
+  chimecli alert getAlertRule [flags]
+
+Flags:
+      --RuleUuid string   Required. the alert rule's UUID
+  -h, --help              help for getAlertRule
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|RuleUuid|string|true|the alert rule's UUID|
 
 #### 示例
 
@@ -3434,6 +4016,8 @@ chimecli alert listAlertRule
 ```
 chimecli alert getAlertRule --RuleUuid 62deb6e7-6d56-11ee-b5ce-000c29dc11fc
 ```
+
+返回:
 
 ```
 {
@@ -3462,7 +4046,41 @@ chimecli alert getAlertRule --RuleUuid 62deb6e7-6d56-11ee-b5ce-000c29dc11fc
 
 #### 命令原型
 
+```
+chimecli compute listVm --help
+list virtual machines
+
+Usage:
+  chimecli compute listVm [flags]
+
+Flags:
+      --az_uuid string        filter by the 'az_uuid' field
+      --cluster_uuid string   filter by the 'cluster_uuid' field
+  -h, --help                  help for listVm
+      --host_uuid string      filter by the 'host_uuid' field
+      --name string           filter by the 'name' field
+      --order string          'asc' or 'desc' of sorting
+      --page int              the page number of the results in paging
+      --size int              the page size of the results in paging
+      --sort string           the field to be sorted by
+      --state string          filter by the 'state' field
+      --uuid string           filter by the 'uuid' field
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|string|false|filter by the 'state' field|
+|uuid|string|false|filter by the 'uuid' field|
+|host_uuid|string|false|filter by the 'host_uuid' field|
+|az_uuid|string|false|filter by the 'az_uuid' field|
+|cluster_uuid|string|false|filter by the 'cluster_uuid' field|
 
 #### 示例
 
@@ -3471,6 +4089,8 @@ chimecli alert getAlertRule --RuleUuid 62deb6e7-6d56-11ee-b5ce-000c29dc11fc
 ```
 chimecli compute listVm --state 1
 ```
+
+返回:
 
 ```
 {
@@ -3513,7 +4133,85 @@ chimecli compute listVm --state 1
 
 #### 命令原型
 
+```
+chimecli compute createVm --help
+create a virtual machine
+
+Usage:
+  chimecli compute createVm [flags]
+
+Flags:
+      --Body string                                   Optional json string for [Body]. the http post body
+      --createVmRequest.AzUuid string                 Required. the AZ's uuid
+      --createVmRequest.ClusterUuid string            Required. the cluster's uuid
+      --createVmRequest.Description string            description for the virtual machine
+      --createVmRequest.HostUuid string               the host's uuid
+      --createVmRequest.InstanceSpecUuid string       Required. the instace specification's uuid
+      --createVmRequest.Name string                   Required. the virtual machine's name
+      --createVmRequest.Password string               the SSH password of the root user
+      --createVmRequest.VncPassword string            the VNC password
+      --createVmRequest.cdrom.Bootable int            whether to boot the VM from the cdrom, default is 0 (not)
+      --createVmRequest.cdrom.HostUuid string         the host's uuid
+      --createVmRequest.cdrom.ImageUuid string        Required. the image's uuid
+      --createVmRequest.cdrom.Name string             Required. the cdrom's name
+      --createVmRequest.cdrom.VolumeSpecUuid string   Required. the volume specification's Uuid
+  -h, --help 
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|body|[CreateVmRequest](#schemacreatevmrequest)|false|the http post body|
+
+**CreateVmRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|az_uuid|string|true|the AZ's uuid|
+|cdrom|[CreateCdromRequest](#schemacreatecdromrequest)|false|the cdrom of the virtual machine|
+|cluster_uuid|string|true|the cluster's uuid|
+|description|string|false|description for the virtual machine|
+|host_uuid|string|false|the host's uuid|
+|instance_spec_uuid|string|true|the instace specification's uuid|
+|name|string|true|the virtual machine's name|
+|nics|[[CreateNicRequest](#schemacreatenicrequest)]|true|the network interfaces of the virtual machine|
+|password|string|false|the SSH password of the root user|
+|vnc_password|string|false|the VNC password|
+|volumes|[[CreateVolumeRequest](#schemacreatevolumerequest)]|true|the volumes of the virutal machine|
+
+**CreateCdromRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createCdromRequest.Bootable|integer|false|whether to boot the VM from the cdrom, default is 0 (not)|
+|createCdromRequest.HostUuid|string|false|the host's uuid|
+|createCdromRequest.ImageUuid|string|true|the image's uuid|
+|createCdromRequest.Name|string|true|the cdrom's name|
+|createCdromRequest.VolumeSpecUuid|string|true|the volume specification's Uuid|
+
+**CreateNicRequest参数**: 
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createNicRequest.Description|string|false|description for the nic|
+|createNicRequest.Ip|string|false|the IP address of the nic|
+|createNicRequest.Name|string|true|the virtual network interface's name|
+|createNicRequest.Primary|integer|false|whether the nic is the primary nic, which can not be removed from a virtual machine|
+|createNicRequest.SubnetUuid|string|true|the subnet's Uuid, which the nic belongs to|
+
+**CreateVolumeRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createVolumeRequest.Description|string|false|description for the volume|
+|createVolumeRequest.HostUuid|string|false|the host's uuid if the volume is on local storage|
+|createVolumeRequest.ImageUuid|string|false|the image's uuid|
+|createVolumeRequest.Name|string|true|the volume's name|
+|createVolumeRequest.Root|integer|false|whether the volume is the root volume, which is not removable|
+|createVolumeRequest.Size|integer|true|the size of the volume in bytes|
+|createVolumeRequest.VolumeSpecUuid|string|true|the volume specification's Uuid|
+
 
 #### 示例
 
@@ -3549,6 +4247,8 @@ chimecli compute createVm --Body  \
   ] 
 }'
 ```
+
+返回:
 
 ```
 {
@@ -3668,7 +4368,23 @@ chimecli compute createVm --Body  \
 
 #### 命令原型
 
+```
+chimecli compute describeVm --help
+get a virtual machine's detailed information
+
+Usage:
+  chimecli compute describeVm [flags]
+
+Flags:
+      --VmUuid string   Required. the virtual machine's uuid
+  -h, --help            help for describeVm
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VmUuid|string|true|the virtual machine's uuid|
 
 #### 示例
 
@@ -3677,6 +4393,8 @@ chimecli compute createVm --Body  \
 ```
 chimecli compute describeVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --
 ```
+
+返回:
 
 ```
 {
@@ -3766,7 +4484,23 @@ chimecli compute describeVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --
 
 #### 命令原型
 
+```
+chimecli compute startVm --help
+start a virtual machine
+
+Usage:
+  chimecli compute startVm [flags]
+
+Flags:
+      --VmUuid string   Required. the virtual machine's uuid
+  -h, --help            help for startVm
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VmUuid|string|true|the virtual machine's uuid|
 
 #### 示例
 
@@ -3775,6 +4509,8 @@ chimecli compute describeVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --
 ```
 chimecli compute startVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 ```
+
+返回:
 
 ```
 {
@@ -3789,7 +4525,23 @@ chimecli compute startVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 
 #### 命令原型
 
+```
+chimecli compute stopVm --help
+stop a virtual machine
+
+Usage:
+  chimecli compute stopVm [flags]
+
+Flags:
+      --VmUuid string   Required. the virtual machine's uuid
+  -h, --help            help for stopVm
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VmUuid|string|true|the virtual machine's uuid|
 
 #### 示例
 
@@ -3798,6 +4550,8 @@ chimecli compute startVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 ```
 chimecli compute stopVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 ```
+
+返回:
 
 ```
 {
@@ -3812,7 +4566,34 @@ chimecli compute stopVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 
 #### 命令原型
 
+```
+chimecli compute updateVm --help
+update a virtual machine
+
+Usage:
+  chimecli compute updateVm [flags]
+
+Flags:
+      --Body string                          Optional json string for [Body]. the http post body
+      --VmUuid string                        Required. the virtual machine's uuid
+  -h, --help                                 help for updateVm
+      --updateVmRequest.Description string   description for the virutal machine
+      --updateVmRequest.Name string          the virutal machine's name
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VmUuid|string|true|the virtual machine's uuid|
+|body|[UpdateVmRequest](#schemaupdatevmrequest)|false|the http post body|
+
+**UpdateVmRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|updateVmRequest.Description|string|false|description for the virutal machine|
+|updateVmRequest.Name|string|false|the virutal machine's name|
 
 #### 示例
 
@@ -3822,6 +4603,8 @@ chimecli compute stopVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 chimecli compute updateVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf --updateVmRequest.Name test-vm
 ```
 
+返回:
+
 ```
 {
   "requestId": "34847e46-2d0e-4ef0-ba76-65e02b7431e4",
@@ -3830,11 +4613,30 @@ chimecli compute updateVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf --update
   }
 }
 ```
+
 ### 删除虚拟机
 
 #### 命令原型
 
+```
+chimecli compute deleteVm --help
+delete a virtual machine
+
+Usage:
+  chimecli compute deleteVm [flags]
+
+Flags:
+      --VmUuid string      Required. the virtual machine's uuid
+      --force_del string   if forceDel is set to true, the physical volumes are deleted as well as the virtual machine
+  -h, --help               help for deleteVm
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VmUuid|string|true|the virtual machine's uuid|
+|force_del|string|false|if forceDel is set to true, the physical volumes are deleted as well as the virtual machine|
 
 #### 示例
 
@@ -3844,6 +4646,8 @@ chimecli compute updateVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf --update
 chimecli compute deleteVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf
 ```
 
+返回:
+
 ```
 {
   "requestId": "3bb72de6-3d03-425b-a004-6b4e1f12c851",
@@ -3852,6 +4656,7 @@ chimecli compute deleteVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf
   }
 }
 ```
+
 ## 云硬盘相关命令
 
 ### 查看云硬盘列表

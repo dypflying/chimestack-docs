@@ -1164,14 +1164,33 @@ chimecli instance_spec createInstanceSpec --createInstanceSpecRequest.Name test-
 
 #### 命令原型
 
+```
+chimecli instance_spec getInstanceSpec --help
+get an instance specification's detail information
+
+Usage:
+  chimecli instance_spec getInstanceSpec [flags]
+
+Flags:
+      --InstanceSpecUuid string   Required. the instance specification's uuid
+  -h, --help                      help for getInstanceSpec
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|InstanceSpecUuid|string|true|the instance specification's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli instance_spec getInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
 ```
+
+返回:
 
 ```
 {
@@ -1192,19 +1211,52 @@ chimecli instance_spec getInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-906
 }
 ```
 
-
 ### 修改计算规格
 
 #### 命令原型
 
+```
+chimecli instance_spec updateInstanceSpec --help
+update an instance specification
+
+Usage:
+  chimecli instance_spec updateInstanceSpec [flags]
+
+Flags:
+      --Body string                                    Optional json string for [Body]. the http post body
+      --InstanceSpecUuid string                        Required. the instance specification's uuid
+      --createInstanceSpecRequest.Description string   description for the instance specification
+      --createInstanceSpecRequest.Memory int           Required. the number of memory
+      --createInstanceSpecRequest.Name string          Required. the instance specification's name
+      --createInstanceSpecRequest.Type int             the instance specification's type, 0: shared resource, 1: dedicated resource
+      --createInstanceSpecRequest.Vcpus int            Required. the number of vCPUs
+  -h, --help                                           help for updateInstanceSpec
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|InstanceSpecUuid|string|true|the instance specification's uuid|
+|body|[CreateInstanceSpecRequest](#schemacreateinstancespecrequest)|true|the http post body|
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|CreateInstanceSpecRequest.Description|string|false|description for the instance specification|
+|CreateInstanceSpecRequest.Memory|integer|true|the number of memory|
+|CreateInstanceSpecRequest.Name|string|true|the instance specification's name|
+|CreateInstanceSpecRequest.Type|integer|false|the instance specification's type, 0: shared resource, 1: dedicated resource|
+|CreateInstanceSpecRequest.Vcpus|integer|true|the number of vCPUs|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli instance_spec updateInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c --createInstanceSpecRequest.Type 1 --createInstanceSpecRequest.Vcpus 2 --createInstanceSpecRequest.Name test-spec --createInstanceSpecRequest.Memory 16777216
 ```
+
+返回:
 
 ```
 {
@@ -1219,15 +1271,34 @@ chimecli instance_spec updateInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-
 
 #### 命令原型
 
+```
+chimecli instance_spec deleteInstanceSpec --help
+delete an instance specification
+
+Usage:
+  chimecli instance_spec deleteInstanceSpec [flags]
+
+Flags:
+      --InstanceSpecUuid string   Required. the instance specification's uuid
+  -h, --help     
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|InstanceSpecUuid|string|true|the instance specification's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli instance_spec deleteInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c 
 {"requestId":"1b24222f-0158-4d10-84c8-c478157e2465","result":1}
 ```
+
+返回:
 
 ```
 {
@@ -1240,14 +1311,42 @@ chimecli instance_spec deleteInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-
 
 #### 命令原型
 
+```
+chimecli instance_spec createClusterInstanceSpecRelation --help
+register an instance specification to a cluster
+
+Usage:
+  chimecli instance_spec createClusterInstanceSpecRelation [flags]
+
+Flags:
+      --AzUuid string                                              Required. the AZ's uuid
+      --Body string                                                Optional json string for [Body]. the http post body
+      --ClusterUuid string                                         Required. the cluster's uuid
+      --createClusterInstanceSpecRequest.InstanceSpecUuid string   Required. the instance specification's Uuid
+  -h, --help                                                       help for createClusterInstanceSpecRelation
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|body|[CreateClusterInstanceSpecRequest](#schemacreateclusterinstancespecrequest)|false|the http post body|
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|CreateClusterInstanceSpecRequest.InstanceSpecUuid|string|true|the instance specification's Uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli instance_spec createClusterInstanceSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --createClusterInstanceSpecRequest.InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
 ```
+
+返回: 
 
 ```
 {
@@ -1266,14 +1365,37 @@ chimecli instance_spec createClusterInstanceSpecRelation --ClusterUuid 65bbc21f-
 
 #### 命令原型
 
+```
+chimecli instance_spec deleteClusterInstanceSpecRelation --help
+unregister an instance specification from a cluster
+
+Usage:
+  chimecli instance_spec deleteClusterInstanceSpecRelation [flags]
+
+Flags:
+      --AzUuid string             Required. the AZ's uuid
+      --ClusterUuid string        Required. the cluster's uuid
+      --InstanceSpecUuid string   Required. the instance specification's uuid
+  -h, --help  
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|InstanceSpecUuid|string|true|the instance specification's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli instance_spec deleteClusterInstanceSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
 ```
+
+返回:
 
 ```
 {
@@ -1286,14 +1408,45 @@ chimecli instance_spec deleteClusterInstanceSpecRelation --ClusterUuid 65bbc21f-
 
 #### 命令原型
 
+```
+chimecli instance_spec listClusterInstanceSpecRelation --help
+list instance specifications registered in the cluster
+
+Usage:
+  chimecli instance_spec listClusterInstanceSpecRelation [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+  -h, --help                 help for listClusterInstanceSpecRelation
+      --name string          filter by the 'name' field
+      --order string         'asc' or 'desc' of sorting
+      --page int             the page number of the results in paging
+      --size int             the page size of the results in paging
+      --sort string          the field to be sorted by
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli instance_spec listClusterInstanceSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
+
+返回:
 
 ```
 {
@@ -1341,19 +1494,47 @@ chimecli instance_spec listClusterInstanceSpecRelation --ClusterUuid 65bbc21f-02
 
 ## 存储规格相关命令
 
-
 ### 获取存储规格列表
 
 #### 命令原型
 
+```
+chimecli volume_spec listVolumeSpec --help
+list volume specifications
+
+Usage:
+  chimecli volume_spec listVolumeSpec [flags]
+
+Flags:
+  -h, --help                       help for listVolumeSpec
+      --name string                filter by the 'name' field
+      --order string               'asc' or 'desc' of sorting
+      --page int                   the page number of the results in paging
+      --size int                   the page size of the results in paging
+      --sort string                the field to be sorted by
+      --storage_pool_uuid string   filter by the storage pool's uuid
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|storage_pool_uuid|string|false|filter by the storage pool's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli volume_spec listVolumeSpec
 ```
+
+返回:
 
 ```
 {
@@ -1419,14 +1600,55 @@ chimecli volume_spec listVolumeSpec
 
 #### 命令原型
 
+```
+chimecli volume_spec createVolumeSpec --help
+create a volume specification
+
+Usage:
+  chimecli volume_spec createVolumeSpec [flags]
+
+Flags:
+      --Body string                                      Optional json string for [Body]. the http post body
+      --createVolumeSpecRequest.Description string       description for the volume specification
+      --createVolumeSpecRequest.MaxIops int              Required. 
+      --createVolumeSpecRequest.MaxThroughput int        Required. the max throughput value of the volume specification
+      --createVolumeSpecRequest.MinIops int              Required. the min iops value of the volume specification
+      --createVolumeSpecRequest.MinThroughput int        Required. the min throughput value of the volume specification
+      --createVolumeSpecRequest.Name string              Required. the volume specification's name
+      --createVolumeSpecRequest.StepIops int             Required. the step iops value of the volume specification
+      --createVolumeSpecRequest.StepThroughput int       Required. the step throughput value of the volume specification
+      --createVolumeSpecRequest.StoragePoolUuid string   Required. the storage pool's Uuid
+  -h, --help    
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|body|[CreateVolumeSpecRequest](#schemacreatevolumespecrequest)|false|the http post body|
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createVolumeSpecRequest.Description|string|false|description for the volume specification|
+|createVolumeSpecRequest.MaxIops|integer|true|none|
+|createVolumeSpecRequest.MaxThroughput|integer|true|the max throughput value of the volume specification|
+|createVolumeSpecRequest.MinIops|integer|true|the min iops value of the volume specification|
+|createVolumeSpecRequest.MinThroughput|integer|true|the min throughput value of the volume specification|
+|createVolumeSpecRequest.Name|string|true|the volume specification's name|
+|createVolumeSpecRequest.StepIops|integer|true|the step iops value of the volume specification|
+|createVolumeSpecRequest.StepThroughput|integer|true|the step throughput value of the volume specification|
+|createVolumeSpecRequest.StoragePoolUuid|string|true|the storage pool's Uuid|
+
 
 #### 示例
 
 命令行:
+
 ```
 chimecli volume_spec createVolumeSpec --createVolumeSpecRequest.Name test-volume-spec --createVolumeSpecRequest.MaxIops 1000 --createVolumeSpecRequest.MinIops 500 --createVolumeSpecRequest.StepIops 10 --createVolumeSpecRequest.MaxThroughput 104857600 --createVolumeSpecRequest.MinThroughput 10485760 --createVolumeSpecRequest.StepThroughput 1048576 --createVolumeSpecRequest.StoragePoolUuid f5165a18-e6b3-42b4-8efc-ad496f318a0a
 ```
+
+返回:
 
 ```
 {
@@ -1456,14 +1678,33 @@ chimecli volume_spec createVolumeSpec --createVolumeSpecRequest.Name test-volume
 
 #### 命令原型
 
+```
+chimecli volume_spec getVolumeSpec --help
+get a volume specification's detailed information
+
+Usage:
+  chimecli volume_spec getVolumeSpec [flags]
+
+Flags:
+      --VolumeSpecUuid string   Required. the volume specification's uuid
+  -h, --help                    help for getVolumeSpec
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VolumeSpecUuid|string|true|the volume specification's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli volume_spec getVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
 ```
+
+返回:
 
 ```
 {
@@ -1493,14 +1734,65 @@ chimecli volume_spec getVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5c
 
 #### 命令原型
 
+```
+chimecli volume_spec updateVolumeSpec --help
+update volume specification
+
+Usage:
+  chimecli volume_spec updateVolumeSpec [flags]
+
+Flags:
+      --Body string                                      Optional json string for [Body]. the http post body
+      --VolumeSpecUuid string                            Required. the volume specification's uuid
+      --createVolumeSpecRequest.Description string       description for the volume specification
+      --createVolumeSpecRequest.MaxIops int              Required. 
+      --createVolumeSpecRequest.MaxThroughput int        Required. the max throughput value of the volume specification
+      --createVolumeSpecRequest.MinIops int              Required. the min iops value of the volume specification
+      --createVolumeSpecRequest.MinThroughput int        Required. the min throughput value of the volume specification
+      --createVolumeSpecRequest.Name string              Required. the volume specification's name
+      --createVolumeSpecRequest.StepIops int             Required. the step iops value of the volume specification
+      --createVolumeSpecRequest.StepThroughput int       Required. the step throughput value of the volume specification
+      --createVolumeSpecRequest.StoragePoolUuid string   Required. the storage pool's Uuid
+  -h, --help     
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VolumeSpecUuid|string|true|the volume specification's uuid|
+|body|[CreateVolumeSpecRequest](#schemacreatevolumespecrequest)|true|the http post body|
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createVolumeSpecRequest.Description|string|false|description for the volume specification|
+|createVolumeSpecRequest.MaxIops|integer|true|none|
+|createVolumeSpecRequest.MaxThroughput|integer|true|the max throughput value of the volume specification|
+|createVolumeSpecRequest.MinIops|integer|true|the min iops value of the volume specification|
+|createVolumeSpecRequest.MinThroughput|integer|true|the min throughput value of the volume specification|
+|createVolumeSpecRequest.Name|string|true|the volume specification's name|
+|createVolumeSpecRequest.StepIops|integer|true|the step iops value of the volume specification|
+|createVolumeSpecRequest.StepThroughput|integer|true|the step throughput value of the volume specification|
+|createVolumeSpecRequest.StoragePoolUuid|string|true|the storage pool's Uuid|
 
 #### 示例
 
 命令行:
+
 ```
-chimecli volume_spec updateVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa --createVolumeSpecRequest.Name test-volume-spec --createVolumeSpecRequest.MaxIops 1000 --createVolumeSpecRequest.MinIops 500 --createVolumeSpecRequest.StepIops 10 --createVolumeSpecRequest.MaxThroughput 104857600 --createVolumeSpecRequest.MinThroughput 10485760 --createVolumeSpecRequest.StepThroughput 10485760 --createVolumeSpecRequest.StoragePoolUuid f5165a18-e6b3-42b4-8efc-ad496f318a0a
+chimecli volume_spec updateVolumeSpec \
+  --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa \
+  --createVolumeSpecRequest.Name test-volume-spec \
+  --createVolumeSpecRequest.MaxIops 1000 \
+  --createVolumeSpecRequest.MinIops 500 \
+  --createVolumeSpecRequest.StepIops 10 \
+  --createVolumeSpecRequest.MaxThroughput 104857600 \
+  --createVolumeSpecRequest.MinThroughput 10485760 \
+  --createVolumeSpecRequest.StepThroughput 10485760 \
+  --createVolumeSpecRequest.StoragePoolUuid f5165a18-e6b3-42b4-8efc-ad496f318a0a
 ```
+
+返回: 
 
 ```
 {
@@ -1515,14 +1807,33 @@ chimecli volume_spec updateVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8
 
 #### 命令原型
 
+```
+chimecli volume_spec deleteVolumeSpec --help
+delete a volume specification
+
+Usage:
+  chimecli volume_spec deleteVolumeSpec [flags]
+
+Flags:
+      --VolumeSpecUuid string   Required. the volume specification's uuid
+  -h, --help                    help for deleteVolumeSpec
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VolumeSpecUuid|string|true|the volume specification's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli volume_spec deleteVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
 ```
+
+返回:
 
 ```
 {
@@ -1536,14 +1847,42 @@ chimecli volume_spec deleteVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8
 
 #### 命令原型
 
+```
+chimecli volume_spec createClusterVolumeSpecRelation --help
+register a volume specification to the cluster
+
+Usage:
+  chimecli volume_spec createClusterVolumeSpecRelation [flags]
+
+Flags:
+      --AzUuid string                                          Required. the AZ's uuid
+      --Body string                                            Optional json string for [Body]. the http post body
+      --ClusterUuid string                                     Required. the cluster's uuid
+      --createClusterVolumeSpecRequest.VolumeSpecUuid string   Required. the volume specification's Uuid
+  -h, --help    
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|body|[CreateClusterVolumeSpecRequest](#schemacreateclustervolumespecrequest)|false|the http post body|
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|volume_spec_uuid|string|true|the volume specification's Uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli volume_spec createClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --createClusterVolumeSpecRequest.VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
 ```
+
+返回:
 
 ```
 {
@@ -1562,14 +1901,39 @@ chimecli volume_spec createClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289
 
 #### 命令原型
 
+```
+chimecli volume_spec deleteClusterVolumeSpecRelation --help
+unregister a volume specification from the cluster
+
+Usage:
+  chimecli volume_spec deleteClusterVolumeSpecRelation [flags]
+
+Flags:
+      --AzUuid string           Required. the AZ's uuid
+      --ClusterUuid string      Required. the cluster's uuid
+      --VolumeSpecUuid string   Required. the volume specification's uuid
+  -h, --help  
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|VolumeSpecUuid|string|true|the volume specification's uuid|
 
 #### 示例
 
 命令行:
+
 ```
-chimecli volume_spec deleteClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
+chimecli volume_spec deleteClusterVolumeSpecRelation \
+  --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 \
+  --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
 ```
+
+返回:
 
 ```
 {
@@ -1577,18 +1941,50 @@ chimecli volume_spec deleteClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289
   "result": 1
 }
 ```
+
 ### 查看集群的存储规格列表
 
 #### 命令原型
 
+```
+chimecli volume_spec listClusterVolumeSpecRelation --help
+list volume specifications
+
+Usage:
+  chimecli volume_spec listClusterVolumeSpecRelation [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+  -h, --help                 help for listClusterVolumeSpecRelation
+      --name string          filter by the 'name' field
+      --order string         'asc' or 'desc' of sorting
+      --page int             the page number of the results in paging
+      --size int             the page size of the results in paging
+      --sort string          the field to be sorted by
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli volume_spec listClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
+
+返回:
 
 ```
 {
@@ -1644,14 +2040,51 @@ chimecli volume_spec listClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289-4
 
 #### 命令原型
 
+```
+chimecli network listNetwork --help
+list networks
+
+Usage:
+  chimecli network listNetwork [flags]
+
+Flags:
+      --AzUuid string           Required. filter by AZ's uuid
+      --ClusterUuid string      Required. filter by the cluster's uuid
+  -h, --help                    help for listNetwork
+      --interface_name string   filter by network interface's name
+      --name string             filter by the 'name' field
+      --order string            'asc' or 'desc' of sorting
+      --page int                the page number of the results in paging
+      --size int                the page size of the results in paging
+      --sort string             the field to be sorted by
+      --state int               filter by the 'state' field
+      --type int                filter by network type(0: classical network, 1:vlan, 2:vxlan)
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer(int64)|false|the page number of the results in paging|
+|size|integer(int64)|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|integer(int64)|false|filter by the 'state' field|
+|type|integer(int64)|false|filter by network type(0: classical network, 1:vlan, 2:vxlan)|
+|interface_name|string|false|filter by network interface's name|
+|AzUuid|string|true|filter by AZ's uuid|
+|ClusterUuid|string|true|filter by the cluster's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli network listNetwork --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
+
+返回:
 
 ```
 {
@@ -1682,14 +2115,53 @@ chimecli network listNetwork --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 
 #### 命令原型
 
+```
+chimecli network createNetwork --help
+create a network
+
+Usage:
+  chimecli network createNetwork [flags]
+
+Flags:
+      --AzUuid string                               Required. the AZ's uuid
+      --Body string                                 Optional json string for [Body]. the http post body
+      --ClusterUuid string                          Required. the cluster's uuid
+      --createNetworkRequest.Description string     description for the network
+      --createNetworkRequest.InterfaceName string   Required. the unified interface name which the network uses in the node
+      --createNetworkRequest.Name string            Required. the network's name
+      --createNetworkRequest.Type int               the network's type, can be: classical, vlan and vxlan
+  -h, --help    
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|body|[CreateNetworkRequest](#schemacreatenetworkrequest)|false|the http post body|
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createNetworkRequest.Description|string|false|description for the network|
+|createNetworkRequest.InterfaceName|string|true|the unified interface name which the network uses in the node|
+|createNetworkRequest.Name|string|true|the network's name|
+|createNetworkRequest.Type|integer|false|the network's type, can be: classical, vlan and vxlan|
 
 #### 示例
 
 命令行:
+
 ```
-chimecli network createNetwork --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --createNetworkRequest.Type 0 --createNetworkRequest.Name br1 --createNetworkRequest.InterfaceName ens224
+chimecli network createNetwork \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 \
+  --createNetworkRequest.Type 0 \
+  --createNetworkRequest.Name br1 \
+  --createNetworkRequest.InterfaceName ens224
 ```
+
+返回: 
 
 ```
 {
@@ -1716,14 +2188,37 @@ chimecli network createNetwork --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --C
 
 #### 命令原型
 
+```
+chimecli network getNetwork --help
+get network's detailed information
+
+Usage:
+  chimecli network getNetwork [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+      --NetworkUuid string   Required. the network's uuid
+  -h, --help                 help for getNetwork
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|NetworkUuid|string|true|the network's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli network getNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6
 ```
+
+返回:
 
 ```
 {
@@ -1750,14 +2245,46 @@ chimecli network getNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6
 
 #### 命令原型
 
+```
+chimecli network updateNetwork --help
+update a network
+
+Usage:
+  chimecli network updateNetwork [flags]
+
+Flags:
+      --AzUuid string                             Required. the AZ's uuid
+      --Body string                               Optional json string for [Body]. the http post body
+      --ClusterUuid string                        Required. the cluster's uuid
+      --NetworkUuid string                        Required. the network's uuid
+  -h, --help                                      help for updateNetwork
+      --updateNetworkRequest.Description string   description for the network
+      --updateNetworkRequest.Name string          Required. the network's name
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|NetworkUuid|string|true|the network's uuid|
+|body|[UpdateNetworkRequest](#schemaupdatenetworkrequest)|false|the http post body|
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|updateNetworkRequest.Description|string|false|description for the network|
+|updateNetworkRequest.Name|string|true|the network's name|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli network updateNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6 --updateNetworkRequest.Name br1 --updateNetworkRequest.Description br1-network
 ```
+
+返回:
 
 ```
 {
@@ -1767,18 +2294,42 @@ chimecli network updateNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b
   }
 }
 ```
+
 ### 删除网络
 
 #### 命令原型
 
+```
+chimecli network deleteNetwork --help
+delete a network
+
+Usage:
+  chimecli network deleteNetwork [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+      --NetworkUuid string   Required. the network's uuid
+  -h, --help 
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|NetworkUuid|string|true|the network's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli network deleteNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6
 ```
+
+返回:
 
 ```
 {
@@ -1791,14 +2342,54 @@ chimecli network deleteNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b
 
 #### 命令原型
 
+```
+chimecli network listSubnet --help
+list subnets
+
+Usage:
+  chimecli network listSubnet [flags]
+
+Flags:
+      --AzUuid string        Required. filter by AZ's uuid
+      --ClusterUuid string   Required. filter by cluster's uuid
+      --NetworkUuid string   Required. filter by network's uuid
+  -h, --help                 help for listSubnet
+      --name string          filter by the 'name' field
+      --order string         'asc' or 'desc' of sorting
+      --page int             the page number of the results in paging
+      --size int             the page size of the results in paging
+      --sort string          the field to be sorted by
+      --state int            filter by the 'state' field
+      --type int             filter by subnet's type
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|integer|false|filter by the 'state' field|
+|type|integer|false|filter by subnet's type|
+|AzUuid|string|true|filter by AZ's uuid|
+|ClusterUuid|string|true|filter by cluster's uuid|
+|NetworkUuid|string|true|filter by network's uuid|
 
 #### 示例
 
 命令行:
+
 ```
-chimecli network listSubnet --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
+chimecli network listSubnet \
+  --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
+
+返回:
 
 ```
 {
@@ -1829,14 +2420,55 @@ chimecli network listSubnet --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e -
 
 #### 命令原型
 
+```
+chimecli network createSubnet --help
+create a subnet
+
+Usage:
+  chimecli network createSubnet [flags]
+
+Flags:
+      --AzUuid string                            Required. the AZ's uuid
+      --Body string                              Optional json string for [Body]. the http post body
+      --ClusterUuid string                       Required. the cluster's uuid
+      --NetworkUuid string                       Required. the network's uuid
+      --createSubnetRequest.CIDR string          Required. the CIDR value, e.g. 192.168.231.1/24
+      --createSubnetRequest.Description string   description for the subnet
+      --createSubnetRequest.Gateway string       the gateway of the subnet
+      --createSubnetRequest.Name string          Required. the subnet's name
+      --createSubnetRequest.ReservedIps string   the reserved ips inside the subnet, which will not be assigned to virtual machines
+  -h, --help  
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|NetworkUuid|string|true|the network's uuid|
+|body|[CreateSubnetRequest](#schemacreatesubnetrequest)|false|the http post body|
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createSubnetRequest.Cidr|string|true|the CIDR value, e.g. 192.168.231.1/24|
+|createSubnetRequest.Description|string|false|description for the subnet|
+|createSubnetRequest.Gateway|string|false|the gateway of the subnet|
+|createSubnetRequest.Name|string|true|the subnet's name|
+|createSubnetRequest.ReservedIps|string|false|the reserved ips inside the subnet, which will not be assigned to virtual machines|
 
 #### 示例
 
 命令行:
+
 ```
-chimecli network createSubnet --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e --createSubnetRequest.CIDR 192.168.231.200/30 --createSubnetRequest.Name subnet2
+chimecli network createSubnet \
+  --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e \
+  --createSubnetRequest.CIDR 192.168.231.200/30 \
+  --createSubnetRequest.Name subnet2
 ```
+
+返回:
 
 ```
 {
@@ -1858,18 +2490,44 @@ chimecli network createSubnet --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e
   }
 }
 ```
+
 ### 查看子网
 
 #### 命令原型
 
+```
+chimecli network getSubnet --help
+get a subnet's detailed information
+
+Usage:
+  chimecli network getSubnet [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+      --NetworkUuid string   Required. the network's uuid
+      --SubnetUuid string    Required. the subnet's uuid
+  -h, --help  
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|NetworkUuid|string|true|the network's uuid|
+|SubnetUuid|string|true|the subnet's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli network getSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5
 ```
+
+返回:
 
 ```
 {
@@ -1896,14 +2554,59 @@ chimecli network getSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5
 
 #### 命令原型
 
+```
+chimecli network updateSubnet --help
+update a subnet
+
+Usage:
+  chimecli network updateSubnet [flags]
+
+Flags:
+      --AzUuid string                            Required. the AZ's uuid
+      --Body string                              Optional json string for [Body]. the http post body
+      --ClusterUuid string                       Required. the cluster's uuid
+      --NetworkUuid string                       Required. the network's uuid
+      --SubnetUuid string                        Required. the subnet's uuid
+      --createSubnetRequest.CIDR string          Required. the CIDR value, e.g. 192.168.231.1/24
+      --createSubnetRequest.Description string   description for the subnet
+      --createSubnetRequest.Gateway string       the gateway of the subnet
+      --createSubnetRequest.Name string          Required. the subnet's name
+      --createSubnetRequest.ReservedIps string   the reserved ips inside the subnet, which will not be assigned to virtual machines
+  -h, --help   
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|NetworkUuid|string|true|the network's uuid|
+|SubnetUuid|string|true|the subnet's uuid|
+|body|[CreateSubnetRequest](#schemacreatesubnetrequest)|false|the http post body|
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createSubnetRequest.Cidr|string|true|the CIDR value, e.g. 192.168.231.1/24|
+|createSubnetRequest.Description|string|false|description for the subnet|
+|createSubnetRequest.Gateway|string|false|the gateway of the subnet|
+|createSubnetRequest.Name|string|true|the subnet's name|
+|createSubnetRequest.ReservedIps|string|false|the reserved ips inside the subnet, which will not be assigned to virtual machines|
 
 #### 示例
 
 命令行:
+
 ```
-chimecli network updateSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5 --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e --createSubnetRequest.CIDR 192.168.231.200/32 --createSubnetRequest.ReservedIps 192.168.231.128,192.168.231.158 --createSubnetRequest.Name subnet2
+chimecli network updateSubnet \
+  --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5 \
+  --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e \
+  --createSubnetRequest.CIDR 192.168.231.200/32 \
+  --createSubnetRequest.ReservedIps 192.168.231.128,192.168.231.158 \
+  --createSubnetRequest.Name subnet2
 ```
+
+返回:
 
 ```
 {
@@ -1918,14 +2621,39 @@ chimecli network updateSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5 
 
 #### 命令原型
 
+```
+chimecli network deleteSubnet --help
+delete a subnet
+
+Usage:
+  chimecli network deleteSubnet [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+      --NetworkUuid string   Required. the network's uuid
+      --SubnetUuid string    Required. the subnet's uuid
+  -h, --help  
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|NetworkUuid|string|true|the network's uuid|
+|SubnetUuid|string|true|the subnet's uuid|
 
 #### 示例
 
 命令行:
+
 ```
 chimecli network deleteSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5
 ```
+
+返回:
 
 ```
 {

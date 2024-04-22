@@ -1,22 +1,67 @@
 ---
-title: 4 命令行CLI介绍
+title: 4 CLI介绍
 weight: 4
-description: 介绍ChimeStack的命令行工具的使用方法
+description: 本章介绍ChimeStack命令行工具(CLI的使用方法
 ---
 
 ## 概述
 
 
-## AZ相关命令
+## 可用区(AZ)操作命令
 
 
-## Cluster相关命令
+## 集群(Cluster)操作命令
 
 ### 查看Cluster列表
+
+#### 命令原型
+
+```
+chimecli cluster listCluster --help
+This will show clusters
+
+Usage:
+  chimecli cluster listCluster [flags]
+
+Flags:
+      --AzUuid string            Required. filter by the AZ's uuid
+      --arch string              filter by the cluster's architecture
+  -h, --help                     help for listCluster
+      --hypervisor_type string   filter by the cluster's hypervisor type
+      --name string              filter by the 'name' field
+      --order string             'asc' or 'desc' of sorting
+      --page int                 the page number of the results in paging
+      --size int                 the page size of the results in paging
+      --sort string              the field to be sorted by
+      --state int                filter by the 'state' field
+      --type int                 filter by the cluster's type (0: hyperconveged, 1:computing only, 2: storage only)
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|filter by the AZ's uuid|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|integer|false|filter by the 'state' field|
+|type|integer|false|filter by the cluster's type (0: hyperconveged, 1:computing only, 2: storage only)|
+|hypervisor_type|string|false|filter by the cluster's hypervisor type|
+|arch|string|false|filter by the cluster's architecture|
+
+
+#### 示例
+
+命令行:
 
 ```
 chimecli cluster listCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865
 ```
+
+返回:
 
 ```
 {
@@ -56,9 +101,58 @@ chimecli cluster listCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865
 
 ### 创建Cluster 
 
+#### 命令原型
+
 ```
- chimecli cluster createCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --createClusterRequest.Arch x86 --createClusterRequest.HypervisorType kvm --createClusterRequest.Name test-cluster --createClusterRequest.Type 1 
+chimecli cluster createCluster --help
+This will create a cluster in a specified Az
+
+Usage:
+  chimecli cluster createCluster [flags]
+
+Flags:
+      --AzUuid string                                Required. the AZ's uuid
+      --Body string                                  Optional json string for [Body]. the http post body
+      --createClusterRequest.Arch string             the cluster's architecture, like x86_64, arm, ...
+      --createClusterRequest.Description string      description for the cluster
+      --createClusterRequest.HypervisorType string   the cluster's hypervisor type, like kvm (default), xen, ...
+      --createClusterRequest.Name string             Required. the cluster's name
+      --createClusterRequest.Type int                the cluster's type
+  -h, --help  
 ```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|body|[CreateClusterRequest](#schemacreateclusterrequest)|false|the http post body|
+
+
+**命令行替代body参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|CreateClusterRequest.Arch|string|false|the cluster's architecture, like x86_64, arm, ...|
+|CreateClusterRequest.Description|string|false|description for the cluster|
+|CreateClusterRequest.HypervisorType|string|false|the cluster's hypervisor type, like kvm (default), xen, ...|
+|CreateClusterRequest.Name|string|true|the cluster's name|
+|CreateClusterRequest.Type|integer|false|the cluster's type|
+
+#### 示例
+
+命令行:
+
+```
+ chimecli cluster createCluster \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --createClusterRequest.Arch x86 \
+  --createClusterRequest.HypervisorType kvm \
+  --createClusterRequest.Name test-cluster \
+  --createClusterRequest.Type 1 
+```
+
+返回:
 
 ```
 {
@@ -81,9 +175,40 @@ chimecli cluster listCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865
 
 ### 查看Cluster 
 
+#### 命令原型
+
 ```
-chimecli cluster getCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
+chimecli cluster getCluster --help
+This will describe a cluster
+
+Usage:
+  chimecli cluster getCluster [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+  -h, --help                 help for getCluster
+
 ```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+
+#### 示例
+
+命令行:
+
+```
+chimecli cluster getCluster \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
+```
+
+返回: 
 
 ```
 {
@@ -107,9 +232,54 @@ chimecli cluster getCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --Clus
 
 ### 修改Cluster 
 
+#### 命令原型
+
+```
+chimecli cluster updateCluster --help
+This will update a cluster.
+
+Usage:
+  chimecli cluster updateCluster [flags]
+
+Flags:
+      --AzUuid string                                Required. the AZ's uuid
+      --Body string                                  Optional json string for [Body]. the http post body
+      --ClusterUuid string                           Required. the cluster's uuid
+      --createClusterRequest.Arch string             the cluster's architecture, like x86_64, arm, ...
+      --createClusterRequest.Description string      description for the cluster
+      --createClusterRequest.HypervisorType string   the cluster's hypervisor type, like kvm (default), xen, ...
+      --createClusterRequest.Name string             Required. the cluster's name
+      --createClusterRequest.Type int                the cluster's type
+  -h, --help  
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|body|[CreateClusterRequest](#schemacreateclusterrequest)|true|the http post body|
+
+**命令行替代body参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|CreateClusterRequest.Arch|string|false|the cluster's architecture, like x86_64, arm, ...|
+|CreateClusterRequest.Description|string|false|description for the cluster|
+|CreateClusterRequest.HypervisorType|string|false|the cluster's hypervisor type, like kvm (default), xen, ...|
+|CreateClusterRequest.Name|string|true|the cluster's name|
+|CreateClusterRequest.Type|integer|false|the cluster's type|
+
+#### 示例
+
+命令行:
+
 ```
 chimecli cluster updateCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e --createClusterRequest.Description 'cluster description' --createClusterRequest.Name 'test-cluster' 
 ```
+
+返回:
 
 ```
 {
@@ -122,9 +292,37 @@ chimecli cluster updateCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --C
 
 ### 启用Cluster 
 
+#### 命令原型
+
+```
+chimecli cluster enableCluster --help
+This will enable a cluster
+
+Usage:
+  chimecli cluster enableCluster [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+  -h, --help                 help for enableCluster
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+
+#### 示例
+
+命令行:
+
 ```
 chimecli cluster enableCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
 ```
+
+返回:
 
 ```
 {
@@ -137,9 +335,37 @@ chimecli cluster enableCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --C
 
 ### 停用Cluster 
 
+#### 命令原型
+
+```
+chimecli cluster disableCluster --help
+This will disable a cluster
+
+Usage:
+  chimecli cluster disableCluster [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+  -h, --help                 help for disableCluster
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+
+#### 示例
+
+命令行:
+
 ```
 chimecli cluster disableCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
 ```
+
+返回:
 
 ```
 {
@@ -152,9 +378,38 @@ chimecli cluster disableCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --
 
 ### 删除Cluster 
 
+
+#### 命令原型
+
+```
+chimecli cluster deleteCluster --help
+This will delete a cluster
+
+Usage:
+  chimecli cluster deleteCluster [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+  -h, --help                 help for deleteCluster
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+
+#### 示例
+
+命令行:
+
 ```
 chimecli cluster deleteCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
 ```
+
+返回: 
 
 ```
 {
@@ -167,9 +422,54 @@ chimecli cluster deleteCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --C
 
 ### 查看Host列表
 
+#### 命令原型
+
+```
+chimecli host listHost --help
+This will show hosts
+
+Usage:
+  chimecli host listHost [flags]
+
+Flags:
+      --AzUuid string        Required. filter by the AZ's uuid
+      --ClusterUuid string   Required. filter by the cluster's uuid
+  -h, --help                 help for listHost
+      --manage_ip string     filter by the host's management IP address
+      --name string          filter by the 'name' field
+      --order string         'asc' or 'desc' of sorting
+      --page int             the page number of the results in paging
+      --rack_name string     filter by the rack's name
+      --size int             the page size of the results in paging
+      --sort string          the field to be sorted by
+      --state int            filter by the 'state' field
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|integer|false|filter by the 'state' field|
+|rack_name|string|false|filter by the rack's name|
+|manage_ip|string|false|filter by the host's management IP address|
+|AzUuid|true|filter by the AZ's uuid|
+|ClusterUuid|string|true|filter by the cluster's uuid|
+
+#### 示例
+
+命令行:
+
 ```
 chimecli host listHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
 ```
+
+返回:
+
 
 ```
 {
@@ -225,6 +525,49 @@ chimecli host listHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUu
 
 ### 新注册Host
 
+#### 命令原型
+
+```
+chimecli host createHost --help
+This will create a host
+
+Usage:
+  chimecli host createHost [flags]
+
+Flags:
+      --AzUuid string                           Required. the AZ's uuid
+      --Body string                             Optional json string for [Body]. the http post body
+      --ClusterUuid string                      Required. the cluster's uuid
+      --createHostRequest.CpuRatio float32      the CPU's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical CPUs in the node.
+      --createHostRequest.CpuReserved int       the reserverd CPU number, which will not be allocated to virtual machines.
+      --createHostRequest.Description string    description for the host
+      --createHostRequest.MemoryRatio float32   the memory's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical memory in the node.
+      --createHostRequest.MemoryReserved int    the reserverd memory number, which will not be allocated to virtual machines.
+      --createHostRequest.Uuid string           Required. the host's Uuid
+  -h, --help     
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|body|[CreateHostRequest](#schemacreatehostrequest)|false|the http post body|
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|cpu_ratio|float|false|the CPU's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical CPUs in the node.|
+|description|string|false|description for the host|
+|memory_ratio|float|false|the memory's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical memory in the node.|
+|reserved_memory|integer|false|the reserverd memory number, which will not be allocated to virtual machines.|
+|reserved_vcpus|integer|false|the reserverd CPU number, which will not be allocated to virtual machines.|
+|uuid|string|true|the host's Uuid|
+
+#### 示例
+
+命令行:
+
 ```
 chimecli host createHost 
     --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
@@ -235,6 +578,8 @@ chimecli host createHost
     --createHostRequest.MemoryReserved 1024 \
     --createHostRequest.Uuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
+
+返回:
 
 ```
 {
@@ -266,9 +611,39 @@ chimecli host createHost
 
 ### 查看Host详情
 
+#### 命令原型
+
+```
+chimecli host getHost --help
+This will describe a host
+
+Usage:
+  chimecli host getHost [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+      --HostUuid string      Required. the host's uuid
+  -h, --help                 help for getHost
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|HostUuid|string|true|the host's uuid|
+
+#### 示例
+
+命令行:
+
 ```
 chimecli host getHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
+
+返回:
 
 ```
 {
@@ -300,9 +675,54 @@ chimecli host getHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUui
 
 ### 修改Host 
 
+#### 命令原型
+
+```
+chimecli host updateHost --help
+This will update a host.
+
+Usage:
+  chimecli host updateHost [flags]
+
+Flags:
+      --AzUuid string                           Required. the AZ's uuid
+      --Body string                             Optional json string for [Body]. the http post body
+      --ClusterUuid string                      Required. the cluster's uuid
+      --HostUuid string                         Required. the host's uuid
+  -h, --help                                    help for updateHost
+      --updateHostRequest.CpuRatio float32      the CPU's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical CPUs in the node.
+      --updateHostRequest.CpuReserved int       the reserverd CPU number, which will not be allocated to virtual machines.
+      --updateHostRequest.Description string    description for the host
+      --updateHostRequest.MemoryRatio float32   the memory's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical memory in the node.
+      --updateHostRequest.MemoryReserved int    the reserverd memory number, which will not be allocated to virtual machines.
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|HostUuid|string|true|the host's uuid|
+|body|[UpdateHostRequest](#schemaupdatehostrequest)|true|the http post body|
+
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|UpdateHostRequest.CpuRatio|float|false|the CPU's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical CPUs in the node.|
+|UpdateHostRequest.Description|string|false|description for the host|
+|UpdateHostRequest.MemoryRatio|float|false|the memory's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical memory in the node.|
+|UpdateHostRequest.ReservedMemory|integer|false|the reserverd memory number, which will not be allocated to virtual machines.|
+|UpdateHostRequest.ReservedVcpus|integer|false|the reserverd CPU number, which will not be allocated to virtual machines.|
+
+#### 示例
+
+命令行:
 ```
 chimecli host updateHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a --updateHostRequest.CpuRatio 2.0 --updateHostRequest.CpuReserved 1 --updateHostRequest.MemoryRatio 2.0 --updateHostRequest.MemoryReserved 0
 ```
+
+返回:
 
 ```
 {
@@ -315,9 +735,39 @@ chimecli host updateHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --Cluster
 
 ### 删除Host
 
+#### 命令原型
+
+```
+chimecli host deleteHost --help
+This will delete a host
+
+Usage:
+  chimecli host deleteHost [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+      --HostUuid string      Required. the host's uuid
+  -h, --help                 help for deleteHost
+  ```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|HostUuid|string|true|the host's uuid|
+
+#### 示例
+
+命令行:
+
 ```
 chimecli host deleteHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
+
+返回:
 
 ```
 {
@@ -328,9 +778,38 @@ chimecli host deleteHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --Cluster
 
 ### 启用Host
 
+#### 命令原型
+
+```
+chimecli host enableHost --help
+This will enable a host
+
+Usage:
+  chimecli host enableHost [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+      --HostUuid string      Required. the host's uuid
+  -h, --help                 help for enableHost
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|HostUuid|string|true|the host's uuid|
+
+#### 示例
+
+命令行:
 ```
 chimecli host enableHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
+
+返回:
 
 ```
 {
@@ -343,9 +822,38 @@ chimecli host enableHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --Cluster
 
 ### 停用Host 
 
+#### 命令原型
+
+```
+chimecli host disableHost --help
+This will disable a host
+
+Usage:
+  chimecli host disableHost [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+      --HostUuid string      Required. the host's uuid
+  -h, --help                 help for disableHost
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|HostUuid|string|true|the host's uuid|
+
+#### 示例
+
+命令行:
 ```
 chimecli host disableHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
+
+返回:
 
 ```
 {
@@ -356,12 +864,40 @@ chimecli host disableHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --Cluste
 }
 ```
 
-
 ### 挂起Host 
 
+#### 命令原型
+
+```
+chimecli host suspendHost --help
+This will suspend a host
+
+Usage:
+  chimecli host suspendHost [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+      --HostUuid string      Required. the host's uuid
+  -h, --help                 help for suspendHost
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|HostUuid|string|true|the host's uuid|
+
+#### 示例
+
+命令行:
 ```
 chimecli host suspendHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
+
+返回:
 
 ```
 {
@@ -374,9 +910,51 @@ chimecli host suspendHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --Cluste
 
 ### 查看物理节点列表
 
+#### 命令原型
+
+```
+chimecli host listClient --help
+This will show available clients
+
+Usage:
+  chimecli host listClient [flags]
+
+Flags:
+      --all int            retrieve all the clients
+  -h, --help               help for listClient
+      --manage_ip string   filter by the client's management IP address
+      --name string        filter by the 'name' field
+      --order string       'asc' or 'desc' of sorting
+      --page int           the page number of the results in paging
+      --rack_name string   filter by the rack's name
+      --size int           the page size of the results in paging
+      --sort string        the field to be sorted by
+      --state int          filter by the 'state' field
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|integer|false|filter by the 'state' field|
+|rack_name|string|false|filter by the rack's name|
+|manage_ip|string|false|filter by the client's management IP address|
+|all|integer|false|retrieve all the clients|
+
+#### 示例
+
+命令行:
+
 ```
 chimecli host listClient
 ```
+
+返回: 
 
 ```
 {
@@ -422,9 +1000,45 @@ chimecli host listClient
 
 ### 获取计算规格列表
 
+#### 命令原型
+
+```
+chimecli instance_spec listInstanceSpec --help
+list instance specifications
+
+Usage:
+  chimecli instance_spec listInstanceSpec [flags]
+
+Flags:
+  -h, --help           help for listInstanceSpec
+      --name string    filter by the 'name' field
+      --order string   'asc' or 'desc' of sorting
+      --page int       the page number of the results in paging
+      --size int       the page size of the results in paging
+      --sort string    the field to be sorted by
+      --type int       filter by the instance specification's type(0: shared, 1: dedicated)
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|type|integer|false|filter by the instance specification's type(0: shared, 1: dedicated)|
+
+#### 示例
+
+命令行:
+
 ```
 chimecli instance_spec listInstanceSpec
 ```
+
+返回:
 
 ```
 {
@@ -484,9 +1098,48 @@ chimecli instance_spec listInstanceSpec
 
 ### 新建计算规格
 
+#### 命令原型
+
+```
+chimecli instance_spec createInstanceSpec --help
+create an instance specification
+
+Usage:
+  chimecli instance_spec createInstanceSpec [flags]
+
+Flags:
+      --Body string                                    Optional json string for [Body]. the http post body
+      --createInstanceSpecRequest.Description string   description for the instance specification
+      --createInstanceSpecRequest.Memory int           Required. the number of memory
+      --createInstanceSpecRequest.Name string          Required. the instance specification's name
+      --createInstanceSpecRequest.Type int             the instance specification's type, 0: shared resource, 1: dedicated resource
+      --createInstanceSpecRequest.Vcpus int            Required. the number of vCPUs
+  -h, --help     
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|body|[CreateInstanceSpecRequest](#schemacreateinstancespecrequest)|false|the http post body|
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|CreateInstanceSpecRequest.Description|string|false|description for the instance specification|
+|CreateInstanceSpecRequest.Memory|integer|true|the number of memory|
+|CreateInstanceSpecRequest.Name|string|true|the instance specification's name|
+|CreateInstanceSpecRequest.Type|integer|false|the instance specification's type, 0: shared resource, 1: dedicated resource|
+|CreateInstanceSpecRequest.Vcpus|integer|true|the number of vCPUs|
+
+#### 示例
+
+命令行:
+
 ```
 chimecli instance_spec createInstanceSpec --createInstanceSpecRequest.Name test-spec --createInstanceSpecRequest.Type 1 --createInstanceSpecRequest.Vcpus 1 --createInstanceSpecRequest.Memory 16777216
 ```
+
+返回:
 
 ```
 {
@@ -509,6 +1162,13 @@ chimecli instance_spec createInstanceSpec --createInstanceSpecRequest.Name test-
 
 ### 查看计算规格
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli instance_spec getInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
 ```
@@ -535,6 +1195,13 @@ chimecli instance_spec getInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-906
 
 ### 修改计算规格
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli instance_spec updateInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c --createInstanceSpecRequest.Type 1 --createInstanceSpecRequest.Vcpus 2 --createInstanceSpecRequest.Name test-spec --createInstanceSpecRequest.Memory 16777216
 ```
@@ -550,6 +1217,13 @@ chimecli instance_spec updateInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-
 
 ### 删除计算规格
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli instance_spec deleteInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c 
 {"requestId":"1b24222f-0158-4d10-84c8-c478157e2465","result":1}
@@ -564,6 +1238,13 @@ chimecli instance_spec deleteInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-
 
 ### 关联计算规格到集群
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli instance_spec createClusterInstanceSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --createClusterInstanceSpecRequest.InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
 ```
@@ -583,6 +1264,13 @@ chimecli instance_spec createClusterInstanceSpecRelation --ClusterUuid 65bbc21f-
 
 ### 解除计算规格和集群的关联
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli instance_spec deleteClusterInstanceSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
 ```
@@ -596,6 +1284,13 @@ chimecli instance_spec deleteClusterInstanceSpecRelation --ClusterUuid 65bbc21f-
 
 ### 查看集群的计算规格列表
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli instance_spec listClusterInstanceSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
@@ -646,8 +1341,16 @@ chimecli instance_spec listClusterInstanceSpecRelation --ClusterUuid 65bbc21f-02
 
 ## 存储规格相关命令
 
+
 ### 获取存储规格列表
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli volume_spec listVolumeSpec
 ```
@@ -714,6 +1417,13 @@ chimecli volume_spec listVolumeSpec
 
 ### 新建存储规格
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli volume_spec createVolumeSpec --createVolumeSpecRequest.Name test-volume-spec --createVolumeSpecRequest.MaxIops 1000 --createVolumeSpecRequest.MinIops 500 --createVolumeSpecRequest.StepIops 10 --createVolumeSpecRequest.MaxThroughput 104857600 --createVolumeSpecRequest.MinThroughput 10485760 --createVolumeSpecRequest.StepThroughput 1048576 --createVolumeSpecRequest.StoragePoolUuid f5165a18-e6b3-42b4-8efc-ad496f318a0a
 ```
@@ -744,6 +1454,13 @@ chimecli volume_spec createVolumeSpec --createVolumeSpecRequest.Name test-volume
 
 ### 查看存储规格
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli volume_spec getVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
 ```
@@ -774,6 +1491,13 @@ chimecli volume_spec getVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5c
 
 ### 修改存储规格
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli volume_spec updateVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa --createVolumeSpecRequest.Name test-volume-spec --createVolumeSpecRequest.MaxIops 1000 --createVolumeSpecRequest.MinIops 500 --createVolumeSpecRequest.StepIops 10 --createVolumeSpecRequest.MaxThroughput 104857600 --createVolumeSpecRequest.MinThroughput 10485760 --createVolumeSpecRequest.StepThroughput 10485760 --createVolumeSpecRequest.StoragePoolUuid f5165a18-e6b3-42b4-8efc-ad496f318a0a
 ```
@@ -789,6 +1513,13 @@ chimecli volume_spec updateVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8
 
 ### 删除存储规格
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli volume_spec deleteVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
 ```
@@ -803,6 +1534,13 @@ chimecli volume_spec deleteVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8
 
 ### 关联存储规格到集群
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli volume_spec createClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --createClusterVolumeSpecRequest.VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
 ```
@@ -822,6 +1560,13 @@ chimecli volume_spec createClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289
 
 ### 解除关联存储规格和集群
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli volume_spec deleteClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
 ```
@@ -834,6 +1579,13 @@ chimecli volume_spec deleteClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289
 ```
 ### 查看集群的存储规格列表
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli volume_spec listClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
@@ -890,6 +1642,13 @@ chimecli volume_spec listClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289-4
 
 ### 获取网络列表
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli network listNetwork --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
@@ -921,6 +1680,13 @@ chimecli network listNetwork --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 
 ### 新建网络
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli network createNetwork --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --createNetworkRequest.Type 0 --createNetworkRequest.Name br1 --createNetworkRequest.InterfaceName ens224
 ```
@@ -948,6 +1714,13 @@ chimecli network createNetwork --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --C
 
 ### 查看网络
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli network getNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6
 ```
@@ -975,6 +1748,13 @@ chimecli network getNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6
 
 ### 修改网络
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli network updateNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6 --updateNetworkRequest.Name br1 --updateNetworkRequest.Description br1-network
 ```
@@ -989,6 +1769,13 @@ chimecli network updateNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b
 ```
 ### 删除网络
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli network deleteNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6
 ```
@@ -1002,6 +1789,13 @@ chimecli network deleteNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b
 
 ### 获取子网列表
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli network listSubnet --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
@@ -1033,6 +1827,13 @@ chimecli network listSubnet --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e -
 
 ### 新建子网
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli network createSubnet --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e --createSubnetRequest.CIDR 192.168.231.200/30 --createSubnetRequest.Name subnet2
 ```
@@ -1059,6 +1860,13 @@ chimecli network createSubnet --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e
 ```
 ### 查看子网
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli network getSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5
 ```
@@ -1086,6 +1894,13 @@ chimecli network getSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5
 
 ### 更新子网
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli network updateSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5 --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e --createSubnetRequest.CIDR 192.168.231.200/32 --createSubnetRequest.ReservedIps 192.168.231.128,192.168.231.158 --createSubnetRequest.Name subnet2
 ```
@@ -1101,6 +1916,13 @@ chimecli network updateSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5 
 
 ### 删除子网
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli network deleteSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5
 ```
@@ -1116,6 +1938,13 @@ chimecli network deleteSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5
 
 ### 获取存储池列表
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli storage_pool listStoragePool --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
@@ -1151,6 +1980,13 @@ chimecli storage_pool listStoragePool --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97
 
 ### 新建存储池
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli storage_pool createStoragePool --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --createStoragePoolRequest.BackendPath /chime/backend --createStoragePoolRequest.ImageCachePath /chime/cache --createStoragePoolRequest.Name new-storagepool --createStoragePoolRequest.PhysicalSize 1048576000 --createStoragePoolRequest.ReservedSize 0 --createStoragePoolRequest.SizeRatio 2 --createStoragePoolRequest.Type 0
 ```
@@ -1182,6 +2018,13 @@ chimecli storage_pool createStoragePool --ClusterUuid 65bbc21f-0289-4bbf-9517-6b
 
 ### 查看存储池
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli storage_pool getStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4f-fb45c95b618b
 ```
@@ -1212,6 +2055,13 @@ chimecli storage_pool getStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4f-f
 ```
 ### 更新存储池
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli storage_pool updateStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4f-fb45c95b618b --createStoragePoolRequest.BackendPath /chime/backend1 --createStoragePoolRequest.ImageCachePath /chime/cache --createStoragePoolRequest.PhysicalSize 104857600 --createStoragePoolRequest.SizeRatio 3 --createStoragePoolRequest.Type 0 --createStoragePoolRequest.Name new-storagepool
 ```
@@ -1227,6 +2077,13 @@ chimecli storage_pool updateStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4
 
 ### 删除存储池
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli storage_pool deleteStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4f-fb45c95b618b
 ```
@@ -1241,6 +2098,14 @@ chimecli storage_pool deleteStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4
 ## 镜像相关命令
 
 ### 镜像列表
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli image listImage
@@ -1276,6 +2141,14 @@ chimecli image listImage
 ```
 
 ### 新建公有镜像
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli image createPublicImage \
@@ -1313,6 +2186,13 @@ chimecli image createPublicImage \
 
 ### 新建私有镜像
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli image createUserImage \
     --createImageRequest.Format qcow2 \
@@ -1349,6 +2229,13 @@ chimecli image createUserImage \
 
 ### 查询镜像
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli image getImage --ImageUuid fb11078f-8af8-4247-adfe-295459f29646
 ```
@@ -1380,6 +2267,13 @@ chimecli image getImage --ImageUuid fb11078f-8af8-4247-adfe-295459f29646
 
 ### 更新镜像
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli image updateImage \
     --ImageUuid fb11078f-8af8-4247-adfe-295459f29646 \
@@ -1397,6 +2291,14 @@ chimecli image updateImage \
 
 ### 删除镜像
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli image deleteImage --ImageUuid fb11078f-8af8-4247-adfe-295459f29646
 ```
@@ -1409,6 +2311,14 @@ chimecli image deleteImage --ImageUuid fb11078f-8af8-4247-adfe-295459f29646
 ```
 
 ### 镜像源列表
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli image listImageBucket
@@ -1461,6 +2371,14 @@ chimecli image listImageBucket
 
 ### 查看镜像源
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli image getImageBucket --ImageBucketUuid 9c15f4cb-5f6d-4e45-818f-a4315c54240c
 ```
@@ -1487,6 +2405,14 @@ chimecli image getImageBucket --ImageBucketUuid 9c15f4cb-5f6d-4e45-818f-a4315c54
 ## 报警相关命令
 
 ### 报警列表
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli alert listAlert
@@ -1616,6 +2542,14 @@ chimecli alert listAlert
 
 ### 查看报警详情
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli alert getAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e
 ```
@@ -1641,6 +2575,14 @@ chimecli alert getAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e
 
 ### 接受报警
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli alert acceptAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e --acceptAlertRequest.Comment "accepted"
 ```
@@ -1654,6 +2596,14 @@ chimecli alert acceptAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e --ac
 
 ### 删除报警
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli alert deleteAlert --AlertUuid c24f4240-6e5e-418b-911f-fa46fe173888
 ```
@@ -1666,6 +2616,14 @@ chimecli alert deleteAlert --AlertUuid c24f4240-6e5e-418b-911f-fa46fe173888
 ```
 
 ### 查看报警规则列表
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli alert listAlertRule
@@ -1737,6 +2695,14 @@ chimecli alert listAlertRule
 
 ### 查看报警规则详情
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli alert getAlertRule --RuleUuid 62deb6e7-6d56-11ee-b5ce-000c29dc11fc
 ```
@@ -1765,6 +2731,14 @@ chimecli alert getAlertRule --RuleUuid 62deb6e7-6d56-11ee-b5ce-000c29dc11fc
 ## 虚拟机操作相关命令
 
 ### 虚拟机列表
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli compute listVm --state 1
@@ -1808,6 +2782,14 @@ chimecli compute listVm --state 1
 ```
 
 ### 创建虚拟机
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli compute createVm --Body  \
@@ -1956,6 +2938,14 @@ chimecli compute createVm --Body  \
 
 ### 查看虚拟机详情
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli compute describeVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --
 ```
@@ -2046,6 +3036,14 @@ chimecli compute describeVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --
 
 ### 启动虚拟机
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli compute startVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 ```
@@ -2060,6 +3058,14 @@ chimecli compute startVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 ```
 
 ### 停止虚拟机
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli compute stopVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
@@ -2076,6 +3082,14 @@ chimecli compute stopVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 
 ### 更新虚拟机
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli compute updateVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf --updateVmRequest.Name test-vm
 ```
@@ -2089,6 +3103,14 @@ chimecli compute updateVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf --update
 }
 ```
 ### 删除虚拟机
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli compute deleteVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf
@@ -2105,6 +3127,14 @@ chimecli compute deleteVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf
 ## 云硬盘相关命令
 
 ### 查看云硬盘列表
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli volume listVolume --state 2
@@ -2154,6 +3184,14 @@ chimecli volume listVolume --state 2
 
 ### 新建云硬盘
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli volume createVolume --createVolumeRequest.VolumeSpecUuid 38112d5c-7f13-438a-aec5-d14de51bd30f --createVolumeRequest.HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a --createVolumeRequest.Name test-volume --createVolumeRequest.Size 21474836480 --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
@@ -2196,6 +3234,14 @@ chimecli volume createVolume --createVolumeRequest.VolumeSpecUuid 38112d5c-7f13-
 }
 ```
 ### 查看云硬盘
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli volume getVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
@@ -2241,6 +3287,14 @@ chimecli volume getVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 
 ### 更新云硬盘
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli volume updateVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f --updateVolumeRequest.Name 'test-volume' --updateVolumeRequest.Description 'volume description'
 ```
@@ -2256,6 +3310,14 @@ chimecli volume updateVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f -
 
 ### 删除云硬盘
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli volume deleteVolume --VolumeUuid 9379b2e5-45dd-4760-84d4-f0a5ce90a0e3
 ```
@@ -2268,6 +3330,14 @@ chimecli volume deleteVolume --VolumeUuid 9379b2e5-45dd-4760-84d4-f0a5ce90a0e3
 ```
 
 ### 挂载云硬盘
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli compute attachVolumeToVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --attachVolumeRequest.VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
@@ -2284,6 +3354,14 @@ chimecli compute attachVolumeToVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 
 
 ### 卸载云硬盘
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli compute detachVolumeFromVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --detachVolumeRequest.VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 ```
@@ -2298,6 +3376,14 @@ chimecli compute detachVolumeFromVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a7
 ```
 
 ### 创建快照
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli volume createSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f --createSnapshotRequest.Name 'test-snapshot'
@@ -2324,6 +3410,14 @@ chimecli volume createSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 ```
 
 ### 查看云盘快照列表
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 bin/chimecli volume listVolumeSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
@@ -2354,6 +3448,14 @@ bin/chimecli volume listVolumeSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b
 ```
 ### 查看快照详情
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli volume  getSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69
 ```
@@ -2379,6 +3481,14 @@ chimecli volume  getSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69
 ```
 
 ### 更新快照
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli volume  updateSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69 --createSnapshotRequest.Name 'test-snapshot' --createSnapshotRequest.Description 'snapshot description'
@@ -2439,6 +3549,14 @@ chimecli volume restoreVolume fec61438-370b-4c19-9333-6ce6ab016e69 --VolumeUuid 
 
 ### 删除快照
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli volume deleteSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69
 ```
@@ -2454,6 +3572,13 @@ chimecli volume deleteSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e
 
 ### 查看弹性网卡列表
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli network listNic --state 2
@@ -2492,6 +3617,14 @@ chimecli network listNic --state 2
 
 ### 新建弹性网卡
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli network createNic --createNicRequest.SubnetUuid e73efdf7-d232-4556-ba95-3851100a47b7 --createNicRequest.Name test-nic
 ```
@@ -2523,6 +3656,14 @@ chimecli network createNic --createNicRequest.SubnetUuid e73efdf7-d232-4556-ba95
 }
 ```
 ### 查看弹性网卡
+
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 
 ```
 chimecli network getNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
@@ -2557,6 +3698,14 @@ chimecli network getNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 
 ### 更新弹性网卡
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli network updateNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629 --updateNicRequest.Name 'test-nic-new'
 ```
@@ -2572,6 +3721,14 @@ chimecli network updateNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629 --upda
 
 ### 删除弹性网卡
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli network deleteNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 ```
@@ -2585,6 +3742,14 @@ chimecli network deleteNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 
 ### 挂载弹性网卡
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
+
 ```
 chimecli compute attachNicToVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --attachNicRequest.NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 ```
@@ -2597,8 +3762,16 @@ chimecli compute attachNicToVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --a
   }
 }
 ```
+
 ### 卸载弹性网卡
 
+#### 命令原型
+
+#### 参数列表
+
+#### 示例
+
+命令行:
 ```
 chimecli compute detachNicFromVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --detachNicRequest.NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 ```

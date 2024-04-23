@@ -114,7 +114,9 @@ Flags:
 命令行:
 
 ```
-chimecli az createAz --createAzRequest.Name test-az --createAzRequest.Description 'an Az example' 
+chimecli az createAz \
+  --createAzRequest.Name test-az \
+  --createAzRequest.Description 'an Az example' 
 ```
 
 ### 查看AZ详情
@@ -203,7 +205,10 @@ Flags:
 命令行:
 
 ```
-chimecli az updateAz --AzUuid 1b0dc604-8f60-4bec-80aa-38de4644c6e7 --createAzRequest.Name 'test-az2' --createAzRequest.Description 'an Az example'
+chimecli az updateAz \
+  --AzUuid 1b0dc604-8f60-4bec-80aa-38de4644c6e7 \
+  --createAzRequest.Name 'test-az2' \
+  --createAzRequest.Description 'an Az example'
 ```
 
 返回: 
@@ -796,7 +801,7 @@ Flags:
 |state|integer|false|filter by the 'state' field|
 |rack_name|string|false|filter by the rack's name|
 |manage_ip|string|false|filter by the host's management IP address|
-|AzUuid|true|filter by the AZ's uuid|
+|AzUuid|string|true|filter by the AZ's uuid|
 |ClusterUuid|string|true|filter by the cluster's uuid|
 
 #### 示例
@@ -895,6 +900,8 @@ Flags:
 |AzUuid|string|true|the AZ's uuid|
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateHostRequest](#schemacreatehostrequest)|false|the http post body|
+
+**CreateHostRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1488,6 +1495,8 @@ Flags:
 |---|---|---|---|
 |body|[CreateInstanceSpecRequest](#schemacreateinstancespecrequest)|false|the http post body|
 
+**CreateInstanceSpecRequest参数**:
+
 |Name|Type|Required|Description|
 |---|---|---|---|
 |CreateInstanceSpecRequest.Description|string|false|description for the instance specification|
@@ -1708,6 +1717,8 @@ Flags:
 |AzUuid|string|true|the AZ's uuid|
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateClusterInstanceSpecRequest](#schemacreateclusterinstancespecrequest)|false|the http post body|
+
+**CreateClusterInstanceSpecRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2006,6 +2017,8 @@ Flags:
 |---|---|---|---|
 |body|[CreateVolumeSpecRequest](#schemacreatevolumespecrequest)|false|the http post body|
 
+**CreateVolumeSpecRequest参数**:
+
 |Name|Type|Required|Description|
 |---|---|---|---|
 |createVolumeSpecRequest.Description|string|false|description for the volume specification|
@@ -2258,6 +2271,8 @@ Flags:
 |AzUuid|string|true|the AZ's uuid|
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateClusterVolumeSpecRequest](#schemacreateclustervolumespecrequest)|false|the http post body|
+
+**CreateClusterVolumeSpecRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2531,6 +2546,8 @@ Flags:
 |AzUuid|string|true|the AZ's uuid|
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateNetworkRequest](#schemacreatenetworkrequest)|false|the http post body|
+
+**CreateNetworkRequest参数**: 
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2844,6 +2861,8 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |NetworkUuid|string|true|the network's uuid|
 |body|[CreateSubnetRequest](#schemacreatesubnetrequest)|false|the http post body|
+
+**CreateSubnetRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3174,6 +3193,8 @@ Flags:
 |AzUuid|string|true|the AZ's uuid|
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateStoragePoolRequest](#schemacreatestoragepoolrequest)|false|the http post body|
+
+**CreateStoragePoolRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3522,6 +3543,8 @@ Flags:
 |---|---|---|---|
 |body|[CreateImageRequest](#schemacreateimagerequest)|false|the http body of the post request|
 
+**CreateImageRequest参数**:
+
 |Name|Type|Required|Description|
 |---|---|---|---|
 |createImageRequest.BootType|string|false|the boot type of the image, can be UEFI or legacy|
@@ -3604,6 +3627,8 @@ Flags:
 |Name|Type|Required|Description|
 |---|---|---|---|
 |body|[CreateImageRequest](#schemacreateimagerequest)|false|the http body of the post request|
+
+**CreateImageRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -4204,6 +4229,8 @@ Flags:
 |---|---|---|---|
 |AlertUuid|string|true||
 |body|[AcceptAlertRequest](#schemaacceptalertrequest)|false|the http body of the post request|
+
+**AcceptAlertRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|

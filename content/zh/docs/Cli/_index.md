@@ -4663,7 +4663,41 @@ chimecli compute deleteVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf
 
 #### 命令原型
 
+```
+chimecli volume listVolume --help
+list volumes
+
+Usage:
+  chimecli volume listVolume [flags]
+
+Flags:
+      --AzUuid string        Required. filter by AZ's uuid
+      --ClusterUuid string   Required. filter by cluster's uuid
+  -h, --help                 help for listVolume
+      --host_uuid string     filter by host's uuid
+      --name string          filter by the 'name' field
+      --order string         'asc' or 'desc' of sorting
+      --page int             the page number of the results in paging
+      --size int             the page size of the results in paging
+      --sort string          the field to be sorted by
+      --state string         filter by the 'state' field
+      --uuid string          filter by volume's uuid
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|string|false|filter by the 'state' field|
+|uuid|string|false|filter by volume's uuid|
+|host_uuid|string|false|filter by host's uuid|
+|AzUuid|string|true|filter by AZ's uuid|
+|ClusterUuid|string|true|filter by cluster's uuid|
 
 #### 示例
 
@@ -4672,6 +4706,8 @@ chimecli compute deleteVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf
 ```
 chimecli volume listVolume --state 2
 ```
+
+返回:
 
 ```
 {
@@ -4719,15 +4755,62 @@ chimecli volume listVolume --state 2
 
 #### 命令原型
 
+```
+chimecli volume createVolume --help
+create a volume
+
+Usage:
+  chimecli volume createVolume [flags]
+
+Flags:
+      --AzUuid string                               Required. the AZ's uuid
+      --Body string                                 Optional json string for [Body]. the http post body
+      --ClusterUuid string                          Required. the cluster's uuid
+      --createVolumeRequest.Description string      description for the volume
+      --createVolumeRequest.HostUuid string         the host's uuid if the volume is on local storage
+      --createVolumeRequest.ImageUuid string        the image's uuid
+      --createVolumeRequest.Name string             Required. the volume's name
+      --createVolumeRequest.Root int                whether the volume is the root volume, which is not removable
+      --createVolumeRequest.Size int                Required. the size of the volume in bytes
+      --createVolumeRequest.VolumeSpecUuid string   Required. the volume specification's Uuid
+  -h, --help  
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|body|[CreateVolumeRequest](#schemacreatevolumerequest)|false|the http post body|
+
+**CreateVolumeRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createVolumeRequest.Description|string|false|description for the volume|
+|createVolumeRequest.HostUuid|string|false|the host's uuid if the volume is on local storage|
+|createVolumeRequest.ImageUuid|string|false|the image's uuid|
+|createVolumeRequest.Name|string|true|the volume's name|
+|createVolumeRequest.Root|integer|false|whether the volume is the root volume, which is not removable|
+|createVolumeRequest.Size|integer|true|the size of the volume in bytes|
+|createVolumeRequest.VolumeSpecUuid|string|true|the volume specification's Uuid|
 
 #### 示例
 
 命令行:
 
 ```
-chimecli volume createVolume --createVolumeRequest.VolumeSpecUuid 38112d5c-7f13-438a-aec5-d14de51bd30f --createVolumeRequest.HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a --createVolumeRequest.Name test-volume --createVolumeRequest.Size 21474836480 --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
+chimecli volume createVolume \
+  --createVolumeRequest.VolumeSpecUuid 38112d5c-7f13-438a-aec5-d14de51bd30f \
+  --createVolumeRequest.HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a \
+  --createVolumeRequest.Name test-volume \
+  --createVolumeRequest.Size 21474836480 \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
+
+返回:
 
 ```
 {
@@ -4766,11 +4849,32 @@ chimecli volume createVolume --createVolumeRequest.VolumeSpecUuid 38112d5c-7f13-
   }
 }
 ```
+
 ### 查看云硬盘
 
 #### 命令原型
 
+```
+chimecli volume getVolume --help
+get a volume's detailed information
+
+Usage:
+  chimecli volume getVolume [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+      --VolumeUuid string    Required. the volume's uuid
+  -h, --help                 help for getVolume
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VolumeUuid|string|true|the volume's uuid|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
 
 #### 示例
 
@@ -4779,6 +4883,8 @@ chimecli volume createVolume --createVolumeRequest.VolumeSpecUuid 38112d5c-7f13-
 ```
 chimecli volume getVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 ```
+
+返回:
 
 ```
 {
@@ -4822,7 +4928,38 @@ chimecli volume getVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 
 #### 命令原型
 
+```
+chimecli volume updateVolume --help
+update a volume
+
+Usage:
+  chimecli volume updateVolume [flags]
+
+Flags:
+      --AzUuid string                            Required. the AZ's uuid
+      --Body string                              Optional json string for [Body]. the http post body
+      --ClusterUuid string                       Required. the cluster's uuid
+      --VolumeUuid string                        Required. the volume's uuid
+  -h, --help                                     help for updateVolume
+      --updateVolumeRequest.Description string   description for the volume
+      --updateVolumeRequest.Name string          the volume's name
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VolumeUuid|string|true|the volume's uuid|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|body|[UpdateVolumeRequest](#schemaupdatevolumerequest)|false|the http post body|
+
+**UpdateVolumeRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|updateVolumeRequest.Description|string|false|description for the volume|
+|updateVolumeRequest.Name|string|false|the volume's name|
 
 #### 示例
 
@@ -4832,6 +4969,8 @@ chimecli volume getVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 chimecli volume updateVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f --updateVolumeRequest.Name 'test-volume' --updateVolumeRequest.Description 'volume description'
 ```
 
+返回:
+
 ```
 {
   "requestId": "ded9e524-20d4-4a45-843b-d6cd13b76ec0",
@@ -4839,13 +4978,35 @@ chimecli volume updateVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f -
     "vm": "ok"
   }
 }
-`
+```
 
 ### 删除云硬盘
 
 #### 命令原型
 
+```
+chimecli volume deleteVolume --help
+delete a volume
+
+Usage:
+  chimecli volume deleteVolume [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+      --VolumeUuid string    Required. the volume's uuid
+      --force_del string     whether to delete the physical volume in the node
+  -h, --help     
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VolumeUuid|string|true|the volume's uuid|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|force_del|string|false|whether to delete the physical volume in the node|
 
 #### 示例
 
@@ -4854,6 +5015,8 @@ chimecli volume updateVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f -
 ```
 chimecli volume deleteVolume --VolumeUuid 9379b2e5-45dd-4760-84d4-f0a5ce90a0e3
 ```
+
+返回:
 
 ```
 {
@@ -4866,16 +5029,44 @@ chimecli volume deleteVolume --VolumeUuid 9379b2e5-45dd-4760-84d4-f0a5ce90a0e3
 
 #### 命令原型
 
+```
+chimecli compute attachVolumeToVm --help
+attach a volume to the virtual machine
+
+Usage:
+  chimecli compute attachVolumeToVm [flags]
+
+Flags:
+      --Body string                             Optional json string for [Body]. the http post body
+      --VmUuid string                           Required. the virtual machine's uuid
+      --attachVolumeRequest.VolumeUuid string   Required. the virtual machine's uuid
+  -h, --help    
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VmUuid|string|true|the virtual machine's uuid|
+|body|[AttachVolumeRequest](#schemaattachvolumerequest)|false|the http post body|
+
+**AttachVolumeRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|attachVolumeRequest.VolumeUuid|string|true|the virtual machine's uuid|
 
 #### 示例
 
 命令行:
 
 ```
-chimecli compute attachVolumeToVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --attachVolumeRequest.VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
+chimecli compute attachVolumeToVm \
+  --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 \
+  --attachVolumeRequest.VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 ```
 
+返回: 
 ```
 {
   "requestId": "df148989-d472-4f7a-ae83-5c5ac77d8a52",
@@ -4889,15 +5080,44 @@ chimecli compute attachVolumeToVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 
 
 #### 命令原型
 
+```
+chimecli compute detachVolumeFromVm --help
+detach a volume from the virtual machine
+
+Usage:
+  chimecli compute detachVolumeFromVm [flags]
+
+Flags:
+      --Body string                             Optional json string for [Body]. the http post body
+      --VmUuid string                           Required. the virtual machine's uuid
+      --detachVolumeRequest.VolumeUuid string   Required. the virtual machine's uuid
+  -h, --help                                    help for detachVolumeFromVm
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VmUuid|string|true|the virtual machine's uuid|
+|body|[DetachVolumeRequest](#schemadetachvolumerequest)|false|the http post body|
+
+**DetachVolumeRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|detachVolumeRequest.VolumeUuid|string|true|the virtual machine's uuid|
 
 #### 示例
 
 命令行:
 
 ```
-chimecli compute detachVolumeFromVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --detachVolumeRequest.VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
+chimecli compute detachVolumeFromVm \
+  --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 \
+  --detachVolumeRequest.VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 ```
+
+返回:
 
 ```
 {

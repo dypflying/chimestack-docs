@@ -5132,15 +5132,47 @@ chimecli compute detachVolumeFromVm \
 
 #### 命令原型
 
+```
+chimecli volume createSnapshot --help
+create a snapshot
+
+Usage:
+  chimecli volume createSnapshot [flags]
+
+Flags:
+      --Body string                                Optional json string for [Body]. the http post body
+      --VolumeUuid string                          Required. the volume's uuid
+      --createSnapshotRequest.Description string   description for the snapshot
+      --createSnapshotRequest.Name string          Required. the snapshot's name
+  -h, --help                                       help for createSnapshot
+
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VolumeUuid|string|true|the volume's uuid|
+|body|[CreateSnapshotRequest](#schemacreatesnapshotrequest)|false|the http post body|
+
+**CreateSnapshotRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createSnapshotRequest.Description|string|false|description for the snapshot|
+|createSnapshotRequest.Name|string|true|the snapshot's name|
 
 #### 示例
 
 命令行:
 
 ```
-chimecli volume createSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f --createSnapshotRequest.Name 'test-snapshot'
+chimecli volume createSnapshot \
+  --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f \
+  --createSnapshotRequest.Name 'test-snapshot'
 ```
+
+返回:
 
 ```
 {
@@ -5166,7 +5198,33 @@ chimecli volume createSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 
 #### 命令原型
 
+```
+chimecli volume listSnapshot --help
+list all snapshots
+
+Usage:
+  chimecli volume listSnapshot [flags]
+
+Flags:
+  -h, --help           help for listSnapshot
+      --name string    filter by the 'name' field
+      --order string   'asc' or 'desc' of sorting
+      --page int       the page number of the results in paging
+      --size int       the page size of the results in paging
+      --sort string    the field to be sorted by
+      --state string   filter by the 'state' field
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer(int64)|false|the page number of the results in paging|
+|size|integer(int64)|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|string|false|filter by the 'state' field|
 
 #### 示例
 
@@ -5175,6 +5233,8 @@ chimecli volume createSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 ```
 bin/chimecli volume listVolumeSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 ```
+
+返回:
 
 ```
 {
@@ -5199,11 +5259,30 @@ bin/chimecli volume listVolumeSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b
   }
 }
 ```
+
 ### 查看快照详情
 
 #### 命令原型
 
+```
+chimecli volume getSnapshot --help
+get a snapshot's detail information
+
+Usage:
+  chimecli volume getSnapshot [flags]
+
+Flags:
+      --SnapshotUuid string   Required. the snapshot's uuid
+      --VolumeUuid string     Required. the volume's uuid
+  -h, --help                  help for getSnapshot
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VolumeUuid|string|true|the volume's uuid|
+|SnapshotUuid|string|true|the snapshot's uuid|
 
 #### 示例
 
@@ -5212,6 +5291,8 @@ bin/chimecli volume listVolumeSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b
 ```
 chimecli volume  getSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69
 ```
+
+返回:
 
 ```
 {
@@ -5237,15 +5318,49 @@ chimecli volume  getSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69
 
 #### 命令原型
 
+```
+chimecli volume updateSnapshot --help
+update a snapshot
+
+Usage:
+  chimecli volume updateSnapshot [flags]
+
+Flags:
+      --Body string                                Optional json string for [Body]. the http post body
+      --SnapshotUuid string                        Required. the snapshot's uuid
+      --VolumeUuid string                          Required. the volume's uuid
+      --createSnapshotRequest.Description string   description for the snapshot
+      --createSnapshotRequest.Name string          Required. the snapshot's name
+  -h, --help                                       help for updateSnapshot
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VolumeUuid|string|true|the volume's uuid|
+|SnapshotUuid|string|true|the snapshot's uuid|
+|body|[CreateSnapshotRequest](#schemacreatesnapshotrequest)|false|the http post body|
+
+**CreateSnapshotRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|description|string|false|description for the snapshot|
+|name|string|true|the snapshot's name|
 
 #### 示例
 
 命令行:
 
 ```
-chimecli volume  updateSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69 --createSnapshotRequest.Name 'test-snapshot' --createSnapshotRequest.Description 'snapshot description'
+chimecli volume  updateSnapshot \
+  --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69 \
+  --createSnapshotRequest.Name 'test-snapshot' \
+  --createSnapshotRequest.Description 'snapshot description'
 ```
+
+返回: 
 
 ```
 {
@@ -5258,9 +5373,38 @@ chimecli volume  updateSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016
 
 ### 从快照恢复到云盘
 
+#### 命令原型
+
+```
+chimecli volume restoreVolume --help
+restore volume from a snapshot
+
+Usage:
+  chimecli volume restoreVolume [flags]
+
+Flags:
+      --SnapshotUuid string   Required. the snapshot's uuid
+      --VolumeUuid string     Required. the volume's uuid
+  -h, --help                  help for restoreVolume
+
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VolumeUuid|string|true|the volume's uuid|
+|SnapshotUuid|string|true|the snapshot's uuid|
+
+#### 示例
+
+命令行:
+
 ```
 chimecli volume restoreVolume fec61438-370b-4c19-9333-6ce6ab016e69 --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f 
 ```
+
+返回: 
 
 ```
 {
@@ -5304,7 +5448,25 @@ chimecli volume restoreVolume fec61438-370b-4c19-9333-6ce6ab016e69 --VolumeUuid 
 
 #### 命令原型
 
+```
+chimecli volume deleteSnapshot --help
+delete a snapshot
+
+Usage:
+  chimecli volume deleteSnapshot [flags]
+
+Flags:
+      --SnapshotUuid string   Required. the snapshot's uuid
+      --VolumeUuid string     Required. the volume's uuid
+  -h, --help                  help for deleteSnapshot
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VolumeUuid|string|true|the volume's uuid|
+|SnapshotUuid|string|true|the snapshot's uuid|
 
 #### 示例
 
@@ -5313,6 +5475,8 @@ chimecli volume restoreVolume fec61438-370b-4c19-9333-6ce6ab016e69 --VolumeUuid 
 ```
 chimecli volume deleteSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69
 ```
+
+返回:
 
 ```
 {

@@ -9,6 +9,335 @@ description: 本章介绍ChimeStack命令行工具(CLI的使用方法
 
 ## 可用区(AZ)操作命令
 
+### 查看AZ列表
+
+#### 命令原型
+
+```
+chimecli az listAz --help
+This will show all available azs by default.
+
+Usage:
+  chimecli az listAz [flags]
+
+Flags:
+  -h, --help           help for listAz
+      --name string    filter by the 'name' field
+      --order string   'asc' or 'desc' of sorting
+      --page int       the page number of the results in paging
+      --size int       the page size of the results in paging
+      --sort string    the field to be sorted by
+      --state int      filter by the 'state' field
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|integer|false|filter by the 'state' field|
+
+#### 示例
+
+命令行:
+
+```
+chimecli az listAz
+```
+
+返回: 
+
+```
+{
+  "requestId": "8cfbae8a-b9b6-4f82-8e5a-2c7121794578",
+  "result": {
+    "elements": [
+      {
+        "created_at": "2023-06-29T03:46:02Z",
+        "description": "default zone",
+        "name": "Default",
+        "state": 1,
+        "uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865"
+      },
+      {
+        "created_at": "2023-06-28T21:50:11Z",
+        "description": "update az",
+        "name": "Backup Zone",
+        "state": 1,
+        "uuid": "43340503-02e3-4223-bee3-2548957bc22b"
+      }
+    ],
+    "size": 2,
+    "total": 2
+  }
+}
+```
+
+### 新建AZ
+
+#### 命令原型
+
+```
+chimecli az createAz --help 
+This will create an available az.
+
+Usage:
+  chimecli az createAz [flags]
+
+Flags:
+      --Body string                          Optional json string for [Body]. the http post body
+      --createAzRequest.Description string   description for the AZ
+      --createAzRequest.Name string          Required. the AZ's name  
+  -h, --help                                 help for createAz
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|body|[CreateAzRequest](#schemacreateazrequest)|false|the http post body|
+
+**CreateAzRequest参数**: 
+
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createAzRequest.Description|string|false|description for the AZ|
+|createAzRequest.Name|string|true|the AZ's name|
+
+#### 示例
+
+命令行:
+
+```
+chimecli az createAz --createAzRequest.Name test-az --createAzRequest.Description 'an Az example' 
+```
+
+### 查看AZ详情
+
+#### 命令原型
+
+```
+chimecli az getAz --help
+This will describe an available az.
+
+Usage:
+  chimecli az getAz [flags]
+
+Flags:
+      --AzUuid string   Required. the AZ's uuid
+  -h, --help            help for getAz
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+
+#### 示例
+
+命令行:
+
+```
+chimecli az getAz --AzUuid 1b0dc604-8f60-4bec-80aa-38de4644c6e7
+```
+
+返回: 
+
+```
+{
+  "requestId": "f6a9ea50-f9ac-405e-b489-540169501fd1",
+  "result": {
+    "az": {
+      "created_at": "2024-04-23T08:16:01Z",
+      "description": "an Az example",
+      "name": "test-az",
+      "state": 1,
+      "uuid": "1b0dc604-8f60-4bec-80aa-38de4644c6e7"
+    }
+  }
+}
+```
+
+### 修改AZ
+
+#### 命令原型
+
+```
+chimecli az updateAz --help
+This will update an available az.
+
+Usage:
+  chimecli az updateAz [flags]
+
+Flags:
+      --AzUuid string                        Required. the AZ's uuid
+      --Body string                          Optional json string for [Body]. the http post body
+      --createAzRequest.Description string   description for the AZ
+      --createAzRequest.Name string          Required. the AZ's name
+      --createAzRequest.Parent string        
+  -h, --help                                 help for updateAz
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|body|[CreateAzRequest](#schemacreateazrequest)|true|the http post body|
+
+**CreateAzRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|description|string|false|description for the AZ|
+|name|string|true|the AZ's name|
+
+#### 示例
+
+命令行:
+
+```
+chimecli az updateAz --AzUuid 1b0dc604-8f60-4bec-80aa-38de4644c6e7 --createAzRequest.Name 'test-az2' --createAzRequest.Description 'an Az example'
+```
+
+返回: 
+
+```
+{
+  "requestId": "0cbff938-1e78-4c8a-b00e-0535be12fa82",
+  "result": {
+    "az": "ok"
+  }
+}
+```
+
+### 启用AZ
+
+#### 命令原型
+
+```
+chimecli az enableAz --help
+This will enable an available az.
+
+Usage:
+  chimecli az enableAz [flags]
+
+Flags:
+      --AzUuid string   Required. the AZ's uuid
+  -h, --help            help for enableAz
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+
+#### 示例
+
+命令行:
+
+```
+chimecli az enableAz --AzUuid 1b0dc604-8f60-4bec-80aa-38de4644c6e7
+```
+
+返回: 
+
+```
+{
+  "requestId": "7aea36d3-c233-48a7-ab32-c23a8e3836c5",
+  "result": {
+    "az": "ok"
+  }
+}
+```
+
+### 停用AZ
+
+#### 命令原型
+
+```
+chimecli az disableAz --help
+This will disable an available az.
+
+Usage:
+  chimecli az disableAz [flags]
+
+Flags:
+      --AzUuid string   Required. the AZ's uuid
+  -h, --help            help for disableAz
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+
+#### 示例
+
+命令行:
+
+```
+chimecli az disableAz --AzUuid 1b0dc604-8f60-4bec-80aa-38de4644c6e7
+```
+
+返回: 
+
+```
+{
+  "requestId": "ee841a17-fd9c-4bc5-956d-d834f33a9e2e",
+  "result": {
+    "az": "ok"
+  }
+}
+```
+
+### 删除AZ
+
+#### 命令原型
+
+```
+chimecli az deleteAz --help 
+This will delete an available az.
+
+Usage:
+  chimecli az deleteAz [flags]
+
+Flags:
+      --AzUuid string   Required. the AZ's uuid
+  -h, --help            help for deleteAz
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+
+#### 示例
+
+命令行:
+
+```
+chimecli az deleteAz --AzUuid 1b0dc604-8f60-4bec-80aa-38de4644c6e7
+```
+
+返回: 
+
+```
+{
+  "requestId": "5ee30b76-2a1a-4a1e-8b23-5afc150382fc",
+  "result": 1
+}
+```
+
 
 ## 集群(Cluster)操作命令
 
@@ -129,7 +458,7 @@ Flags:
 |body|[CreateClusterRequest](#schemacreateclusterrequest)|false|the http post body|
 
 
-**命令行替代body参数**:
+**CreateClusterRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -276,7 +605,11 @@ Flags:
 命令行:
 
 ```
-chimecli cluster updateCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e --createClusterRequest.Description 'cluster description' --createClusterRequest.Name 'test-cluster' 
+chimecli cluster updateCluster \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e \
+  --createClusterRequest.Description 'cluster description' \
+  --createClusterRequest.Name 'test-cluster' 
 ```
 
 返回:
@@ -319,7 +652,9 @@ Flags:
 命令行:
 
 ```
-chimecli cluster enableCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
+chimecli cluster enableCluster \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
 ```
 
 返回:
@@ -362,7 +697,9 @@ Flags:
 命令行:
 
 ```
-chimecli cluster disableCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
+chimecli cluster disableCluster \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
 ```
 
 返回:
@@ -406,7 +743,9 @@ Flags:
 命令行:
 
 ```
-chimecli cluster deleteCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
+chimecli cluster deleteCluster \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
 ```
 
 返回: 
@@ -465,7 +804,9 @@ Flags:
 命令行:
 
 ```
-chimecli host listHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
+chimecli host listHost \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
 ```
 
 返回:
@@ -640,7 +981,10 @@ Flags:
 命令行:
 
 ```
-chimecli host getHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
+chimecli host getHost \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e \
+  --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
 
 返回:
@@ -721,7 +1065,14 @@ Flags:
 
 命令行:
 ```
-chimecli host updateHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a --updateHostRequest.CpuRatio 2.0 --updateHostRequest.CpuReserved 1 --updateHostRequest.MemoryRatio 2.0 --updateHostRequest.MemoryReserved 0
+chimecli host updateHost \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e \
+  --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a \
+  --updateHostRequest.CpuRatio 2.0 \
+  --updateHostRequest.CpuReserved 1 \
+  --updateHostRequest.MemoryRatio 2.0 \
+  --updateHostRequest.MemoryReserved 0
 ```
 
 返回:
@@ -766,7 +1117,10 @@ Flags:
 命令行:
 
 ```
-chimecli host deleteHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
+chimecli host deleteHost \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e \
+  --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
 
 返回:
@@ -808,7 +1162,10 @@ Flags:
 
 命令行:
 ```
-chimecli host enableHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
+chimecli host enableHost \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e \
+  --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
 
 返回:
@@ -852,7 +1209,10 @@ Flags:
 
 命令行:
 ```
-chimecli host disableHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
+chimecli host disableHost \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e \
+  --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
 
 返回:
@@ -896,7 +1256,10 @@ Flags:
 
 命令行:
 ```
-chimecli host suspendHost --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
+chimecli host suspendHost \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e \
+  --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
 
 返回:
@@ -1138,7 +1501,11 @@ Flags:
 命令行:
 
 ```
-chimecli instance_spec createInstanceSpec --createInstanceSpecRequest.Name test-spec --createInstanceSpecRequest.Type 1 --createInstanceSpecRequest.Vcpus 1 --createInstanceSpecRequest.Memory 16777216
+chimecli instance_spec createInstanceSpec \
+  --createInstanceSpecRequest.Name test-spec \
+  --createInstanceSpecRequest.Type 1 \
+  --createInstanceSpecRequest.Vcpus 1 \
+  --createInstanceSpecRequest.Memory 16777216
 ```
 
 返回:
@@ -1257,7 +1624,12 @@ Flags:
 命令行:
 
 ```
-chimecli instance_spec updateInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c --createInstanceSpecRequest.Type 1 --createInstanceSpecRequest.Vcpus 2 --createInstanceSpecRequest.Name test-spec --createInstanceSpecRequest.Memory 16777216
+chimecli instance_spec updateInstanceSpec \
+  --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c \
+  --createInstanceSpecRequest.Type 1 \
+  --createInstanceSpecRequest.Vcpus 2 \
+  --createInstanceSpecRequest.Name test-spec \
+  --createInstanceSpecRequest.Memory 16777216
 ```
 
 返回:
@@ -1299,7 +1671,6 @@ Flags:
 
 ```
 chimecli instance_spec deleteInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c 
-{"requestId":"1b24222f-0158-4d10-84c8-c478157e2465","result":1}
 ```
 
 返回:
@@ -1347,7 +1718,9 @@ Flags:
 命令行:
 
 ```
-chimecli instance_spec createClusterInstanceSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --createClusterInstanceSpecRequest.InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
+chimecli instance_spec createClusterInstanceSpecRelation \
+  --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 \
+  --createClusterInstanceSpecRequest.InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
 ```
 
 返回: 
@@ -1396,7 +1769,9 @@ Flags:
 命令行:
 
 ```
-chimecli instance_spec deleteClusterInstanceSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
+chimecli instance_spec deleteClusterInstanceSpecRelation \
+  --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 \
+  --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
 ```
 
 返回:
@@ -1649,7 +2024,15 @@ Flags:
 命令行:
 
 ```
-chimecli volume_spec createVolumeSpec --createVolumeSpecRequest.Name test-volume-spec --createVolumeSpecRequest.MaxIops 1000 --createVolumeSpecRequest.MinIops 500 --createVolumeSpecRequest.StepIops 10 --createVolumeSpecRequest.MaxThroughput 104857600 --createVolumeSpecRequest.MinThroughput 10485760 --createVolumeSpecRequest.StepThroughput 1048576 --createVolumeSpecRequest.StoragePoolUuid f5165a18-e6b3-42b4-8efc-ad496f318a0a
+chimecli volume_spec createVolumeSpec \
+  --createVolumeSpecRequest.Name test-volume-spec \
+  --createVolumeSpecRequest.MaxIops 1000 \
+  --createVolumeSpecRequest.MinIops 500 \
+  --createVolumeSpecRequest.StepIops 10 \
+  --createVolumeSpecRequest.MaxThroughput 104857600 \
+  --createVolumeSpecRequest.MinThroughput 10485760 \
+  --createVolumeSpecRequest.StepThroughput 1048576 \
+  --createVolumeSpecRequest.StoragePoolUuid f5165a18-e6b3-42b4-8efc-ad496f318a0a
 ```
 
 返回:
@@ -1885,7 +2268,9 @@ Flags:
 命令行:
 
 ```
-chimecli volume_spec createClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 --createClusterVolumeSpecRequest.VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
+chimecli volume_spec createClusterVolumeSpecRelation \
+  --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 \
+  --createClusterVolumeSpecRequest.VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
 ```
 
 返回:
@@ -2289,7 +2674,10 @@ Flags:
 命令行:
 
 ```
-chimecli network updateNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6 --updateNetworkRequest.Name br1 --updateNetworkRequest.Description br1-network
+chimecli network updateNetwork \
+  --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6 \
+  --updateNetworkRequest.Name br1 \
+  --updateNetworkRequest.Description br1-network
 ```
 
 返回:
@@ -3826,7 +4214,9 @@ Flags:
 命令行:
 
 ```
-chimecli alert acceptAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e --acceptAlertRequest.Comment "accepted"
+chimecli alert acceptAlert \
+  --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e \
+  --acceptAlertRequest.Comment "accepted"
 ```
 
 返回:
@@ -4391,7 +4781,7 @@ Flags:
 命令行:
 
 ```
-chimecli compute describeVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --
+chimecli compute describeVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 ```
 
 返回:
@@ -4600,7 +4990,9 @@ Flags:
 命令行:
 
 ```
-chimecli compute updateVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf --updateVmRequest.Name test-vm
+chimecli compute updateVm \
+  --VmUuid 4be21239-293c-4989-b637-4df104f17caf \
+  --updateVmRequest.Name test-vm
 ```
 
 返回:
@@ -4966,7 +5358,10 @@ Flags:
 命令行:
 
 ```
-chimecli volume updateVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f --updateVolumeRequest.Name 'test-volume' --updateVolumeRequest.Description 'volume description'
+chimecli volume updateVolume \
+  --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f \
+  --updateVolumeRequest.Name 'test-volume' \
+  --updateVolumeRequest.Description 'volume description'
 ```
 
 返回:
@@ -5401,7 +5796,9 @@ Flags:
 命令行:
 
 ```
-chimecli volume restoreVolume fec61438-370b-4c19-9333-6ce6ab016e69 --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f 
+chimecli volume restoreVolume \
+  --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69 \
+  --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f 
 ```
 
 返回: 
@@ -5491,7 +5888,37 @@ chimecli volume deleteSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e
 
 #### 命令原型
 
+```
+chimecli network  listNic --help 
+list network interfaces
+
+Usage:
+  chimecli network listNic [flags]
+
+Flags:
+  -h, --help                 help for listNic
+      --name string          filter by the 'name' field
+      --order string         'asc' or 'desc' of sorting
+      --page int             the page number of the results in paging
+      --size int             the page size of the results in paging
+      --sort string          the field to be sorted by
+      --state string         filter by the 'state' field
+      --subnet_uuid string   filter by the subnet's uuid
+      --uuid string          filter by the network interface's uuid
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|string|false|filter by the 'state' field|
+|uuid|string|false|filter by the network interface's uuid|
+|subnet_uuid|string|false|filter by the subnet's uuid|
 
 #### 示例
 
@@ -5500,6 +5927,8 @@ chimecli volume deleteSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e
 ```
 chimecli network listNic --state 2
 ```
+
+返回:
 
 ```
 {
@@ -5536,15 +5965,52 @@ chimecli network listNic --state 2
 
 #### 命令原型
 
+```
+chimecli network createNic --help 
+create a network interface
+
+Usage:
+  chimecli network createNic [flags]
+
+Flags:
+      --Body string                           Optional json string for [Body]. the http post body
+      --createNicRequest.Description string   description for the nic
+      --createNicRequest.Ip string            the IP address of the nic
+      --createNicRequest.Name string          Required. the virtual network interface's name
+      --createNicRequest.Primary int          whether the nic is the primary nic, which can not be removed from a virtual machine
+      --createNicRequest.SubnetUuid string    Required. the subnet's Uuid, which the nic belongs to
+  -h, --help                                  help for createNic
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|body|[CreateNicRequest](#schemacreatenicrequest)|false|the http post body|
+
+**CreateNicRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|createNicRequest.Description|string|false|description for the volume|
+|createNicRequest.HostUuid|string|false|the host's uuid if the volume is on local storage|
+|createNicRequest.ImageUuid|string|false|the image's uuid|
+|createNicRequest.Name|string|true|the volume's name|
+|createNicRequest.Root|integer|false|whether the volume is the root volume, which is not removable|
+|createNicRequest.Size|integer|true|the size of the volume in bytes|
+|createNicRequest.VolumeSpecUuid|string|true|the volume specification's Uuid|
 
 #### 示例
 
 命令行:
 
 ```
-chimecli network createNic --createNicRequest.SubnetUuid e73efdf7-d232-4556-ba95-3851100a47b7 --createNicRequest.Name test-nic
+chimecli network createNic \
+  --createNicRequest.SubnetUuid e73efdf7-d232-4556-ba95-3851100a47b7 \
+  --createNicRequest.Name test-nic
 ```
+
+返回:
 
 ```
 {
@@ -5572,11 +6038,28 @@ chimecli network createNic --createNicRequest.SubnetUuid e73efdf7-d232-4556-ba95
   }
 }
 ```
+
 ### 查看弹性网卡
 
 #### 命令原型
 
+```
+chimecli network getNic --help 
+get a network interface's detailed information
+
+Usage:
+  chimecli network getNic [flags]
+
+Flags:
+      --NicUuid string   Required. the network interface's uuid
+  -h, --help             help for getNic
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|NicUuid|string|true|the network interface's uuid|
 
 #### 示例
 
@@ -5585,6 +6068,8 @@ chimecli network createNic --createNicRequest.SubnetUuid e73efdf7-d232-4556-ba95
 ```
 chimecli network getNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 ```
+
+返回:
 
 ```
 {
@@ -5617,15 +6102,48 @@ chimecli network getNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 
 #### 命令原型
 
+```
+chimecli network updateNic --help 
+update a network interface
+
+Usage:
+  chimecli network updateNic [flags]
+
+Flags:
+      --Body string                           Optional json string for [Body]. the http post body
+      --NicUuid string                        Required. the network interface's uuid
+  -h, --help                                  help for updateNic
+      --updateNicRequest.Description string   description for the nic
+      --updateNicRequest.Name string          Required. the nic's name
+
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|NicUuid|string|true|the network interface's uuid|
+|body|[UpdateNicRequest](#schemaupdatenicrequest)|false|the http post body|
+
+**UpdateNicRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|updateNicRequest.Description|string|false|description for the virutal machine|
+|updateNicRequest.Name|string|false|the virutal machine's name|
+
 
 #### 示例
 
 命令行:
 
 ```
-chimecli network updateNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629 --updateNicRequest.Name 'test-nic-new'
+chimecli network updateNic \
+  --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629 \
+  --updateNicRequest.Name 'test-nic-new'
 ```
+
+返回:
 
 ```
 {
@@ -5640,7 +6158,25 @@ chimecli network updateNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629 --upda
 
 #### 命令原型
 
+```
+chimecli network deleteNic --help 
+delete a network interface
+
+Usage:
+  chimecli network deleteNic [flags]
+
+Flags:
+      --NicUuid string     Required. the network interface's uuid
+      --force_del string   whether to force delete the network interface from the OS
+  -h, --help               help for deleteNic
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|NicUuid|string|true|the network interface's uuid|
+|force_del|string|false|whether to force delete the network interface from the OS|
 
 #### 示例
 
@@ -5649,6 +6185,8 @@ chimecli network updateNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629 --upda
 ```
 chimecli network deleteNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 ```
+
+返回:
 
 ```
 {
@@ -5661,15 +6199,44 @@ chimecli network deleteNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 
 #### 命令原型
 
+```
+chimecli compute attachNicToVm --help 
+attach a network interface to the virtual machine
+
+Usage:
+  chimecli compute attachNicToVm [flags]
+
+Flags:
+      --Body string                       Optional json string for [Body]. the http post body
+      --VmUuid string                     Required. the virtual machine's uuid
+      --attachNicRequest.NicUuid string   Required. the network interface's uuid
+  -h, --help                              help for attachNicToVm
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VmUuid|string|true|the virtual machine's uuid|
+|body|[AttachNicRequest](#schemaattachnicrequest)|false|the http post body|
+
+**AttachNicRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|attachNicRequest.NicUuid|string|true|the network interface's uuid|
 
 #### 示例
 
 命令行:
 
 ```
-chimecli compute attachNicToVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --attachNicRequest.NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
+chimecli compute attachNicToVm \
+  --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 \
+  --attachNicRequest.NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 ```
+
+返回:
 
 ```
 {
@@ -5684,14 +6251,43 @@ chimecli compute attachNicToVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --a
 
 #### 命令原型
 
+```
+chimecli compute detachNicFromVm --help 
+detach a network interface from the virtual machine
+
+Usage:
+  chimecli compute detachNicFromVm [flags]
+
+Flags:
+      --Body string                       Optional json string for [Body]. the http post body
+      --VmUuid string                     Required. the virtual machine's uuid
+      --detachNicRequest.NicUuid string   Required. the network interface's uuid
+  -h, --help                              help for detachNicFromVm
+```
+
 #### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VmUuid|string|true|the virtual machine's uuid|
+|body|[DetachNicRequest](#schemadetachnicrequest)|false|the http post body|
+
+**DetachNicRequest参数**:
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|detachNicRequest.NicUuid|string|true|the network interface's uuid|
 
 #### 示例
 
 命令行:
 ```
-chimecli compute detachNicFromVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 --detachNicRequest.NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
+chimecli compute detachNicFromVm \
+  --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 \
+  --detachNicRequest.NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 ```
+
+返回:
 
 ```
 {

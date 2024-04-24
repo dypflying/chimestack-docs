@@ -1,10 +1,59 @@
 ---
 title: 4 CLI介绍
 weight: 4
-description: 本章介绍ChimeStack命令行工具(CLI的使用方法
+description: 本章介绍ChimeStack命令行工具(CLI)的使用方法
 ---
 
 ## 概述
+
+chimecli是通过命令行管理ChimeStack的工具
+
+### CLI使用方法
+
+CLI命令格式为:
+
+```
+chimecli <resource category> <operation> [flags]  
+```
+
+其中"resource category"为资源类别，目前支持的资源类别为: 
+
+- az: 可用区
+- cluster: 集群
+- host: 节点
+- storage_pool: 存储池
+- network: 网络
+- instance_spec: 计算规格
+- volume_spec: 云硬盘规格
+- image: 镜像
+- alert: 报警
+- compute: 虚拟机
+- volume: 云硬盘
+- user: 用户
+
+### 登录
+
+```
+chimecli login --help
+chimecli login
+
+Usage:
+  chimecli login [flags]
+
+Flags:
+      --api-endpoint string   the endpoint of the chime api service (default "127.0.0.1:8801")
+  -h, --help                  help for login
+      --name string           the account name to login (default "admin")
+      --password string       the password to login (default "admin")
+
+```
+
+**参数**: 
+
+**返回**: 
+
+
+### 登出
 
 
 ## 可用区(AZ)操作命令

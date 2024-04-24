@@ -180,10 +180,10 @@ Usage:
 Flags:
       --AzUuid string                        Required. the AZ's uuid
       --Body string                          Optional json string for [Body]. the http post body
-      --createAzRequest.Description string   description for the AZ
-      --createAzRequest.Name string          Required. the AZ's name
-      --createAzRequest.Parent string        
   -h, --help                                 help for updateAz
+      --updateAzRequest.Description string   description for the AZ
+      --updateAzRequest.Name string          Required. the AZ's name
+
 ```
 
 #### 参数列表
@@ -191,14 +191,14 @@ Flags:
 |Name|Type|Required|Description|
 |---|---|---|---|
 |AzUuid|string|true|the AZ's uuid|
-|body|[CreateAzRequest](#schemacreateazrequest)|true|the http post body|
+|body|[UpdateAzRequest](#schemaupdateazrequest)|true|the http post body|
 
 **CreateAzRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|description|string|false|description for the AZ|
-|name|string|true|the AZ's name|
+|updateAzRequest.Description|string|false|description for the AZ|
+|updateAzRequest.Name|string|true|the AZ's name|
 
 #### 示例
 

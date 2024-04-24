@@ -1255,9 +1255,9 @@ Content-Type: application/json
 Accept: application/json
 Authorization: Bearer <api token>
 Host: api.yourchimestack.com:8801
-Content-Length: 66
+Content-Length: 48
 
-{"description":"an AZ example","name":"default","parent":"string"}
+{"description":"an AZ example","name":"default"}
 ```
 
 `PATCH /az/{AzUuid}`
@@ -1271,8 +1271,7 @@ This will update an available az.
 ```json
 {
   "description": "an AZ example",
-  "name": "default",
-  "parent": "string"
+  "name": "default"
 }
 ```
 
@@ -1281,7 +1280,7 @@ This will update an available az.
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |AzUuid|path|string|true|the AZ's uuid|
-|body|body|[CreateAzRequest](#schemacreateazrequest)|true|the http post body|
+|body|body|[UpdateAzRequest](#schemaupdateazrequest)|true|the http post body|
 
 > Example responses
 
@@ -8836,6 +8835,28 @@ user  request
 |error|[CommonError](#schemacommonerror)|false|none|none|
 |requestId|string|false|none|in: body|
 |result|any|false|none|in: body|
+
+### UpdateAzRequest
+<!-- backwards compatibility -->
+<a id="schemaupdateazrequest"></a>
+<a id="schema_UpdateAzRequest"></a>
+<a id="tocSupdateazrequest"></a>
+<a id="tocsupdateazrequest"></a>
+
+```json
+{
+  "description": "an AZ example",
+  "name": "default"
+}
+
+```
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|description|string|false|none|description for the AZ|
+|name|string|true|none|the AZ's name|
 
 ### UpdateHostRequest
 <!-- backwards compatibility -->

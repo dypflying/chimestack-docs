@@ -656,7 +656,7 @@ chimecli cluster getCluster \
 #### 命令原型
 
 ```
-chimecli cluster updateCluster --help
+chimecli cluster updateCluster --help 
 This will update a cluster.
 
 Usage:
@@ -666,12 +666,13 @@ Flags:
       --AzUuid string                                Required. the AZ's uuid
       --Body string                                  Optional json string for [Body]. the http post body
       --ClusterUuid string                           Required. the cluster's uuid
-      --createClusterRequest.Arch string             the cluster's architecture, like x86_64, arm, ...
-      --createClusterRequest.Description string      description for the cluster
-      --createClusterRequest.HypervisorType string   the cluster's hypervisor type, like kvm (default), xen, ...
-      --createClusterRequest.Name string             Required. the cluster's name
-      --createClusterRequest.Type int                the cluster's type
-  -h, --help  
+  -h, --help                                         help for updateCluster
+      --updateClusterRequest.Arch string             the cluster's architecture, like x86_64, arm, ...
+      --updateClusterRequest.Description string      description for the cluster
+      --updateClusterRequest.HypervisorType string   the cluster's hypervisor type, like kvm (default), xen, ...
+      --updateClusterRequest.Name string             Required. the cluster's name
+      --updateClusterRequest.Type int                the cluster's type
+
 ```
 
 #### 参数列表
@@ -680,17 +681,17 @@ Flags:
 |---|---|---|---|
 |AzUuid|string|true|the AZ's uuid|
 |ClusterUuid|string|true|the cluster's uuid|
-|body|[CreateClusterRequest](#schemacreateclusterrequest)|true|the http post body|
+|body|[UpdateClusterRequest](#schemaupdateclusterrequest)|true|the http post body|
 
-**CreateClusterRequest参数**:
+**UpdateClusterRequest**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|CreateClusterRequest.Arch|string|false|the cluster's architecture, like x86_64, arm, ...|
-|CreateClusterRequest.Description|string|false|description for the cluster|
-|CreateClusterRequest.HypervisorType|string|false|the cluster's hypervisor type, like kvm (default), xen, ...|
-|CreateClusterRequest.Name|string|true|the cluster's name|
-|CreateClusterRequest.Type|integer|false|the cluster's type|
+|updateClusterRequest.Arch|string|false|the cluster's architecture, like x86_64, arm, ...|
+|updateClusterRequest.Description|string|false|description for the cluster|
+|updateClusterRequest.HypervisorType|string|false|the cluster's hypervisor type, like kvm (default), xen, ...|
+|updateClusterRequest.Name|string|true|the cluster's name|
+|updateClusterRequest.Type|integer|false|the cluster's type|
 
 #### 示例
 
@@ -700,8 +701,8 @@ Flags:
 chimecli cluster updateCluster \
   --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
   --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e \
-  --createClusterRequest.Description 'cluster description' \
-  --createClusterRequest.Name 'test-cluster' 
+  --updateClusterRequest.Description 'cluster description' \
+  --updateClusterRequest.Name 'test-cluster' 
 ```
 
 返回:
@@ -1690,12 +1691,12 @@ Usage:
 Flags:
       --Body string                                    Optional json string for [Body]. the http post body
       --InstanceSpecUuid string                        Required. the instance specification's uuid
-      --createInstanceSpecRequest.Description string   description for the instance specification
-      --createInstanceSpecRequest.Memory int           Required. the number of memory
-      --createInstanceSpecRequest.Name string          Required. the instance specification's name
-      --createInstanceSpecRequest.Type int             the instance specification's type, 0: shared resource, 1: dedicated resource
-      --createInstanceSpecRequest.Vcpus int            Required. the number of vCPUs
   -h, --help                                           help for updateInstanceSpec
+      --updateInstanceSpecRequest.Description string   description for the instance specification
+      --updateInstanceSpecRequest.Memory int           Required. the number of memory
+      --updateInstanceSpecRequest.Name string          Required. the instance specification's name
+      --updateInstanceSpecRequest.Type int             the instance specification's type, 0: shared resource, 1: dedicated resource
+      --updateInstanceSpecRequest.Vcpus int            Required. the number of vCPUs
 ```
 
 #### 参数列表
@@ -1703,17 +1704,17 @@ Flags:
 |Name|Type|Required|Description|
 |---|---|---|---|
 |InstanceSpecUuid|string|true|the instance specification's uuid|
-|body|[CreateInstanceSpecRequest](#schemacreateinstancespecrequest)|true|the http post body|
+|body|[UpdateInstanceSpecRequest](#schemaupdateinstancespecrequest)|true|the http post body|
 
-**CreateInstanceSpecRequest参数**:
+**UpdateInstanceSpecRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|CreateInstanceSpecRequest.Description|string|false|description for the instance specification|
-|CreateInstanceSpecRequest.Memory|integer|true|the number of memory|
-|CreateInstanceSpecRequest.Name|string|true|the instance specification's name|
-|CreateInstanceSpecRequest.Type|integer|false|the instance specification's type, 0: shared resource, 1: dedicated resource|
-|CreateInstanceSpecRequest.Vcpus|integer|true|the number of vCPUs|
+|updateInstanceSpecRequest.Description|string|false|description for the instance specification|
+|updateInstanceSpecRequest.Memory|integer|true|the number of memory|
+|updateInstanceSpecRequest.Name|string|true|the instance specification's name|
+|updateInstanceSpecRequest.Type|integer|false|the instance specification's type, 0: shared resource, 1: dedicated resource|
+|updateInstanceSpecRequest.Vcpus|integer|true|the number of vCPUs|
 
 #### 示例
 
@@ -1722,10 +1723,10 @@ Flags:
 ```
 chimecli instance_spec updateInstanceSpec \
   --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c \
-  --createInstanceSpecRequest.Type 1 \
-  --createInstanceSpecRequest.Vcpus 2 \
-  --createInstanceSpecRequest.Name test-spec \
-  --createInstanceSpecRequest.Memory 16777216
+  --updateInstanceSpecRequest.Type 1 \
+  --updateInstanceSpecRequest.Vcpus 2 \
+  --updateInstanceSpecRequest.Name test-spec \
+  --updateInstanceSpecRequest.Memory 16777216
 ```
 
 返回:
@@ -2231,16 +2232,16 @@ Usage:
 Flags:
       --Body string                                      Optional json string for [Body]. the http post body
       --VolumeSpecUuid string                            Required. the volume specification's uuid
-      --createVolumeSpecRequest.Description string       description for the volume specification
-      --createVolumeSpecRequest.MaxIops int              Required. 
-      --createVolumeSpecRequest.MaxThroughput int        Required. the max throughput value of the volume specification
-      --createVolumeSpecRequest.MinIops int              Required. the min iops value of the volume specification
-      --createVolumeSpecRequest.MinThroughput int        Required. the min throughput value of the volume specification
-      --createVolumeSpecRequest.Name string              Required. the volume specification's name
-      --createVolumeSpecRequest.StepIops int             Required. the step iops value of the volume specification
-      --createVolumeSpecRequest.StepThroughput int       Required. the step throughput value of the volume specification
-      --createVolumeSpecRequest.StoragePoolUuid string   Required. the storage pool's Uuid
-  -h, --help     
+  -h, --help                                             help for updateVolumeSpec
+      --updateVolumeSpecRequest.Description string       description for the volume specification
+      --updateVolumeSpecRequest.MaxIops int              Required. 
+      --updateVolumeSpecRequest.MaxThroughput int        Required. the max throughput value of the volume specification
+      --updateVolumeSpecRequest.MinIops int              Required. the min iops value of the volume specification
+      --updateVolumeSpecRequest.MinThroughput int        Required. the min throughput value of the volume specification
+      --updateVolumeSpecRequest.Name string              Required. the volume specification's name
+      --updateVolumeSpecRequest.StepIops int             Required. the step iops value of the volume specification
+      --updateVolumeSpecRequest.StepThroughput int       Required. the step throughput value of the volume specification
+      --updateVolumeSpecRequest.StoragePoolUuid string   Required. the storage pool's Uuid 
 ```
 
 #### 参数列表
@@ -2248,21 +2249,21 @@ Flags:
 |Name|Type|Required|Description|
 |---|---|---|---|
 |VolumeSpecUuid|string|true|the volume specification's uuid|
-|body|[CreateVolumeSpecRequest](#schemacreatevolumespecrequest)|true|the http post body|
+|body|[UpdateVolumeSpecRequest](#schemaupdatevolumespecrequest)|true|the http post body|
 
-**CreateVolumeSpecRequest参数**:
+**UpdateVolumeSpecRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|createVolumeSpecRequest.Description|string|false|description for the volume specification|
-|createVolumeSpecRequest.MaxIops|integer|true|the max iops value of the volume specification|
-|createVolumeSpecRequest.MaxThroughput|integer|true|the max throughput value of the volume specification|
-|createVolumeSpecRequest.MinIops|integer|true|the min iops value of the volume specification|
-|createVolumeSpecRequest.MinThroughput|integer|true|the min throughput value of the volume specification|
-|createVolumeSpecRequest.Name|string|true|the volume specification's name|
-|createVolumeSpecRequest.StepIops|integer|true|the step iops value of the volume specification|
-|createVolumeSpecRequest.StepThroughput|integer|true|the step throughput value of the volume specification|
-|createVolumeSpecRequest.StoragePoolUuid|string|true|the storage pool's Uuid|
+|updateVolumeSpecRequest.Description|string|false|description for the volume specification|
+|updateVolumeSpecRequest.MaxIops|integer|true|the max iops value of the volume specification|
+|updateVolumeSpecRequest.MaxThroughput|integer|true|the max throughput value of the volume specification|
+|updateVolumeSpecRequest.MinIops|integer|true|the min iops value of the volume specification|
+|updateVolumeSpecRequest.MinThroughput|integer|true|the min throughput value of the volume specification|
+|updateVolumeSpecRequest.Name|string|true|the volume specification's name|
+|updateVolumeSpecRequest.StepIops|integer|true|the step iops value of the volume specification|
+|updateVolumeSpecRequest.StepThroughput|integer|true|the step throughput value of the volume specification|
+|updateVolumeSpecRequest.StoragePoolUuid|string|true|the storage pool's Uuid|
 
 #### 示例
 
@@ -2271,14 +2272,14 @@ Flags:
 ```
 chimecli volume_spec updateVolumeSpec \
   --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa \
-  --createVolumeSpecRequest.Name test-volume-spec \
-  --createVolumeSpecRequest.MaxIops 1000 \
-  --createVolumeSpecRequest.MinIops 500 \
-  --createVolumeSpecRequest.StepIops 10 \
-  --createVolumeSpecRequest.MaxThroughput 104857600 \
-  --createVolumeSpecRequest.MinThroughput 10485760 \
-  --createVolumeSpecRequest.StepThroughput 10485760 \
-  --createVolumeSpecRequest.StoragePoolUuid f5165a18-e6b3-42b4-8efc-ad496f318a0a
+  --updateVolumeSpecRequest.Name test-volume-spec \
+  --updateVolumeSpecRequest.MaxIops 1000 \
+  --updateVolumeSpecRequest.MinIops 500 \
+  --updateVolumeSpecRequest.StepIops 10 \
+  --updateVolumeSpecRequest.MaxThroughput 104857600 \
+  --updateVolumeSpecRequest.MinThroughput 10485760 \
+  --updateVolumeSpecRequest.StepThroughput 10485760 \
+  --updateVolumeSpecRequest.StoragePoolUuid f5165a18-e6b3-42b4-8efc-ad496f318a0a
 ```
 
 返回: 
@@ -3069,12 +3070,12 @@ Flags:
       --ClusterUuid string                       Required. the cluster's uuid
       --NetworkUuid string                       Required. the network's uuid
       --SubnetUuid string                        Required. the subnet's uuid
-      --createSubnetRequest.CIDR string          Required. the CIDR value, e.g. 192.168.231.1/24
-      --createSubnetRequest.Description string   description for the subnet
-      --createSubnetRequest.Gateway string       the gateway of the subnet
-      --createSubnetRequest.Name string          Required. the subnet's name
-      --createSubnetRequest.ReservedIps string   the reserved ips inside the subnet, which will not be assigned to virtual machines
-  -h, --help   
+  -h, --help                                     help for updateSubnet
+      --updateSubnetRequest.CIDR string          Required. the CIDR value, e.g. 192.168.231.1/24
+      --updateSubnetRequest.Description string   description for the subnet
+      --updateSubnetRequest.Gateway string       the gateway of the subnet
+      --updateSubnetRequest.Name string          Required. the subnet's name
+      --updateSubnetRequest.ReservedIps string   the reserved ips inside the subnet, which will not be assigned to virtual machines
 ```
 
 #### 参数列表
@@ -3085,17 +3086,17 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |NetworkUuid|string|true|the network's uuid|
 |SubnetUuid|string|true|the subnet's uuid|
-|body|[CreateSubnetRequest](#schemacreatesubnetrequest)|false|the http post body|
+|body|[UpdateSubnetRequest](#schemaupdatesubnetrequest)|false|the http post body|
 
-**CreateSubnetRequest参数**:
+**UpdateSubnetRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|createSubnetRequest.Cidr|string|true|the CIDR value, e.g. 192.168.231.1/24|
-|createSubnetRequest.Description|string|false|description for the subnet|
-|createSubnetRequest.Gateway|string|false|the gateway of the subnet|
-|createSubnetRequest.Name|string|true|the subnet's name|
-|createSubnetRequest.ReservedIps|string|false|the reserved ips inside the subnet, which will not be assigned to virtual machines|
+|updateSubnetRequest.Cidr|string|true|the CIDR value, e.g. 192.168.231.1/24|
+|updateSubnetRequest.Description|string|false|description for the subnet|
+|updateSubnetRequest.Gateway|string|false|the gateway of the subnet|
+|updateSubnetRequest.Name|string|true|the subnet's name|
+|updateSubnetRequest.ReservedIps|string|false|the reserved ips inside the subnet, which will not be assigned to virtual machines|
 
 #### 示例
 
@@ -3105,9 +3106,9 @@ Flags:
 chimecli network updateSubnet \
   --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5 \
   --NetworkUuid f2a515db-7699-4970-b13c-a8ea9840f62e \
-  --createSubnetRequest.CIDR 192.168.231.200/32 \
-  --createSubnetRequest.ReservedIps 192.168.231.128,192.168.231.158 \
-  --createSubnetRequest.Name subnet2
+  --updateSubnetRequest.CIDR 192.168.231.200/32 \
+  --updateSubnetRequest.ReservedIps 192.168.231.128,192.168.231.158 \
+  --updateSubnetRequest.Name subnet2
 ```
 
 返回:
@@ -3414,15 +3415,16 @@ Flags:
       --Body string                                      Optional json string for [Body]. the http post body
       --ClusterUuid string                               Required. the cluster's uuid
       --StoragePoolUuid string                           Required. the storage pool's uuid
-      --createStoragePoolRequest.BackendPath string      the backend path of the physical storage in nodes (only for local storage)
-      --createStoragePoolRequest.Description string      description for the storage pool
-      --createStoragePoolRequest.ImageCachePath string   the image cache path of the physical storage in nodes (only for local storage)
-      --createStoragePoolRequest.Name string             Required. the storage pool's name
-      --createStoragePoolRequest.PhysicalSize int        Required. the physical size of the storage
-      --createStoragePoolRequest.ReservedSize int        the reserverd storage size, which will not be allocated to virtual machines.
-      --createStoragePoolRequest.SizeRatio float32       the storage's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical storage
-      --createStoragePoolRequest.Type int                the storage pool's type, 0: local, 1:iscsi, 2:ceph
-  -h, --help   
+  -h, --help                                             help for updateStoragePool
+      --updateStoragePoolRequest.BackendPath string      the backend path of the physical storage in nodes (only for local storage)
+      --updateStoragePoolRequest.Description string      description for the storage pool
+      --updateStoragePoolRequest.ImageCachePath string   the image cache path of the physical storage in nodes (only for local storage)
+      --updateStoragePoolRequest.Name string             Required. the storage pool's name
+      --updateStoragePoolRequest.PhysicalSize int        Required. the physical size of the storage
+      --updateStoragePoolRequest.ReservedSize int        the reserverd storage size, which will not be allocated to virtual machines.
+      --updateStoragePoolRequest.SizeRatio float32       the storage's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical storage
+      --updateStoragePoolRequest.Type int                the storage pool's type, 0: local, 1:iscsi, 2:ceph
+
 ```
 
 #### 参数列表
@@ -3432,20 +3434,20 @@ Flags:
 |AzUuid|string|true|the AZ's uuid|
 |ClusterUuid|string|true|the cluster's uuid|
 |StoragePoolUuid|string|true|the storage pool's uuid|
-|body|[CreateStoragePoolRequest](#schemacreatestoragepoolrequest)|false|the http post body|
+|body|[UpdateStoragePoolRequest](#schemaupdatestoragepoolrequest)|false|the http post body|
 
-**CreateStoragePoolRequest参数**:
+**UpdateStoragePoolRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|createStoragePoolRequest.BackendPath|string|false|the backend path of the physical storage in nodes (only for local storage)|
-|createStoragePoolRequest.Description|string|false|description for the storage pool|
-|createStoragePoolRequest.ImageCachePath|string|false|the image cache path of the physical storage in nodes (only for local storage)|
-|createStoragePoolRequest.Name|string|true|the storage pool's name|
-|createStoragePoolRequest.PhysicalSize|integer|true|the physical size of the storage|
-|createStoragePoolRequest.ReservedSize|integer|false|the reserverd storage size, which will not be allocated to virtual machines.|
-|createStoragePoolRequest.SizeRatio|float|false|the storage's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical storage|
-|createStoragePoolRequest.Type|integer|false|the storage pool's type, 0: local, 1:iscsi, 2:ceph|
+|updateStoragePoolRequest.BackendPath|string|false|the backend path of the physical storage in nodes (only for local storage)|
+|updateStoragePoolRequest.Description|string|false|description for the storage pool|
+|updateStoragePoolRequest.ImageCachePath|string|false|the image cache path of the physical storage in nodes (only for local storage)|
+|updateStoragePoolRequest.Name|string|true|the storage pool's name|
+|updateStoragePoolRequest.PhysicalSize|integer|true|the physical size of the storage|
+|updateStoragePoolRequest.ReservedSize|integer|false|the reserverd storage size, which will not be allocated to virtual machines.|
+|updateStoragePoolRequest.SizeRatio|float|false|the storage's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical storage|
+|updateStoragePoolRequest.Type|integer|false|the storage pool's type, 0: local, 1:iscsi, 2:ceph|
 
 #### 示例
 
@@ -3454,12 +3456,12 @@ Flags:
 ```
 chimecli storage_pool updateStoragePool \
   --StoragePoolUuid 97329a52-44c4-44ac-af4f-fb45c95b618b \
-  --createStoragePoolRequest.BackendPath /chime/backend1 \
-  --createStoragePoolRequest.ImageCachePath /chime/cache \
-  --createStoragePoolRequest.PhysicalSize 104857600 \
-  --createStoragePoolRequest.SizeRatio 3 \
-  --createStoragePoolRequest.Type 0 \
-  --createStoragePoolRequest.Name new-storagepool
+  --updateStoragePoolRequest.BackendPath /chime/backend1 \
+  --updateStoragePoolRequest.ImageCachePath /chime/cache \
+  --updateStoragePoolRequest.PhysicalSize 104857600 \
+  --updateStoragePoolRequest.SizeRatio 3 \
+  --updateStoragePoolRequest.Type 0 \
+  --updateStoragePoolRequest.Name new-storagepool
 ```
 
 返回:

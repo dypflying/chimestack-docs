@@ -1723,7 +1723,7 @@ This will update a cluster.
 |---|---|---|---|---|
 |AzUuid|path|string|true|the AZ's uuid|
 |ClusterUuid|path|string|true|the cluster's uuid|
-|body|body|[CreateClusterRequest](#schemacreateclusterrequest)|true|the http post body|
+|body|body|[UpdateClusterRequest](#schemaupdateclusterrequest)|true|the http post body|
 
 > Example responses
 
@@ -3041,7 +3041,7 @@ update an instance specification
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |InstanceSpecUuid|path|string|true|the instance specification's uuid|
-|body|body|[CreateInstanceSpecRequest](#schemacreateinstancespecrequest)|true|the http post body|
+|body|body|[UpdateInstanceSpecRequest](#schemaupdateinstancespecrequest)|true|the http post body|
 
 > Example responses
 
@@ -3695,7 +3695,7 @@ update a subnet
 |ClusterUuid|path|string|true|the cluster's uuid|
 |NetworkUuid|path|string|true|the network's uuid|
 |SubnetUuid|path|string|true|the subnet's uuid|
-|body|body|[CreateSubnetRequest](#schemacreatesubnetrequest)|false|the http post body|
+|body|body|[UpdateSubnetRequest](#schemaupdatesubnetrequest)|false|the http post body|
 
 > Example responses
 
@@ -4402,7 +4402,7 @@ update a storage pool
 |AzUuid|path|string|true|the AZ's uuid|
 |ClusterUuid|path|string|true|the cluster's uuid|
 |StoragePoolUuid|path|string|true|the storage pool's uuid|
-|body|body|[CreateStoragePoolRequest](#schemacreatestoragepoolrequest)|false|the http post body|
+|body|body|[UpdateStoragePoolRequest](#schemaupdatestoragepoolrequest)|false|the http post body|
 
 > Example responses
 
@@ -5900,7 +5900,7 @@ update volume specification
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |VolumeSpecUuid|path|string|true|the volume specification's uuid|
-|body|body|[CreateVolumeSpecRequest](#schemacreatevolumespecrequest)|true|the http post body|
+|body|body|[UpdateVolumeSpecRequest](#schemaupdatevolumespecrequest)|true|the http post body|
 
 > Example responses
 
@@ -8858,6 +8858,34 @@ user  request
 |description|string|false|none|description for the AZ|
 |name|string|true|none|the AZ's name|
 
+### UpdateClusterRequest
+<!-- backwards compatibility -->
+<a id="schemaupdateclusterrequest"></a>
+<a id="schema_UpdateClusterRequest"></a>
+<a id="tocSupdateclusterrequest"></a>
+<a id="tocsupdateclusterrequest"></a>
+
+```json
+{
+  "arch": "x86_64",
+  "description": "a cluster example",
+  "hypervisor_type": "kvm",
+  "name": "default",
+  "type": 0
+}
+
+```
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|arch|string|false|none|the cluster's architecture, like x86_64, arm, ...|
+|description|string|false|none|description for the cluster|
+|hypervisor_type|string|false|none|the cluster's hypervisor type, like kvm (default), xen, ...|
+|name|string|true|none|the cluster's name|
+|type|integer(int64)|false|none|the cluster's type|
+
 ### UpdateHostRequest
 <!-- backwards compatibility -->
 <a id="schemaupdatehostrequest"></a>
@@ -8920,6 +8948,34 @@ user  request
 |os_type|string|false|none|the operation system's type, like Windows, Linux, ...|
 |shared|integer(int64)|false|none|whether the image is shared with other accounts or not|
 
+### UpdateInstanceSpecRequest
+<!-- backwards compatibility -->
+<a id="schemaupdateinstancespecrequest"></a>
+<a id="schema_UpdateInstanceSpecRequest"></a>
+<a id="tocSupdateinstancespecrequest"></a>
+<a id="tocsupdateinstancespecrequest"></a>
+
+```json
+{
+  "description": "an instance specification example",
+  "memory": 4294967296,
+  "name": "Small",
+  "type": 0,
+  "vcpus": 2
+}
+
+```
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|description|string|false|none|description for the instance specification|
+|memory|integer(int64)|true|none|the number of memory|
+|name|string|true|none|the instance specification's name|
+|type|integer(int64)|false|none|the instance specification's type, 0: shared resource, 1: dedicated resource|
+|vcpus|integer(int64)|true|none|the number of vCPUs|
+
 ### UpdateNetworkRequest
 <!-- backwards compatibility -->
 <a id="schemaupdatenetworkrequest"></a>
@@ -8964,6 +9020,68 @@ user  request
 |description|string|false|none|description for the nic|
 |name|string|true|none|the nic's name|
 
+### UpdateStoragePoolRequest
+<!-- backwards compatibility -->
+<a id="schemaupdatestoragepoolrequest"></a>
+<a id="schema_UpdateStoragePoolRequest"></a>
+<a id="tocSupdatestoragepoolrequest"></a>
+<a id="tocsupdatestoragepoolrequest"></a>
+
+```json
+{
+  "backend_path": "/chime/backend",
+  "description": "a storage pool example",
+  "image_cache_path": "/chime/cache",
+  "name": "local storage pool",
+  "physical_size": 107374182400,
+  "reserved_size": 0,
+  "size_ratio": 2,
+  "type": 0
+}
+
+```
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|backend_path|string|false|none|the backend path of the physical storage in nodes (only for local storage)|
+|description|string|false|none|description for the storage pool|
+|image_cache_path|string|false|none|the image cache path of the physical storage in nodes (only for local storage)|
+|name|string|true|none|the storage pool's name|
+|physical_size|integer(int64)|true|none|the physical size of the storage|
+|reserved_size|integer(int64)|false|none|the reserverd storage size, which will not be allocated to virtual machines.|
+|size_ratio|number(float)|false|none|the storage's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical storage|
+|type|integer(int64)|false|none|the storage pool's type, 0: local, 1:iscsi, 2:ceph|
+
+### UpdateSubnetRequest
+<!-- backwards compatibility -->
+<a id="schemaupdatesubnetrequest"></a>
+<a id="schema_UpdateSubnetRequest"></a>
+<a id="tocSupdatesubnetrequest"></a>
+<a id="tocsupdatesubnetrequest"></a>
+
+```json
+{
+  "cidr": "192.168.231.1/24",
+  "description": "a subnet example",
+  "gateway": "192.168.231.2",
+  "name": "subnet1",
+  "reserved_ips": "192.168.231.254,192.168.231.1-192.168.231.100"
+}
+
+```
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|cidr|string|true|none|the CIDR value, e.g. 192.168.231.1/24|
+|description|string|false|none|description for the subnet|
+|gateway|string|false|none|the gateway of the subnet|
+|name|string|true|none|the subnet's name|
+|reserved_ips|string|false|none|the reserved ips inside the subnet, which will not be assigned to virtual machines|
+
 ### UpdateVmRequest
 <!-- backwards compatibility -->
 <a id="schemaupdatevmrequest"></a>
@@ -9007,4 +9125,40 @@ user  request
 |---|---|---|---|---|
 |description|string|false|none|description for the volume|
 |name|string|false|none|the volume's name|
+
+### UpdateVolumeSpecRequest
+<!-- backwards compatibility -->
+<a id="schemaupdatevolumespecrequest"></a>
+<a id="schema_UpdateVolumeSpecRequest"></a>
+<a id="tocSupdatevolumespecrequest"></a>
+<a id="tocsupdatevolumespecrequest"></a>
+
+```json
+{
+  "description": "a volume specification example",
+  "max_iops": 10000,
+  "max_throughput": 524288000,
+  "min_iops": 1000,
+  "min_throughput": 52428800,
+  "name": "Standard",
+  "step_iops": 100,
+  "step_throughput": 5242880,
+  "storage_pool_uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a"
+}
+
+```
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|description|string|false|none|description for the volume specification|
+|max_iops|integer(int64)|true|none|none|
+|max_throughput|integer(int64)|true|none|the max throughput value of the volume specification|
+|min_iops|integer(int64)|true|none|the min iops value of the volume specification|
+|min_throughput|integer(int64)|true|none|the min throughput value of the volume specification|
+|name|string|true|none|the volume specification's name|
+|step_iops|integer(int64)|true|none|the step iops value of the volume specification|
+|step_throughput|integer(int64)|true|none|the step throughput value of the volume specification|
+|storage_pool_uuid|string|true|none|the storage pool's Uuid|
 

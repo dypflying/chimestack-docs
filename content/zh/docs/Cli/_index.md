@@ -280,7 +280,7 @@ Flags:
 |AzUuid|string|true|the AZ's uuid|
 |body|[UpdateAzRequest](#schemaupdateazrequest)|true|the http post body|
 
-**CreateAzRequest参数**:
+**UpdateAzRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -554,11 +554,11 @@ Flags:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|CreateClusterRequest.Arch|string|false|the cluster's architecture, like x86_64, arm, ...|
-|CreateClusterRequest.Description|string|false|description for the cluster|
-|CreateClusterRequest.HypervisorType|string|false|the cluster's hypervisor type, like kvm (default), xen, ...|
-|CreateClusterRequest.Name|string|true|the cluster's name|
-|CreateClusterRequest.Type|integer|false|the cluster's type|
+|createClusterRequest.Arch|string|false|the cluster's architecture, like x86_64, arm, ...|
+|createClusterRequest.Description|string|false|description for the cluster|
+|createClusterRequest.HypervisorType|string|false|the cluster's hypervisor type, like kvm (default), xen, ...|
+|createClusterRequest.Name|string|true|the cluster's name|
+|createClusterRequest.Type|integer|false|the cluster's type|
 
 #### 示例
 
@@ -993,12 +993,12 @@ Flags:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|cpu_ratio|float|false|the CPU's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical CPUs in the node.|
-|description|string|false|description for the host|
-|memory_ratio|float|false|the memory's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical memory in the node.|
-|reserved_memory|integer|false|the reserverd memory number, which will not be allocated to virtual machines.|
-|reserved_vcpus|integer|false|the reserverd CPU number, which will not be allocated to virtual machines.|
-|uuid|string|true|the host's Uuid|
+|createHostRequest.CpuRatio|float|false|the CPU's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical CPUs in the node.|
+|createHostRequest.Description|string|false|description for the host|
+|createHostRequest.MemoryRatio|float|false|the memory's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical memory in the node.|
+|createHostRequest.ReservedMemory|integer|false|the reserverd memory number, which will not be allocated to virtual machines.|
+|createHostRequest.ReservedVcpus|integer|false|the reserverd CPU number, which will not be allocated to virtual machines.|
+|createHostRequest.Uuid|string|true|the host's Uuid|
 
 #### 示例
 
@@ -1150,11 +1150,11 @@ Flags:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|UpdateHostRequest.CpuRatio|float|false|the CPU's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical CPUs in the node.|
-|UpdateHostRequest.Description|string|false|description for the host|
-|UpdateHostRequest.MemoryRatio|float|false|the memory's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical memory in the node.|
-|UpdateHostRequest.ReservedMemory|integer|false|the reserverd memory number, which will not be allocated to virtual machines.|
-|UpdateHostRequest.ReservedVcpus|integer|false|the reserverd CPU number, which will not be allocated to virtual machines.|
+|updateHostRequest.CpuRatio|float|false|the CPU's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical CPUs in the node.|
+|updateHostRequest.Description|string|false|description for the host|
+|updateHostRequest.MemoryRatio|float|false|the memory's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical memory in the node.|
+|updateHostRequest.ReservedMemory|integer|false|the reserverd memory number, which will not be allocated to virtual machines.|
+|updateHostRequest.ReservedVcpus|integer|false|the reserverd CPU number, which will not be allocated to virtual machines.|
 
 #### 示例
 
@@ -1587,11 +1587,11 @@ Flags:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|CreateInstanceSpecRequest.Description|string|false|description for the instance specification|
-|CreateInstanceSpecRequest.Memory|integer|true|the number of memory|
-|CreateInstanceSpecRequest.Name|string|true|the instance specification's name|
-|CreateInstanceSpecRequest.Type|integer|false|the instance specification's type, 0: shared resource, 1: dedicated resource|
-|CreateInstanceSpecRequest.Vcpus|integer|true|the number of vCPUs|
+|createInstanceSpecRequest.Description|string|false|description for the instance specification|
+|createInstanceSpecRequest.Memory|integer|true|the number of memory|
+|createInstanceSpecRequest.Name|string|true|the instance specification's name|
+|createInstanceSpecRequest.Type|integer|false|the instance specification's type, 0: shared resource, 1: dedicated resource|
+|createInstanceSpecRequest.Vcpus|integer|true|the number of vCPUs|
 
 #### 示例
 
@@ -1810,7 +1810,7 @@ Flags:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|CreateClusterInstanceSpecRequest.InstanceSpecUuid|string|true|the instance specification's Uuid|
+|createClusterInstanceSpecRequest.InstanceSpecUuid|string|true|the instance specification's Uuid|
 
 #### 示例
 
@@ -2364,7 +2364,7 @@ Flags:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|volume_spec_uuid|string|true|the volume specification's Uuid|
+|createClusterVolumeSpecRequest.VolumeSpecUuid|string|true|the volume specification's Uuid|
 
 #### 示例
 
@@ -5840,9 +5840,9 @@ Flags:
       --Body string                                Optional json string for [Body]. the http post body
       --SnapshotUuid string                        Required. the snapshot's uuid
       --VolumeUuid string                          Required. the volume's uuid
-      --createSnapshotRequest.Description string   description for the snapshot
-      --createSnapshotRequest.Name string          Required. the snapshot's name
   -h, --help                                       help for updateSnapshot
+      --updateSnapshotRequest.Description string   description for the snapshot
+      --updateSnapshotRequest.Name string          Required. the snapshot's name
 ```
 
 #### 参数列表
@@ -5851,14 +5851,14 @@ Flags:
 |---|---|---|---|
 |VolumeUuid|string|true|the volume's uuid|
 |SnapshotUuid|string|true|the snapshot's uuid|
-|body|[CreateSnapshotRequest](#schemacreatesnapshotrequest)|false|the http post body|
+|body|[UpdateSnapshotRequest](#schemaupdatesnapshotrequest)|false|the http post body|
 
-**CreateSnapshotRequest参数**:
+**UpdateSnapshotRequest参数**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|description|string|false|description for the snapshot|
-|name|string|true|the snapshot's name|
+|updateSnapshotRequest.Description|string|false|description for the snapshot|
+|updateSnapshotRequest.Name|string|true|the snapshot's name|
 
 #### 示例
 

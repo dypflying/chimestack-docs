@@ -5221,7 +5221,7 @@ update a snapshot
 |---|---|---|---|---|
 |VolumeUuid|path|string|true|the volume's uuid|
 |SnapshotUuid|path|string|true|the snapshot's uuid|
-|body|body|[CreateSnapshotRequest](#schemacreatesnapshotrequest)|false|the http post body|
+|body|body|[UpdateSnapshotRequest](#schemaupdatesnapshotrequest)|false|the http post body|
 
 > Example responses
 
@@ -9019,6 +9019,28 @@ user  request
 |---|---|---|---|---|
 |description|string|false|none|description for the nic|
 |name|string|true|none|the nic's name|
+
+### UpdateSnapshotRequest
+<!-- backwards compatibility -->
+<a id="schemaupdatesnapshotrequest"></a>
+<a id="schema_UpdateSnapshotRequest"></a>
+<a id="tocSupdatesnapshotrequest"></a>
+<a id="tocsupdatesnapshotrequest"></a>
+
+```json
+{
+  "description": "a snapshot example",
+  "name": "test-snapshot"
+}
+
+```
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|description|string|false|none|description for the snapshot|
+|name|string|true|none|the snapshot's name|
 
 ### UpdateStoragePoolRequest
 <!-- backwards compatibility -->

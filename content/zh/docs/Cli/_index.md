@@ -6,7 +6,7 @@ description: 本章介绍ChimeStack命令行工具(CLI)的使用方法
 
 ## 概述
 
-chimecli是通过命令行管理ChimeStack的工具
+chimecli是一个通过命令行管理操作ChimeStack的工具。
 
 ### CLI使用方法
 
@@ -16,7 +16,7 @@ CLI命令格式为:
 chimecli <resource category> <operation> [flags]  
 ```
 
-其中"resource category"为资源类别，目前支持的资源类别为: 
+> "resource category"为资源类别，目前可用CLI管理操作的资源为: 
 
 - az: 可用区
 - cluster: 集群
@@ -31,7 +31,16 @@ chimecli <resource category> <operation> [flags]
 - volume: 云硬盘
 - user: 用户
 
+> "operation"为操作资源的命令，是对[API](/docs/reference/api/)的封装，和[API](/docs/reference/api/)相对应。
+
+> "flags"是命令相关的输入参数，具体可以通过"chimecli <resource category> <operation> --help"查看参数说明. 
+
+
+CLI的全部命令(除了登录/登出)，都需要进行用户身份认证，在使用CLI命令前，需要先进行用户登录(login), 登录成功后，登录信息会保存在当前用户的默认配置中(~/.config/chimecli/config.yaml)；如果不再需要继续使用CLI，需要进行登出(logout)操作以保障用户的信息安全。
+
 ### 登录
+
+> 命令原型:
 
 ```
 chimecli login --help
@@ -48,13 +57,42 @@ Flags:
 
 ```
 
-**参数**: 
+> 参数列表: 
 
-**返回**: 
+|Name|Type|Required|Description|
+|---|---|---|---|
+|api-endpoint|string|true|the endpoint of the chime api service |
+|name|string|true|the account name to login |
+|password|string|true|the password to login|
 
+> 示例: 
+
+```
+chimecli login --api-endpoint 192.168.231.128:8801 --name user --password admin 
+2024/04/25 08:51:08  ****** account login successfully! ******
+```
 
 ### 登出
 
+> 命令原型:
+
+```
+chimecli logout --help
+chimecli logout
+
+Usage:
+  chimecli logout [flags]
+
+Flags:
+  -h, --help   help for logout
+```
+
+> 示例: 
+
+```
+chimecli logout 
+2024/04/25 08:52:39  ****** account logout successfully! ******
+```
 
 ## 可用区(AZ)操作命令
 

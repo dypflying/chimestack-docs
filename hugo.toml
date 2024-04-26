@@ -64,6 +64,7 @@ staticDir = ['static']
 languageName ="English"
 # Weight used for sorting.
 weight = 2
+contentDir = "content/en"
 [languages.en.params]
 title = "ChimeStack"
 description = "A lightweight software that provides services for cloud infrastructure"

@@ -1,77 +1,74 @@
 ---
-title: Goldydocs
+title: ChimeStack
 ---
 
-{{< blocks/cover title="Welcome to Goldydocs: A Docsy Example Project!" image_anchor="top" height="full" >}}
+{{< blocks/cover title="Welcome To ChimeStack" image_anchor="top" height="full"  >}}
 <a class="btn btn-lg btn-primary me-3 mb-4" href="/docs/">
-  Learn More <i class="fas fa-arrow-alt-circle-right ms-2"></i>
+  Know More <i class="fas fa-arrow-alt-circle-right ms-2"></i>
 </a>
-<a class="btn btn-lg btn-secondary me-3 mb-4" href="https://github.com/google/docsy-example">
+<a class="btn btn-lg btn-secondary me-3 mb-4" href="https://github.com/dypflying/chimestack">
   Download <i class="fab fa-github ms-2 "></i>
 </a>
-<p class="lead mt-5">Porridge temperature assessment &mdash; in the cloud!</p>
+<p class="lead mt-5" style="color:yellow;"><b>A Lightweight Private Cloud Infrastructure Software</b></p>
 {{< blocks/link-down color="info" >}}
 {{< /blocks/cover >}}
 
 
 {{% blocks/lead color="primary" %}}
-Goldydocs provides a single web UI providing visibility into porridge
-temperature, chair size, and bed softness metrics! You can even find out who's
-been eating **your** porridge.
-
-(Sadly, Goldydocs isn't a real project, but you can use this site as an example
-to create your own real websites with [Docsy](https://docsy.dev))
+ChimeStack is a lightweight cloud computing infrastructure as a service (IaaS) software. ChimeStack helps companies and organizations quickly build and operate private cloud environments. ChimeStack improves the storage's efficiency in hyper-converged environments by shortening the I/O path. ChimeStack is designed for small-scale cloud infrastructure as a service and edge computing service scenarios.
+{.-text-yellow}
 {{% /blocks/lead %}}
 
 
 {{% blocks/section color="dark" type="row" %}}
-{{% blocks/feature icon="fa-lightbulb" title="New chair metrics!" %}}
-The Goldydocs UI now shows chair size metrics by default.
 
-Please follow this space for updates!
+{{% blocks/feature icon="fa-gears" title="Simple"  %}}
+Quick deployment and simplified operation
 {{% /blocks/feature %}}
 
 
-{{% blocks/feature icon="fab fa-github" title="Contributions welcome!" url="https://github.com/google/docsy-example" %}}
-We do a [Pull Request](https://github.com/google/docsy-example/pulls) contributions workflow on **GitHub**. New users are always welcome!
+{{% blocks/feature icon="fa-lightbulb" title="Lightweight"  %}}
+ChimeStack occupies very limited physical resource in the runtime
 {{% /blocks/feature %}}
 
-
-{{% blocks/feature icon="fab fa-twitter" title="Follow us on Twitter!" url="https://twitter.com/docsydocs" %}}
-For announcement of latest features etc.
+{{% blocks/feature icon="fab fa-dropbox" title="Efficient" %}}
+ChimeStack supports storage and computing hyperconveged deployment with high efficiency I/O path
 {{% /blocks/feature %}}
 
-
-{{% /blocks/section %}}
-
-
-{{% blocks/section %}}
-This is the second section
-{.h1 .text-center}
 {{% /blocks/section %}}
 
 
 {{% blocks/section type="row" %}}
 
-{{% blocks/feature icon="fab fa-app-store-ios" title="Download **from AppStore**" %}}
-Get the Goldydocs app!
+{{% blocks/feature icon="fab fa-mixer" title="Elastic" %}}
+Simplified scale-out and scale-in
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fab fa-github" title="Contributions welcome!"
-    url="https://github.com/google/docsy-example" %}}
-We do a [Pull Request](https://github.com/google/docsy-example/pulls)
-contributions workflow on **GitHub**. New users are always welcome!
+{{% blocks/feature icon="fa-compass" title="Reliable" %}}
+ChimeStack's overall components support high-availability deployment and automatical failover
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fab fa-twitter" title="Follow us on Twitter!"
-    url="https://twitter.com/GoHugoIO" %}}
-For announcement of latest features etc.
+{{% blocks/feature icon="fa-eye" title="Friendly" %}}
+ChimeStack provides a web GUI and a command line tool for interactive operations, and provides SDKs for further development purposes 
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}
 
 
-{{% blocks/section %}}
-This is the another section
-{.h1 .text-center}
+{{% blocks/section type="row" %}}
+
+{{% blocks/feature icon="fa-download" title="Download" url="https://chimestack.io/download" %}}
+Download ChimeStack's installation packages
+{{% /blocks/feature %}}
+
+{{% blocks/feature icon="fab fa-github" title="Contributions welcome!"
+    url="https://github.com/dypflying/chimestack" %}}
+Welcome new contributors! **GitHub** Start from a [Pull Request](https://github.com/dypflying/chimestack/pulls). 
+{{% /blocks/feature %}}
+
+{{% blocks/feature icon="fab fa-twitter" title="Follow Twitter!"
+    url="https://twitter.com/chimestack" %}}
+For release notifications
+{{% /blocks/feature %}}
+
 {{% /blocks/section %}}

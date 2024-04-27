@@ -1,17 +1,17 @@
 ---
 title: 2.3 Quick Start
-description: 本章介绍如何快速部署配置一个All-In-One的ChimeStack
+description: This chapter introduces how to deploy an all-in-one ChimeStack platform
 weight: 4
 ---
 
-**All-In-One部署时，启用监听端口列表**:
+**Followings are the listening ports used in all-in-one deployed environment**:
 
 | Port | Component    | Description               |
 |------|--------------|---------------------------|
-| 8801 | chime-server | server对外API端口          ｜
-| 8802 | chime-server | server和agent之间通过grpc通信, server侧端口| 
-| 8033 | chime-portal | portal对外服务端口 |
-| 8811 | chime-agent  | server和agent之间通过grpc通信, agent侧端口 | 
-| 3306 | mysql        | mysql默认服务端口  |
-| 8086 | influxdb     | influxdb默认服务端口 | 
-| 9000 | minio        | 如果s3服务软件选择minio的话，默认服务端口 | 
+| 8801 | chime-server | chime-server's API service's port          ｜
+| 8802 | chime-server | chime-server's gRPC port for communicating with chime-agents| 
+| 8033 | chime-portal | chime portal's service port |
+| 8811 | chime-agent  | chime-agent's gRPC port for comminicating with chime-server | 
+| 3306 | mysql        | mysql's default service port  |
+| 8086 | influxdb     | influxdb's default service port | 
+| 9000 | minio        | minio's default service port if use minio for providing s3 service | 

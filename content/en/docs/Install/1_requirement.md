@@ -1,7 +1,7 @@
 ---
 title: 2.1 Prerequisites
 date: 2023-11-09
-description: This chapter introduces the environment requirements of the ChimeStack platform.
+description: This chapter introduces the prerequisites of the ChimeStack platform.
 weight: 2
 ---
 

@@ -1,20 +1,20 @@
 ---
-title: 配置ChimeStack
+title: Configure ChimeStack
 date: 2023-11-09
-description: 本章介绍如何快速配置并启动ChimeStack
+description: This chapter introduces how to configure and start ChimeStack
 weight: 5
 ---
 
 
-## 配置并启动chime-server
+## Configure and Start chime-server
 
-本章节说明如何配置chime-server依赖的mysql,influxdb和s3组件，及如何启动chime-server
+This section introduces how to configure the chime-server's indenpdent components including mysql, influxdb and OSS(s3), and how to launch a chime-server process.  
 
-### 配置和初始化mysql
+### Configure and initiate mysql
 
-##### 创建mysql新账户
+##### create new mysql user 
 
-通过mysql客户端登录mysql, 创建新账户chime，并给chime用户赋予数据库权限
+Login mysql with root user via client tool, create new user named "chime"，and grant privileges to user chime
 
 ```
 CREATE USER 'chime'@'%' IDENTIFIED BY 'chime';
@@ -22,22 +22,22 @@ GRANT ALL PRIVILEGES ON *.* TO 'chime'@'%';
 flush privileges;
 ```
 
-##### 初始化并配置数据库
+##### initiate database
 
-通过以下命令初始化数据库并更新chime-server配置
+Utilize the "chimeadm" command to initiate the mysql database and update the configuration of chime-server
 
 ```
 chimeadm initserver mysql --ip <ip address> --port <port> --user <user> --password <password> --name <dbname>
 ```
 
-命令行参数解释如下: 
-- ip address: mysql实例的访问地址
-- port: mysql实例的访问端口
-- user: mysql访问用户名称
-- password: mysql访问用户密码
-- name: 要初始化的数据库名称
+The command's flags are explained as follows:
+- ip address: mysql instance's ip address 
+- port: mysql instance's port 
+- user: user name to access mysql database  
+- password: user's password 
+- name: the database name to be initiated
 
-例如:
+For instance:
 
 ```
 chimeadm initserver mysql --ip 127.0.0.1 \
@@ -47,19 +47,20 @@ chimeadm initserver mysql --ip 127.0.0.1 \
   --name chime 
 ```
 
-运行成功后，数据库chime被成功初始化，同时/etc/chime/server.yaml中的数据库配置信息会被更新。
+If the command completes successfully, the "chime" database is created and initiated, and the mysql related settings in the configuration file of /etc/chime/server.yaml will be updated as well. 
 
 
-### 配置influxdb 
+### Configure influxdb 
 
-##### 初始化influxdb
+##### initiate influxdb
 
-**方式一**: 通过登录web ui配置
+**method #1**: initiate by the Web UI
 
-访问 "https://<influxdb service ip>:8086/"，输入用户名/密码，输入organization name和bucket name后，生成api-token，api-token需要被妥善保存，后续作为Influxdb API的访问凭证。
+Access "https://<influxdb service ip>:8086/" via a browser，input the user name/password, input the organization name and bucket name, and then it will generate an API token，which should be kept carefully, it is the only access token to Influxdb API.
 
-**方式二**: 通过influx cli完成初始化
+**method #2**: initiate by influx CLI
 
+for instance: 
 ```
 influx setup \
   --username chime-user \
@@ -71,24 +72,24 @@ influx setup \
   --name chime
 ```
 
-其中如果token选项为空的话，会自动生成一个api-token，api-token需要被妥善保存，后续作为Influxdb API的访问凭证。
+**Note**: if not specify the "token" flag, then it will generate an API token instead, which should be kept carefully.
 
-##### 配置influxdb
+##### Configure influxdb setting for chime-server
 
-通过以下命令更新chime-server配置
+The following command updates the influxdb's setting in the configuration of chime-server
 
 ```
 chimeadm initserver influxdb --vip-endpoint <vip based endpoint> --real-endpoints <real service endpoints> --token <token> --org <org> --bucket <bucket>
 ```
 
-命令行参数解释如下: 
-- vip-endpoint: 通过keepalived+lvs负载均衡设置的VIP时，vip-endpoint设置成负载均衡entry的endpoint；如果直接访问的influxdb时，vip-endpoint设置成infludb实例的endpoint。
-- real-endpoints: influxdb运行实例的endpoint地址列表(如果有多个influxdb实例，endpoint列表用逗号分隔)
-- token: influxdb实例的API访问令牌
-- org: influxdb的组织名称
-- bucket: influxdb的bucket名称
+The command's flags are explained as follows: 
+- vip-endpoint: if the influxdb is accessed through a VIP with load balancing provisioned by keepalived+lvs tools，the vip-endpoint should be set to the ingress endpoint of the load balancing instance; If the influxdb is accessed directly，vip-endpoint should be set to the endpoint of infludb instance.
+- real-endpoints: influxdb instances' endpoints(use commas to separate multiple endpoints)
+- token: API token to access influxdb
+- org: organization name pre-set in the influxdb
+- bucket: bucket name pre-set in the influxdb
 
-例如:
+For instance:
 
 ```
 chimeadm initserver influxdb --vip-endpoint http://192.168.231.120:8086 \
@@ -98,23 +99,24 @@ chimeadm initserver influxdb --vip-endpoint http://192.168.231.120:8086 \
   --bucket chime \
 ```
 
-### 配置s3
+### Configure S3 setting for chime-server
 
-通过以下命令更新chime-server配置
+Update the s3 setting in the configuration of chime-server by: 
 
 ```
 chimeadm initserver s3 --ip <ip address> --port <port> --ak <ak> --sk <sk> --embedded --path [path to storage] 
 ```
 
-命令行参数解释如下: 
-- ip address: s3实例的访问地址
-- port: s3实例的访问端口
-- ak: s3的ak凭证
-- sk: s3的sk凭证
-- embedded: 启用内置的s3单路径存储引擎
-- path: 当embedded设置时，s3存储的路径
+The command's flags are explained as follows: 
+- ip address: the IP address of S3 instance
+- port: the access port of S3 instance
+- ak: AK token of S3
+- sk: SK token of S3
+- embedded: to use an chime-server embedded s3 engine
+- path: if the embedded flag is set，the directory for the S3 engine's storage
  
-例如:
+For instance:
+
 ```
 # use embedded minio engine 
 chimeadm initserver s3 --ip 192.168.231.100 --port 9000 --ak chime --sk chime --embedded --path /storage/s3
@@ -123,54 +125,55 @@ chimeadm initserver s3 --ip 192.168.231.100 --port 9000 --ak chime --sk chime --
 chimeadm initserver s3 --ip 192.168.231.101 --port 9000 --ak chime --sk chime
 ```
 
-### 检查chime-server
+### Check chime-server
 
-通过chimeadm initserver check命令检查chime-server的配置, 并且检查mysql, influxdb和s3等依赖组件的可用性, 在server节点运行:
+You can invoke the "chimeadm initserver check" sub-command to check the correctness of the chime-server's configuration, it will check the availability of Mysql, Influxdb and S3 components by probing their connectivity and functions, for instance, run following command in the server node:
 
 ```
 chimeadm initserver check 
 ```
+The success of the checking means the configuration is complete and valid, hence the chime-server is ready to run
 
-如果检查成功，则说明配置完成且有效，chime-server已经准备好，可以直接启动
+### Launch chime-server
 
-### 运行chime-server
+chime-server can be lauched by either one of the following methods
 
-可以通过以下两种方式启动chime-server:
-
-1. 在前台启动，方便观察输出，可用于调试阶段: 
+1. Start in the front-end, it will keep printing information in the terminal，mainly used for debugging purpose: 
+   
 ```
 chime-server    
 ```
 
-2. 通过systemd启动
+1. Start by systemd:
+   
 ```
 sudo systemctl start chime-server
 ```
 
-chime-server的运行日志在/var/log/chime/server.log
+chime-server's runtime log locates at /var/log/chime/server.log
 
-## 配置并启动chime-portal 
+## Configure and launch chime-portal 
 
-chime-server二进制程序文件除了包含了ChimeStack的管控服务端程序，还内嵌了一个Web UI(portal), Web UI可以独立于Server进程单独运行，也可以和Server运行在一个进程中(默认)。
+The executable binary file of chime-server not only includes the management server，but also embeds a Web UI(portal) component, which is by default launched together with the management server，but it can also be launched as a standalone process.
 
-下面介绍如何配置、初始化和运行chime-portal
+Next section introduces how to configure, initiate and start a chime-portal process
 
-### 配置和初始化portal数据库
+### Configure and initiate the portal database 
 
-通过以下命令初始化portal数据库并更新chime-portal配置
+You can initiate the portal database and update the configuration of chime-portal by the following command: 
 
 ```
 chimeadm initportal mysql --ip <ip address> --port <port> --user <user> --password <password> --name <dbname>
 ```
 
-命令行参数解释如下: 
-- ip address: mysql实例的访问地址
-- port: mysql实例的访问端口
-- user: mysql访问用户名称
-- password: mysql访问用户密码
-- name: 要初始化的数据库名称
+The command's flags are explained as follows: 
+- ip address: mysql instance's ip address 
+- port: mysql instance's port
+- user: user name to access mysql database  
+- password: user's password
+- name: the database name to be initiated
 
-例如:
+For instance:
 
 ```
 chimeadm initportal mysql --ip 127.0.0.1 \
@@ -180,23 +183,23 @@ chimeadm initportal mysql --ip 127.0.0.1 \
   --name portal
 ```
 
-运行成功后，数据库portal被成功初始化，同时/etc/chime/server.yaml中的portal数据库配置信息被更新。
+If the command completes successfully, the "portal" database is created and initiated, and the mysql related settings in the configuration file of /etc/chime/server.yaml will be updated as well. 
 
-### 配置portal运行参数
+### Configure chime-portal's runtime properties
 
-通过以下命令配置portal运行参数
+You can invoke the following command to configure portal's runtime properties
 
 ```
 chimeadm initportal run --port <port> --api-url <api server addr: port> --prefix [prefix] 
 ```
 
 
-命令行参数解释如下: 
-- port: chime-portal的访问端口
-- api-url: chime-server的api访问地址
-- prefix: chime-server的api的访问版本, 默认为 "/v1"
+The command's flags are explained as follows: 
+- port: chime-portal's access port 
+- api-url: chime-server's API endpoint
+- prefix: chime-server's API version in path, default is "/v1"
 
-例如:
+For instance:
 
 ```
 chimeadm initportal run \
@@ -205,18 +208,19 @@ chimeadm initportal run \
   --prefix /v1
 ```
 
-### 检查chime-portal
+### Check chime-portal
 
-运行check命令检查chime-portal的配置和组件的连通性:
+You can invoke the "check" sub-command to check the correctness of the configuration of chime-portal, for instance:
 
 ```
 chimeadm initportal check 
 ```
-如果检查成功，则说明配置完成，chime-portal可以启动
 
-### 运行chime-portal
+The success of the checking means the configuration is complete and valid, hence the chime-portal is ready to run
 
-默认chime-server和chime-portal是在同一个进程中启动的，server和portal的配置都在文件/etc/chime/server.yaml中，该配置文件的默认格式为: 
+### Start chime-portal
+
+By default the chime-server and the chime-portal are launched in the same process，and their configurations are both in the file of /etc/chime/server.yaml，whose contents look like: 
 ```
 chime-server:
     ......
@@ -226,18 +230,18 @@ chime-portal:
     ......
 ```
 
-server和portal配置完成后，运行chime-server会同时启动server和portal
+With such configurations, launching a chime-server process will start a server routine and a portal routine simultaneously.
 
-如果需要分别运行server和portal，可以将 /etc/chime/server.yaml中 [chime-portal]的部分拷贝到新文件, 例如/etc/chime/portal.yaml, 原来的配置文件仅保存[chime-server]部分。这样server和portal可以分别运行: 
+To run a chime-server and a chime-portal respectively is quite simple, just move the content of "[chime-server]" section from the server.yaml to another yaml file, such as portal.yaml, and then you can launch the chime-server process and the chime-portal process respectively, for instance: 
 
 ```
-chime-server #仅运行server
-chime-server --cfg /etc/chime/portal.yaml #仅运行portal 
+chime-server --cfg /etc/chime/sefver.yaml #only launch server
+chime-server --cfg /etc/chime/portal.yaml #only launch portal
 ```
 
-## 配置并启动chime-agent
+## Configure and start chime-agent
 
-### 配置chime-agent
+### Configure chime-agent
 
 chime-agent是ChimeStack的客户端程序，运行在计算节点上(计算节点和管理节点没有界限，可以是不同的服务器，也可以是相同的服务器)。chime-agent启动时会读取agent的配置文件(/etc/chime/agent.yaml)，下面介绍如何通过chimeadm配置并启动agent
 
@@ -288,7 +292,7 @@ chimeadm initagent check
 chime-agent
 ```
 
-2. 通过systemd启动
+2. Start by systemd
 
 ```
 sudo systemctl start chime-agent 

@@ -104,7 +104,7 @@ curl -O https://dl.influxdata.com/influxdb/releases/influxdb2-2.7.5-1.x86_64.rpm
 
 or download the influxdb 2.7.5 package from the ChimeStack web site [Downloads/3rd/Influxdb](https://chimestack.io/downloads/3rd/influxdb).
 
-Run the following commands after the downloading: 
+Run the following commands after downloading: 
 
 ```
 sudo yum localinstall influxdb2-2.7.5-1.x86_64.rpm
@@ -114,54 +114,54 @@ sudo systenctl start influxdb
 
 If you want to install the client command line tool of influxdb，you can download its package from [Offical Website Download](https://docs.influxdata.com/influxdb/v2/tools/influx-cli/)，or from the ChimeStack Website[Downloads/3rd/Influxdb-CLI](https://chimestack.io/downloads/3rd/influxdb-cli)
 
-Run the following commands after the downloading: 
+Run the following commands after downloading: 
 
 ```
 sudo tar xvf influxdb2-client-2.7.3-linux-amd64.tar.gz
 sudo cp influx /usr/bin/ 
 ```
 
-### 安装第三方s3服务程序
+### Install 3rd OSS Service(s3)
 
-ChimeStack可以对接任何支持s3协议的对象存储引擎，推荐使用minio，minio的部署配置方法参考 [官方文档](https://min.io/docs/minio/linux/operations/installation.html)
+ChimeStack supports any OSS provider which follows S3 protocal, such as Minio, which is also recommended by ChimeStack. You can refer to [MinIO Offcial Documentation](https://min.io/docs/minio/linux/operations/installation.html) for more details about its installation and configuration.
 
-### 安装qemu+libvirt
+### Install qemu+libvirt
 
-安装 libvirt, qemu, genisoimage
+Install libvirt, qemu, genisoimage
 
 ```
 sudo dnf install qemu-kvm libvirt genisoimage 
 ```
 
-或
+Or
 
 ```
 sudo yum install qemu-kvm libvirt genisoimage 
 ```
 
-{{% alert title="提示" color="primary" %}}
-ChimeStack需要使用libvirt8.0, qemu6.0以上版本
+{{% alert title="Note" color="primary" %}}
+ChimeStack requires libvirt8.0, qemu6.0 or later versions
 {{% /alert %}}
 
-启动libvirtd
+Start libvirtd
 ```
 sudo systemctl enable libvirtd
 sudo systemctl start libvirtd
 ```
 
-### 安装chrony服务
+### Install Chrony Service
 
-{{% alert title="提示" color="primary" %}}
-CentOS 8以后已经使用chrony替代ntp 
+{{% alert title="Note" color="primary" %}}
+From CentOS 8, it uses chrony service instead of ntp service by default
 {{% /alert %}}
 
-安装chrony 
+Install chrony 
 
 ```
 sudo yum install -y chrony
 ```
 
-配置chrony服务端
+Configure a chrony server
 
 ```
 #sudo vim /etc/chrony.conf 
@@ -170,7 +170,7 @@ allow 192.168.0.0/16
 
 ```
 
-配置chrony客户端
+Configure chrony clients:
 
 ```
 #sudo vim /etc/chrony.conf 
@@ -178,14 +178,14 @@ allow 192.168.0.0/16
 pool 192.168.x.x iburst
 ```
 
-在服务端和客户端分别启动chronyd服务
+Start the chronyd service in both server and client sides respectively 
 
 ```
 sudo systemctl enable chronyd 
 sudo systemctl start chronyd
 ```
 
-### 设置时区
+### Setup Timezone
 
 ```
 #check current timezone setting

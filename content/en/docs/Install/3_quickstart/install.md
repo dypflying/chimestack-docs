@@ -1,51 +1,52 @@
 ---
-title: 安装ChimeStack
+title: Install ChimeStack
 date: 2023-11-09
-description: 本章介绍如何安装ChimeStack
+description: this chapter introduces how to install the ChimeStack in Linux 
 weight: 3
 ---
 
-## 通过ISO安装ChimeStack 
+## Install ChimeStack with ISO packages
 
-## 手动安装ChimeStack 
+## Manually Install ChimeStack
 
-### 安装Chime-Stack包 
+### Install ChimeStack Packages
 
-Chime-Stack的二进制安装包可从 [Downloads/Releases](https://chimestack.io/downloads/releases) 下载
+Download the ChimeStack's binary packages from [Downloads/Releases](https://chimestack.io/downloads/releases).
 
-{{% alert title="提示" color="primary" %}}
-目前chime-stack安装包仅在centos7/8/9上测试通过
+{{% alert title="Note" color="primary" %}}
+Currently, the install package has only been tested on CentOS7/8/9
 {{% /alert %}}
 
-在命令行直接运行，可完成安装
+Directly run the executable binary package to install the ChimeStack(root privilege required): 
 
 ```
 sudo ./chimestack-x.x.x.bin 
 ```
 
-- 二进制程序chime-server, chime-agent和chimeadm安装在/usr/bin/
-- server和agent的配置文件在/etc/chime/
-- 进程相关文件在/var/lib/chime/
-- 日志文件在/var/log/chime/ 
-  
-如果系统中已经安装了chime-stack，执行安装命令后，除了二进制程序会被更新外，/etc/chime、/var/lib/chime和/var/lib/log下的所有文件均不会被更新，如果要强制更新，运行:
+- The executable binaries files chime-server, chime-agent, chimecli and chimeadm will be installed at /usr/bin/
+- The chime-server's and chime-agent's configuration files will be installed at /etc/chime/
+- Necessary libraries and files for ChimeStack's runtime process locates at /var/lib/chime/
+- Log files locates at /var/log/chime/ 
+
+For the pre-existing ChimeStack's installation, the new package will only overwrite the executable binaries, while the configuration files in /etc/chime, library files in /var/lib/chime and logs in /var/log/chime will not be updated. 
+If you want to force it to update all the pre-existing files, please run it with a "force" flag, like:
 
 ```
 sudo ./chimestack-x.x.x.bin --force 
 ```
 
-### 安装第三方组件
+### Install the 3rd softwares
 
-chime-stack(或)依赖以下第三方程序: 
-- (必须)mysql: 存储chime-server的元数据信息
-- (必须)influxdb: 存储chime-server运行时的全部监控数据
-- (可选)遵守s3协议的对象存储服务软件(如minio),作为镜像服务、备份服务的存储引擎。chime-server内部已经集成了一个简单的s3引擎(minio实现)，当缺少第三方s3服务软件时，可以选择用chime-server的内嵌的s3引擎为镜像服务提供存储的基础设置软件。 
+Following 3rd softwares are dependent on ChimeStack : 
+- (Required) Mysql provides storage and querying the meta data of ChimeStack
+- (Required) Influxdb provides storage and querying the minitoring data of ChimeStack
+- (Optional) Object storage service(OSS) software follows the S3 protocal, like minio, provides the storage engine for ChimeStack's image service and backup service。 
 
-#### 1.安装mysql 
+#### 1.Install Mysql
 
-推荐安装mysql7.0以上版本
+Mysql 7 and later versions are recommended
 
-##### 公网可达的安装方式
+##### Installation with Internet
 
 ```
 sudo yum install mysql-server 
@@ -55,21 +56,21 @@ sudo yum install mysql-server
 sudo dnf install mysql-server 
 ```
 
-{{% alert title="提示" color="primary" %}}
-如果当前系统已经安装了旧版本的mysql服务，需要先卸载旧的mysql: 
+{{% alert title="Note" color="primary" %}}
+Please uninstall the pre-exsiting old version Mysql if any
 ```
 sudo yum remove mysql-server
 ```
 
-并且需要把 /var/lib/mysql文件夹清空。否则新的mysql可能会出现innodb配置错误
+And please empty the /var/lib/mysql directory, otherwise there could be innodb configuration issues in the runtime
 
 {{% /alert %}}
 
-##### 离线的安装方式
+##### Installation with Packages
 
-mysql8.x的离线安装包可以从 [官方下载](https://dev.mysql.com/downloads/mysql/) 或者从 [Downloads/3rd/Mysql](https://chimestack.io/downloads/3rd/mysql) 获取。
+The installation package of mysql8.x can be downloaded from [Offical Website Download](https://dev.mysql.com/downloads/mysql/) or from [Downloads/3rd/Mysql](https://chimestack.io/downloads/3rd/mysql)
 
-安装所需的rpm及其顺序如下：
+Please install the RPM packages in the following sequence：
 1. mysql-community-common-8.0.36-1.el8.x86_64.rpm
 2. mysql-community-icu-data-files-8.0.36-1.el8.x86_64.rpm
 3. mysql-community-client-plugins-8.0.36-1.el8.x86_64.rpm
@@ -77,13 +78,13 @@ mysql8.x的离线安装包可以从 [官方下载](https://dev.mysql.com/downloa
 5. mysql-community-client-8.0.36-1.el8.x86_64.rpm
 6. mysql-community-server-8.0.36-1.el8.x86_64.rpm
 
-分别运行如下命令安装rpm包:
+For instance, invoke the following command to install a RPM package
 
 ```
 sudo rpm -ivh mysql-xxx.rpm 
 ```
 
-##### 启动mysql
+##### Start Mysql
 
 ```
 sudo systemctl enable mysqld 
@@ -91,19 +92,19 @@ sudo systemctl start mysqld
 ```
 
 
-#### 2.安装influxdb 
+#### 2.Install Influxdb 
 
-ChimeStack要求influxdb 2.x版本，不能和influxdb 1.x的版本一起使用
+ChimeStack requires influxdb 2.x version or later, do **not** use influxdb 1.x versions.
 
-可从官网下载 [官方下载]（https://docs.influxdata.com/influxdb/v2/install/）influxdb官方安装包，例如:
+Influxdb installation packages can be downloaded from [Offical Website Download](https://docs.influxdata.com/influxdb/v2/install/), such as:
 
 ```
 curl -O https://dl.influxdata.com/influxdb/releases/influxdb2-2.7.5-1.x86_64.rpm
 ```
 
-或者从ChimeStack网站[Downloads/3rd/Influxdb](https://chimestack.io/downloads/3rd/influxdb) 下载influxdb 2.7.5安装包
+or download the influxdb 2.7.5 package from the ChimeStack web site [Downloads/3rd/Influxdb](https://chimestack.io/downloads/3rd/influxdb).
 
-下载后运行: 
+Run the following commands after the downloading: 
 
 ```
 sudo yum localinstall influxdb2-2.7.5-1.x86_64.rpm
@@ -111,9 +112,9 @@ sudo systemctl enable influxdb
 sudo systenctl start influxdb
 ```
 
-如果需要influxdb客户端程序，可从[官方下载](https://docs.influxdata.com/influxdb/v2/tools/influx-cli/)客户端安装包，或者从ChimeStack网站[Downloads/3rd/Influxdb-CLI](https://chimestack.io/downloads/3rd/influxdb-cli) 下载influxdb2 客户端安装包
+If you want to install the client command line tool of influxdb，you can download its package from [Offical Website Download](https://docs.influxdata.com/influxdb/v2/tools/influx-cli/)，or from the ChimeStack Website[Downloads/3rd/Influxdb-CLI](https://chimestack.io/downloads/3rd/influxdb-cli)
 
-下载后安装客户端程序: 
+Run the following commands after the downloading: 
 
 ```
 sudo tar xvf influxdb2-client-2.7.3-linux-amd64.tar.gz

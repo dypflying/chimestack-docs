@@ -1,48 +1,46 @@
 ---
-title: 3.1 系统登录
+title: 3.1 Login
 date: 2023-11-09
 weight: 3
-description: 本章节介绍系统登录和设置用户个人信息
+description: This chapter introduces how to login the ChimeStack and how to update personal information
 ---
 
-## ChimeStack用户的三层角色介绍
+## 3 User Roles in ChimeStack
 
-| Role                | 说明                               | 权限 |
+| Role                | Description      | Privilege |
 |---------------------|------------------------------------|------|
-| Super Administator  | 超级管理员角色,唯一账号 —— admin       | 云平台管理、其他用户管理、云资源生命周期管理 |
-| Administator        | 管理员,可由超级管理员创建管理           | 云平台管理、普通用户管理 |
-| User                | 普通用户,可由超级管理员或管理员创建管理  | 云资源的生命周期管理 |
+| Super Administator  | super administator, "admin" is the only super administator | platform management, user management, cloud resources management |
+| Administator        | administator, created by super administator or administators | platform management、user management |
+| User                | normal user, created by super administator or administators  | cloud resources management |
 
-## 登录系统
+## System Login
 
-打开浏览器，输入 http://\<your-chime-server-vip-address\>:8033/，打开系统登录页面
+Access the url of "http://\<your-chime-server-vip-address\>:8033/" in browser, open the login page.
 
 {{% imgproc login Fit "800x600" %}}
 {{% /imgproc %}}
 
-输入用户名和密码若正确则完成登录
+Input username and password to login
 
 {{% pageinfo color="primary" %}}
-超级管理员的初始用户名/密码为: admin/admin
+the initial username/password of the super administrator is "admin/admin"
 {{% /pageinfo %}}
 
-{{% alert title="提示" color="primary" %}}
-所有用户密码均经过二次加密存储
+{{% alert title="Note" color="primary" %}}
+user passwords in ChimeStack are double encrypted and stored
 {{% /alert %}}
 
-## 修改用户个人信息、密码
+## Update personal information including password 
 
 点击屏幕右上角的头像
+Click user's avator on the top-right of the main page, for instance: 
 
 {{% imgproc userpanel Fit "240x240" %}}
 {{% /imgproc %}}
 
-然后点击**设置**按钮，进入用户信息修改页面，如下所示：
+Click the **Setting** button，enter the user's information edit page, for instance:
 
 {{% imgproc usersetting Fit "600x600" %}}
 {{% /imgproc %}}
 
-用户自己可以修改密码、头像、名称等信息。
-
-
-
+User's password, avator login name and nickname can be updated in the page. 

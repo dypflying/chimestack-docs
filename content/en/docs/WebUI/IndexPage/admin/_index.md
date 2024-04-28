@@ -1,42 +1,42 @@
 ---
-title: 管理员首页
-description: 管理员首页功能介绍
+title: Administrator's Dashboard Page
+description: Introduction to administrator's dashboard page
 weight: 3
 ---
 
 {{% imgproc admindashboard Fit "1200x800" %}}
 {{% /imgproc %}}
 
-* 登录信息
-  * 当前登录用户名称
-  * 登录时间、系统时间
-* 未读报警信息
-  * 按重要程度分为"紧急","严重"和"警告"三种级别
-  * 分别按重要程度、未读数量排序显示Top的三个报警条目。
-  * 点击"查看全部"跳转到报警列表页查看。
-* 平台统计信息
-  * 可用区总数量
-  * 集群总数量
-  * 节点总数量
-  * 存储池总数量
-  * 二层网络总数量
-  * 镜像资源池总数量
-* 资源统计信息
-  * 虚拟机使用情况汇总
-  * 云盘使用情况汇总
-  * 弹性网卡使用情况汇总
-* 资源分配情况
-  * CPU分配情况汇总
-  * 内存分配情况汇总
-  * 存储池分配情况汇总
-  * 镜像存储使用情况汇总
-* 物理节点整体性能统计
-  * 物理节点CPU平均使用率
-  * 物理节点Memory平均使用率
-  * 物理节点磁盘I/O的平均数据
-  * 物理节点网络I/O的平均数据
+* Login Information
+  * current user name
+  * login datetime、system datetime
+* Unread Alert Summary 
+  * Categorize the alerts by their severity as "Urgent","Severe" and "Warn"
+  * Show the top 3 alert items sorted by severity and their unread count 
+  * Click the "View All" link to enter the alert list view page 
+* Platform Statistical Summary 
+  * total number of available zones
+  * total number of clusters
+  * total number of nodes
+  * total number of storage pools
+  * total number of layer-2 networks
+  * total number of image buckets
+* Virtualized Resource Statistical Summary
+  * virtual machines' summary
+  * volumes' summary
+  * elastic network interfaces' summary
+* Physical Resource Allocation Statistical Summary 
+  * CPU allocation's summary
+  * memory allocation's summary
+  * storage usage's summary
+  * image bucket usage's summary
+* Physical node's average usage statistical information
+  * CPU's average usage
+  * memory's average usage
+  * disk I/O's average usage
+  * network I/O's average usage
 
 
 {{% pageinfo color="primary" %}}
-可以选择不同的时间段展示性能数据
+you can choose different time ranges to show the statistics in the page
 {{% /pageinfo %}}

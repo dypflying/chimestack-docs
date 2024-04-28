@@ -1,40 +1,40 @@
 ---
-title: 私有镜像
-description: 用户的私有镜像的生命周期管理
+title: User Image
+description: user images' management in ChimeStack
 weight: 3
 ---
 
-## 查看私有镜像
+## Check User Images
 
-* 查看私有镜像列表：
-  * 点击**筛选**按钮，输入过滤条件，查询过滤后的镜像列表
-  * 点击**列过滤**按钮，过滤需要显示在列表也的信息，默认全部显示
-* 编辑私有镜像：
-  * 点击镜像的**编辑**按钮编辑镜像属性信息
-* 删除私有镜像
-  * 点击镜像的**删除**按钮删除镜像
+* Check user's image list：
+  * Click **Filter** button, input or select filter conditions, check the filtered image list
+  * Click **Columns** button，select the columns to be displayed in the list，by default it shows all columns
+* Update user's image：
+  * Click **Edit** button to edit image's attributes
+* Delete user's image 
+  * Click **Delete** button to delete an image
   
 {{% imgproc image_list Fit "1000x500" %}}
-私有镜像列表页
+User's image list page
 {{% /imgproc %}}
 
-{{% alert title="提示" color="default" %}}
-镜像为平台资源，即同一用户的镜像所有集群可用。 
+{{% alert title="Note" color="default" %}}
+A user's image is availale for all clusters, but only the owner can access except for it is marked as a shared image
 {{% /alert %}}
 
 
-## 添加私有镜像
+## Add user's image
 
-* 添加镜像，输入或选择以下信息: 
-  * 输入镜像的名称,允许(2～64)个字符
-  * 选择镜像的文件格式，目前支持"raw","qcow2"和"iso"
-  * 选择操作系统类型
-  * 选择操作系统版本
-  * (可选)系统架构
-  * (可选)启动类型(bios,uefi)
-  * 选择是否共享，默认不共享
-  * 输入安装URL，支持本地上传或者sftp上传。本地文件上传格式为: file:///path, sftp文件上传格式为: sftp://username:password@host:/path，用户也可以通过Web UI上传文件到管理服务器后台。
+* To create an image，input or choose the following image's attributes: 
+  * Input the image's name, which is restricted to 2～64 characters
+  * Choose the file format of the image from the dropdown menu, which contains "raw", "qcow2" and "iso" file format
+  * Choose the operation system's type from the dropdown menu. 
+  * Choose the operation system's version.
+  * (Optional) Choose the system's architecture
+  * (Optional) Choose the boot type of the image, such as "bios" or "uefi"
+  * Choose sharable or not, by default it is not sharable. 
+  * Input the install URL, it supports local uploading or sftp uploading。for a local uploading url, its format like: file:///path, and for a sftp uploading url, its format like: sftp://username:password@host:/path. and as an alternative method, user can also upload the image file through the web browser directly in this page.
 
 {{% imgproc create_image Fit "1000x1000" %}}
-创建私有镜像页面
+Create user's image page
 {{% /imgproc %}}

@@ -1,5 +1,5 @@
 ---
-title: 3.3 计算资源
+title: 3.3 Computing Resources
 weight: 5
-description: 本章节介绍用户计算资源管理方法（虚拟机、私有镜像)
+description: This chapter introduces how to manage the computing resources(virtual machines、user images)
 ---

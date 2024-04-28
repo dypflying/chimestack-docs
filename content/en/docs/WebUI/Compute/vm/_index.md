@@ -8,8 +8,8 @@ weight: 2
 
 * 查看虚拟机列表：
   * 选择当前的**可用区**和**集群**，查看当前集群下所有的虚拟机
-  * 点击**筛选**按钮，输入过滤条件，查询过滤后的虚拟机列表
-  * 点击**列过滤**按钮，过滤需要显示在列表也的信息，默认全部显示
+  * Click **filter** button, input or select filter conditions, check the filtered virtual machine list
+  * Click **columns** button，select the columns to be displayed in the list，by default it shows all columns
 * 查看虚拟机详情：在列表中选中某个虚拟机，显示虚拟机详情信息
   * 基本信息页：显示虚拟机的基础信息 
   * 云盘信息页：显示虚拟机挂载的云盘信息列表

@@ -1,7 +1,7 @@
 ---
-title: 3.6 报警管理
+title: 3.6 Alert Management 
 weight: 8
-description: 本章节介绍报警系统的使用方法
+description: This chapter introduces the alert management in ChimeStack
 ---
 
 

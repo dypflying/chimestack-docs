@@ -1,18 +1,18 @@
 ---
-title: 查看报警
+title: Alert Management
 description: 
 weight: 2
 ---
 
 * Alert List
-  * 点击**筛选**按钮，输入过滤条件，查询过滤后的报警列表
-  * 点击**列过滤**按钮，过滤需要显示在列表的信息，默认全部显示
+  * Click **filter** button, input or select filter conditions, check the filtered alert list
+  * Click **columns** button，select the columns to be displayed in the list，by default it shows all columns
 
 {{% imgproc alert_list Fit "1000x1000" %}}
 Alert list
 {{% /imgproc %}}
 
-* 人工确认后，通过接受报警来解除报警提示
+* If the alert is handled, you can acknowledge the alert so that it will be removed from the notification list.
   
 {{% imgproc alert_accept Fit "1000x1000" %}}
 Accept alerts

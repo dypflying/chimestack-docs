@@ -243,23 +243,23 @@ chime-server --cfg /etc/chime/portal.yaml #only launch portal
 
 ### Configure chime-agent
 
-chime-agent是ChimeStack的客户端程序，运行在计算节点上(计算节点和管理节点没有界限，可以是不同的服务器，也可以是相同的服务器)。chime-agent启动时会读取agent的配置文件(/etc/chime/agent.yaml)，下面介绍如何通过chimeadm配置并启动agent
+chime-agent is the client-side program of ChimeStack，normally runs in the computing nodes(actually there is no restriction for defining a server node and a computing node, they can share the same machine or be deployed separately). chime-agent reads the configurations from the /etc/chime/agent.yaml file during the startup, following introduces how to configure and start chime-agent via the "chimeadm" tool.
 
-通过以下命令配置agent运行参数
+You can configure the chime-agent by the following command:
 
 ```
 chimeadm initagent --host [host name] --ip <ip address> --rack <rackname> --api <server ip:port> --token <token>
 ```
 
 
-命令行参数解释如下: 
-- host(可选): 当前host的名称，如果忽略chimeadm会自动生成一个host名称
-- ip: 当前节点的管理网ip
-- rack: 当前节点所在机架的名称
-- api: chime-server api服务的uri
-- token: chime-server的认证token
+The command's flags are explained as follows: 
+- host(optional): current hostname, chimeadm will generate a random hostname if omit this flag.
+- ip: current node's management IP address 
+- rack: the rack name where the node is located
+- api: the API endpoint of chime-server
+- token: the API token of chime-server
 
-例如:
+For instance:
 
 ```
 chimeadm initagent
@@ -270,23 +270,23 @@ chimeadm initagent
   --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVdWlkIjoiMGZhYjZkYTQtYmU4Zi00ZGJhLTlhYzgtMTlmNGZmNTE5ZjM0IiwiYXVkIjoiY2hpbWUiLCJleHAiOjE3MTE3OTc0OTYsImlhdCI6MTcxMTc5NzQ5NiwiaXNzIjoiY2hpbWUiLCJzdWIiOiJjaGltZSJ9.DpCskpkyEHodbxPbj061iLMw1n04ibjZQ8qj5o0lRTA
 ```
 
-配置成功后，chime-server会自动下发配置，完成其它组件访问的设置。
+If the command finishes successfully，chime-agent will receive its components' settings from the chime-server and save them in the configuration of agent。
 
-### 检查chime-agent
+### Check chime-agent
 
-运行check命令检查chime-agent的配置，以及和chime-server的连通性
+You can run the "check" sub-command to check the correctness of the chime-agent's configuration，and test the connectivity to chime-server.
 
 ```
 chimeadm initagent check 
 ```
 
-如果检查成功后，说明配置完成，chime-agent可以启动
+The success of the checking means the configuration is complete and valid，chime-agent is ready to run.
 
-### 运行chime-agent
+### Start chime-agent
 
-可以通过两种方式运行chime-agent:
+chime-agent can be launched by either one of the following methods: 
 
-1. 在计算节点直接运行chime-agent程序，可以观察程序输出，方便调试阶段使用
+1. Start in the front-end, it will keep printing information in the terminal，mainly used for debugging purpose: 
 
 ```
 chime-agent
@@ -298,6 +298,6 @@ chime-agent
 sudo systemctl start chime-agent 
 ```
 
-chime-agent的运行时日志信息在/var/log/chime/agent.log
+chime-agent's runtime log locates at /var/log/chime/agent.log
 
-运行后，节点会自动注册到系统中，但是没有分配给具体的Cluster以及缺少节点参数设置等信息，需要在Web UI或者CLI手动添加到集群中，具体参考[节点管理](../../webui/platform/host/) 章节。
+If the chime-agent starts with no error, the node will be logged into the platform automatically, but so far it is still not related to any cluster, to make it a normal functioning computing node that can accommodate virtual machine instances on demand, you must register it to one of the cluster and set allocation ratios for the node, more details refer to the chapter of [Node Management](../../webui/platform/host/).

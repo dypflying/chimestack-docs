@@ -1,5 +1,5 @@
 ---
-title: mysql配置
+title: Mysql HA Settings
 date: 2023-11-09
 weight: 4
 ---

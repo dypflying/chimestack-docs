@@ -1,56 +1,57 @@
 ---
-title: 2.4 高可用配置
+title: 2.4 High Availability Setting
 date: 2023-11-09
-description: 本章介绍在生产环境下的ChimeStack的部署配置方案，包括chime-server、chime-agent的高可用部署及配置，以及mysql, influxdb和s3的高可用部署及配置。
+description: This chapter introduces how to deploy and configure the ChimeStack in a production environment, including how to achieve high-availability deployment of chime-server and chime-agent, as well as its dependent components like Mysql, Influxdb and OSS.
 weight: 5
 ---
 
-### ChimeStack高可用架构简述
+### Introduction to ChimeStack's HA Architecture
 
-在生产环境下ChimeStack的高可用方案是通过对服务分布式集群化，并引入keepalived+lvs组件对实例进行健康检查、自动failover和负载均衡等，当部分服务崩溃或者服务器宕机情况下，不影响服务的可用性及数据的可靠性。
+In the production environment, The high-availability solution of ChimeStack is to clusterize its services in distributed nodes and introduce the "keepalived+LVS" component into the production for services' health check, automatic failover, and load balancing. So that when some components or services of ChimeStack are down, with the HA setting of keepalived+LVS, it will detect the failure and will failover to a healthy one in seconds, ChimeStack's overall supposed SLA is 99.5%.
 
-以下概括了ChimeStack各组件的高可用方案:
+Following is the summary of the HA solutions for ChimeStack's components
 
-- chime-server: 一主一备(多备) + keepalived(VIP) 
-- chime-portal: 双活(多活) + keepalived(VIP) + LVS(load balancing)
-- chime-agent: ChimeStack自实现的故障时客户虚拟机自动迁移
-- mysql: 互为主从双活实例 + keepalived(VIP), 或者percona集群部署
-- influxdb: 双活实例 + 客户端双写 + 服务端通过VIP读 + keepalived(VIP)
-- s3: minio的MNMD(Multiple-Node-Multiple-Drive)
+- chime-server: active-standby instances + keepalived(VIP) 
+- chime-portal: active-active instances + keepalived(VIP) + LVS(load balancing)
+- chime-agent: virtual machines' automatical migration in case of node's failure, implemented by ChimeStack.
+- mysql: dual mysql instances of mutual master and slave + keepalived(VIP), or Percona cluster is an alternative solution  
+- influxdb: active-active instances + chime-client dual writes + chime-server read from VIP endpoint+ keepalived(VIP)
+- s3: minio's MNMD(Multiple-Node-Multiple-Drive) deployments
 
-### 节点及配置规划
+### Make Nodes Plan 
 
-生产环境最小配置计算公式: 2*管控节点 + n*计算节点 (n>=1)
+The simple formula for calculating the minimum nodes setting for a production environment: 
+> m * server nodes + n * computing nodes (2<=m<=3, n>=1)
 
-节点和节点名称及IP规划：
+Plan for nodes and their hostnames and IP addresses：
 
 | Node | Hostname | Manage IP       | Description | 
 |------|----------|----------|-------------|
-| ServerNode1 | server1.chime.com | 192.168.231.11 | 管控服务主节点 | 
-| ServerNode2 | server2.chime.com | 192.168.231.12 | 管控服务从节点 | 
-| Node1 | node1.chime.com | 192.168.231.101 | 计算节点1 | 
-| Node2 | node2.chime.com | 192.168.231.102 | 计算节点2 | 
+| ServerNode1 | server1.chime.com | 192.168.231.11 | master node of management service | 
+| ServerNode2 | server2.chime.com | 192.168.231.12 | slave node of management service | 
+| Node1 | node1.chime.com | 192.168.231.101 | computing node1 | 
+| Node2 | node2.chime.com | 192.168.231.102 | computing node2 | 
 | ... | ... | ... | ... |
 
-服务IP地址和端口，及服务规划
+Plan for IP addresses with ports, and services
 | IP:Port         | Component/Service |    Description     | 
 |-----------------|-------------------|--------------------|
-| 192.168.231.11:8801 | chime-server | Server1 API的真实endpoint | 
-| 192.168.231.12:8801 | chime-server | Server2 API的真实endpoint | 
-| 192.168.231.10:8801 | chime-server | Server API的VIP endpoint |
-| 192.168.231.11:8802 | chime-server | Server1 grpc的真实endpoint | 
-| 192.168.231.12:8802 | chime-server | Server2 grpc的真实endpoint | 
-| 192.168.231.10:8802 | chime-server | Server grpc的VIP endpoint |
-| 192.168.231.11:8033 | chime-portal | Server1 web UI的真实endpoint | 
-| 192.168.231.12:8033 | chime-portal | Server2 web UI的真实endpoint | 
-| 192.168.231.20:80   | chime-portal | web UI的VIP endpoint |
-| 192.168.231.11:3306 | mysql        | Server1 mysql的真实endpoint | 
-| 192.168.231.12:3306 | mysql        | Server2 mysql的真实endpoint | 
-| 192.168.231.30:3306 | mysql        | mysql的VIP endpoint |
-| 192.168.231.11:8086 | influxdb     | Server1 influxdb的真实endpoint | 
-| 192.168.231.12:8086 | influxdb     | Server2 influxdb的真实endpoint | 
-| 192.168.231.40:8086 | influxdb     | influxdb的VIP endpoint |
-| 192.168.231.11:9000 | minio        | Server1 minio的真实endpoint | 
-| 192.168.231.12:9000 | minio        | Server2 minio的真实endpoint | 
-| 192.168.231.50:9000 | minio        | minio的VIP endpoint |
+| 192.168.231.11:8801 | chime-server | Server1 API's real endpoint | 
+| 192.168.231.12:8801 | chime-server | Server2 API's real endpoint | 
+| 192.168.231.10:8801 | chime-server | Server API's VIP endpoint |
+| 192.168.231.11:8802 | chime-server | Server1 grpc's real endpoint | 
+| 192.168.231.12:8802 | chime-server | Server2 grpc's real endpoint | 
+| 192.168.231.10:8802 | chime-server | Server grpc's VIP endpoint |
+| 192.168.231.11:8033 | chime-portal | Server1 web UI's real endpoint | 
+| 192.168.231.12:8033 | chime-portal | Server2 web UI's real endpoint | 
+| 192.168.231.20:80   | chime-portal | web UI's VIP endpoint |
+| 192.168.231.11:3306 | mysql        | Server1's mysql's real endpoint | 
+| 192.168.231.12:3306 | mysql        | Server2's mysql's real endpoint | 
+| 192.168.231.30:3306 | mysql        | mysql's VIP endpoint |
+| 192.168.231.11:8086 | influxdb     | Server1's influxdb's real endpoint | 
+| 192.168.231.12:8086 | influxdb     | Server2's influxdb's real endpoint | 
+| 192.168.231.40:8086 | influxdb     | influxdb's VIP endpoint |
+| 192.168.231.11:9000 | minio        | Server1's minio's real endpoint | 
+| 192.168.231.12:9000 | minio        | Server2's minio's real endpoint | 
+| 192.168.231.50:9000 | minio        | minio's VIP endpoint |
 

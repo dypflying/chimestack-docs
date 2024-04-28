@@ -1,5 +1,5 @@
 ---
-title: influxdb配置
+title: Influxdb HA Settings
 date: 2023-11-09
 weight: 5
 ---

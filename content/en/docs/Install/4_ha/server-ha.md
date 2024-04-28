@@ -1,5 +1,5 @@
 ---
-title: server/portal的高可用配置
+title: Server/Portal HA Settings
 date: 2023-11-09
 weight: 2
 ---

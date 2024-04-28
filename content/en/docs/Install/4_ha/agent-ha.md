@@ -1,5 +1,5 @@
 ---
-title: agent的高可用介绍
+title: Agent HA Settings
 date: 2023-11-09
 weight: 3
 ---

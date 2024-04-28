@@ -1,5 +1,5 @@
 ---
-title: s3服务配置
+title: S3 HA Settings
 date: 2023-11-09
 weight: 5
 ---

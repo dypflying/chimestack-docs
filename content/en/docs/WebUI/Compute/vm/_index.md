@@ -6,49 +6,49 @@ weight: 2
 
 ## 查看虚拟机
 
-* 查看虚拟机列表：
-  * 选择当前的**可用区**和**集群**，查看当前集群下所有的虚拟机
+* Check virutal machine list：
+  * To change current cluster, click **Change Cluster** and then select **Zone** and **Cluster**
   * Click **filter** button, input or select filter conditions, check the filtered virtual machine list
   * Click **columns** button，select the columns to be displayed in the list，by default it shows all columns
-* 查看虚拟机详情：在列表中选中某个虚拟机，显示虚拟机详情信息
-  * 基本信息页：显示虚拟机的基础信息 
-  * 云盘信息页：显示虚拟机挂载的云盘信息列表
-  * 网卡信息页：显示虚拟机挂载的弹性网卡信息列表
-  * 系统监控页：显示虚拟机整体的CPU、内存使用率
-  * I/O监控页：显示虚拟机整体的磁盘I/O、网络I/O情况
+* View virtual machine's details: select the virutal machine in the list，detailed information will be showed in the below panel.
+  * General information tab: show the general information of the virtual machine
+  * Volumes information tan: list the attached volumes' information of the virtual machine 
+  * Network interfaces information tab: list the attached network interfaces' information of the virtual machine 
+  * System monitor tab: Show the virtual machine's CPU and memory usage percentage in charts 
+  * I/O monitor tab: Show the virtual machine's overall statistics of its disk I/O and network I/O in charts
 
 {{% imgproc vmlist Fit "1000x1000" %}}
-虚拟机列表页和虚拟机详情基础信息页
+virtual machine's list and details 
 {{% /imgproc %}}
 
 {{% imgproc vmstorage Fit "1000x500" %}}
-虚拟机挂载的云盘信息列表
+attached volumes list
 {{% /imgproc %}}
 
 {{% imgproc vmnic Fit "1000x500" %}}
-虚拟机挂载的弹性网卡信息列表
+attached elastic network interfaces list
 {{% /imgproc %}}
 
 {{% imgproc vmsysperf Fit "1000x500" %}}
-虚拟机整体的CPU、内存使用率
+virtual machine's CPU and memory usage percentage
 {{% /imgproc %}}
 
 {{% imgproc vmioperf Fit "1000x500" %}}
-虚拟机整体的磁盘I/O、网络I/O情况
+virtual machine's overall statistics of disk I/O and network I/O
 {{% /imgproc %}}
 
-## 虚拟机管理
+## Virtual Machine Management
 
-### 新建虚拟机
-* 在"基础"页，输入或选择:
-  * 输入虚拟机的名称,允许(2～64)个字符
-  * (可选)描述
-  * 选择虚拟机的规格
-  * 选择根云盘规格
-  * 输入根云盘大小, GiB为最小单位
-  * (可选)选择一个启动镜像（可以从镜像源、镜像格式和操作系统类型中过滤选择），如果不选择一个镜像给启动盘，则需要在"添加虚拟设备"页中设置启动光盘，否则为无操作系统启动。
-  * 选择一个网络
-  * 选择一个子网 
+### Create New Virtual Machine
+* Input or choose following items in the "Basic" information tab:
+  * Input name of the virtual machine, it is restricted to 2～64 characters
+  * (Optional) input description
+  * Choose one of the instance specifications 
+  * Choose one of the volume specifications for the root volume
+  * Input size of the root volume (GiB) 
+  * (Optional) Choose a bootable image (can be searched by image bucket type, format and OS type)，if no bootable image selected，you must add a bootable CDRom as the primary boot device in the "Add Virtual Hardware" tab, otherwise there is no bootable device for the virtual machine to startup.
+  * Choose a newwork
+  * Choose a subnet
 
 {{% imgproc newvmgeneral Fit "1000x1500" %}}
 {{% /imgproc %}}

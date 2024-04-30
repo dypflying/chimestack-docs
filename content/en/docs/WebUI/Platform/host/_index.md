@@ -4,49 +4,49 @@ description: This chapter introduces how to manage hosts in ChimeStack
 weight: 4
 ---
 
-## 物理节点
+## Physical Nodes
 
 集群安装完成后，一个运行chime-agent的节点会自动注册到系统里，但这时该节点还不能分配虚拟资源，即无法创建虚拟机，管理员需要把节点注册到单个集群中，才能分配物理资源。
 
-* 查看物理节点列表
-  * 点击**筛选**按钮，输入过滤条件，查询过滤后的物理节点列表
-  * 点击**列过滤**按钮，过滤需要显示在列表的信息，默认全部显示
+* Check physical node list
+  * Click **Filter** button, input or select filter conditions, check the filtered physical node list
+  * Click **Columns** button，select the columns to be displayed in the list，by default it shows all columns
 
 {{% imgproc phyhost_list Fit "1000x600" %}}
-物理节点列表页
+physical nodes list page
 {{% /imgproc %}}
 
-* 注册节点，点击**注册**，输入或选择注册节点信息:
-  * 选择要注册的可用区
-  * 选择要注册的集群
-  * 输入CPU的超分比(默认是1.0)，比如32核心的物理CPU，可分最多32核心的vCPUs给虚拟机。如果是2.0，则可分配最多64核心的vCPUs
-  * 输入保留CPU，即有多少核心的CPU是不参与虚拟化的，一般情况下每个节点会预留少量的CPU作为运行在节点上的基础服务用；在超融合场景下，往往存储后端的服务进程也许需要预留一部分的CPU使用，这样和用户虚拟化使用的计算资源隔离，减少互相影响。
-  * 输入内存超分比(默认是1.0)
-  * 输入保留内存
-  * (可选)输入描述信息
+* To registered a physical node to a specific cluster, click **Register**，input or choose the following node's information:
+  * Choose an availanle zone
+  * Choose a cluster to register
+  * Input the CPU's allocation ratio(default is 1.0), for instance, with a ratio of 1.0, a 16 cores CPU with 32 threads, can allocate up to 32 vCPUs for virtual machines; with a ratio of 2.0, can allocate up to 64 vCPUs for virtual machines.
+  * Input the reserved CPUs, which are the CPU resources that will not be allocated to virtual machines, normally these CPU resources are reserved for the cloud platform's general components like the chime-agent running in the computing nodes. Especially in the hyper-converged scenario, the nodes must reserve enough physical resources for chime-agent and chime-stor or ceph's OSDs to reduce the resource conflict between the platform's components and the virtual machines.
+  * Input the memory's allocation ratio.
+  * Input the reserved memory.
+  * (Optional) Input description.
 {{% imgproc phyhost_register Fit "1000x1000" %}}
-注册一个物理节点到集群
+register a physical host to a cluster
 {{% /imgproc %}}
 
-## 已注册节点
+## Registered Nodes
 
-* 查看已注册节点列表
-  * 点击**筛选**按钮，输入过滤条件，查询过滤后的已注册节点列表
-  * 点击**列过滤**按钮，过滤需要显示在列表的信息，默认全部显示
+* Check registered node list
+  * Click **Filter** button, input or select filter conditions, check the filtered registered node list
+  * Click **Columns** button，select the columns to be displayed in the list，by default it shows all columns
 {{% imgproc host_list Fit "1000x600" %}}
-已注册节点列表
+registered node list page
 {{% /imgproc %}}
 
-* 修改节点配置
-  * 输入CPU的超分比(默认是1.0)，比如32核心的物理CPU，可分最多32核心的vCPUs给虚拟机。如果是2.0，则可分配最多64核心的vCPUs
-  * 输入保留CPU，即有多少核心的CPU是不参与虚拟化的，一般情况下每个节点会预留少量的CPU作为运行在节点上的基础服务用；在超融合场景下，往往存储后端的服务进程也许需要预留一部分的CPU使用，这样和用户虚拟化使用的计算资源隔离，减少互相影响。
-  * 输入内存超分比(默认是1.0)
-  * 输入保留内存
-  * (可选)输入描述信息
-* 点击**删除**按钮解除注册节点信息，该物理节点重新回到未注册状态
-* 点击**停用**停止该节点的调度，不影响已经运行的虚拟机，但新虚拟机将不再调度到该节点
-* 点击**启用**重新启用该节点
+* Update host's properties
+  * Input the CPU's allocation ratio(default is 1.0), for instance, with a ratio of 1.0, a 16 cores CPU with 32 threads, can allocate up to 32 vCPUs for virtual machines; with a ratio of 2.0, can allocate up to 64 vCPUs for virtual machines.
+  * Input the reserved CPUs, which are the CPU resources that will not be allocated to virtual machines, normally these CPU resources are reserved for the cloud platform's general components like the chime-agent running in the computing nodes. Especially in the hyper-converged scenario, the nodes must reserve enough physical resources for chime-agent and chime-stor or ceph's OSDs to reduce the resource conflict between the platform's components and the virtual machines.
+  * Input the memory's allocation ratio.
+  * Input the reserved memory.
+  * (Optional) Input description.
+* Click **Delete** item button in the operation dropdown menu to unregister a host from its cluster. 
+* Click **Disable** item button in the operation dropdown menu to disable a host, a disabled host will not destroy any virtual machines running in the host, but new virtual machines will not be scheduled in the host any more
+* Click **Enable** item button in the operation dropdown menu to enable a host.
 {{% imgproc host_update Fit "1000x1000" %}}
-更新节点设置
+update node's properties
 {{% /imgproc %}}
 

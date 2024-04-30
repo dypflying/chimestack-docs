@@ -4,17 +4,17 @@ description: This chapter introduces how to manage clusters in ChimeStack
 weight: 3
 ---
 
-* 查看集群列表
-  * 点击**筛选**按钮，输入过滤条件，查询过滤后的集群列表
-  * 点击**列过滤**按钮，过滤需要显示在列表的信息，默认全部显示
+* Check cluster list
+  * Click **Filter** button, input or select filter conditions, check the filtered cluster list
+  * Click **Columns** button，select the columns to be displayed in the list，by default it shows all columns
 
 {{% imgproc cluster_list Fit "1000x600" %}}
-集群列表页
+cluster list page
 {{% /imgproc %}}
 
-* 集群管理
-  * 点击**编辑**更新集群基本信息
-  * 点击**新建**创建新的集群
-  * 点击**删除**删除一个集群
-  * 点击**启用**把一个"停用"状态的集群恢复启用
-  * 点击**停用**把一个"启用"状态的集群停用，停用后的集群不会影响既存的资源，但是无法再新建新的资源
+* Cluster management
+  * Click **Edit** item button in the operation dropdown menu to update a cluster's properties
+  * Click **New** button to create a new cluster
+  * Click **Delete** item button in the operation dropdown menu to delete a cluster 
+  * Click **Enable** item button in the operation dropdown menu to enable a cluster 
+  * Click **Disable** item button in the operation dropdown menu to disable a cluster, a disabled cluster will not stop or influence the running resources in the cluster, but no other resource will be scheduled in the cluster any more

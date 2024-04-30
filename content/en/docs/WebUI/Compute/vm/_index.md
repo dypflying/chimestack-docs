@@ -1,6 +1,6 @@
 ---
-title: 虚拟机
-description: 本章节介绍虚拟机全生命周期的管理方法
+title: Virtual Machine
+description: This chapter introduces how to manage the lifecycle of virtual machines
 weight: 2
 ---
 

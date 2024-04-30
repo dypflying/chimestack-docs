@@ -4,35 +4,35 @@ description: This chapter introduces how to manage instance specifications in Ch
 weight: 7
 ---
 
-* 查看虚拟机规格列表
-  * 点击**筛选**按钮，输入过滤条件，查询过滤后的虚拟机规格列表
-  * 点击**列过滤**按钮，过滤需要显示在列表的信息，默认全部显示
+* Check instance specification list 
+  * Click **Filter** button, input or select filter conditions, check the filtered instance specification list
+  * Click **Columns** button，select the columns to be displayed in the list，by default it shows all columns
   
 {{% imgproc instancespec_list Fit "1000x600" %}}
-虚拟机规格列表
+instance specification list
 {{% /imgproc %}}
 
-* 新建虚拟机规格
-  * 输入规格名称
-  * 选择规格类型
-    * 共享型: 虚拟机实例和其他实例共享物理机资源，可以比较好的利用系统资源
-    * 独占性: 虚拟机独占物理机器资源
-  * 输入vCPU个数
-  * 输入内存容量(单位是MiB)
-  * (可选)描述信息
+* Create new instance specification
+  * Input the name of the instance specification
+  * Choose a type of the instance specification
+    * Shared: virtual machines share the physical resources, with this type, resources are utilized more efficiently but may cause resources conflict when the physical resources are running out
+    * Dedicated: each virtual machine monoplizes its physical resource
+  * Input the number of the vCPUs
+  * Input the number of memory (MiB)
+  * (Optional) Input Description
   
 {{% imgproc instancespec_new Fit "1000x600" %}}
-新建虚拟机规格
+create new instance specification
 {{% /imgproc %}}
 
-* 虚拟机规格管理
-  * 点击**编辑**按钮编辑规格信息和参数
-  * 点击**删除**按钮删除规格
+* Instance specification management 
+  * Click **Edit** item button in the operation dropdown menu to update an instance specification's properties
+  * Click **Delete** item button in the operation dropdown menu to delete an instance specification.
 
 
-* 关联虚拟机规格到集群: 只有把虚拟机规格关联到集群才能正常使用，点击**挂载到集群**把一个规格关联到一个集群上，一个规格可以关联多个集群。
+* Attach instance specification to cluster: to have the instance specification available in clusters, administator must attach it to the clusters before creating virtual machines with this instance specification. You can click the **Attach to Cluster** item button in the operation dropdown menu to attach it to clusters, one instance specification can be attached to multiple clusters.
   
 {{% imgproc instancespec_relation Fit "1000x600" %}}
-虚拟机规格关联到集群
+Attach instance specifications to clusters
 {{% /imgproc %}}
 

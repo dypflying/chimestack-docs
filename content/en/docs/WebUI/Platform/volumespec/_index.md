@@ -4,41 +4,48 @@ description: This chapter introduces how to manage volume specifications in Chim
 weight: 9
 ---
 
-* 查看云盘规格列表
-  * 点击**筛选**按钮，输入过滤条件，查询过滤后的云盘规格列表
-  * 点击**列过滤**按钮，过滤需要显示在列表的信息，默认全部显示
+* Check volume specification list 
+  * Click **Filter** button, input or select filter conditions, check the filtered volume specification list
+  * Click **Columns** button，select the columns to be displayed in the list，by default it shows all columns
   
 {{% imgproc volumespec_list Fit "1000x600" %}}
-云盘规格列表
+volume specification list 
 {{% /imgproc %}}
 
-* 新建云盘规格
-  * 输入规格名称
-  * 选择存储池
-  * 输入最小IOPS
-  * 输入最大IOPS
-  * 输入IOPS步长
-  * 输入最小带宽
-  * 输入最大带宽
-  * 输入带宽步长
-  * (可选)描述信息
+* Create new volume specification
+  * Input the name of the volume specification
+  * Choose a storage pool 
+  * Input the minimum IOPS of the volume specification
+  * Input the maximum IOPS of the volume specification
+  * Input the step IOPS of the volume specification
+  * Input the minimum throughput of the volume specification
+  * Input the maximum throughput of the volume specification
+  * Input the step throughput of the volume specification
+  * (Optional) Input description
 
 {{% pageinfo color="primary" %}}
-云盘实际IOPS的计算公式为: iops = min(最大IOPS, size(GiB)*IOPS步长) 且 max(最小IOPS, size(GiB)*IOPS步长) 
 
-云盘实际带宽的计算公式为: 带宽 = min(最大带宽, size(GiB)*带宽步长(MiB)) 且 max(最小带宽, size(GiB)*带宽步长(MiB)) 
+The formula for calculating a volume's IOPS limitation: 
+```
+a volume's IOPS = MAX('minimum IOPS', MIN('maximum IOPS', size(GiB)*'step IOPS'))
+```
+
+The formula for calculating a volume's throughput limitation: 
+```
+a volume's throughput = MAX('minimum throughput', MIN('maximum throughput', size(GiB)*'step throughput'))
+```
 {{% /pageinfo %}}
 
 {{% imgproc volumespec_new Fit "1000x600" %}}
 新建云盘规格
 {{% /imgproc %}}
 
-* 云盘规格管理
-  * 点击**编辑**按钮编辑规格信息和参数
-  * 点击**删除**按钮删除规格
+* Volume specification management 
+  * Click **Edit** item button in the operation dropdown menu to update a volume specification's properties
+  * Click **Delete** item button in the operation dropdown menu to delete a volume specification.
 
-* 关联云盘规格到集群: 只有把云盘规格关联到集群才能正常使用，点击**挂载到集群**把一个规格关联到一个集群上，一个规格可以关联多个集群。
+* Attach volume specification to cluster: to have the volume specification available in clusters, administator must attach it to the clusters before creating virtual volumes with this specification. You can click the **Attach to Cluster** item button in the operation dropdown menu to attach it to clusters, one volume specification can be attached to multiple clusters.
 
 {{% imgproc volumespec_relation Fit "1000x600" %}}
-云盘规格关联到集群
+Attach volume specifications to clusters
 {{% /imgproc %}}

@@ -4,25 +4,25 @@ description: This chapter introduces how to manage subnets in ChimeStack
 weight: 6
 ---
 
-* 查看子网列表
-  * 点击**筛选**按钮，输入过滤条件，查询过滤后的子网列表
-  * 点击**列过滤**按钮，过滤需要显示在列表的信息，默认全部显示
+* Check subnet list
+  * Click **Filter** button, input or select filter conditions, check the filtered subnet list.
+  * Click **Columns** button, select the columns to be displayed in the list, by default it shows all columns
   
 {{% imgproc subnet_list Fit "1000x600" %}}
-子网列表
+subnet list 
 {{% /imgproc %}}
 
-* 新建子网
-  * 输入子网名称
-  * 选择网络
-  * 输入CIDR
-  * 输入网关（如果不输入，默认为CIDR对应网络IP段的第一个IP）
-  * (可选)描述信息
+* Create new subnet
+  * Input the name of the subnet
+  * Choose a network which the subnet belongs to
+  * Input the CIDR of the subnet
+  * (Optional) Input the gateway of the subnet（if omit, it will use the first IP address from the CIDR's IP range as the gateway）
+  * (Optional) Input description
   
 {{% imgproc subnet_new Fit "1000x600" %}}
-新建子网
+create subnet
 {{% /imgproc %}}
 
-* 子网管理
-  * 点击**编辑**更新子网基本信息
-  * 点击**删除**删除一个子网
+* Subnet management 
+  * Click **Edit** item button in the operation dropdown menu to update a subnet's properties
+  * Click **Delete** item button in the operation dropdown menu to delete a subnet

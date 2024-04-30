@@ -6,7 +6,7 @@ weight: 4
 
 ## Physical Nodes
 
-集群安装完成后，一个运行chime-agent的节点会自动注册到系统里，但这时该节点还不能分配虚拟资源，即无法创建虚拟机，管理员需要把节点注册到单个集群中，才能分配物理资源。
+If the chime-agent runs successfully for the first time after its installation in a computing node, the computing node is logged into the ChimeStack's database automatically, however so far the host still can not accommodate any virtual machine, the administrator must register the host to a specific cluster to make it available for the virtual resources in the cluster.
 
 * Check physical node list
   * Click **Filter** button, input or select filter conditions, check the filtered physical node list

@@ -4,32 +4,32 @@ description: This chapter introduces how to manage public images in ChimeStack
 weight: 10
 ---
 
-* 查看镜像源列表
-  * 点击**筛选**按钮，输入过滤条件，查询过滤后的镜像源列表，每个账号有一个私有镜像源
-  * 点击**列过滤**按钮，过滤需要显示在列表的信息，默认全部显示
+* Check image bucket list
+  * Click **Filter** button, input or select filter conditions, check the filtered image bucket list. Each user has a dedicated image bucket.
+  * Click **Columns** button，select the columns to be displayed in the list，by default it shows all columns
 
 {{% imgproc bucket_list Fit "1000x600" %}}
-镜像源列表
+image bucket list
 {{% /imgproc %}}
 
-* 查看镜像列表
-  * 点击**筛选**按钮，输入过滤条件，查询过滤后的镜像列表
-  * 点击**列过滤**按钮，过滤需要显示在列表的信息，默认全部显示
+* Check image list
+  * Click **Filter** button, input or select filter conditions, check the filtered image list. 
+  * Click **Columns** button，select the columns to be displayed in the list，by default it shows all columns
   
 {{% imgproc image_list Fit "1000x600" %}}
-镜像列表
+image list
 {{% /imgproc %}}
 
-* 添加公共镜像，输入或选择以下信息: 
-  * 输入镜像的名称,允许(2～64)个字符
-  * 选择镜像的文件格式，目前支持"raw","qcow2"和"iso"
-  * 选择操作系统类型
-  * 选择操作系统版本
-  * (可选)系统架构
-  * (可选)启动类型(bios,uefi)
-  * 选择是否共享，默认不共享
-  * 输入安装URL，支持本地上传或者sftp上传。本地文件上传格式为: file:///path, sftp文件上传格式为: sftp://username:password@host:/path，用户也可以通过Web UI上传文件到管理服务器后台。
+* Add a public image, input or choose the following information: 
+  * Input the name of the image, which is restricted to 2～64 characters.
+  * Choose the file format of the image from the dropdown menu, which contains "raw", "qcow2" and "iso" file format
+  * Choose the operation system's type from the dropdown menu. 
+  * Choose the operation system's version.
+  * (Optional) Choose the system's architecture
+  * (Optional) Choose the boot type of the image, such as "bios" or "uefi"
+  * Input the install URL, it supports local uploading or sftp uploading。for a local uploading url, its format like: file:///path, and for a sftp uploading url, its format like: sftp://username:password@host:/path. and as an alternative method, user can also upload the image file through the web browser directly in this page.
+
   
 {{% imgproc image_new Fit "1000x600" %}}
-新建镜像
+create new image
 {{% /imgproc %}}

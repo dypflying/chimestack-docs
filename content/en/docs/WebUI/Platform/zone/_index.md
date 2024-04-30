@@ -4,17 +4,17 @@ description: This chapter introduces how to manage available zones in ChimeStack
 weight: 2
 ---
 
-* 查看可用区列表
-  * 点击**筛选**按钮，输入过滤条件，查询过滤后的可用区列表
-  * 点击**列过滤**按钮，过滤需要显示在列表的信息，默认全部显示
+* Check available zone list 
+  * Click **Filter** button, input or select filter conditions, check the filtered available zone list.
+  * Click **Columns** button, select the columns to be displayed in the list, by default it shows all columns
 
 {{% imgproc zone_list Fit "1000x600" %}}
-可用区列表
+available zone list
 {{% /imgproc %}}
 
-* 可用区管理
-  * 点击**编辑**更新可用区基本信息
-  * 点击**新建**创建新的可用区
-  * 点击**删除**删除一个可用区
-  * 点击**启用**把一个"停用"状态的可用区恢复启用
-  * 点击**停用**把一个"启用"状态的可用区停用，停用后的可用区不会影响既存的资源，但是无法再新建新的资源
+* Available zone management
+  * Click **Edit** item button in the operation dropdown menu to update an available zone's properties.
+  * Click **New** button to create new available zone.
+  * Click **Delete** item button in the operation dropdown menu to delete an available zone.
+  * Click **Enable** item button in the operation dropdown menu to enable an available zone. 
+  * Click **Disable** item button in the operation dropdown menu to disable an available zone, a disabled zone will not affect any existing clusters that belong to it, but it will not accommodate new clusters any more. 

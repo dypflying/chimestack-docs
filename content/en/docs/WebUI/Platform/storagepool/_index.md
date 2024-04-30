@@ -4,29 +4,29 @@ description: This chapter introduces how to manage storage pools in ChimeStack
 weight: 8
 ---
 
-* 查看存储池列表
-  * 点击**筛选**按钮，输入过滤条件，查询过滤后的虚拟机列表
-  * 点击**列过滤**按钮，过滤需要显示在列表的信息，默认全部显示
+* Check storage pool list
+  * Click **Filter** button, input or select filter conditions, check the filtered storage pool list.
+  * Click **Columns** button, select the columns to be displayed in the list, by default it shows all columns
 
 {{% imgproc pool_list Fit "1000x600" %}}
-存储池列表
+storage pool list
 {{% /imgproc %}}
 
-* 新建存储池
-  * 输入存储吃名称
-  * 选择存储池类型
-    * 本地存储: 节点上的物理盘存储
-    * Ceph存储: Ceph集群的存储资源
-  * (仅本地存储) 后端的存储路径
-  * (仅本地存储) 缓存盘的存储路径 
-  * 容量分配比
-  * 物理容量(GiB)
-  * 保留容量(GiB)
-  * (可选)描述信息
+* Create new storage pool
+  * Input the name of the storage pool 
+  * Choose the type of the storage pool
+    * Local Storage: the local persistent disks in the computing nodes
+    * Ceph storage: Ceph's storage pool
+  * (Only for local storage) Input the backend path, which is for storing volumes' data, it must be an existing directory in all the nodes of the cluster. 
+  * (Only for local storage) Input the image cache path, which is for storing the image caches, it must be an existing directory in all the nodes of the cluster. 
+  * Input the size ratio, which multiplies the physical size as the allocatable size of the storage pool.
+  * Input the physical size(GiB)
+  * Input the reserved size(GiB), which is not allocatable to virtual volumes. 
+  * (Optional) Input description
 {{% imgproc pool_new Fit "1000x600" %}}
-新建存储池
+create storage pool 
 {{% /imgproc %}}
 
-* 存储池管理
-  * 点击**编辑**按钮编辑存储池信息和参数
-  * 点击**删除**按钮删除存储池
+* Storage pool management
+  * Click **Edit** item button in the operation dropdown menu to edit a storage pool's properties.
+  * Click **Delete** item button in the operation dropdown menu to delete a storage pool

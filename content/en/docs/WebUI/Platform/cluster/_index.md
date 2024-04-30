@@ -1,6 +1,6 @@
 ---
-title: 集群管理
-description: 介绍集群的管理方法
+title: Cluster Management
+description: This chapter introduces how to manage clusters in ChimeStack
 weight: 3
 ---
 

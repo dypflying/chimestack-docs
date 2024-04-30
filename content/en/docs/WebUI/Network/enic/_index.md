@@ -1,56 +1,56 @@
 ---
-title: 弹性网卡
-description: 本章节介绍弹性网卡管理方法
+title: Elastic Interface
+description: This chapter introduces how to manage elastic interfaces
 weight: 2
 ---
 
 
-## 查看弹性网卡
+## Check Network Interfaces
 
-* 网卡列表：
-  * 选择当前的**可用区**和**集群**，查看当前集群下所有的弹性网卡
-  * 点击**筛选**按钮，输入过滤条件，查询过滤后的弹性网卡列表
-  * 点击**列过滤**按钮，过滤需要显示在列表也的信息，默认全部显示
-* 查看弹性网卡详情：在列表中选中某个弹性网卡，显示云盘详情信息
-  * 基本信息页：显示网卡的基础信息 
-  * 挂载的实例页：显示该网卡挂载的虚拟机实例信息
-  * 网卡监控页：显示网卡的I/O监控数据
+* Check network interface list:
+  * To change current cluster, click **Change Cluster** and then select **Zone** and **Cluster**
+  * Click **filter** button, input or select filter conditions, check the filtered network interfaces list
+  * Click **columns** button，select the columns to be displayed in the list，by default it shows all columns
+* To view a network interface's details, select the network interface in the list，detailed information will be showed in the below panel.
+  * General information tab: show the general information of the network inerface
+  * Attached instances tab: show the virtual machine instance to which the network interface attaches
+  * Network interface monitor tab: Show the network interface's I/O statistical information in charts
   
 {{% imgproc nic_list Fit "1000x600" %}}
-弹性网卡列表页
+network interfaces list page
 {{% /imgproc %}}
 
 {{% imgproc nic_attach Fit "1000x400" %}}
-弹性网卡挂载的虚拟机
+virtual machines to which the network interface attaches
 {{% /imgproc %}}
 
 {{% imgproc nic_stat Fit "1000x400" %}}
-网卡I/O监控
+network interface's I/O monitor
 {{% /imgproc %}}
 
-## 新建网卡
-* 输入或选择:
-  * 输入网卡的名称,允许(2～64)个字符
-  * (可选)描述
-  * 选择网络
-  * 选择子网
-  * (可选)
+## Create Network Interface
+* Input or choose:
+  * Input name of the network interface, it is restricted to 2～64 characters
+  * (Optional) input description
+  * Choose a newwork
+  * Choose a subnet
+  * (Optional) Input an IP address
   
 {{% imgproc nic_new Fit "1000x400" %}}
-新建弹性网卡
+create network interface
 {{% /imgproc %}}
 
-### 更新网卡基本信息
+### Update Network Interface's Information
 
 {{% imgproc nic_update Fit "800x500" %}}
 {{% /imgproc %}}
 
-## 弹性生命周期管理
-* **挂载**: 对于处于"可用"或者"挂载失败"状态下的网卡，在网卡列表"操作"列点击"挂载"可挂载到某一虚拟机实例，同样的操作也可以在虚拟机详情网卡列表页完成。
-* **卸载**: 对于处于"已挂载"或者"卸载失败"状态下的云盘，可以在网卡详情页完成卸载，其中主网卡不能卸载。
-* **删除**: 对于处于"可用"状态下的网卡，在网卡列表"操作"列点击"删除"按钮即可删除，删除后无法恢复。
+## Network Interface's Lifecycle Management 
+* **Attach**: you can attach network interfaces which are in the "Available" or "Attach Failure" states by clicking the "Attach" item button in the operation list to attach the network interface to a specific virtual machine. You can also attach a network interface to a virtual machine in the virtual machine's details page.
+* **Detach**: you can detach network interfaces which are in the "Attached" or "Detach Failure" states by clicking the "Detach" item button in the operation list to detach the network interface from a virtual machine. You can also detach the network interface from the virtual machine in the virtual machine's details page. Note: the primary network interface is not detachable
+* **Delete**: You can delete the network intetfaces which are in "Available" or "Delete Failure" states by clicking the "Delete" item button in the operation list. Note: Deleted interfaces can not be restored.
   
-### 批量删除操作
+### Batch Delete
 
-可以选择多个"可用"状态的网卡一起删除，页面会自动刷新并更新任务的状态。
+ Choose multiple network intetfaces in the "Available" state and click the "Delete" item in the batch action's dropdown menu to delete them simultaneously.
 

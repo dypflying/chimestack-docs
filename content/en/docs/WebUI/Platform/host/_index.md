@@ -1,6 +1,6 @@
 ---
-title: 节点管理
-description: 介绍节点的管理方法
+title: Host Management 
+description: This chapter introduces how to manage hosts in ChimeStack
 weight: 4
 ---
 

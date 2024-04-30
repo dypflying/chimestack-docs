@@ -9,7 +9,7 @@ weight: 3
 
 * Login Information
   * current user name
-  * login datetime、system datetime
+  * login datetime, system datetime
 * Unread Alert Summary 
   * Categorize the alerts by their severity as "Urgent","Severe" and "Warn"
   * Show the top 3 alert items sorted by severity and their unread count 
@@ -30,7 +30,7 @@ weight: 3
   * memory allocation's summary
   * storage usage's summary
   * image bucket usage's summary
-* Physical node's average usage statistical information
+* Physical Node's Average Usage Statistical Summary
   * CPU's average usage
   * memory's average usage
   * disk I/O's average usage

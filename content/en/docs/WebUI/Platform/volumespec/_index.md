@@ -1,6 +1,6 @@
 ---
-title: 云盘规格管理
-description: 介绍云盘规格的管理方法
+title: Volume Specification Management
+description: This chapter introduces how to manage volume specifications in ChimeStack
 weight: 9
 ---
 

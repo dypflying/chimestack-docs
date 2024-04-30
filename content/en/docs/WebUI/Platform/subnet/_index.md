@@ -1,6 +1,6 @@
 ---
-title: 子网管理
-description: 介绍子网的管理方法
+title: Subnet Management
+description: This chapter introduces how to manage subnets in ChimeStack
 weight: 6
 ---
 

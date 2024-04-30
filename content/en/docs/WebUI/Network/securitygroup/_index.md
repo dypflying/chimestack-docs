@@ -1,7 +1,7 @@
 ---
-title: 安全组
+title: Security Group
 description: 
 weight: 3
 ---
 
-待更新
+To be updated

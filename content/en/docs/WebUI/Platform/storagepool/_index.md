@@ -1,6 +1,6 @@
 ---
-title: 存储池管理
-description: 介绍本地存储池、Ceph存储的管理方法
+title: Storage Pool Management
+description: This chapter introduces how to manage storage pools in ChimeStack
 weight: 8
 ---
 

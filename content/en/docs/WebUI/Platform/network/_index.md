@@ -1,6 +1,6 @@
 ---
-title: 二层网络管理
-description: 介绍二层网络的管理方法
+title: Layer-2 Network Management
+description: This chapter introduces how to manage layer-2 networks in ChimeStack
 weight: 5
 ---
 

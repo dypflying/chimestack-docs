@@ -1,6 +1,6 @@
 ---
-title: 共有镜像管理
-description: 介绍共有镜像的管理方法
+title: Public Image Management
+description: This chapter introduces how to manage public images in ChimeStack
 weight: 10
 ---
 

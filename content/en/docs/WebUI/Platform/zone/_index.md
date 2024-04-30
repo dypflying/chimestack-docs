@@ -1,6 +1,6 @@
 ---
-title: 可用区
-description: 介绍可用区的管理方法
+title: Available Zone Management
+description: This chapter introduces how to manage available zones in ChimeStack
 weight: 2
 ---
 

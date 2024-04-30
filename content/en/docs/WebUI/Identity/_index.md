@@ -1,6 +1,5 @@
 ---
-title: 3.8 用户管理
+title: 3.8 Identity Management
 weight: 10
-description: 本章节介绍用户管理和审计管理功能
+description: This chapter introduces how to manage identities in ChimeStack
 ---
-

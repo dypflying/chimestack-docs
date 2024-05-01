@@ -1,31 +1,30 @@
 ---
-title: API使用规范
+title: API Usage Specification
 weight: 1
 ---
 
-ChimeStack提供标准Restful APIs, 除了通过Web GUI方式使用ChimeStack，您也可以通过Restful API或者[CLI](../../../cli)的方式使用ChimeStack。
+ChimeStack provides standard Restful APIs, which is the fundamental service for the Web UI and the command line tool(CLI)
 
-## HTTP方法
+## HTTP Methods
 
-ChimeStack API 通过标准Restful HTTP方法操作资源: 
+ChimeStack API manipulates resource through HTTP Restful methods as following:  
 
-| 方法名 | 说明  |
+| Method | Description  |
 |-------|------|
-| GET |  查询资源信息 |
-| POST | 新建资源 | 
-| PATCH | 修改资源信息 |
-| PUT  | 修改/操作资源 |
-| DELETE | 删除资源 | 
+| GET |  query information |
+| POST | create resource | 
+| PATCH | update resource |
+| PUT  | update/hanlee resource |
+| DELETE | delete resource | 
 
+## Parameter Passing Methods
 
-## 传参方式
+ChimeStack API's parameter passing methods include:
+- in path: parameters passed in the url of HTTP
+- in query: parameters passed in the HTTP query strings
+- in body: parameters passed in the HTTP body
 
-ChimeStack的API传参方法包括:
-- in path: 在http url的路径中传递
-- in query: 在http的query string中传递
-- in body: 在http的请求体中传递
-
-往往一个API请求最少包含一种传参数方式，也可能三种同时使用。例如，在一个可用区(AZ)中创建一个集群(Cluster)的API原型为:
+Usually an API request uses at least one parameter passing methods, maybe uses two or three combined methods in one request. For example, following is an API request for creating a cluster in an Availability Zone:
 
 ```
 POST /v1/az/{AzUuid}/cluster 
@@ -41,27 +40,27 @@ Body: {
   "type": <cluster type>
 }
 ```
-其中url中的{AzUuid}是被添加Cluster的可用区的Uuid，为"in path"类型传参，Body的内容是要创建Cluster的具体信息，为"in body"类型传参。
 
+{AzUuid} is the "in path" parameter of AZ's uuid; the content of Body is the cluster's detail for the creating, it is "in body" parameter passing method
 
-## 返回码和返回内容
+## Return Code And Return Content
 
-### 返回码
+### Return Code
 
-以下是ChimeStack涉及到的Http返回码及说明: 
+Following is the return codes that ChimeStack's API may response:
 
-| 返回码 | 说明  |
+| Return Code | Description |
 |-------|------|
-| 200 | 请求成功 |
-| 400 | 请求包含了非法参数或者缺少参数 | 
-| 401 | 访问没有授权 |
-| 403 | 拒绝访问 |
-| 404 | Http资源不存在 | 
-| 500 | 服务器内部错误 | 
+| 200 | response successfully |
+| 400 | illegal or missing parameters | 
+| 401 | no authorization |
+| 403 | access denied |
+| 404 | http resource not found | 
+| 500 | service's internal error | 
 
-### 返回内容
+### Return Content
 
-Http请求的，返回内容的原型如下(json格式):
+ChimeStack API's response content in json format as following: 
 
 ```
 {
@@ -75,7 +74,7 @@ Http请求的，返回内容的原型如下(json格式):
 }
 ```
 
-例如，成功创建一个cluster的返回内容如下: 
+for instance, the following is a successful response of creating a cluster:
 
 ```
 {
@@ -95,15 +94,16 @@ Http请求的，返回内容的原型如下(json格式):
   }
 }
 ```
-## API的认证方式
 
-ChimeStack API的认证方式是通过在Http Headers中传入ApiKey(api token)进行认证(登录API不需要认证)，传入Header的原型为：
+## Authentification
+
+ChimeStack wraps up an authorized token in the http headers for all the requests(except "login", "logout", "auth" requests) to authenticate, the format of the authentification header is:
 
 ```
 Authorization: Bearer <api token>
 ```
 
-例如,通过curl命令创建一个集群(cluster): 
+For instance, following is a http request of creating a cluster invoked by the "curl" tool:
 
 ```
  curl -H "Content-Type: application/json" \
@@ -112,9 +112,9 @@ Authorization: Bearer <api token>
      -d '{"name":"mycluster","description":"test cluster","hypervisor_type":"kvm", "arch":"x86_64"}' 
 ```
 
-## 登录并获取Token
+## Login and acquire an API token
 
-Api Token需要用户通过调用[登录API](/docs/reference/api/api/#login)获取. 例如调用: 
+API Token can be acquired by invoking the [Login API](/docs/reference/api/api/#login). For instance: 
 
 ```
  curl -H "Content-Type: application/json"  \
@@ -122,7 +122,7 @@ Api Token需要用户通过调用[登录API](/docs/reference/api/api/#login)获�
     -d '{"user_name":"admin","password":"admin"}'   
 ```
 
-登录成功后打印输出:
+If above command completes successfully, its output looks like: 
 
 ```
 {
@@ -139,14 +139,16 @@ Api Token需要用户通过调用[登录API](/docs/reference/api/api/#login)获�
 }
 ```
 
-输出信息中的"uuid"即为API Token
+The "uuid" value in above response is the API token
 
-## 登出并销毁Token
+## Logout and destroy the API token
 
-如果不再需要使用API时，从安全角度考虑，需要销毁API Token，可以通过登出命令让token失效，例如调用:
+To destroy an API token, you can invoke the "logout" command, for instance:
 
 ```
  curl -H "Content-Type: application/json" \
  -X POST  'http://mychimestack:8801/v1/logout' \
  -d '{"token":"d820ef87-8fab-434a-9129-d9f1b53e5820"}' 
 ```
+
+After the logout, the API token is no longer valid

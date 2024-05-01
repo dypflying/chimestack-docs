@@ -1,10 +1,10 @@
 ---
-title: 4 CLI介绍
+title: 4 Command Line Introduction
 weight: 4
-description: 本章介绍ChimeStack命令行工具(CLI)的使用方法
+description: This chapter introduces the usage of the ChimeStack's command line tool(CLI)
 ---
 
-## 概述
+## Overview
 
 chimecli是一个通过命令行管理操作ChimeStack的工具。
 

@@ -1,64 +1,63 @@
 ---
-title: 云盘
-description: 本章节介绍云硬盘生命周期的管理方法
+title: Volume
+description: This chapter introduces how to manage the lifecycle of volumes
 weight: 2
 ---
 
-## 查看云盘
+## Volume List
 
-* 查看云盘列表：
-  * 选择当前的**可用区**和**集群**，查看当前集群下所有的云盘
-  * 点击**筛选**按钮，输入过滤条件，查询过滤后的云盘列表
-  * 点击**列过滤**按钮，过滤需要显示在列表也的信息，默认全部显示
-* 查看云盘详情：在列表中选中某个云盘，显示云盘详情信息
-  * 基本信息页：显示云盘的基础信息 
-  * 挂载的实例页：显示云盘挂载的虚拟机实例信息
-  * 快照信息页：显示该云盘的快照列表
-  * 云盘监控页：显示云盘的I/O数据
+* Check volumes list：
+  * To change current cluster, click **Change Cluster** and then select **Zone** and **Cluster**
+  * Click **filter** button, input or select filter conditions, check the filtered volumes list
+  * Click **columns** button，select the columns to be displayed in the list，by default it shows all columns
+* To view a volume's details, select a volume in the list，detailed information will be showed in the below panel.
+  * General information tab: show the general information of the volume
+  * Attached instances tab: show the virtual machine instance to which the volume attaches
+  * Snapshot tab: show the snapshots of the volume
+  * Volume monitor tab: Show the volume's I/O statistical information in charts
   
 {{% imgproc volume_list Fit "1000x1000" %}}
-云盘列表页
+volume list page
 {{% /imgproc %}}
 
 {{% imgproc volume_attach Fit "1000x400" %}}
-云盘挂载的虚拟机
+virtual machine instances attached by the volume
 {{% /imgproc %}}
 
 {{% imgproc volume_snapshot Fit "1000x400" %}}
-云盘快照列表
+volume's snapshot list 
 {{% /imgproc %}}
 
 {{% imgproc volume_stat Fit "1000x400" %}}
-云盘I/O统计
+volume's I/O monitor
 {{% /imgproc %}}
 
-## 新建云盘
-* 输入或选择:
-  * 输入云盘的名称,允许(2～64)个字符
-  * (可选)描述
-  * 选择云盘规格
-  * 输入云盘大小
-  * 若为本地盘，选择本地盘所在的节点
+## Create New Volume
+* Input or choose the following information:
+  * Input the name of the volume, which is restricted to 2～64 characters
+  * (Optional) Input description
+  * Choose a volume specification
+  * Input the size of the volume
+  * If it is a local volume, choose a host at which to create the volume
   
 {{% imgproc volume_new Fit "1000x400" %}}
-新建数据云盘
+create new volume
 {{% /imgproc %}}
 
-## 云盘生命周期管理
-* **挂载**: 对于处于"可用"或者"挂载失败"状态下的云盘，在云盘列表"操作"列点击"挂载"可挂载云盘到某一虚拟机实例，同样的操作也可以在虚拟机详情云盘列表页完成。
-* **卸载**: 对于处于"已挂载"或者"卸载失败"状态下的云盘，可以在云盘详情页完成卸载，根云盘不能卸载。
-* **删除**: 对于处于"可用"状态下的云盘，在云盘列表"操作"列点击"删除"删除一个云盘，注意，本地盘删除后为物理删除，无法恢复。
+## Volume's lifecycle management 
+* **Attach**: you can attach a volume which is in the "Available" or "Attach Failure" state by clicking the "Attach" item button in the operation list to attach the volume to a specific virtual machine. You can also attach a volume to a virtual machine in its details page. 
+* **Detach**: you can detach a volume which is in the "Attached" or "Detach Failure" state by clicking the "Detach" item button in the operation list to detach the volume from a virtual machine. You can also detach the volume from the virtual machine in its details page. Note: the root volume is not detachable
+* **Delete**: You can delete the volumes which are in "Available" or "Delete Failure" state by clicking the "Delete" item button in the operation list. Note: Deleted volumes can not be restored.
   
-### 批量删除操作
+### Batch Delete
 
-可以选择多个"可用"状态的云盘一起删除，页面会自动刷新并更新任务的状态。
+Choose multiple volumes in the "Available" state and click the "Delete" item in the batch action's dropdown menu to delete them simultaneously.
 
-## 制作快照和从快照中恢复云盘
-* **制作快照**: 在云盘列表"操作"列点击"制作快照"可为云盘制作快照，操作成功后会在云盘详情快照列表也查看。
+## Make snapshots and restore a volume from snapshots 
+* **Make snapshot**: click the "Take Snapshot" item button in the operation dropdown menu to make a snapshot of the volume. You can check the snapshot in the volume's details panel.
 {{% imgproc volume_new_snapshot Fit "1000x400" %}}
-从快照恢复到云盘
+resotre volume from a snapshot
 {{% /imgproc %}}
-* **删除快照**: 在云盘详情快照列表页中，点击"删除"选项可删除快照
-* **快照恢复到云盘**:  在云盘详情快照列表页中，点击"恢复"选项可将云盘恢复到选定的快照
-
+* **Delete Snapshot**: In the snapshot tab of the volume's details panel, click "Delete" item button in the operation dropdown menu to delete a snapshot
+* **Restore volume**: In the snapshot tab of the volume's details panel,click "Restore" item button in the operation dropdown menu to restore a snapshot to volume
 

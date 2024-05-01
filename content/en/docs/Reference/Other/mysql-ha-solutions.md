@@ -1,5 +1,5 @@
 ---
-title: Mysql高可用架构介绍
+title: Introduction to Mysql's Architecture
 weight: 3
 ---
 

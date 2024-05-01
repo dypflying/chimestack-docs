@@ -1,4 +1,4 @@
 ---
-title: 其它
+title: Other
 weight: 3
 ---

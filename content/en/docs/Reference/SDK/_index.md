@@ -1,7 +1,7 @@
 ---
 title: SDK
 weight: 3
-description: Chime SDK使用介绍
+description: introduction to ChimeStack's SDK
 ---
 
-待更新
+To be updated

@@ -1,18 +1,18 @@
 ---
-title: 快照
-description: 本章节介绍云盘快照生命周期的管理方法
+title: Snapshot 
+description: This chapter introduce how to manage the lifecycle of snapshots
 weight: 3
 ---
 
-* 查看快照列表：
-  * 选择当前的**可用区**和**集群**，查看当前集群下所有的快照
-  * 点击**筛选**按钮，输入查询条件，查看按条件过滤的快照列表
-  * 点击**列过滤**按钮，过滤需要显示在列表也的信息，默认全部显示
-* 编辑快照
-  * 点击某个快照的**编辑**按钮，可编辑快照的名称和描述
-* 删除快照
-  * 点击某个快照的**删除**按钮，可删除快照
+* Check snapshot list：
+  * To change current cluster, click **Change Cluster** and then select **Zone** and **Cluster**
+  * Click **filter** button, input or select filter conditions, check the filtered snapshot list
+  * Click **columns** button，select the columns to be displayed in the list，by default it shows all columns
+* Edit snapshot
+  * Click **Edit** item button in the opetation dropdown menu to update the snapshot's basic information
+* Delete snapshot
+  * Click **Delete** item button in the opetation dropdown menu to delete a snapshot
 
 {{% imgproc snapshot_list Fit "1000x500" %}}
-快照表页
+snapshot list page
 {{% /imgproc %}}

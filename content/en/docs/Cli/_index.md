@@ -188,7 +188,7 @@ Flags:
 |---|---|---|---|
 |body|[CreateAzRequest](#schemacreateazrequest)|false|the http post body|
 
-**CreateAzRequest arguments**: 
+**CreateAzRequest Arguments**: 
 
 
 |Name|Type|Required|Description|
@@ -280,7 +280,7 @@ Flags:
 |AzUuid|string|true|the AZ's uuid|
 |body|[UpdateAzRequest](#schemaupdateazrequest)|true|the http post body|
 
-**UpdateAzRequest Argument**:
+**UpdateAzRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -550,7 +550,7 @@ Flags:
 |body|[CreateClusterRequest](#schemacreateclusterrequest)|false|the http post body|
 
 
-**CreateClusterRequest参数**:
+**CreateClusterRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -988,7 +988,7 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateHostRequest](#schemacreatehostrequest)|false|the http post body|
 
-**CreateHostRequest参数**:
+**CreateHostRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1145,7 +1145,7 @@ Flags:
 |body|[UpdateHostRequest](#schemaupdatehostrequest)|true|the http post body|
 
 
-**UpdateHostRequest Argument**: 
+**UpdateHostRequest Arguments**: 
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1582,7 +1582,7 @@ Flags:
 |---|---|---|---|
 |body|[CreateInstanceSpecRequest](#schemacreateinstancespecrequest)|false|the http post body|
 
-**CreateInstanceSpecRequest Argument**:
+**CreateInstanceSpecRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1705,7 +1705,7 @@ Flags:
 |InstanceSpecUuid|string|true|the instance specification's uuid|
 |body|[UpdateInstanceSpecRequest](#schemaupdateinstancespecrequest)|true|the http post body|
 
-**UpdateInstanceSpecRequest参数**:
+**UpdateInstanceSpecRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1805,7 +1805,7 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateClusterInstanceSpecRequest](#schemacreateclusterinstancespecrequest)|false|the http post body|
 
-**CreateClusterInstanceSpecRequest Argument**:
+**CreateClusterInstanceSpecRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2104,7 +2104,7 @@ Flags:
 |---|---|---|---|
 |body|[CreateVolumeSpecRequest](#schemacreatevolumespecrequest)|false|the http post body|
 
-**CreateVolumeSpecRequest Argument**:
+**CreateVolumeSpecRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2250,7 +2250,7 @@ Flags:
 |VolumeSpecUuid|string|true|the volume specification's uuid|
 |body|[UpdateVolumeSpecRequest](#schemaupdatevolumespecrequest)|true|the http post body|
 
-**UpdateVolumeSpecRequest Argument**:
+**UpdateVolumeSpecRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2359,7 +2359,7 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateClusterVolumeSpecRequest](#schemacreateclustervolumespecrequest)|false|the http post body|
 
-**CreateClusterVolumeSpecRequest Argument**:
+**CreateClusterVolumeSpecRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2634,7 +2634,7 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateNetworkRequest](#schemacreatenetworkrequest)|false|the http post body|
 
-**CreateNetworkRequest Argument**: 
+**CreateNetworkRequest Arguments**: 
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2766,7 +2766,7 @@ Flags:
 |NetworkUuid|string|true|the network's uuid|
 |body|[UpdateNetworkRequest](#schemaupdatenetworkrequest)|false|the http post body|
 
-**UpdateNetworkRequest Argument**:
+**UpdateNetworkRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2949,7 +2949,7 @@ Flags:
 |NetworkUuid|string|true|the network's uuid|
 |body|[CreateSubnetRequest](#schemacreatesubnetrequest)|false|the http post body|
 
-**CreateSubnetRequest Argument**:
+**CreateSubnetRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3087,7 +3087,7 @@ Flags:
 |SubnetUuid|string|true|the subnet's uuid|
 |body|[UpdateSubnetRequest](#schemaupdatesubnetrequest)|false|the http post body|
 
-**UpdateSubnetRequest Argument**:
+**UpdateSubnetRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3281,7 +3281,7 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateStoragePoolRequest](#schemacreatestoragepoolrequest)|false|the http post body|
 
-**CreateStoragePoolRequest Argument**:
+**CreateStoragePoolRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3435,7 +3435,7 @@ Flags:
 |StoragePoolUuid|string|true|the storage pool's uuid|
 |body|[UpdateStoragePoolRequest](#schemaupdatestoragepoolrequest)|false|the http post body|
 
-**UpdateStoragePoolRequest Argument**:
+**UpdateStoragePoolRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3631,7 +3631,7 @@ Flags:
 |---|---|---|---|
 |body|[CreateImageRequest](#schemacreateimagerequest)|false|the http body of the post request|
 
-**CreateImageRequest Argument**:
+**CreateImageRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3716,7 +3716,7 @@ Flags:
 |---|---|---|---|
 |body|[CreateImageRequest](#schemacreateimagerequest)|false|the http body of the post request|
 
-**CreateImageRequest Argument**:
+**CreateImageRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3859,7 +3859,7 @@ Flags:
 |ImageUuid|string|true||
 |body|[UpdateImageRequest](#schemaupdateimagerequest)|false|the http body of the post request|
 
-**UpdateImageRequest Argument**:
+**UpdateImageRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -4318,7 +4318,7 @@ Flags:
 |AlertUuid|string|true||
 |body|[AcceptAlertRequest](#schemaacceptalertrequest)|false|the http body of the post request|
 
-**AcceptAlertRequest Argument**:
+**AcceptAlertRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -4545,9 +4545,9 @@ output:
 }
 ```
 
-## 虚拟机操作相关命令
+## Virtual Machine Operations
 
-### 虚拟机列表
+### Virtual Machine List
 
 #### Command Usage
 
@@ -4634,7 +4634,7 @@ output:
 }
 ```
 
-### 创建虚拟机
+### Create New Virtual Machine
 
 #### Command Usage
 
@@ -4669,7 +4669,7 @@ Flags:
 |---|---|---|---|
 |body|[CreateVmRequest](#schemacreatevmrequest)|false|the http post body|
 
-**CreateVmRequest参数**:
+**CreateVmRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -4685,7 +4685,7 @@ Flags:
 |vnc_password|string|false|the VNC password|
 |volumes|[[CreateVolumeRequest](#schemacreatevolumerequest)]|true|the volumes of the virutal machine|
 
-**CreateCdromRequest参数**:
+**CreateCdromRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -4695,7 +4695,7 @@ Flags:
 |createCdromRequest.Name|string|true|the cdrom's name|
 |createCdromRequest.VolumeSpecUuid|string|true|the volume specification's Uuid|
 
-**CreateNicRequest参数**: 
+**CreateNicRequest Arguments**: 
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -4705,7 +4705,7 @@ Flags:
 |createNicRequest.Primary|integer|false|whether the nic is the primary nic, which can not be removed from a virtual machine|
 |createNicRequest.SubnetUuid|string|true|the subnet's Uuid, which the nic belongs to|
 
-**CreateVolumeRequest参数**:
+**CreateVolumeRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -4869,7 +4869,7 @@ output:
 }
 ```
 
-### 查看虚拟机详情
+### Check Virtual Machine's Details
 
 #### Command Usage
 
@@ -4985,7 +4985,7 @@ output:
 }
 ```
 
-### 启动虚拟机
+### Start Virtual Machine
 
 #### Command Usage
 
@@ -5026,7 +5026,7 @@ output:
 }
 ```
 
-### 停止虚拟机
+### Stop Virtual Machine
 
 #### Command Usage
 
@@ -5067,7 +5067,7 @@ output:
 }
 ```
 
-### 更新虚拟机
+### Update Virtual Machine
 
 #### Command Usage
 
@@ -5093,7 +5093,7 @@ Flags:
 |VmUuid|string|true|the virtual machine's uuid|
 |body|[UpdateVmRequest](#schemaupdatevmrequest)|false|the http post body|
 
-**UpdateVmRequest参数**:
+**UpdateVmRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5121,7 +5121,7 @@ output:
 }
 ```
 
-### 删除虚拟机
+### Delete Virtual Machine
 
 #### Command Usage
 
@@ -5164,9 +5164,9 @@ output:
 }
 ```
 
-## 云硬盘相关命令
+## Volume Operations
 
-### 查看云硬盘列表
+### Check Volume List
 
 #### Command Usage
 
@@ -5258,7 +5258,7 @@ output:
 }
 ```
 
-### 新建云硬盘
+### Create New Volume
 
 #### Command Usage
 
@@ -5291,7 +5291,7 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateVolumeRequest](#schemacreatevolumerequest)|false|the http post body|
 
-**CreateVolumeRequest参数**:
+**CreateVolumeRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5357,7 +5357,7 @@ output:
 }
 ```
 
-### 查看云硬盘
+### Check Volume's Details
 
 #### Command Usage
 
@@ -5431,7 +5431,7 @@ output:
 }
 ```
 
-### 更新云硬盘
+### Update Volume
 
 #### Command Usage
 
@@ -5461,7 +5461,7 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[UpdateVolumeRequest](#schemaupdatevolumerequest)|false|the http post body|
 
-**UpdateVolumeRequest参数**:
+**UpdateVolumeRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5490,7 +5490,7 @@ output:
 }
 ```
 
-### 删除云硬盘
+### Delete Volume
 
 #### Command Usage
 
@@ -5535,7 +5535,7 @@ output:
 }
 ```
 
-### 挂载云硬盘
+### Attach Volume To Virtual Machine
 
 #### Command Usage
 
@@ -5560,7 +5560,7 @@ Flags:
 |VmUuid|string|true|the virtual machine's uuid|
 |body|[AttachVolumeRequest](#schemaattachvolumerequest)|false|the http post body|
 
-**AttachVolumeRequest参数**:
+**AttachVolumeRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5586,7 +5586,7 @@ output:
 }
 ```
 
-### 卸载云硬盘
+### Detach Volume From Virtual Machine
 
 #### Command Usage
 
@@ -5611,7 +5611,7 @@ Flags:
 |VmUuid|string|true|the virtual machine's uuid|
 |body|[DetachVolumeRequest](#schemadetachvolumerequest)|false|the http post body|
 
-**DetachVolumeRequest参数**:
+**DetachVolumeRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5638,7 +5638,7 @@ output:
 }
 ```
 
-### 创建快照
+### Create New Snapshot
 
 #### Command Usage
 
@@ -5665,7 +5665,7 @@ Flags:
 |VolumeUuid|string|true|the volume's uuid|
 |body|[CreateSnapshotRequest](#schemacreatesnapshotrequest)|false|the http post body|
 
-**CreateSnapshotRequest参数**:
+**CreateSnapshotRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5704,7 +5704,7 @@ output:
 }
 ```
 
-### 查看云盘快照列表
+### Check Volume's Snapshot List
 
 #### Command Usage
 
@@ -5770,7 +5770,7 @@ output:
 }
 ```
 
-### 查看快照详情
+### Check Snapshot's Details
 
 #### Command Usage
 
@@ -5824,7 +5824,7 @@ output:
 }
 ```
 
-### 更新快照
+### Update Snapshot
 
 #### Command Usage
 
@@ -5852,7 +5852,7 @@ Flags:
 |SnapshotUuid|string|true|the snapshot's uuid|
 |body|[UpdateSnapshotRequest](#schemaupdatesnapshotrequest)|false|the http post body|
 
-**UpdateSnapshotRequest参数**:
+**UpdateSnapshotRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5881,7 +5881,7 @@ output:
 }
 ```
 
-### 从快照恢复到云盘
+### Restore Volume From Snapshot
 
 #### Command Usage
 
@@ -5956,7 +5956,7 @@ output:
 }
 ```
 
-### 删除快照
+### Delete Snapshot
 
 #### Command Usage
 
@@ -5997,9 +5997,9 @@ output:
 }
 ```
 
-## 弹性网卡相关命令
+## Elastic Network Interface Operation
 
-### 查看弹性网卡列表
+### Check Network Interface List
 
 #### Command Usage
 
@@ -6076,7 +6076,7 @@ output:
 }
 ```
 
-### 新建弹性网卡
+### Create New Network Interface
 
 #### Command Usage
 
@@ -6103,7 +6103,7 @@ Flags:
 |---|---|---|---|
 |body|[CreateNicRequest](#schemacreatenicrequest)|false|the http post body|
 
-**CreateNicRequest参数**:
+**CreateNicRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -6154,7 +6154,7 @@ output:
 }
 ```
 
-### 查看弹性网卡
+### Check Network Interface's Details
 
 #### Command Usage
 
@@ -6213,7 +6213,7 @@ output:
 }
 ```
 
-### 更新弹性网卡
+### Update Network Interface
 
 #### Command Usage
 
@@ -6240,7 +6240,7 @@ Flags:
 |NicUuid|string|true|the network interface's uuid|
 |body|[UpdateNicRequest](#schemaupdatenicrequest)|false|the http post body|
 
-**UpdateNicRequest参数**:
+**UpdateNicRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -6269,7 +6269,7 @@ output:
 }
 ```
 
-### 删除弹性网卡
+### Delete Network Interface
 
 #### Command Usage
 
@@ -6310,7 +6310,7 @@ output:
 }
 ```
 
-### 挂载弹性网卡
+### Attach Network Interface To Virtual Machine
 
 #### Command Usage
 
@@ -6335,7 +6335,7 @@ Flags:
 |VmUuid|string|true|the virtual machine's uuid|
 |body|[AttachNicRequest](#schemaattachnicrequest)|false|the http post body|
 
-**AttachNicRequest参数**:
+**AttachNicRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -6362,7 +6362,7 @@ output:
 }
 ```
 
-### 卸载弹性网卡
+### Detach Network Interface From Virtual Machine
 
 #### Command Usage
 
@@ -6387,7 +6387,7 @@ Flags:
 |VmUuid|string|true|the virtual machine's uuid|
 |body|[DetachNicRequest](#schemadetachnicrequest)|false|the http post body|
 
-**DetachNicRequest参数**:
+**DetachNicRequest Arguments**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|

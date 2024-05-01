@@ -6,41 +6,41 @@ description: This chapter introduces the usage of the ChimeStack's command line 
 
 ## Overview
 
-chimecli是一个通过命令行管理操作ChimeStack的工具。
+chimecli is the ChimeStack's command line tool, which manages ChimeStack's resources as well as the Web UI。
 
-### CLI使用方法
+### Usage
 
-CLI命令格式为:
+The usage of the command line is as following:
 
 ```
 chimecli <resource category> <operation> [flags]  
 ```
 
-> "resource category"为资源类别，目前可用CLI管理操作的资源为: 
+> "resource category" can be one of the follows: 
 
-- az: 可用区
-- cluster: 集群
-- host: 节点
-- storage_pool: 存储池
-- network: 网络
-- instance_spec: 计算规格
-- volume_spec: 云硬盘规格
-- image: 镜像
-- alert: 报警
-- compute: 虚拟机
-- volume: 云硬盘
-- user: 用户
+- az(available zone)
+- cluster
+- host
+- storage_pool(storage pool)
+- network
+- instance_spec(instance specification)
+- volume_spec(volume specification)
+- image
+- alert
+- compute(virtual machine)
+- volume
+- user(identity)
 
-> "operation"为操作资源的命令，是对[API](/docs/reference/api/)的封装，和[API](/docs/reference/api/)相对应。
+> "operation" is the operational actions for the resource, which is a wrap up to [API](/docs/reference/api/) and hence is corresponding to the [API](/docs/reference/api/).
 
-> "flags"是命令相关的输入参数，具体可以通过"chimecli <resource category> <operation> --help"查看参数说明. 
+> "flags" are the command line's arguments, argument details can be seen from the help message by executing "chimecli <resource category> <operation> --help". 
 
 
-CLI的全部命令(除了登录/登出)，都需要进行用户身份认证，在使用CLI命令前，需要先进行用户登录(login), 登录成功后，登录信息会保存在当前用户的默认配置中(~/.config/chimecli/config.yaml)；如果不再需要继续使用CLI，需要进行登出(logout)操作以保障用户的信息安全。
+All the commands except the "login" and "logout" commands require user's authentification. To use the ChimeStack command line, you must run the "login" command first, after login successfully, the authorized token as well as user's information will be stored at {user's home directory}/.config/chimecli/config.yaml file, each time of invoking a command by the chimecli, the authorized token will be read from the file and be sent in HTTP headers to the API server for authentification. If you will not use the chimecli any longer, keep in mind to run the "logout" command to clear the local authorized information for security considerations. 
 
-### 登录
+### Login
 
-> 命令原型:
+> Command Usage:
 
 ```
 chimecli login --help
@@ -57,7 +57,7 @@ Flags:
 
 ```
 
-> 参数列表: 
+> Argument List: 
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -65,16 +65,16 @@ Flags:
 |name|string|true|the account name to login |
 |password|string|true|the password to login|
 
-> 示例: 
+> Example: 
 
 ```
 chimecli login --api-endpoint 192.168.231.128:8801 --name user --password admin 
 2024/04/25 08:51:08  ****** account login successfully! ******
 ```
 
-### 登出
+### Logout
 
-> 命令原型:
+> Command Usage:
 
 ```
 chimecli logout --help
@@ -87,18 +87,18 @@ Flags:
   -h, --help   help for logout
 ```
 
-> 示例: 
+> Example: 
 
 ```
 chimecli logout 
 2024/04/25 08:52:39  ****** account logout successfully! ******
 ```
 
-## 可用区(AZ)操作命令
+## Available Zone Operations
 
-### 查看AZ列表
+### Check AZ List
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli az listAz --help
@@ -117,7 +117,7 @@ Flags:
       --state int      filter by the 'state' field
 ```
 
-#### 参数列表
+#### Argument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -128,15 +128,15 @@ Flags:
 |name|string|false|filter by the 'name' field|
 |state|integer|false|filter by the 'state' field|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli az listAz
 ```
 
-返回: 
+output: 
 
 ```
 {
@@ -164,9 +164,9 @@ chimecli az listAz
 }
 ```
 
-### 新建AZ
+### Create New AZ
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli az createAz --help 
@@ -182,13 +182,13 @@ Flags:
   -h, --help                                 help for createAz
 ```
 
-#### 参数列表
+#### Argument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |body|[CreateAzRequest](#schemacreateazrequest)|false|the http post body|
 
-**CreateAzRequest参数**: 
+**CreateAzRequest arguments**: 
 
 
 |Name|Type|Required|Description|
@@ -196,9 +196,9 @@ Flags:
 |createAzRequest.Description|string|false|description for the AZ|
 |createAzRequest.Name|string|true|the AZ's name|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli az createAz \
@@ -206,9 +206,9 @@ chimecli az createAz \
   --createAzRequest.Description 'an Az example' 
 ```
 
-### 查看AZ详情
+### Check AZ's details
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli az getAz --help
@@ -222,21 +222,21 @@ Flags:
   -h, --help            help for getAz
 ```
 
-#### 参数列表
+#### Argument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |AzUuid|string|true|the AZ's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli az getAz --AzUuid 1b0dc604-8f60-4bec-80aa-38de4644c6e7
 ```
 
-返回: 
+output: 
 
 ```
 {
@@ -253,9 +253,9 @@ chimecli az getAz --AzUuid 1b0dc604-8f60-4bec-80aa-38de4644c6e7
 }
 ```
 
-### 修改AZ
+### Update AZ
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli az updateAz --help
@@ -273,23 +273,23 @@ Flags:
 
 ```
 
-#### 参数列表
+#### Argument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |AzUuid|string|true|the AZ's uuid|
 |body|[UpdateAzRequest](#schemaupdateazrequest)|true|the http post body|
 
-**UpdateAzRequest参数**:
+**UpdateAzRequest Argument**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |updateAzRequest.Description|string|false|description for the AZ|
 |updateAzRequest.Name|string|true|the AZ's name|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli az updateAz \
@@ -298,7 +298,7 @@ chimecli az updateAz \
   --createAzRequest.Description 'an Az example'
 ```
 
-返回: 
+output: 
 
 ```
 {
@@ -309,9 +309,9 @@ chimecli az updateAz \
 }
 ```
 
-### 启用AZ
+### Enable AZ
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli az enableAz --help
@@ -325,21 +325,21 @@ Flags:
   -h, --help            help for enableAz
 ```
 
-#### 参数列表
+#### Argument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |AzUuid|string|true|the AZ's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli az enableAz --AzUuid 1b0dc604-8f60-4bec-80aa-38de4644c6e7
 ```
 
-返回: 
+output: 
 
 ```
 {
@@ -350,9 +350,9 @@ chimecli az enableAz --AzUuid 1b0dc604-8f60-4bec-80aa-38de4644c6e7
 }
 ```
 
-### 停用AZ
+### Disable AZ
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli az disableAz --help
@@ -366,21 +366,21 @@ Flags:
   -h, --help            help for disableAz
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |AzUuid|string|true|the AZ's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli az disableAz --AzUuid 1b0dc604-8f60-4bec-80aa-38de4644c6e7
 ```
 
-返回: 
+output: 
 
 ```
 {
@@ -391,9 +391,9 @@ chimecli az disableAz --AzUuid 1b0dc604-8f60-4bec-80aa-38de4644c6e7
 }
 ```
 
-### 删除AZ
+### Delete AZ
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli az deleteAz --help 
@@ -407,21 +407,21 @@ Flags:
   -h, --help            help for deleteAz
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |AzUuid|string|true|the AZ's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli az deleteAz --AzUuid 1b0dc604-8f60-4bec-80aa-38de4644c6e7
 ```
 
-返回: 
+output: 
 
 ```
 {
@@ -431,11 +431,11 @@ chimecli az deleteAz --AzUuid 1b0dc604-8f60-4bec-80aa-38de4644c6e7
 ```
 
 
-## 集群(Cluster)操作命令
+## Cluster Operations
 
-### 查看Cluster列表
+### Check Cluster List
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli cluster listCluster --help
@@ -458,7 +458,7 @@ Flags:
       --type int                 filter by the cluster's type (0: hyperconveged, 1:computing only, 2: storage only)
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -474,15 +474,15 @@ Flags:
 |arch|string|false|filter by the cluster's architecture|
 
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli cluster listCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865
 ```
 
-返回:
+output:
 
 ```
 {
@@ -520,9 +520,9 @@ chimecli cluster listCluster --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865
 }
 ```
 
-### 创建Cluster 
+### Create New Cluster 
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli cluster createCluster --help
@@ -542,7 +542,7 @@ Flags:
   -h, --help  
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|---|
@@ -560,9 +560,9 @@ Flags:
 |createClusterRequest.Name|string|true|the cluster's name|
 |createClusterRequest.Type|integer|false|the cluster's type|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
  chimecli cluster createCluster \
@@ -573,7 +573,7 @@ Flags:
   --createClusterRequest.Type 1 
 ```
 
-返回:
+output:
 
 ```
 {
@@ -594,9 +594,9 @@ Flags:
 }
 ```
 
-### 查看Cluster 
+### Check Cluster's Details 
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli cluster getCluster --help
@@ -612,16 +612,16 @@ Flags:
 
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |AzUuid|string|true|the AZ's uuid|
 |ClusterUuid|string|true|the cluster's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli cluster getCluster \
@@ -629,7 +629,7 @@ chimecli cluster getCluster \
   --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
 ```
 
-返回: 
+output: 
 
 ```
 {
@@ -651,9 +651,9 @@ chimecli cluster getCluster \
 }
 ```
 
-### 修改Cluster 
+### Update Cluster 
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli cluster updateCluster --help 
@@ -675,7 +675,7 @@ Flags:
 
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -693,9 +693,9 @@ Flags:
 |updateClusterRequest.Name|string|true|the cluster's name|
 |updateClusterRequest.Type|integer|false|the cluster's type|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli cluster updateCluster \
@@ -705,7 +705,7 @@ chimecli cluster updateCluster \
   --updateClusterRequest.Name 'test-cluster' 
 ```
 
-返回:
+output:
 
 ```
 {
@@ -716,9 +716,9 @@ chimecli cluster updateCluster \
 }
 ```
 
-### 启用Cluster 
+### Enable Cluster 
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli cluster enableCluster --help
@@ -733,16 +733,16 @@ Flags:
   -h, --help                 help for enableCluster
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |AzUuid|string|true|the AZ's uuid|
 |ClusterUuid|string|true|the cluster's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli cluster enableCluster \
@@ -750,7 +750,7 @@ chimecli cluster enableCluster \
   --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
 ```
 
-返回:
+output:
 
 ```
 {
@@ -761,9 +761,9 @@ chimecli cluster enableCluster \
 }
 ```
 
-### 停用Cluster 
+### Disable Cluster 
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli cluster disableCluster --help
@@ -778,16 +778,16 @@ Flags:
   -h, --help                 help for disableCluster
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |AzUuid|string|true|the AZ's uuid|
 |ClusterUuid|string|true|the cluster's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli cluster disableCluster \
@@ -795,7 +795,7 @@ chimecli cluster disableCluster \
   --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
 ```
 
-返回:
+output:
 
 ```
 {
@@ -806,10 +806,10 @@ chimecli cluster disableCluster \
 }
 ```
 
-### 删除Cluster 
+### Delete Cluster 
 
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli cluster deleteCluster --help
@@ -824,16 +824,16 @@ Flags:
   -h, --help                 help for deleteCluster
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |AzUuid|string|true|the AZ's uuid|
 |ClusterUuid|string|true|the cluster's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli cluster deleteCluster \
@@ -841,7 +841,7 @@ chimecli cluster deleteCluster \
   --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
 ```
 
-返回: 
+output: 
 
 ```
 {
@@ -850,11 +850,11 @@ chimecli cluster deleteCluster \
 }
 ```
 
-## Host相关命令
+## Host Operations
 
-### 查看Host列表
+### Check Host List
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli host listHost --help
@@ -877,7 +877,7 @@ Flags:
       --state int            filter by the 'state' field
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -892,9 +892,9 @@ Flags:
 |AzUuid|string|true|filter by the AZ's uuid|
 |ClusterUuid|string|true|filter by the cluster's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli host listHost \
@@ -902,8 +902,7 @@ chimecli host listHost \
   --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e
 ```
 
-返回:
-
+output:
 
 ```
 {
@@ -957,9 +956,9 @@ chimecli host listHost \
 }
 ```
 
-### 新注册Host
+### Register Host
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli host createHost --help
@@ -981,7 +980,7 @@ Flags:
   -h, --help     
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1000,9 +999,9 @@ Flags:
 |createHostRequest.ReservedVcpus|integer|false|the reserverd CPU number, which will not be allocated to virtual machines.|
 |createHostRequest.Uuid|string|true|the host's Uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli host createHost 
@@ -1015,7 +1014,7 @@ chimecli host createHost
     --createHostRequest.Uuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
 
-返回:
+output:
 
 ```
 {
@@ -1045,9 +1044,9 @@ chimecli host createHost
 }
 ```
 
-### 查看Host详情
+### Check Host's Details
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli host getHost --help
@@ -1063,7 +1062,7 @@ Flags:
   -h, --help                 help for getHost
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1071,9 +1070,9 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |HostUuid|string|true|the host's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli host getHost \
@@ -1082,7 +1081,7 @@ chimecli host getHost \
   --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
 
-返回:
+output:
 
 ```
 {
@@ -1112,9 +1111,9 @@ chimecli host getHost \
 }
 ```
 
-### 修改Host 
+### Update Host 
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli host updateHost --help
@@ -1136,7 +1135,7 @@ Flags:
       --updateHostRequest.MemoryReserved int    the reserverd memory number, which will not be allocated to virtual machines.
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1146,7 +1145,7 @@ Flags:
 |body|[UpdateHostRequest](#schemaupdatehostrequest)|true|the http post body|
 
 
-**UpdateHostRequest参数**: 
+**UpdateHostRequest Argument**: 
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1156,9 +1155,9 @@ Flags:
 |updateHostRequest.ReservedMemory|integer|false|the reserverd memory number, which will not be allocated to virtual machines.|
 |updateHostRequest.ReservedVcpus|integer|false|the reserverd CPU number, which will not be allocated to virtual machines.|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 ```
 chimecli host updateHost \
   --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
@@ -1170,7 +1169,7 @@ chimecli host updateHost \
   --updateHostRequest.MemoryReserved 0
 ```
 
-返回:
+output:
 
 ```
 {
@@ -1181,9 +1180,9 @@ chimecli host updateHost \
 }
 ```
 
-### 删除Host
+### Delete Host
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli host deleteHost --help
@@ -1199,7 +1198,7 @@ Flags:
   -h, --help                 help for deleteHost
   ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1207,9 +1206,9 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |HostUuid|string|true|the host's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli host deleteHost \
@@ -1218,7 +1217,7 @@ chimecli host deleteHost \
   --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
 
-返回:
+output:
 
 ```
 {
@@ -1227,9 +1226,9 @@ chimecli host deleteHost \
 }
 ```
 
-### 启用Host
+### Enable Host
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli host enableHost --help
@@ -1245,7 +1244,7 @@ Flags:
   -h, --help                 help for enableHost
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1253,9 +1252,9 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |HostUuid|string|true|the host's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 ```
 chimecli host enableHost \
   --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
@@ -1263,7 +1262,7 @@ chimecli host enableHost \
   --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
 
-返回:
+output:
 
 ```
 {
@@ -1274,9 +1273,9 @@ chimecli host enableHost \
 }
 ```
 
-### 停用Host 
+### Disable Host 
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli host disableHost --help
@@ -1292,7 +1291,7 @@ Flags:
   -h, --help                 help for disableHost
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1300,9 +1299,9 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |HostUuid|string|true|the host's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 ```
 chimecli host disableHost \
   --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
@@ -1310,7 +1309,7 @@ chimecli host disableHost \
   --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
 
-返回:
+output:
 
 ```
 {
@@ -1321,9 +1320,9 @@ chimecli host disableHost \
 }
 ```
 
-### 挂起Host 
+### Suspend Host 
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli host suspendHost --help
@@ -1339,7 +1338,7 @@ Flags:
   -h, --help                 help for suspendHost
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1347,9 +1346,9 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |HostUuid|string|true|the host's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 ```
 chimecli host suspendHost \
   --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
@@ -1357,7 +1356,7 @@ chimecli host suspendHost \
   --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a
 ```
 
-返回:
+output:
 
 ```
 {
@@ -1368,9 +1367,9 @@ chimecli host suspendHost \
 }
 ```
 
-### 查看物理节点列表
+### Check Physical Server List
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli host listClient --help
@@ -1392,7 +1391,7 @@ Flags:
       --state int          filter by the 'state' field
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1406,15 +1405,15 @@ Flags:
 |manage_ip|string|false|filter by the client's management IP address|
 |all|integer|false|retrieve all the clients|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli host listClient
 ```
 
-返回: 
+output: 
 
 ```
 {
@@ -1456,11 +1455,11 @@ chimecli host listClient
 }
 ```
 
-## 计算规格相关命令
+## Instance Specification Operations
 
-### 获取计算规格列表
+### Check Instance Specification List
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli instance_spec listInstanceSpec --help
@@ -1479,7 +1478,7 @@ Flags:
       --type int       filter by the instance specification's type(0: shared, 1: dedicated)
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1490,15 +1489,15 @@ Flags:
 |name|string|false|filter by the 'name' field|
 |type|integer|false|filter by the instance specification's type(0: shared, 1: dedicated)|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli instance_spec listInstanceSpec
 ```
 
-返回:
+output:
 
 ```
 {
@@ -1556,9 +1555,9 @@ chimecli instance_spec listInstanceSpec
 }
 ```
 
-### 新建计算规格
+### Create New Instance Specification
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli instance_spec createInstanceSpec --help
@@ -1577,13 +1576,13 @@ Flags:
   -h, --help     
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |body|[CreateInstanceSpecRequest](#schemacreateinstancespecrequest)|false|the http post body|
 
-**CreateInstanceSpecRequest参数**:
+**CreateInstanceSpecRequest Argument**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1593,9 +1592,9 @@ Flags:
 |createInstanceSpecRequest.Type|integer|false|the instance specification's type, 0: shared resource, 1: dedicated resource|
 |createInstanceSpecRequest.Vcpus|integer|true|the number of vCPUs|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli instance_spec createInstanceSpec \
@@ -1605,7 +1604,7 @@ chimecli instance_spec createInstanceSpec \
   --createInstanceSpecRequest.Memory 16777216
 ```
 
-返回:
+output:
 
 ```
 {
@@ -1626,9 +1625,9 @@ chimecli instance_spec createInstanceSpec \
 }
 ```
 
-### 查看计算规格
+### Check Instance Specification's Details
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli instance_spec getInstanceSpec --help
@@ -1642,21 +1641,21 @@ Flags:
   -h, --help                      help for getInstanceSpec
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |InstanceSpecUuid|string|true|the instance specification's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli instance_spec getInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
 ```
 
-返回:
+output:
 
 ```
 {
@@ -1677,9 +1676,9 @@ chimecli instance_spec getInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-906
 }
 ```
 
-### 修改计算规格
+### Update Instance Specification's Details
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli instance_spec updateInstanceSpec --help
@@ -1699,7 +1698,7 @@ Flags:
       --updateInstanceSpecRequest.Vcpus int            Required. the number of vCPUs
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1716,9 +1715,9 @@ Flags:
 |updateInstanceSpecRequest.Type|integer|false|the instance specification's type, 0: shared resource, 1: dedicated resource|
 |updateInstanceSpecRequest.Vcpus|integer|true|the number of vCPUs|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli instance_spec updateInstanceSpec \
@@ -1729,7 +1728,7 @@ chimecli instance_spec updateInstanceSpec \
   --updateInstanceSpecRequest.Memory 16777216
 ```
 
-返回:
+output:
 
 ```
 {
@@ -1740,9 +1739,9 @@ chimecli instance_spec updateInstanceSpec \
 }
 ```
 
-### 删除计算规格
+### Delete Instance Specification
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli instance_spec deleteInstanceSpec --help
@@ -1756,21 +1755,21 @@ Flags:
   -h, --help     
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |InstanceSpecUuid|string|true|the instance specification's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli instance_spec deleteInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c 
 ```
 
-返回:
+output:
 
 ```
 {
@@ -1779,9 +1778,9 @@ chimecli instance_spec deleteInstanceSpec --InstanceSpecUuid 849075e3-7b00-498d-
 }
 ```
 
-### 关联计算规格到集群
+### Attach Instance Specification To Cluster
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli instance_spec createClusterInstanceSpecRelation --help
@@ -1798,7 +1797,7 @@ Flags:
   -h, --help                                                       help for createClusterInstanceSpecRelation
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1806,15 +1805,15 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateClusterInstanceSpecRequest](#schemacreateclusterinstancespecrequest)|false|the http post body|
 
-**CreateClusterInstanceSpecRequest参数**:
+**CreateClusterInstanceSpecRequest Argument**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |createClusterInstanceSpecRequest.InstanceSpecUuid|string|true|the instance specification's Uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli instance_spec createClusterInstanceSpecRelation \
@@ -1822,7 +1821,7 @@ chimecli instance_spec createClusterInstanceSpecRelation \
   --createClusterInstanceSpecRequest.InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
 ```
 
-返回: 
+output: 
 
 ```
 {
@@ -1837,9 +1836,9 @@ chimecli instance_spec createClusterInstanceSpecRelation \
 }
 ```
 
-### 解除计算规格和集群的关联
+### Detach Instance Specification From Cluster
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli instance_spec deleteClusterInstanceSpecRelation --help
@@ -1855,7 +1854,7 @@ Flags:
   -h, --help  
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1863,9 +1862,9 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |InstanceSpecUuid|string|true|the instance specification's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli instance_spec deleteClusterInstanceSpecRelation \
@@ -1873,7 +1872,7 @@ chimecli instance_spec deleteClusterInstanceSpecRelation \
   --InstanceSpecUuid 849075e3-7b00-498d-9061-83996f3d370c
 ```
 
-返回:
+output:
 
 ```
 {
@@ -1882,9 +1881,9 @@ chimecli instance_spec deleteClusterInstanceSpecRelation \
 }
 ```
 
-### 查看集群的计算规格列表
+### Check Attached Instance Specification List In Cluster
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli instance_spec listClusterInstanceSpecRelation --help
@@ -1904,7 +1903,7 @@ Flags:
       --sort string          the field to be sorted by
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -1916,15 +1915,15 @@ Flags:
 |AzUuid|string|true|the AZ's uuid|
 |ClusterUuid|string|true|the cluster's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli instance_spec listClusterInstanceSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
 
-返回:
+output:
 
 ```
 {
@@ -1970,11 +1969,11 @@ chimecli instance_spec listClusterInstanceSpecRelation --ClusterUuid 65bbc21f-02
 }
 ```
 
-## 存储规格相关命令
+## Volume Specification Operation
 
-### 获取存储规格列表
+### Check Volume Specification List 
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume_spec listVolumeSpec --help
@@ -1993,7 +1992,7 @@ Flags:
       --storage_pool_uuid string   filter by the storage pool's uuid
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2004,15 +2003,15 @@ Flags:
 |name|string|false|filter by the 'name' field|
 |storage_pool_uuid|string|false|filter by the storage pool's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume_spec listVolumeSpec
 ```
 
-返回:
+output:
 
 ```
 {
@@ -2074,9 +2073,9 @@ chimecli volume_spec listVolumeSpec
 }
 ```
 
-### 新建存储规格
+### Create New Volume Specification
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume_spec createVolumeSpec --help
@@ -2099,13 +2098,13 @@ Flags:
   -h, --help    
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |body|[CreateVolumeSpecRequest](#schemacreatevolumespecrequest)|false|the http post body|
 
-**CreateVolumeSpecRequest参数**:
+**CreateVolumeSpecRequest Argument**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2120,9 +2119,9 @@ Flags:
 |createVolumeSpecRequest.StoragePoolUuid|string|true|the storage pool's Uuid|
 
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume_spec createVolumeSpec \
@@ -2136,7 +2135,7 @@ chimecli volume_spec createVolumeSpec \
   --createVolumeSpecRequest.StoragePoolUuid f5165a18-e6b3-42b4-8efc-ad496f318a0a
 ```
 
-返回:
+output:
 
 ```
 {
@@ -2162,9 +2161,9 @@ chimecli volume_spec createVolumeSpec \
 }
 ```
 
-### 查看存储规格
+### Check Volume Specification's Details 
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume_spec getVolumeSpec --help
@@ -2178,21 +2177,21 @@ Flags:
   -h, --help                    help for getVolumeSpec
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |VolumeSpecUuid|string|true|the volume specification's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume_spec getVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
 ```
 
-返回:
+output:
 
 ```
 {
@@ -2218,9 +2217,9 @@ chimecli volume_spec getVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5c
 }
 ```
 
-### 修改存储规格
+### Update Volume Specification
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume_spec updateVolumeSpec --help
@@ -2244,14 +2243,14 @@ Flags:
       --updateVolumeSpecRequest.StoragePoolUuid string   Required. the storage pool's Uuid 
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |VolumeSpecUuid|string|true|the volume specification's uuid|
 |body|[UpdateVolumeSpecRequest](#schemaupdatevolumespecrequest)|true|the http post body|
 
-**UpdateVolumeSpecRequest参数**:
+**UpdateVolumeSpecRequest Argument**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2265,9 +2264,9 @@ Flags:
 |updateVolumeSpecRequest.StepThroughput|integer|true|the step throughput value of the volume specification|
 |updateVolumeSpecRequest.StoragePoolUuid|string|true|the storage pool's Uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume_spec updateVolumeSpec \
@@ -2282,7 +2281,7 @@ chimecli volume_spec updateVolumeSpec \
   --updateVolumeSpecRequest.StoragePoolUuid f5165a18-e6b3-42b4-8efc-ad496f318a0a
 ```
 
-返回: 
+output: 
 
 ```
 {
@@ -2293,9 +2292,9 @@ chimecli volume_spec updateVolumeSpec \
 }
 ```
 
-### 删除存储规格
+### Delete Volume Specification
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume_spec deleteVolumeSpec --help
@@ -2309,21 +2308,21 @@ Flags:
   -h, --help                    help for deleteVolumeSpec
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |VolumeSpecUuid|string|true|the volume specification's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume_spec deleteVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
 ```
 
-返回:
+output:
 
 ```
 {
@@ -2333,9 +2332,9 @@ chimecli volume_spec deleteVolumeSpec --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8
 ```
 
 
-### 关联存储规格到集群
+### Attach Volume Specification To Cluster
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume_spec createClusterVolumeSpecRelation --help
@@ -2352,7 +2351,7 @@ Flags:
   -h, --help    
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2360,15 +2359,15 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateClusterVolumeSpecRequest](#schemacreateclustervolumespecrequest)|false|the http post body|
 
-**CreateClusterVolumeSpecRequest参数**:
+**CreateClusterVolumeSpecRequest Argument**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |createClusterVolumeSpecRequest.VolumeSpecUuid|string|true|the volume specification's Uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume_spec createClusterVolumeSpecRelation \
@@ -2376,7 +2375,7 @@ chimecli volume_spec createClusterVolumeSpecRelation \
   --createClusterVolumeSpecRequest.VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
 ```
 
-返回:
+output:
 
 ```
 {
@@ -2391,9 +2390,9 @@ chimecli volume_spec createClusterVolumeSpecRelation \
 }
 ```
 
-### 解除关联存储规格和集群
+### Detach Volume Specification From Cluster
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume_spec deleteClusterVolumeSpecRelation --help
@@ -2409,7 +2408,7 @@ Flags:
   -h, --help  
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2417,9 +2416,9 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |VolumeSpecUuid|string|true|the volume specification's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume_spec deleteClusterVolumeSpecRelation \
@@ -2427,7 +2426,7 @@ chimecli volume_spec deleteClusterVolumeSpecRelation \
   --VolumeSpecUuid c70e7af9-6f9f-49d1-b51a-8b5cb716c9fa
 ```
 
-返回:
+output:
 
 ```
 {
@@ -2436,9 +2435,9 @@ chimecli volume_spec deleteClusterVolumeSpecRelation \
 }
 ```
 
-### 查看集群的存储规格列表
+### Check Attached Volume Specification List In Cluster
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume_spec listClusterVolumeSpecRelation --help
@@ -2458,7 +2457,7 @@ Flags:
       --sort string          the field to be sorted by
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2470,15 +2469,15 @@ Flags:
 |AzUuid|string|true|the AZ's uuid|
 |ClusterUuid|string|true|the cluster's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume_spec listClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
 
-返回:
+output:
 
 ```
 {
@@ -2528,11 +2527,11 @@ chimecli volume_spec listClusterVolumeSpecRelation --ClusterUuid 65bbc21f-0289-4
 }
 ```
 
-## 网络配置相关命令
+## Network Operatrions
 
-### 获取网络列表
+### Check Layer-2 Network List
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli network listNetwork --help
@@ -2555,7 +2554,7 @@ Flags:
       --type int                filter by network type(0: classical network, 1:vlan, 2:vxlan)
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2570,15 +2569,15 @@ Flags:
 |AzUuid|string|true|filter by AZ's uuid|
 |ClusterUuid|string|true|filter by the cluster's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli network listNetwork --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
 
-返回:
+output:
 
 ```
 {
@@ -2605,9 +2604,9 @@ chimecli network listNetwork --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 }
 ```
 
-### 新建网络
+### Create New Layer-2 Network
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli network createNetwork --help
@@ -2627,7 +2626,7 @@ Flags:
   -h, --help    
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2635,7 +2634,7 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateNetworkRequest](#schemacreatenetworkrequest)|false|the http post body|
 
-**CreateNetworkRequest参数**: 
+**CreateNetworkRequest Argument**: 
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2644,9 +2643,9 @@ Flags:
 |createNetworkRequest.Name|string|true|the network's name|
 |createNetworkRequest.Type|integer|false|the network's type, can be: classical, vlan and vxlan|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli network createNetwork \
@@ -2657,7 +2656,7 @@ chimecli network createNetwork \
   --createNetworkRequest.InterfaceName ens224
 ```
 
-返回: 
+output: 
 
 ```
 {
@@ -2680,9 +2679,9 @@ chimecli network createNetwork \
 }
 ```
 
-### 查看网络
+### Check Layer-2 Network's Details
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli network getNetwork --help
@@ -2698,7 +2697,7 @@ Flags:
   -h, --help                 help for getNetwork
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2706,15 +2705,15 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |NetworkUuid|string|true|the network's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli network getNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6
 ```
 
-返回:
+output:
 
 ```
 {
@@ -2737,9 +2736,9 @@ chimecli network getNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6
 }
 ```
 
-### 修改网络
+### Update Layer-2 Network
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli network updateNetwork --help
@@ -2758,7 +2757,7 @@ Flags:
       --updateNetworkRequest.Name string          Required. the network's name
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2767,16 +2766,16 @@ Flags:
 |NetworkUuid|string|true|the network's uuid|
 |body|[UpdateNetworkRequest](#schemaupdatenetworkrequest)|false|the http post body|
 
-**UpdateNetworkRequest参数**:
+**UpdateNetworkRequest Argument**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |updateNetworkRequest.Description|string|false|description for the network|
 |updateNetworkRequest.Name|string|true|the network's name|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli network updateNetwork \
@@ -2785,7 +2784,7 @@ chimecli network updateNetwork \
   --updateNetworkRequest.Description br1-network
 ```
 
-返回:
+output:
 
 ```
 {
@@ -2796,9 +2795,9 @@ chimecli network updateNetwork \
 }
 ```
 
-### 删除网络
+### Delete Layer-2 Network
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli network deleteNetwork --help
@@ -2814,7 +2813,7 @@ Flags:
   -h, --help 
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2822,15 +2821,15 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |NetworkUuid|string|true|the network's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli network deleteNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6
 ```
 
-返回:
+output:
 
 ```
 {
@@ -2839,9 +2838,9 @@ chimecli network deleteNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b
 }
 ```
 
-### 获取子网列表
+### Check Subnet List
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli network listSubnet --help
@@ -2864,7 +2863,7 @@ Flags:
       --type int             filter by subnet's type
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2879,9 +2878,9 @@ Flags:
 |ClusterUuid|string|true|filter by cluster's uuid|
 |NetworkUuid|string|true|filter by network's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli network listSubnet \
@@ -2890,7 +2889,7 @@ chimecli network listSubnet \
   --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
 
-返回:
+output:
 
 ```
 {
@@ -2917,9 +2916,9 @@ chimecli network listSubnet \
 }
 ```
 
-### 新建子网
+### Create New Subnet
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli network createSubnet --help
@@ -2941,7 +2940,7 @@ Flags:
   -h, --help  
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2950,7 +2949,7 @@ Flags:
 |NetworkUuid|string|true|the network's uuid|
 |body|[CreateSubnetRequest](#schemacreatesubnetrequest)|false|the http post body|
 
-**CreateSubnetRequest参数**:
+**CreateSubnetRequest Argument**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -2960,9 +2959,9 @@ Flags:
 |createSubnetRequest.Name|string|true|the subnet's name|
 |createSubnetRequest.ReservedIps|string|false|the reserved ips inside the subnet, which will not be assigned to virtual machines|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli network createSubnet \
@@ -2971,7 +2970,7 @@ chimecli network createSubnet \
   --createSubnetRequest.Name subnet2
 ```
 
-返回:
+output:
 
 ```
 {
@@ -2994,9 +2993,9 @@ chimecli network createSubnet \
 }
 ```
 
-### 查看子网
+### Check Subnet's Details
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli network getSubnet --help
@@ -3013,7 +3012,7 @@ Flags:
   -h, --help  
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3022,15 +3021,15 @@ Flags:
 |NetworkUuid|string|true|the network's uuid|
 |SubnetUuid|string|true|the subnet's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli network getSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5
 ```
 
-返回:
+output:
 
 ```
 {
@@ -3053,9 +3052,9 @@ chimecli network getSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5
 }
 ```
 
-### 更新子网
+### Update Subnet
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli network updateSubnet --help
@@ -3078,7 +3077,7 @@ Flags:
       --updateSubnetRequest.ReservedIps string   the reserved ips inside the subnet, which will not be assigned to virtual machines
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3088,7 +3087,7 @@ Flags:
 |SubnetUuid|string|true|the subnet's uuid|
 |body|[UpdateSubnetRequest](#schemaupdatesubnetrequest)|false|the http post body|
 
-**UpdateSubnetRequest参数**:
+**UpdateSubnetRequest Argument**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3098,9 +3097,9 @@ Flags:
 |updateSubnetRequest.Name|string|true|the subnet's name|
 |updateSubnetRequest.ReservedIps|string|false|the reserved ips inside the subnet, which will not be assigned to virtual machines|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli network updateSubnet \
@@ -3111,7 +3110,7 @@ chimecli network updateSubnet \
   --updateSubnetRequest.Name subnet2
 ```
 
-返回:
+output:
 
 ```
 {
@@ -3122,9 +3121,9 @@ chimecli network updateSubnet \
 }
 ```
 
-### 删除子网
+### Delete Subnet
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli network deleteSubnet --help
@@ -3141,7 +3140,7 @@ Flags:
   -h, --help  
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3150,15 +3149,15 @@ Flags:
 |NetworkUuid|string|true|the network's uuid|
 |SubnetUuid|string|true|the subnet's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli network deleteSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5
 ```
 
-返回:
+output:
 
 ```
 {
@@ -3167,11 +3166,11 @@ chimecli network deleteSubnet --SubnetUuid fed410bf-da50-490f-a045-314b08dc8ad5
 }
 ```
 
-## 存储池相关命令
+## Storage Pool Operations
 
-### 获取存储池列表
+### Check Storage Pool List
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli storage_pool listStoragePool --help
@@ -3193,7 +3192,7 @@ Flags:
       --type int             filter the storage pool's type (0: local, 1: iscsi, 2: ceph)
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3207,9 +3206,9 @@ Flags:
 |AzUuid|string|true|filter by the AZ's uuid|
 |ClusterUuid|string|true|filter by the cluster's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli storage_pool listStoragePool \
@@ -3217,7 +3216,7 @@ chimecli storage_pool listStoragePool \
   --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
 
-返回:
+output:
 
 ```
 {
@@ -3248,9 +3247,9 @@ chimecli storage_pool listStoragePool \
 }
 ```
 
-### 新建存储池
+### Create New Storage Pool
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli storage_pool createStoragePool --help
@@ -3274,7 +3273,7 @@ Flags:
   -h, --help   
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3282,7 +3281,7 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |body|[CreateStoragePoolRequest](#schemacreatestoragepoolrequest)|false|the http post body|
 
-**CreateStoragePoolRequest参数**:
+**CreateStoragePoolRequest Argument**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3295,9 +3294,9 @@ Flags:
 |createStoragePoolRequest.SizeRatio|float|false|the storage's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical storage|
 |createStoragePoolRequest.Type|integer|false|the storage pool's type, 0: local, 1:iscsi, 2:ceph|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli storage_pool createStoragePool \
@@ -3311,7 +3310,7 @@ chimecli storage_pool createStoragePool \
   --createStoragePoolRequest.Type 0
 ```
 
-返回:
+output:
 
 ```
 {
@@ -3338,9 +3337,9 @@ chimecli storage_pool createStoragePool \
 }
 ```
 
-### 查看存储池
+### Check Storage Pool's Details
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli storage_pool getStoragePool --help
@@ -3356,7 +3355,7 @@ Flags:
   -h, --help                     help for getStoragePool
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3364,15 +3363,15 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |StoragePoolUuid|string|true|the storage pool's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli storage_pool getStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4f-fb45c95b618b
 ```
 
-返回:
+output:
 
 ```
 {
@@ -3399,9 +3398,9 @@ chimecli storage_pool getStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4f-f
 }
 ```
 
-### 更新存储池
+### Update Storage Pool
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli storage_pool updateStoragePool --help
@@ -3427,7 +3426,7 @@ Flags:
 
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3436,7 +3435,7 @@ Flags:
 |StoragePoolUuid|string|true|the storage pool's uuid|
 |body|[UpdateStoragePoolRequest](#schemaupdatestoragepoolrequest)|false|the http post body|
 
-**UpdateStoragePoolRequest参数**:
+**UpdateStoragePoolRequest Argument**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3449,9 +3448,9 @@ Flags:
 |updateStoragePoolRequest.SizeRatio|float|false|the storage's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical storage|
 |updateStoragePoolRequest.Type|integer|false|the storage pool's type, 0: local, 1:iscsi, 2:ceph|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli storage_pool updateStoragePool \
@@ -3464,7 +3463,7 @@ chimecli storage_pool updateStoragePool \
   --updateStoragePoolRequest.Name new-storagepool
 ```
 
-返回:
+output:
 
 ```
 {
@@ -3475,9 +3474,9 @@ chimecli storage_pool updateStoragePool \
 }
 ```
 
-### 删除存储池
+### Delete Storage Pool
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli storage_pool deleteStoragePool --help
@@ -3493,7 +3492,7 @@ Flags:
   -h, --help 
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3501,15 +3500,15 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |StoragePoolUuid|string|true|the storage pool's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli storage_pool deleteStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4f-fb45c95b618b
 ```
 
-返回:
+output:
 
 ```
 {
@@ -3518,11 +3517,11 @@ chimecli storage_pool deleteStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4
 }
 ```
 
-## 镜像相关命令
+## Image Operations
 
-### 镜像列表
+### Check Image List
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli image listImage --help
@@ -3546,7 +3545,7 @@ Flags:
       --uuid string          filter by the 'uuid' field
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3562,15 +3561,15 @@ Flags:
 |uuid|string|false|filter by the 'uuid' field|
 |bucket_uuid|string|false|filter by the 'bucket_uuid' field|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli image listImage
 ```
 
-返回: 
+output: 
 
 ```
 {
@@ -3601,9 +3600,9 @@ chimecli image listImage
 }
 ```
 
-### 新建公有镜像
+### Create New Public Image
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli image createPublicImage --help
@@ -3626,13 +3625,13 @@ Flags:
   -h, --help                                    help for createPublicImage
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |body|[CreateImageRequest](#schemacreateimagerequest)|false|the http body of the post request|
 
-**CreateImageRequest参数**:
+**CreateImageRequest Argument**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3646,9 +3645,9 @@ Flags:
 |createImageRequest.OsType|string|false|the operation system's type, like Windows, Linux, ...|
 |createImageRequest.Shared|integer|false|whether the image is shared with other accounts or not|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli image createPublicImage \
@@ -3659,7 +3658,7 @@ chimecli image createPublicImage \
     --createImageRequest.InstallUrl file:///root/images/centos7_cloudinit.qcow2
 ```
 
-返回:
+output:
 
 ```
 {
@@ -3686,9 +3685,9 @@ chimecli image createPublicImage \
 }
 ```
 
-### 新建私有镜像
+### Create New User Image
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli image createUserImage --help
@@ -3711,13 +3710,13 @@ Flags:
   -h, --help   
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |body|[CreateImageRequest](#schemacreateimagerequest)|false|the http body of the post request|
 
-**CreateImageRequest参数**:
+**CreateImageRequest Argument**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3731,9 +3730,9 @@ Flags:
 |createImageRequest.OsType|string|false|the operation system's type, like Windows, Linux, ...|
 |createImageRequest.Shared|integer|false|whether the image is shared with other accounts or not|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli image createUserImage \
@@ -3744,7 +3743,7 @@ chimecli image createUserImage \
     --createImageRequest.InstallUrl file:///root/images/centos7_cloudinit.qcow2
 ```
 
-返回:
+output:
 
 ```
 {
@@ -3771,9 +3770,9 @@ chimecli image createUserImage \
 }
 ```
 
-### 查询镜像
+### Check Image's Details
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli image getImage --help
@@ -3787,21 +3786,21 @@ Flags:
   -h, --help               help for getImage
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |ImageUuid|string|true|the image's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli image getImage --ImageUuid fb11078f-8af8-4247-adfe-295459f29646
 ```
 
-返回:
+output:
 
 ```
 {
@@ -3828,9 +3827,9 @@ chimecli image getImage --ImageUuid fb11078f-8af8-4247-adfe-295459f29646
 }
 ```
 
-### 更新镜像
+### Update Image
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli image updateImage --help
@@ -3853,14 +3852,14 @@ Flags:
       --updateImageRequest.Shared int           whether the image is shared with other accounts or not
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |ImageUuid|string|true||
 |body|[UpdateImageRequest](#schemaupdateimagerequest)|false|the http body of the post request|
 
-**UpdateImageRequest参数**:
+**UpdateImageRequest Argument**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3873,9 +3872,9 @@ Flags:
 |updateImageRequest.OsType|string|false|the operation system's type, like Windows, Linux, ...|
 |updateImageRequest.Shared|integer|false|whether the image is shared with other accounts or not|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli image updateImage \
@@ -3883,7 +3882,7 @@ chimecli image updateImage \
     --updateImageRequest.Name centos-test
 ```
 
-返回:
+output:
 
 ```
 {
@@ -3894,9 +3893,9 @@ chimecli image updateImage \
 }
 ```
 
-### 删除镜像
+### Delete Image
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli image deleteImage --help
@@ -3910,21 +3909,21 @@ Flags:
   -h, --help               help for deleteImage
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |ImageUuid|string|true|the image's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli image deleteImage --ImageUuid fb11078f-8af8-4247-adfe-295459f29646
 ```
 
-返回:
+output:
 
 ```
 {
@@ -3933,9 +3932,9 @@ chimecli image deleteImage --ImageUuid fb11078f-8af8-4247-adfe-295459f29646
 }
 ```
 
-### 镜像源列表
+### Check Image Bucket List 
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli image listImageBucket --help
@@ -3955,7 +3954,7 @@ Flags:
       --type int       filter by the 'type' field
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -3967,15 +3966,15 @@ Flags:
 |state|integer|false|filter by the 'state' field|
 |type|integer|false|filter by the 'type' field|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli image listImageBucket
 ```
 
-返回:
+output:
 
 ```
 {
@@ -4022,9 +4021,9 @@ chimecli image listImageBucket
 }
 ```
 
-### 查看镜像源
+### Check Image Bucket's Details
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli image getImageBucket --help
@@ -4038,21 +4037,21 @@ Flags:
   -h, --help                     help for getImageBucket
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |ImageBucketUuid|string|true|the image bucket's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli image getImageBucket --ImageBucketUuid 9c15f4cb-5f6d-4e45-818f-a4315c54240c
 ```
 
-返回:
+output:
 
 ```
 {
@@ -4073,11 +4072,11 @@ chimecli image getImageBucket --ImageBucketUuid 9c15f4cb-5f6d-4e45-818f-a4315c54
 }
 ```
 
-## 报警相关命令
+## Alert Operations
 
-### 报警列表
+### Alert List
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli alert listAlert --help
@@ -4098,7 +4097,7 @@ Flags:
       --state int      filter by the 'state' field
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -4111,15 +4110,15 @@ Flags:
 |severity|integer|false|filter by the 'severity' field|
 |priority|integer|false|filter by the 'priority' field|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli alert listAlert
 ```
 
-返回:
+output:
 
 ```
 {
@@ -4243,9 +4242,9 @@ chimecli alert listAlert
 }
 ```
 
-### 查看报警详情
+### Check Alert's Details
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli alert getAlert --help
@@ -4259,21 +4258,21 @@ Flags:
   -h, --help               help for getAlert
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |AlertUuid|string|true|the alert's UUID|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli alert getAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e
 ```
 
-返回:
+output:
 
 ```
 {
@@ -4294,9 +4293,9 @@ chimecli alert getAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e
 }
 ```
 
-### 接受报警
+### Acknowledge Alert
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli alert acceptAlert --help
@@ -4312,22 +4311,22 @@ Flags:
   -h, --help                                help for acceptAlert
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |AlertUuid|string|true||
 |body|[AcceptAlertRequest](#schemaacceptalertrequest)|false|the http body of the post request|
 
-**AcceptAlertRequest参数**:
+**AcceptAlertRequest Argument**:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |acceptAlertRequest.Comment|string|false|comment for the alert's acception|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli alert acceptAlert \
@@ -4335,7 +4334,7 @@ chimecli alert acceptAlert \
   --acceptAlertRequest.Comment "accepted"
 ```
 
-返回:
+output:
 
 ```
 {
@@ -4344,9 +4343,9 @@ chimecli alert acceptAlert \
 }
 ```
 
-### 删除报警
+### Delete Alert
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli alert deleteAlert --help
@@ -4360,21 +4359,21 @@ Flags:
   -h, --help               help for deleteAlert
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |AlertUuid|string|true|the alert's UUID|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli alert deleteAlert --AlertUuid c24f4240-6e5e-418b-911f-fa46fe173888
 ```
 
-返回:
+output:
 
 ```
 {
@@ -4383,9 +4382,9 @@ chimecli alert deleteAlert --AlertUuid c24f4240-6e5e-418b-911f-fa46fe173888
 }
 ```
 
-### 查看报警规则列表
+### Check Alert Rule List
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli alert listAlertRule --help
@@ -4406,7 +4405,7 @@ Flags:
       --state int      filter by the 'state' field
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -4419,15 +4418,15 @@ Flags:
 |severity|integer|false|filter by the 'severity' field|
 |priority|integer|false|filter by the 'priority' field|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli alert listAlertRule
 ```
 
-返回:
+output:
 
 ```
 {
@@ -4493,9 +4492,9 @@ chimecli alert listAlertRule
 }
 ```
 
-### 查看报警规则详情
+### Check Alert Rule's Detail
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli alert getAlertRule --help
@@ -4509,21 +4508,21 @@ Flags:
   -h, --help              help for getAlertRule
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |RuleUuid|string|true|the alert rule's UUID|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli alert getAlertRule --RuleUuid 62deb6e7-6d56-11ee-b5ce-000c29dc11fc
 ```
 
-返回:
+output:
 
 ```
 {
@@ -4550,7 +4549,7 @@ chimecli alert getAlertRule --RuleUuid 62deb6e7-6d56-11ee-b5ce-000c29dc11fc
 
 ### 虚拟机列表
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli compute listVm --help
@@ -4573,7 +4572,7 @@ Flags:
       --uuid string           filter by the 'uuid' field
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -4588,15 +4587,15 @@ Flags:
 |az_uuid|string|false|filter by the 'az_uuid' field|
 |cluster_uuid|string|false|filter by the 'cluster_uuid' field|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli compute listVm --state 1
 ```
 
-返回:
+output:
 
 ```
 {
@@ -4637,7 +4636,7 @@ chimecli compute listVm --state 1
 
 ### 创建虚拟机
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli compute createVm --help
@@ -4664,7 +4663,7 @@ Flags:
   -h, --help 
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -4719,9 +4718,9 @@ Flags:
 |createVolumeRequest.VolumeSpecUuid|string|true|the volume specification's Uuid|
 
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli compute createVm --Body  \
@@ -4754,7 +4753,7 @@ chimecli compute createVm --Body  \
 }'
 ```
 
-返回:
+output:
 
 ```
 {
@@ -4872,7 +4871,7 @@ chimecli compute createVm --Body  \
 
 ### 查看虚拟机详情
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli compute describeVm --help
@@ -4886,21 +4885,21 @@ Flags:
   -h, --help            help for describeVm
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |VmUuid|string|true|the virtual machine's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli compute describeVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 ```
 
-返回:
+output:
 
 ```
 {
@@ -4988,7 +4987,7 @@ chimecli compute describeVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 
 ### 启动虚拟机
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli compute startVm --help
@@ -5002,21 +5001,21 @@ Flags:
   -h, --help            help for startVm
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |VmUuid|string|true|the virtual machine's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli compute startVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 ```
 
-返回:
+output:
 
 ```
 {
@@ -5029,7 +5028,7 @@ chimecli compute startVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 
 ### 停止虚拟机
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli compute stopVm --help
@@ -5043,21 +5042,21 @@ Flags:
   -h, --help            help for stopVm
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |VmUuid|string|true|the virtual machine's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli compute stopVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 ```
 
-返回:
+output:
 
 ```
 {
@@ -5070,7 +5069,7 @@ chimecli compute stopVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 
 ### 更新虚拟机
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli compute updateVm --help
@@ -5087,7 +5086,7 @@ Flags:
       --updateVmRequest.Name string          the virutal machine's name
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5101,9 +5100,9 @@ Flags:
 |updateVmRequest.Description|string|false|description for the virutal machine|
 |updateVmRequest.Name|string|false|the virutal machine's name|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli compute updateVm \
@@ -5111,7 +5110,7 @@ chimecli compute updateVm \
   --updateVmRequest.Name test-vm
 ```
 
-返回:
+output:
 
 ```
 {
@@ -5124,7 +5123,7 @@ chimecli compute updateVm \
 
 ### 删除虚拟机
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli compute deleteVm --help
@@ -5139,22 +5138,22 @@ Flags:
   -h, --help               help for deleteVm
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |VmUuid|string|true|the virtual machine's uuid|
 |force_del|string|false|if forceDel is set to true, the physical volumes are deleted as well as the virtual machine|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli compute deleteVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf
 ```
 
-返回:
+output:
 
 ```
 {
@@ -5169,7 +5168,7 @@ chimecli compute deleteVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf
 
 ### 查看云硬盘列表
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume listVolume --help
@@ -5192,7 +5191,7 @@ Flags:
       --uuid string          filter by volume's uuid
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5207,15 +5206,15 @@ Flags:
 |AzUuid|string|true|filter by AZ's uuid|
 |ClusterUuid|string|true|filter by cluster's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume listVolume --state 2
 ```
 
-返回:
+output:
 
 ```
 {
@@ -5261,7 +5260,7 @@ chimecli volume listVolume --state 2
 
 ### 新建云硬盘
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume createVolume --help
@@ -5284,7 +5283,7 @@ Flags:
   -h, --help  
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5304,9 +5303,9 @@ Flags:
 |createVolumeRequest.Size|integer|true|the size of the volume in bytes|
 |createVolumeRequest.VolumeSpecUuid|string|true|the volume specification's Uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume createVolume \
@@ -5318,7 +5317,7 @@ chimecli volume createVolume \
   --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 ```
 
-返回:
+output:
 
 ```
 {
@@ -5360,7 +5359,7 @@ chimecli volume createVolume \
 
 ### 查看云硬盘
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume getVolume --help
@@ -5376,7 +5375,7 @@ Flags:
   -h, --help                 help for getVolume
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5384,15 +5383,15 @@ Flags:
 |AzUuid|string|true|the AZ's uuid|
 |ClusterUuid|string|true|the cluster's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume getVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 ```
 
-返回:
+output:
 
 ```
 {
@@ -5434,7 +5433,7 @@ chimecli volume getVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 
 ### 更新云硬盘
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume updateVolume --help
@@ -5453,7 +5452,7 @@ Flags:
       --updateVolumeRequest.Name string          the volume's name
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5469,9 +5468,9 @@ Flags:
 |updateVolumeRequest.Description|string|false|description for the volume|
 |updateVolumeRequest.Name|string|false|the volume's name|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume updateVolume \
@@ -5480,7 +5479,7 @@ chimecli volume updateVolume \
   --updateVolumeRequest.Description 'volume description'
 ```
 
-返回:
+output:
 
 ```
 {
@@ -5493,7 +5492,7 @@ chimecli volume updateVolume \
 
 ### 删除云硬盘
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume deleteVolume --help
@@ -5510,7 +5509,7 @@ Flags:
   -h, --help     
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5519,15 +5518,15 @@ Flags:
 |ClusterUuid|string|true|the cluster's uuid|
 |force_del|string|false|whether to delete the physical volume in the node|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume deleteVolume --VolumeUuid 9379b2e5-45dd-4760-84d4-f0a5ce90a0e3
 ```
 
-返回:
+output:
 
 ```
 {
@@ -5538,7 +5537,7 @@ chimecli volume deleteVolume --VolumeUuid 9379b2e5-45dd-4760-84d4-f0a5ce90a0e3
 
 ### 挂载云硬盘
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli compute attachVolumeToVm --help
@@ -5554,7 +5553,7 @@ Flags:
   -h, --help    
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5567,9 +5566,9 @@ Flags:
 |---|---|---|---|
 |attachVolumeRequest.VolumeUuid|string|true|the virtual machine's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli compute attachVolumeToVm \
@@ -5577,7 +5576,7 @@ chimecli compute attachVolumeToVm \
   --attachVolumeRequest.VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 ```
 
-返回: 
+output: 
 ```
 {
   "requestId": "df148989-d472-4f7a-ae83-5c5ac77d8a52",
@@ -5589,7 +5588,7 @@ chimecli compute attachVolumeToVm \
 
 ### 卸载云硬盘
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli compute detachVolumeFromVm --help
@@ -5605,7 +5604,7 @@ Flags:
   -h, --help                                    help for detachVolumeFromVm
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5618,9 +5617,9 @@ Flags:
 |---|---|---|---|
 |detachVolumeRequest.VolumeUuid|string|true|the virtual machine's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli compute detachVolumeFromVm \
@@ -5628,7 +5627,7 @@ chimecli compute detachVolumeFromVm \
   --detachVolumeRequest.VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 ```
 
-返回:
+output:
 
 ```
 {
@@ -5641,7 +5640,7 @@ chimecli compute detachVolumeFromVm \
 
 ### 创建快照
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume createSnapshot --help
@@ -5659,7 +5658,7 @@ Flags:
 
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5673,9 +5672,9 @@ Flags:
 |createSnapshotRequest.Description|string|false|description for the snapshot|
 |createSnapshotRequest.Name|string|true|the snapshot's name|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume createSnapshot \
@@ -5683,7 +5682,7 @@ chimecli volume createSnapshot \
   --createSnapshotRequest.Name 'test-snapshot'
 ```
 
-返回:
+output:
 
 ```
 {
@@ -5707,7 +5706,7 @@ chimecli volume createSnapshot \
 
 ### 查看云盘快照列表
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume listSnapshot --help
@@ -5726,7 +5725,7 @@ Flags:
       --state string   filter by the 'state' field
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5737,15 +5736,15 @@ Flags:
 |name|string|false|filter by the 'name' field|
 |state|string|false|filter by the 'state' field|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 bin/chimecli volume listVolumeSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 ```
 
-返回:
+output:
 
 ```
 {
@@ -5773,7 +5772,7 @@ bin/chimecli volume listVolumeSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b
 
 ### 查看快照详情
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume getSnapshot --help
@@ -5788,22 +5787,22 @@ Flags:
   -h, --help                  help for getSnapshot
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |VolumeUuid|string|true|the volume's uuid|
 |SnapshotUuid|string|true|the snapshot's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume  getSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69
 ```
 
-返回:
+output:
 
 ```
 {
@@ -5827,7 +5826,7 @@ chimecli volume  getSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69
 
 ### 更新快照
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume updateSnapshot --help
@@ -5845,7 +5844,7 @@ Flags:
       --updateSnapshotRequest.Name string          Required. the snapshot's name
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -5860,9 +5859,9 @@ Flags:
 |updateSnapshotRequest.Description|string|false|description for the snapshot|
 |updateSnapshotRequest.Name|string|true|the snapshot's name|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume  updateSnapshot \
@@ -5871,7 +5870,7 @@ chimecli volume  updateSnapshot \
   --createSnapshotRequest.Description 'snapshot description'
 ```
 
-返回: 
+output: 
 
 ```
 {
@@ -5884,7 +5883,7 @@ chimecli volume  updateSnapshot \
 
 ### 从快照恢复到云盘
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume restoreVolume --help
@@ -5900,16 +5899,16 @@ Flags:
 
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |VolumeUuid|string|true|the volume's uuid|
 |SnapshotUuid|string|true|the snapshot's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume restoreVolume \
@@ -5917,7 +5916,7 @@ chimecli volume restoreVolume \
   --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f 
 ```
 
-返回: 
+output: 
 
 ```
 {
@@ -5959,7 +5958,7 @@ chimecli volume restoreVolume \
 
 ### 删除快照
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli volume deleteSnapshot --help
@@ -5974,22 +5973,22 @@ Flags:
   -h, --help                  help for deleteSnapshot
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |VolumeUuid|string|true|the volume's uuid|
 |SnapshotUuid|string|true|the snapshot's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli volume deleteSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69
 ```
 
-返回:
+output:
 
 ```
 {
@@ -6002,7 +6001,7 @@ chimecli volume deleteSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e
 
 ### 查看弹性网卡列表
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli network  listNic --help 
@@ -6023,7 +6022,7 @@ Flags:
       --uuid string          filter by the network interface's uuid
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -6036,15 +6035,15 @@ Flags:
 |uuid|string|false|filter by the network interface's uuid|
 |subnet_uuid|string|false|filter by the subnet's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli network listNic --state 2
 ```
 
-返回:
+output:
 
 ```
 {
@@ -6079,7 +6078,7 @@ chimecli network listNic --state 2
 
 ### 新建弹性网卡
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli network createNic --help 
@@ -6098,7 +6097,7 @@ Flags:
   -h, --help                                  help for createNic
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -6116,9 +6115,9 @@ Flags:
 |createNicRequest.Size|integer|true|the size of the volume in bytes|
 |createNicRequest.VolumeSpecUuid|string|true|the volume specification's Uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli network createNic \
@@ -6126,7 +6125,7 @@ chimecli network createNic \
   --createNicRequest.Name test-nic
 ```
 
-返回:
+output:
 
 ```
 {
@@ -6157,7 +6156,7 @@ chimecli network createNic \
 
 ### 查看弹性网卡
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli network getNic --help 
@@ -6171,21 +6170,21 @@ Flags:
   -h, --help             help for getNic
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |NicUuid|string|true|the network interface's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli network getNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 ```
 
-返回:
+output:
 
 ```
 {
@@ -6216,7 +6215,7 @@ chimecli network getNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 
 ### 更新弹性网卡
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli network updateNic --help 
@@ -6234,7 +6233,7 @@ Flags:
 
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -6249,9 +6248,9 @@ Flags:
 |updateNicRequest.Name|string|false|the virutal machine's name|
 
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli network updateNic \
@@ -6259,7 +6258,7 @@ chimecli network updateNic \
   --updateNicRequest.Name 'test-nic-new'
 ```
 
-返回:
+output:
 
 ```
 {
@@ -6272,7 +6271,7 @@ chimecli network updateNic \
 
 ### 删除弹性网卡
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli network deleteNic --help 
@@ -6287,22 +6286,22 @@ Flags:
   -h, --help               help for deleteNic
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 |NicUuid|string|true|the network interface's uuid|
 |force_del|string|false|whether to force delete the network interface from the OS|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli network deleteNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 ```
 
-返回:
+output:
 
 ```
 {
@@ -6313,7 +6312,7 @@ chimecli network deleteNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 
 ### 挂载弹性网卡
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli compute attachNicToVm --help 
@@ -6329,7 +6328,7 @@ Flags:
   -h, --help                              help for attachNicToVm
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -6342,9 +6341,9 @@ Flags:
 |---|---|---|---|
 |attachNicRequest.NicUuid|string|true|the network interface's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 
 ```
 chimecli compute attachNicToVm \
@@ -6352,7 +6351,7 @@ chimecli compute attachNicToVm \
   --attachNicRequest.NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 ```
 
-返回:
+output:
 
 ```
 {
@@ -6365,7 +6364,7 @@ chimecli compute attachNicToVm \
 
 ### 卸载弹性网卡
 
-#### 命令原型
+#### Command Usage
 
 ```
 chimecli compute detachNicFromVm --help 
@@ -6381,7 +6380,7 @@ Flags:
   -h, --help                              help for detachNicFromVm
 ```
 
-#### 参数列表
+#### Augument List
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -6394,16 +6393,16 @@ Flags:
 |---|---|---|---|
 |detachNicRequest.NicUuid|string|true|the network interface's uuid|
 
-#### 示例
+#### Example
 
-命令行:
+command line:
 ```
 chimecli compute detachNicFromVm \
   --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 \
   --detachNicRequest.NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
 ```
 
-返回:
+output:
 
 ```
 {

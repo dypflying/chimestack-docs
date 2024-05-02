@@ -18,7 +18,7 @@ vrrp_script chk_server {
 vrrp_instance VI_1 {
     state MASTER                         # master node
     interface ens160                     # network inerface for the management network
-    virtual_router_id 51                 # important, the router id must be consistent with other nodes
+    virtual_router_id 51                 # important, the router id must be consistent with other nodes'
     priority 255                         # weight value, master node's weight value must not be less than slave nodes'
     advert_int 1
     authentication {
@@ -47,7 +47,7 @@ vrrp_script chk_server {
 vrrp_instance VI_1 {
     state BACKUP                         # slave node
     interface ens160                     # network inerface for the management network
-    virtual_router_id 51                 # important, the router id must be consistent with other nodes
+    virtual_router_id 51                 # important, the router id must be consistent with other nodes'
     priority 254                         # weight value, slave node's weight value must not be more than master node's
     advert_int 1
     authentication {
@@ -73,53 +73,53 @@ After the restart, you can access the chime-server's services via the VIP addres
 
 In case of the chime-server's services in the master node are not accessable or the master node downs, the VIP address will shift to one of the slave nodes; And when the master node and the chime-server in the master recover, the VIP address will shift back to the master node automatically. 
 
-### 双活(active-active)配置方案
+### Active-active Scheme
 
-{{% alert title="提示" color="warning" %}}
-对于分布式系统在多活模式下，可能出现事务的一致性问题，chime-server通过预先对执行的事务添加记录锁，基本保障了在分布式部署中事务的一致性。但目前dev-x.x.x版本测试尚未充分，所以对于Dev版本的ChimeStack不建议采用多活的配置，仍然推荐主备的配置方式达到chime-server的高可用。
+{{% alert title="Warning" color="warning" %}}
+Like other distributed systems, chime-server in multiple-active scheme has to solve the consistency issue as well. The chime-server's implementation manages to solve the consistency issue by adding record locks to the transactions prior to executing them. However, the current dev-x.x.x version of ChimeStack has not been tested sufficiently for the consistency cases, so by now it is still not recommended to use the active-active scheme for chime-server's deployment, while the active-standby scheme is recommended.
 {{% /alert %}}
 
-在多活(双活)模式下，各chime-server会根据选择的load balancing算法接受请求，但只有一个服务器可以接收入口请求，也就是说，只有其中一个服务器作为路由器接收外部请求，然后分发到所有可达的chime-server实例来响应请求。这种方式是keepalived+lvs的经典场景，即keepalived提供虚拟路由(VIP)、健康检测和故障failover功能，lvs负责负载均衡。
+In multi-active (active-active) mode, each chime-server will receive requests distributed by the load balancer with a specific load-balancing algorithm, but only one node in the node group takes the role of the load-balancing router to receive the external requests and distribute them to chime-servers. The scheme can be implemented by the classic combination of "keepalived"+"lvs", that is, the keepalived framework provides virtual routing(VIP), health checks and failover mechanism, and the lvs framework provisions the load-balancing.
 
-其中lvs可以选择的三种模式是: NAT,DR和TUN。
+You can choose one of the lvs's working modes: NAT,DR and TUN。
 
-负载均衡算法有：rr(Round Robin), wrr(Weighted Round Robin), lc(Least Connection), wlc(Weighted Least Connection), sh(Source Hashing), dh(Destination Hashing), lblc(Locality-Based Least Connection)
+You can choose one of the load balancing algorithms: rr(Round Robin), wrr(Weighted Round Robin), lc(Least Connection), wlc(Weighted Least Connection), sh(Source Hashing), dh(Destination Hashing), lblc(Locality-Based Least Connection)
 
-在规划的chime-server主节点上, 安装keepalived并编辑/etc/keepalived/keepalived.conf, 添加或修改以下部分: 
+On the master node of chime-server, install keepalived and edit /etc/keepalived/keepalived.conf file, add or modify the following content: 
 
 ```
 vrrp_instance VI_1 {
-    state MASTER                   # 设置当前为默认主节点
-    interface ens160               # 管理网网口的名称
-    virtual_router_id 51           # 重要，必须和其它节点的router_id一致
-    priority 255                   # 权重，不小于从节点的数值
+    state MASTER                   # master node
+    interface ens160               # network inerface for the management network
+    virtual_router_id 51           # important, the router id must be consistent with other nodes'
+    priority 255                   # weight value, master node's weight value must not be less than slave nodes'
     advert_int 1
     authentication {
-        auth_type PASS             # 认证方式
-        auth_pass 1111             # 认证密码
+        auth_type PASS             # authentification method 
+        auth_pass 1111             # authentification password
     }
     virtual_ipaddress {
-        192.168.231.10            # chime-server VIP地址
-        192.168.231.20            # chime-portal VIP地址
+        192.168.231.10            # chime-server's VIP address
+        192.168.231.20            # chime-portal's VIP address
     }
 }
 
 virtual_server 192.168.231.20 80 {
     delay_loop 6
-    lb_algo rr                      # 负载均衡算法
-    lb_kind NAT                     # lvs 工作模式
+    lb_algo rr                      # load-balancing algorithm
+    lb_kind NAT                     # lvs working mode
     persistence_timeout 50
     protocol TCP
 
-    real_server 192.168.231.11 8033 {  # real server1地址和端口
+    real_server 192.168.231.11 8033 {  # IP address and port of real server#1
         weight
-        TCP_CHECK {                     # 通过TCP健康检测
+        TCP_CHECK {                     # health check via TCP
             connect_timeout 3         
         }
     }
-    real_server 192.168.231.12 8033 {  # real server2地址和端口
+    real_server 192.168.231.12 8033 {  # IP address and port of real server#2
         weight 1
-        TCP_CHECK {                     # 通过TCP健康检测
+        TCP_CHECK {                     # health check via TCP
             connect_timeout 3
         }
     }
@@ -127,20 +127,20 @@ virtual_server 192.168.231.20 80 {
 
 virtual_server 192.168.231.10 8801 {
     delay_loop 6
-    lb_algo rr                      # 负载均衡算法
-    lb_kind NAT                     # lvs 工作模式
+    lb_algo rr                      # load-balancing algorithm
+    lb_kind NAT                     # lvs working mode
     persistence_timeout 50
     protocol TCP
 
-    real_server 192.168.231.11 8801 {  # real server1地址和端口
+    real_server 192.168.231.11 8801 {  # IP address and port of real server#1
         weight
-        TCP_CHECK {                     # 通过TCP健康检测
+        TCP_CHECK {                     # health check via TCP
             connect_timeout 3         
         }
     }
-    real_server 192.168.231.12 8801 {  # real server2地址和端口
+    real_server 192.168.231.12 8801 {  # IP address and port of real server#2
         weight 1
-        TCP_CHECK {                     # 通过TCP健康检测
+        TCP_CHECK {                     # health check via TCP
             connect_timeout 3
         }
     }
@@ -148,20 +148,20 @@ virtual_server 192.168.231.10 8801 {
 
 virtual_server 192.168.231.10 8802 {
     delay_loop 6
-    lb_algo rr                      # 负载均衡算法
-    lb_kind NAT                     # lvs 工作模式
+    lb_algo rr                      # load-balancing algorithm
+    lb_kind NAT                     # lvs working mode
     persistence_timeout 50
     protocol TCP
 
-    real_server 192.168.231.11 8802 {  # real server1地址和端口
+    real_server 192.168.231.11 8802 {  # IP address and port of real server#1
         weight
-        TCP_CHECK {                     # 通过TCP健康检测
+        TCP_CHECK {                     # health check via TCP
             connect_timeout 3         
         }
     }
-    real_server 192.168.231.12 8802 {  # real server2地址和端口
+    real_server 192.168.231.12 8802 {  # IP address and port of real server#2
         weight 1
-        TCP_CHECK {                     # 通过TCP健康检测
+        TCP_CHECK {                     # health check via TCP
             connect_timeout 3
         }
     }

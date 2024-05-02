@@ -4,74 +4,74 @@ date: 2023-11-09
 weight: 2
 ---
 
-### 主备(active-standby)配置方案
+### Active-standby scheme
 
-在规划的chime-server主节点上(server1.chime.com), 安装keepalived并编辑/etc/keepalived/keepalived.conf, 添加或修改以下部分: 
+On the planed master node for chime-server(server1.chime.com), install keepalived and edit /etc/keepalived/keepalived.conf file, add or modify the following content:
 
 ```
 vrrp_script chk_server {
-    script "/usr/bin/pgrep chime-server" # or "nc -zv localhost 8801" 检查进程或者api端口的可达性
-    interval 2                           # default: 1s  检查间隔
+    script "/usr/bin/pgrep chime-server" # or "nc -zv localhost 8801" # test the aliveness of the process or test the connectivity to API service's port
+    interval 2                           # default: 1s  test interval
 }
 
 
 vrrp_instance VI_1 {
-    state MASTER                         # 设置当前为默认主节点
-    interface ens160                     # 管理网网口的名称
-    virtual_router_id 51                 # 重要，必须和其它从节点的router_id一致
-    priority 255                         # 权重，不小于从节点的数值
+    state MASTER                         # master node
+    interface ens160                     # network inerface for the management network
+    virtual_router_id 51                 # important, the router id must be consistent with other nodes
+    priority 255                         # weight value, master node's weight value must not be less than slave nodes'
     advert_int 1
     authentication {
-        auth_type PASS                   # 认证方式
-        auth_pass 1111                   # 认证密码
+        auth_type PASS                   # authentification method 
+        auth_pass 1111                   # authentification password
     }
     virtual_ipaddress {
-        192.168.231.10                  # VIP地址
+        192.168.231.10                   # VIP address
     }
     track_script {
-        chk_server                       # 健康检查设置
+        chk_server                       # health check scripts
     }
 }
 ```
 
 
-在规划的chime-server从节点上(server2.chime.com), 安装keepalived并编辑/etc/keepalived/keepalived.conf, 添加或修改以下部分: 
+On the planed slave node for chime-server(server2.chime.com), install keepalived and edit /etc/keepalived/keepalived.conf file, add or modify the following content:
 
 ```
 vrrp_script chk_server {
-    script "/usr/bin/pgrep chime-server" # or "nc -zv localhost 8801" 检查进程或者api端口的可达性
-    interval 2                           # default: 1s  检查间隔
+    script "/usr/bin/pgrep chime-server" # or "nc -zv localhost 8801" test the aliveness of the process or test the connectivity to API service's port
+    interval 2                           # default: 1s  test interval
 }
 
 
 vrrp_instance VI_1 {
-    state BACKUP                         # 设置当前为默认从节点
-    interface ens160                     # 管理网网口的名称
-    virtual_router_id 51                 # 重要，必须和其它节点的router_id一致
-    priority 254                         # 权重，不大于主节点的数值
+    state BACKUP                         # slave node
+    interface ens160                     # network inerface for the management network
+    virtual_router_id 51                 # important, the router id must be consistent with other nodes
+    priority 254                         # weight value, slave node's weight value must not be more than master node's
     advert_int 1
     authentication {
-        auth_type PASS                   # 认证方式
-        auth_pass 1111                   # 认证密码
+        auth_type PASS                   # authentification method 
+        auth_pass 1111                   # authentification password
     }
     virtual_ipaddress {
-        192.168.231.10                  # VIP地址
+        192.168.231.10                   # VIP address
     }
     track_script {
-        chk_server                       # 健康检查设置
+        chk_server                       # health check scripts
     }
 }
 ```
 
-配置完成后均需重启keepalived
+It needs a restart of keepalived after changing the configuration:
 
 ```
 sudo systemctl restart keepalived 
 ```
 
-配置后即可通过VIP访问chime-server，例如通过"http://192.168.231.10:8033/"访问Web UI，或通过"192.168.231.10:8801"访问API
+After the restart, you can access the chime-server's services via the VIP address，such as "http://192.168.231.10:8033/" for Web UI,  or "192.168.231.10:8801" for API service.
 
-当chime-server进程不可达或者主服务器down机时，VIP会从主节点漂移到从节点；当主节点服务恢复时，VIP会从从节点漂移回主节点。
+In case of the chime-server's services in the master node are not accessable or the master node downs, the VIP address will shift to one of the slave nodes; And when the master node and the chime-server in the master recover, the VIP address will shift back to the master node automatically. 
 
 ### 双活(active-active)配置方案
 

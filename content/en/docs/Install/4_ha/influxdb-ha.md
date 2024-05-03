@@ -6,21 +6,20 @@ weight: 5
 
 ##### Overview
 
-ChimeStack关于influxdb高可用的解决方案比较简单，通过部署双活influxdb实例+keepalived来实现高可用的目的。即部署两个influxdb实例在两台不同的服务器上，两台服务器的influxdb除了访问地址外，其它访问配置(token, org, bucket)完全相同。对influxdb的写入全部都是双写，即数据是同时写入两个influxdb中，此外，通过keepalived配置虚拟VIP并配置主从influxdb实例，当出现主influxdb故障时，VIP会切换到从服务器上。对influxdb数据的检索都是通过这个VIP访问的，这样保证了重要的报警指标数据检索的高可用性。
+The solution for influxdb's high availability is relatively simple, that is to deploy two influxdb instances on 2 servers, whose API tokens as well as their orginization and bucket settings are all same. chime-agent writes logs to the dual influxdb databases simultaneously, and with the help of keepalived, setup a VIP address and make the 2 influxdb instances a master and a backup, all the query requests for influxdb's data are routed to the VIP address. In short, the solution is to dual writes to influxdb and query from the HA-ensured VIP address. 
 
-架构示意图如下所示: 
+Following is the architecture of the solution: 
 
 ![Influxdb HA](/images/influxdb_ha.png)
 
-其中通过物理网口的IP地址访问的influxdb的endpoint叫做real endpoint, 通过VIP访问influxdb的endpoint叫做vip endpoint，客户端对influxdb的数据写入是直接写入全部的real endpoint，而对influxdb数据的读取是通过vip endpoint。
 
-{{% alert title="提示" color="primary" %}}
-这种部署的一个弊端是，由于网络、服务器可能出现的异常，两个influxdb的数据可能不完全一致，当发生VIP切换时，可能出现信息不一致问题。
+{{% alert title="Information" color="primary" %}}
+One shortcoming of the deployment is when there are some exceptions occur due to network or hardwares of the servers' problem, there could be data consistency issue between the 2 influxdb's storage becasue some data may be lost, as a result, when the VIP address switches, the queries result maybe inconsistent.
 {{% /alert %}}
 
-##### chime-server的influxdb配置
+##### chime-server's influxdb setting: 
 
-规划两台服务器(Node)运行influxdb: 
+requires 2 influxdb instances deployed on 2 servers respectively, such as:
 
 |  Node  |     HostName      |        IP       |
 |--------|---------------|-----------------|
@@ -29,7 +28,7 @@ ChimeStack关于influxdb高可用的解决方案比较简单，通过部署双�
 
 VIP: 192.168.231.40
 
-通过chimeadm配置chime-server: 
+setup chime-server via the "chimeadm" tool: 
 
 ```
 chimeadm initserver influxdb --vip-endpoint http://192.168.231.40:8086 \
@@ -39,10 +38,9 @@ chimeadm initserver influxdb --vip-endpoint http://192.168.231.40:8086 \
   --bucket chime \
 ```
 
-###### 配置keepalived
+###### Setup keepalived
 
-
-在server1编辑 /etc/keepalived/keepalived.conf, 添加如下内容
+edit /etc/keepalived/keepalived.conf file on server1, add or modify the following content:
 
 ```
 vrrp_script chk_influxdb {
@@ -71,7 +69,7 @@ vrrp_instance VI_3 {
 ```
 
 
-在server2编辑 /etc/keepalived/keepalived.conf, 添加如下内容
+edit /etc/keepalived/keepalived.conf file on server2, add or modify the following content:
 
 ```
 vrrp_script chk_influxdb {
@@ -99,12 +97,12 @@ vrrp_instance VI_3 {
 }
 ```
 
-然后server1和server2分别重启keepalived: 
+restart the keepalived on server1 and server2 respectively
 
 ```
 sudo systemctl restart keepalived
 ```
 
-###### 其它高可用方案
+###### Other HA solutions
 
-客户也可以采取开源的influx-cluster方案，具体参考 [influxdb-cluster部署配置](https://github.com/chengshiwen/influxdb-cluster)，或者influxdb官方付费版的Influxdb Enterprise方案, 具体参考 [官方Influx Enterprise部署配置](https://docs.influxdata.com/enterprise_influxdb/v1/)，这两种方案的可用性/可靠性均优于influxdb双写+keepalived的方案，但部署成本和经济成本均比较高，客户可以综合考虑比较收益和成本进行选择。
+One solution is to use the open-sourced influx-cluster, more details refer to [Influxdb-cluster Deployement](https://github.com/chengshiwen/influxdb-cluster). Another solution is to use the official Influxdb Enterprise, more details refer to [Influx Enterprise Deployment](https://docs.influxdata.com/enterprise_influxdb/v1/), both of the 2 solutions could perform better HA than the solution provisioned in the chapter. 

@@ -4,21 +4,22 @@ date: 2023-11-09
 weight: 5
 ---
 
+Currently there are couples of 3rd S3 softwares which are designed with high available solutions. Chimestack recommends using the Minio as the S3 provider and its multi-node, multi-drive deployment model to achive HA for S3. 
 
-当前流行的s3软件均能提供高可用的架构方案，ChimeStack推荐使用minio的多节点多硬盘架构实现服务的高可用
+This chapter introduces how to deploy the Minio's MNMD in production
 
-##### 环境准备
+##### Environment Preparation
 
-规划双节点，每个节点三个硬盘的方案:
+Requires 2 nodes, and 3 hard disks per node, such as:
 
 |  Node        |     HostName      |        IP       |                     Disks               |
 |--------------|-------------------|-----------------|-----------------------------------------|
 | ServerNode1  | server1.chime.com |  192.168.231.11 | /dev/nvme0n2,/dev/nvme0n3,/dev/nvme0n4  |
 | ServerNode2  | server2.chime.com |  192.168.231.12 | /dev/nvme0n2,/dev/nvme0n3,/dev/nvme0n4  |
 
-VIP: 192.168.231.50, 域名: s3.chime.com
+VIP: 192.168.231.50 and its domain name: s3.chime.com
 
-在server1和server2分别格式化磁盘为xfs文件系统并挂载目录:
+format the hard disks as xfs filesystem and mount them to the planned directories on both server1 and server2 
 
 ```
 mkfs.xfs /dev/nvme0n2 && mkfs.xfs /dev/nvme0n3 && mkfs.xfs /dev/nvme0n4 
@@ -28,7 +29,7 @@ mount /dev/nvme0n3 /minio/disk2
 mount /dev/nvme0n4 /minio/disk3
 ```
 
-在server1和server2分别添加minio-user用户和用户组，并改变存储目录所有者:
+add a user named minio-user and the a user group with the same name on both server1 and server2, and change the directories' owner to minio-user, such as: 
 
 ```
 groupadd -r minio-user
@@ -36,18 +37,18 @@ useradd -M -r -g minio-user minio-user
 chown -R minio-user:minio-user /minio/disk1 /minio/disk2 /minio/disk3 
 ```
 
-##### 安装minio 
+##### Install Minio 
 
-在server1和server2分别安装minio
+Install minio on server1 and server2 respecitvely
 
 ```
 wget https://dl.min.io/server/minio/release/linux-amd64/archive/minio-20240406052602.0.0-1.x86_64.rpm -O minio.rpm
 sudo dnf install minio.rpm
 ```
 
-##### 配置minio
+##### Configure minio
 
-在server1和server2分别新建(编辑) /etc/default/minio 文件，这个文件为minio进程运行时参数提供环境变量文件: 
+Create a new /etc/default/minio file on server1 and server2 respectively, a minio process will read necessary running parameters from this file during its startup. And add following content: 
 
 ```
 # The MINIO_VOLUMES setting covers 2 MinIO hosts with 3 drives each at the specified hostname and drive locations.
@@ -66,50 +67,51 @@ MINIO_ROOT_PASSWORD=minioadmin
 MINIO_SERVER_URL="http://s3.chime.com:9000"
 ```
 
-###### 启动minio集群
+###### Start minio cluster
 
-在server1和server2分别启动minio，并查看minio启动状态
+Start minio process on server1 and server2 respectively，then check the status of the the minio process:
+
 ```
 sudo systemctl start minio 
 systemctl status minio
 ```
 
-###### 配置keepalived+lvs
+###### Configure keepalived+lvs
 
-在server1编辑/etc/keepalived/keepalived.conf，添加如下配置:
+Edit /etc/keepalived/keepalived.conf file on server1, add or modify the following content:
 
 ```
 vrrp_instance VI_4 {
-    state MASTER                   # 设置当前为默认主节点
-    interface ens160               # 管理网网口的名称
-    virtual_router_id 54           # 重要，必须和其它节点的router_id一致
-    priority 255                   # 权重，不小于从节点的数值
+    state MASTER                   # master node
+    interface ens160               # network interface of management network
+    virtual_router_id 54           # must be consistent with other nodes'
+    priority 255                   # weight, must not be less than other nodes'
     advert_int 1
     authentication {
-        auth_type PASS             # 认证方式
-        auth_pass 1111             # 认证密码
+        auth_type PASS             # authentification method
+        auth_pass 1111             # authentification password
     }
     virtual_ipaddress {
-        192.168.231.50            # VIP地址
+        192.168.231.50            # VIP address
     }
 }
 
 virtual_server 192.168.231.50 9000 {
     delay_loop 6
-    lb_algo rr                      # 负载均衡算法
-    lb_kind NAT                     # lvs 工作模式
+    lb_algo rr                      # load balancing algorithm
+    lb_kind NAT                     # lvs work mode
     persistence_timeout 50
     protocol TCP
 
-    real_server 192.168.231.11 9000 {  # real server1地址和端口
+    real_server 192.168.231.11 9000 {  # real server1's IP address and port
         weight
-        TCP_CHECK {                     # 通过TCP健康检测
+        TCP_CHECK {                     # health check via TCP
             connect_timeout 3         
         }
     }
-    real_server 192.168.231.12 9000 {  # real server2地址和端口
+    real_server 192.168.231.12 9000 {  # real server2's IP address and port
         weight 1
-        TCP_CHECK {                     # 通过TCP健康检测
+        TCP_CHECK {                     # health check via TCP
             connect_timeout 3
         }
     }
@@ -117,50 +119,50 @@ virtual_server 192.168.231.50 9000 {
 ```
 
 
-在server2编辑/etc/keepalived/keepalived.conf，添加如下配置:
+Edit /etc/keepalived/keepalived.conf file on server2, add or modify the following content:
 
 ```
 vrrp_instance VI_4 {
-    state BACKUP                   # 设置当前为默认主节点
-    interface ens160               # 管理网网口的名称
-    virtual_router_id 54           # 重要，必须和其它节点的router_id一致
-    priority 254                   # 权重，不小于从节点的数值
+    state BACKUP                   # backup node
+    interface ens160               # network interface of management network
+    virtual_router_id 54           # must be consistent with other nodes'
+    priority 254                   # weight, must not be more than master node's
     advert_int 1
     authentication {
-        auth_type PASS             # 认证方式
-        auth_pass 1111             # 认证密码
+        auth_type PASS             # authentification method
+        auth_pass 1111             # authentification password
     }
     virtual_ipaddress {
-        192.168.231.50            # VIP地址
+        192.168.231.50            # VIP address
     }
 }
 
 virtual_server 192.168.231.50 9000 {
     delay_loop 6
-    lb_algo rr                      # 负载均衡算法
-    lb_kind NAT                     # lvs 工作模式
+    lb_algo rr                      # load balancing algorithm
+    lb_kind NAT                     # lvs working mode
     persistence_timeout 50
     protocol TCP
 
-    real_server 192.168.231.11 9000 {  # real server1地址和端口
+    real_server 192.168.231.11 9000 {  # real server1's IP address and port
         weight
-        TCP_CHECK {                     # 通过TCP健康检测
+        TCP_CHECK {                     # health check via TCP
             connect_timeout 3         
         }
     }
     real_server 192.168.231.12 9000 {  # real server2地址和端口
         weight 1
-        TCP_CHECK {                     # 通过TCP健康检测
+        TCP_CHECK {                     # health check via TCP
             connect_timeout 3
         }
     }
 }
 ```
 
-然后重启keepalived完成为minio服务添加的负载均衡服务: 
+restart keepalived to make the configuration changes take into effect
 
 ```
 sudo systemctl restart keepalived
 ```
 
-最后可以通过 http://s3.chime.com:9001/ 访问Web UI，或者通过 s3.chime.com:9000访问minio服务
+Access minio's Web conole via http://s3.chime.com:9001/, or access minio's API via s3.chime.com:9000 for testing the installation.

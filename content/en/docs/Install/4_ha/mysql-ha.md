@@ -4,32 +4,31 @@ date: 2023-11-09
 weight: 4
 ---
 
-本章将介绍两种不同的mysql高可用方案: 
+This chapter introduces 2 solutions of how to achieve Mysql's HA:
+- Mysql dual master and backup +keepalived(VIP) scheme
+- PXC(Percona XtraDB Cluster) scheme
 
-- Mysql双主互为主备+keepalived(VIP)
-- PXC(Percona XtraDB Cluster)配置
-
-{{% alert title="提示" color="default" %}}
-除了本章介绍的两种mysql高可用方案，您也可以根据需要配置其它的高可用方案，具体参考 [Mysql高可用架构介绍](../../../reference/other/mysql-ha-solutions)
+{{% alert title="Information" color="default" %}}
+Besides the 2 solutions introduced in the chapter, you can achieve other Mysql's HA solutions, refer to [Introduction to Mysql's HA architectures](../../../reference/other/mysql-ha-solutions)
 {{% /alert %}}
 
 
-## 1.Mysql双主互为主备+keepalived的部署配置方法
+## 1.Mysql mutual master and backup + keepalived scheme
 
-两台服务器(Node)，配置两个mysql实例互为主从:
+Requires 2 nodes, configure the 2 mysql instances as mutual masters/backups, such as:
 
 |  Node  |  HostName  |        IP       |
 |--------|------------|-----------------|
 | ServerNode1  | server1.chime.com  | 192.168.231.11 |
 | ServerNode2  | server2.chime.com  | 192.168.231.12 |
 
-另外，每台服务器安装keepalived服务，通过设置VIP对外提供mysql服务。
+plus, install the start keepalived service on each node, and setup a VIP for exposing the mysql service, such as:
 
-规划VIP: 192.168.231.30
+VIP: 192.168.231.30
 
-##### 1.配置server2同步server1的binlog
+##### 1.Configure the server2 to be synchronized with server1 via binlog
 
-在server1上编辑/etc/my.conf, 添加如下配置
+edit /etc/my.conf file on server1, add or modify the following content:
 
 ```
 [mysqld]
@@ -41,13 +40,13 @@ binlog-do-db=chime
 binlog-do-db=portal
 ```
 
-然后重启mysqld服务
+restart the mysqld process
 
 ```
 sudo systemctl restart mysqld 
 ```
 
-在server1上执行SQL:
+execute the SQLs on server1:
 
 ```
 #mysql -u root -p 
@@ -57,7 +56,7 @@ GRANT REPLICATION SLAVE ON *.* TO 'chimesync'@'%';
 FLUSH PRIVILEGES;
 ```
 
-然后查询master的bin log状态: 
+check the status of the binlong on the master Mysql: 
 
 ```
 mysql> show master status \G
@@ -70,17 +69,17 @@ Executed_Gtid_Set:
 1 row in set (0.00 sec)
 ```
 
-在server2上执行SQL:
+execute SQLs on server2:
 
 ```
 change master to master_host='192.168.231.11',master_user='chimesync',master_password='passw0rd',master_log_file='mysql-bin.000001',master_log_pos=156;
 ```
 
-**注意**: master_log_file和master_log_pos需要和server1上 "show master status" 输出的binlog状态一致。
+**Note**: the master_log_file and master_log_pos values must be same with the binlog values of the output of the command "show master status" invoked on the master Mysql.
 
-##### 2.配置server1同步server2的binlog
+##### 2.Configure the server1 to be synchronized with server2 via binlog
 
-在server2上编辑/etc/my.conf, 添加如下配置
+edit /etc/my.conf on server2, add or modify the following content:
 
 ```
 [mysqld]
@@ -92,13 +91,13 @@ binlog-do-db=chime
 binlog-do-db=portal
 ```
 
-然后重启mysqld服务
+restart the mysqld service:
 
 ```
 sudo systemctl restart mysqld 
 ```
 
-在server2上执行SQL:
+execute the SQLs on server2:
 
 ```
 #mysql -u root -p 
@@ -108,7 +107,7 @@ GRANT REPLICATION SLAVE ON *.* TO 'chimesync'@'%';
 FLUSH PRIVILEGES;
 ```
 
-然后查询master的bin log状态: 
+check the status of binlog on master mysql: 
 
 ```
 mysql> show master status \G
@@ -121,17 +120,18 @@ Executed_Gtid_Set:
 1 row in set (0.00 sec)
 ```
 
-在server1上执行SQL:
+execute SQLs on server1:
 
 ```
 change master to master_host='192.168.231.12',master_user='chimesync',master_password='passw0rd',master_log_file='mysql-bin.000001',master_log_pos=157;
 ```
 
-**注意**: master_log_file和master_log_pos需要和server2上 "show master status" 输出的binlog状态一致。
+**Note**: the master_log_file and master_log_pos values must be same with the binlog values of the output of the command "show master status" invoked on the master Mysql.
 
-##### 3.验证server1和server2的mysql实例互为主从
 
-在server1和server2分别在chime库创建test1/test2表
+##### 3.Test binlog's mutual replications between server1 and server2
+
+create test1/test2 table in the "chime" database on server1/server2 respectively 
 
 ```
 #on server1: 
@@ -147,11 +147,11 @@ CREATE TABLE TEST2(id INT AUTO_INCREMENT PRIMARY KEY);
 SHOW TABLES;
 ```
 
-验证test1/test2表在两个数据库实例均能看到。
+check the test1/test2 tables exist on both mysql instances
 
-##### 4.修改配置
+##### 4.Change master/slave setting
 
-如果要修改主从配置，可以在执行修改前停止slave replication，修改后再启动slave replication，例如: 
+If need to change master/slave setting, you should stop the replications first, and change the master/slave setting and then restart the slave replication again, for instance:
 
 ```
 STOP SLAVE;
@@ -159,14 +159,14 @@ change master to xxx xxx ...
 START SLAVE;
 ```
 
-##### 5.keepalived 配置
+##### 5.keepalived configuration
 
-在server1编辑 /etc/keepalived/keepalived.conf, 添加如下内容
+edit /etc/keepalived/keepalived.conf file on server1, add or modify the following content:
 
 ```
 vrrp_script chk_mysql {
     script "nc -zv localhost 3306"
-    interval 2                   # default: 1s
+    interval 2                # default: 1s
 }
 
 vrrp_instance VI_2 {
@@ -190,7 +190,7 @@ vrrp_instance VI_2 {
 ```
 
 
-在server2编辑 /etc/keepalived/keepalived.conf, 添加如下内容
+edit /etc/keepalived/keepalived.conf file on server2, add or modify the following content:
 
 ```
 vrrp_script chk_mysql {
@@ -217,22 +217,21 @@ vrrp_instance VI_2 {
     }
 }
 ```
-
-然后在server1和server2分别重启keepalived: 
+restart the keepalived on server1 and server2 respectively
 
 ```
 sudo systemctl restart keepalived
 ```
 
-最后可通过mysql客户端连接VIP地址进行验证:
+check the connectivity to mysql via VIP address: 
 
 ```
 mysql -h 192.168.231.30 -u root -p
 ```
 
-## 2.PXC(Percona XtraDB Cluster)配置示例
+## 2.PXC(Percona XtraDB Cluster) scheme example
 
-规划三台服务器(Node): 
+require 3 nodes, such as: 
 
 |  Node  |  Host  |        IP       |
 |--------|--------|-----------------|
@@ -240,11 +239,11 @@ mysql -h 192.168.231.30 -u root -p
 | ServerNode2  | server2.chime.com  | 192.168.231.12 |
 | ServerNode3  | server3.chime.com  | 192.168.231.13 |
 
-{{% alert title="提示" color="primary" %}}
-尽管Percona Cluster可以仅使用2个Node，但不推荐。
+{{% alert title="Information" color="primary" %}}
+It is not recommended to deploy Percona cluster with only 2 nodes even though it is feasible.
 {{% /alert %}}
 
-在三台server分别安装percona
+install percona on the 3 servers respectively:
 
 ```
 sudo yum install https://repo.percona.com/yum/percona-release-latest.noarch.rpm
@@ -252,7 +251,7 @@ sudo percona-release setup pxc-80
 sudo yum install percona-xtradb-cluster
 ```
 
-安装结束后，对于每个Node, 编辑mysql配置文件/etc/my.cnf
+edit mysql's configuration file of /etc/my.cnf on each server as following: 
 
 ```
 # vim /etc/my.cnf
@@ -270,7 +269,7 @@ ssl-ca=ca.pem
 ssl-cert=server-cert.pem
 ```
 
-对于server1, 添加如下配置:
+add following content on server1:
 
 ```
 wsrep_node_name=server1.chime.com
@@ -278,30 +277,29 @@ wsrep_node_address=192.168.231.11
 pxc_strict_mode=ENFORCING
 ```
 
-对于server2, 添加如下配置:
+add following content on server2:
 
 ```
 wsrep_node_name=server2.chime.com
 wsrep_node_address=192.168.231.12
 ```
 
-对于server3, 添加如下配置:
+add following content on server3:
 
 ```
 wsrep_node_name=server3.chime.com
 wsrep_node_address=192.168.231.13
 ```
 
-安装配置结束后，分别启动mysql服务
+restart mysql on each server:
 
 ```
-sudo systemctl enable mysql
+sudo systemctl stop mysql
 sudo systemctl start mysql
 ```
 
-查看节点在percona集群的状态:
+check the status of Percona cluster:
 
 ```
 show status like 'wsrep%';
 ```
-

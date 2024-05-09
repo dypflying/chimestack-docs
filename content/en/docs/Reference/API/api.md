@@ -4173,9 +4173,9 @@ Content-Type: application/json
 Accept: application/json
 Authorization: Bearer <api token>
 Host: api.yourchimestack.com:8801
-Content-Length: 205
+Content-Length: 223
 
-{"backend_path":"/chime/backend","description":"a storage pool example","image_cache_path":"/chime/cache","name":"local storage pool","physical_size":107374182400,"reserved_size":0,"size_ratio":2,"type":0}
+{"description":"a storage pool example","meta":"{\"backend_path\":\"/chime/volumes\",\"imagecache_path\":\"/chime/cache\"}","name":"local storage pool","physical_size":107374182400,"reserved_size":0,"size_ratio":2,"type":0}
 ```
 
 `POST /az/{AzUuid}/cluster/{ClusterUuid}/storage_pool`
@@ -4186,9 +4186,8 @@ create a storage pool
 
 ```json
 {
-  "backend_path": "/chime/backend",
   "description": "a storage pool example",
-  "image_cache_path": "/chime/cache",
+  "meta": "{\"backend_path\":\"/chime/volumes\",\"imagecache_path\":\"/chime/cache\"}",
   "name": "local storage pool",
   "physical_size": 107374182400,
   "reserved_size": 0,
@@ -4371,9 +4370,9 @@ Content-Type: application/json
 Accept: application/json
 Authorization: Bearer <api token>
 Host: api.yourchimestack.com:8801
-Content-Length: 205
+Content-Length: 223
 
-{"backend_path":"/chime/backend","description":"a storage pool example","image_cache_path":"/chime/cache","name":"local storage pool","physical_size":107374182400,"reserved_size":0,"size_ratio":2,"type":0}
+{"description":"a storage pool example","meta":"{\"backend_path\":\"/chime/volumes\",\"imagecache_path\":\"/chime/cache\"}","name":"local storage pool","physical_size":107374182400,"reserved_size":0,"size_ratio":2,"type":0}
 ```
 
 `PATCH /az/{AzUuid}/cluster/{ClusterUuid}/storage_pool/{StoragePoolUuid}`
@@ -4384,9 +4383,8 @@ update a storage pool
 
 ```json
 {
-  "backend_path": "/chime/backend",
   "description": "a storage pool example",
-  "image_cache_path": "/chime/cache",
+  "meta": "{\"backend_path\":\"/chime/volumes\",\"imagecache_path\":\"/chime/cache\"}",
   "name": "local storage pool",
   "physical_size": 107374182400,
   "reserved_size": 0,
@@ -8507,9 +8505,8 @@ instance spec request
 
 ```json
 {
-  "backend_path": "/chime/backend",
   "description": "a storage pool example",
-  "image_cache_path": "/chime/cache",
+  "meta": "{\"backend_path\":\"/chime/volumes\",\"imagecache_path\":\"/chime/cache\"}",
   "name": "local storage pool",
   "physical_size": 107374182400,
   "reserved_size": 0,
@@ -8523,9 +8520,8 @@ instance spec request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|backend_path|string|false|none|the backend path of the physical storage in nodes (only for local storage)|
 |description|string|false|none|description for the storage pool|
-|image_cache_path|string|false|none|the image cache path of the physical storage in nodes (only for local storage)|
+|meta|string|false|none|the meta information about the details of the storage pool|
 |name|string|true|none|the storage pool's name|
 |physical_size|integer(int64)|true|none|the physical size of the storage|
 |reserved_size|integer(int64)|false|none|the reserverd storage size, which will not be allocated to virtual machines.|
@@ -9051,9 +9047,8 @@ user  request
 
 ```json
 {
-  "backend_path": "/chime/backend",
   "description": "a storage pool example",
-  "image_cache_path": "/chime/cache",
+  "meta": "{\"backend_path\":\"/chime/volumes\",\"imagecache_path\":\"/chime/cache\"}",
   "name": "local storage pool",
   "physical_size": 107374182400,
   "reserved_size": 0,
@@ -9067,9 +9062,8 @@ user  request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|backend_path|string|false|none|the backend path of the physical storage in nodes (only for local storage)|
 |description|string|false|none|description for the storage pool|
-|image_cache_path|string|false|none|the image cache path of the physical storage in nodes (only for local storage)|
+|meta|string|false|none|the meta information about the details of the storage pool|
 |name|string|true|none|the storage pool's name|
 |physical_size|integer(int64)|true|none|the physical size of the storage|
 |reserved_size|integer(int64)|false|none|the reserverd storage size, which will not be allocated to virtual machines.|

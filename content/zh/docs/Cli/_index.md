@@ -3226,12 +3226,11 @@ chimecli storage_pool listStoragePool \
     "elements": [
       {
         "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
-        "backend_path": "/hyperc/backend",
+        "meta": "{\"backend_path\":\"/chime/backend\",\"image_cache_path\":\"/chime/cache\"}",
         "cluster_name": "Default",
         "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
         "created_at": "2023-06-25T19:10:18Z",
         "description": "local storage pool2aa",
-        "image_cache_path": "/hyperc/cache",
         "name": "Local Storage Pool",
         "physical_size": 0,
         "reserved_size": 0,
@@ -3260,18 +3259,18 @@ Usage:
   chimecli storage_pool createStoragePool [flags]
 
 Flags:
-      --AzUuid string                                    Required. the AZ's uuid
-      --Body string                                      Optional json string for [Body]. the http post body
-      --ClusterUuid string                               Required. the cluster's uuid
-      --createStoragePoolRequest.BackendPath string      the backend path of the physical storage in nodes (only for local storage)
-      --createStoragePoolRequest.Description string      description for the storage pool
-      --createStoragePoolRequest.ImageCachePath string   the image cache path of the physical storage in nodes (only for local storage)
-      --createStoragePoolRequest.Name string             Required. the storage pool's name
-      --createStoragePoolRequest.PhysicalSize int        Required. the physical size of the storage
-      --createStoragePoolRequest.ReservedSize int        the reserverd storage size, which will not be allocated to virtual machines.
-      --createStoragePoolRequest.SizeRatio float32       the storage's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical storage
-      --createStoragePoolRequest.Type int                the storage pool's type, 0: local, 1:iscsi, 2:ceph
-  -h, --help   
+      --AzUuid string                                 Required. the AZ's uuid
+      --Body string                                   Optional json string for [Body]. the http post body
+      --ClusterUuid string                            Required. the cluster's uuid
+      --createStoragePoolRequest.Description string   description for the storage pool
+      --createStoragePoolRequest.Meta string          the meta information about the details of the storage pool
+      --createStoragePoolRequest.Name string          Required. the storage pool's name
+      --createStoragePoolRequest.PhysicalSize int     Required. the physical size of the storage
+      --createStoragePoolRequest.ReservedSize int     the reserverd storage size, which will not be allocated to virtual machines.
+      --createStoragePoolRequest.SizeRatio float32    the storage's allocation ratio, e.g. a value of 2.0 stands for up to allocate double size of the physical storage
+      --createStoragePoolRequest.Type int             the storage pool's type, 0: local, 1:iscsi, 2:ceph
+  -h, --help                                          help for createStoragePool
+
 ```
 
 #### 参数列表
@@ -3286,9 +3285,8 @@ Flags:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|createStoragePoolRequest.BackendPath|string|false|the backend path of the physical storage in nodes (only for local storage)|
 |createStoragePoolRequest.Description|string|false|description for the storage pool|
-|createStoragePoolRequest.ImageCachePath|string|false|the image cache path of the physical storage in nodes (only for local storage)|
+|createStoragePoolRequest.Meta|string|true|the meta information about the details of the storage pool|
 |createStoragePoolRequest.Name|string|true|the storage pool's name|
 |createStoragePoolRequest.PhysicalSize|integer|true|the physical size of the storage|
 |createStoragePoolRequest.ReservedSize|integer|false|the reserverd storage size, which will not be allocated to virtual machines.|
@@ -3302,8 +3300,7 @@ Flags:
 ```
 chimecli storage_pool createStoragePool \
   --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 \
-  --createStoragePoolRequest.BackendPath /chime/backend \
-  --createStoragePoolRequest.ImageCachePath /chime/cache \
+  --createStoragePoolRequest.Meta '{"backend_path":"/chime/backend","image_cache_path":"/chime/cache"}' \
   --createStoragePoolRequest.Name new-storagepool \
   --createStoragePoolRequest.PhysicalSize 1048576000 \
   --createStoragePoolRequest.ReservedSize 0 \
@@ -3315,16 +3312,15 @@ chimecli storage_pool createStoragePool \
 
 ```
 {
-  "requestId": "6b511a24-c98f-4619-99cf-21adba3063f7",
+  "requestId": "a195c04a-9c69-422c-af78-aa87872b20f0",
   "result": {
     "storage_pool": {
-      "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
-      "backend_path": "/chime/backend",
+      "az_uuid": "",
       "cluster_name": "",
       "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-      "created_at": "2024-04-18T07:29:07.754159689Z",
+      "created_at": "2024-05-12T02:42:24.744396665Z",
       "description": "",
-      "image_cache_path": "/chime/cache",
+      "meta": "{\"backend_path\":\"/chime/backend\",\"image_cache_path\":\"/chime/cache\"}",
       "name": "new-storagepool",
       "physical_size": 1048576000,
       "reserved_size": 0,
@@ -3332,7 +3328,7 @@ chimecli storage_pool createStoragePool \
       "total_size": 2097152000,
       "type": 0,
       "used_size": 0,
-      "uuid": "97329a52-44c4-44ac-af4f-fb45c95b618b"
+      "uuid": "3b3cb1d6-b84e-4633-8cb1-5e6b4969c0fb"
     }
   }
 }
@@ -3379,13 +3375,12 @@ chimecli storage_pool getStoragePool --StoragePoolUuid 97329a52-44c4-44ac-af4f-f
   "requestId": "f50f9372-da7d-41c5-8cc9-713a8dcd492c",
   "result": {
     "storage_pool": {
+      "meta": "{\"backend_path\":\"/chime/backend\",\"image_cache_path\":\"/chime/cache\"}",
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
-      "backend_path": "/chime/backend",
       "cluster_name": "Default",
       "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
       "created_at": "2024-04-18T07:29:08Z",
       "description": "",
-      "image_cache_path": "/chime/cache",
       "name": "new-storagepool",
       "physical_size": 1048576000,
       "reserved_size": 0,
@@ -3416,9 +3411,8 @@ Flags:
       --ClusterUuid string                               Required. the cluster's uuid
       --StoragePoolUuid string                           Required. the storage pool's uuid
   -h, --help                                             help for updateStoragePool
-      --updateStoragePoolRequest.BackendPath string      the backend path of the physical storage in nodes (only for local storage)
       --updateStoragePoolRequest.Description string      description for the storage pool
-      --updateStoragePoolRequest.ImageCachePath string   the image cache path of the physical storage in nodes (only for local storage)
+      --updateStoragePoolRequest.Meta string             the meta information about the details of the storage pool
       --updateStoragePoolRequest.Name string             Required. the storage pool's name
       --updateStoragePoolRequest.PhysicalSize int        Required. the physical size of the storage
       --updateStoragePoolRequest.ReservedSize int        the reserverd storage size, which will not be allocated to virtual machines.
@@ -3440,9 +3434,8 @@ Flags:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|updateStoragePoolRequest.BackendPath|string|false|the backend path of the physical storage in nodes (only for local storage)|
 |updateStoragePoolRequest.Description|string|false|description for the storage pool|
-|updateStoragePoolRequest.ImageCachePath|string|false|the image cache path of the physical storage in nodes (only for local storage)|
+|updateStoragePoolRequest.Meta|string|false|the meta information about the details of the storage pool|
 |updateStoragePoolRequest.Name|string|true|the storage pool's name|
 |updateStoragePoolRequest.PhysicalSize|integer|true|the physical size of the storage|
 |updateStoragePoolRequest.ReservedSize|integer|false|the reserverd storage size, which will not be allocated to virtual machines.|
@@ -3456,8 +3449,7 @@ Flags:
 ```
 chimecli storage_pool updateStoragePool \
   --StoragePoolUuid 97329a52-44c4-44ac-af4f-fb45c95b618b \
-  --updateStoragePoolRequest.BackendPath /chime/backend1 \
-  --updateStoragePoolRequest.ImageCachePath /chime/cache \
+  --updateStoragePoolRequest.Meta '{"backend_path":"/chime/backend","image_cache_path":"/chime/cache"}' \
   --updateStoragePoolRequest.PhysicalSize 104857600 \
   --updateStoragePoolRequest.SizeRatio 3 \
   --updateStoragePoolRequest.Type 0 \

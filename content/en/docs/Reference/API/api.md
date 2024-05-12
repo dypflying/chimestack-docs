@@ -4129,12 +4129,11 @@ list storage pools
     "elements": [
       {
         "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
-        "backend_path": "/hyperc/backend",
+        "meta": "{\"backend_path\":\"/chime/backend\",\"image_cache_path\":\"/chime/cache\"}",
         "cluster_name": "Default",
         "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
         "created_at": "2023-06-25T19:10:18Z",
         "description": "local storage pool2aa",
-        "image_cache_path": "/hyperc/cache",
         "name": "Local Storage Pool",
         "physical_size": 0,
         "reserved_size": 0,
@@ -4215,12 +4214,11 @@ create a storage pool
   "result": {
     "storage_pool": {
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
-      "backend_path": "/chime/backend",
+      "meta": "{\"backend_path\":\"/chime/backend\",\"image_cache_path\":\"/chime/cache\"}",
       "cluster_name": "",
       "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
       "created_at": "2024-04-18T07:29:07.754159689Z",
       "description": "",
-      "image_cache_path": "/chime/cache",
       "name": "new-storagepool",
       "physical_size": 1048576000,
       "reserved_size": 0,
@@ -4281,12 +4279,11 @@ get a storage pool's detailed information
   "result": {
     "storage_pool": {
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
-      "backend_path": "/chime/backend",
+      "meta": "{\"backend_path\":\"/chime/backend\",\"image_cache_path\":\"/chime/cache\"}",
       "cluster_name": "Default",
       "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
       "created_at": "2024-04-18T07:29:08Z",
       "description": "",
-      "image_cache_path": "/chime/cache",
       "name": "new-storagepool",
       "physical_size": 1048576000,
       "reserved_size": 0,
@@ -4546,6 +4543,7 @@ list volumes
 |state|query|string|false|filter by the 'state' field|
 |uuid|query|string|false|filter by volume's uuid|
 |host_uuid|query|string|false|filter by host's uuid|
+|type|query|integer(int64)|false|filter by volume's type|
 |AzUuid|path|string|true|filter by AZ's uuid|
 |ClusterUuid|path|string|true|filter by cluster's uuid|
 

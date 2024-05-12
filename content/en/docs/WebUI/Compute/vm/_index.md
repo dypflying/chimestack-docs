@@ -90,7 +90,7 @@ The deleted virtual machines can not be restored anymore, and the attached resou
 ## Volumes And NICs Management
 
 ### Data Volumes Management
-* In the virtual machine's details page, choose a data volume to be detached from the volumes list, click "Detach" button item in the "Operation" dropdown menu to trigger a detaching volume task。**Note: root volume is not detachable**
+* In the virtual machine's details page, choose a data volume to be detached from the volumes list, click "Detach" button item in the "Operation" dropdown menu to trigger a detaching volume task. **Note: root volume is not detachable**
 * In the virtual machine's details page, click "Attach Volume" button, choose the volume to be attached from the popup window and click "Save" to trigger a attaching volume task. Note: Ceph volumes belong to current user are attachable; while only local volumes in the same computing node with the virtual machine can be attached 
 {{% imgproc attach_volume Fit "800x400" %}}
 {{% /imgproc %}}

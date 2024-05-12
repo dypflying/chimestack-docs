@@ -38,7 +38,7 @@ volume's I/O monitor
   * (Optional) Input description
   * Choose a volume specification
   * Input the size of the volume
-  * If it is a local volume, choose a host at which to create the volume
+  * (Optional) If the volume specification is on a local storage pool, you must choose a host at which to create the local volume.
   
 {{% imgproc volume_new Fit "1000x400" %}}
 create new volume

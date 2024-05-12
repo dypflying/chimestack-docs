@@ -24,7 +24,11 @@ weight: 8
   * 保留容量(GiB)
   * (可选)描述信息
 {{% imgproc pool_new Fit "1000x600" %}}
-新建存储池
+新建存储池(本地存储)
+{{% /imgproc %}}
+
+{{% imgproc pool_new_ceph Fit "1000x600" %}}
+新建存储池(Ceph存储)
 {{% /imgproc %}}
 
 * 存储池管理

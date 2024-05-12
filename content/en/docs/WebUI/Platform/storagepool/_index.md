@@ -24,7 +24,11 @@ storage pool list
   * Input the reserved size(GiB), which is not allocatable to virtual volumes. 
   * (Optional) Input description
 {{% imgproc pool_new Fit "1000x600" %}}
-create storage pool 
+create storage pool (local)
+{{% /imgproc %}}
+
+{{% imgproc pool_new_ceph Fit "1000x600" %}}
+create storage pool (ceph)
 {{% /imgproc %}}
 
 * Storage pool management

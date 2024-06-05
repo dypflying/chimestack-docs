@@ -109,7 +109,7 @@ Run the following commands after downloading:
 ```
 sudo yum localinstall influxdb2-2.7.5-1.x86_64.rpm
 sudo systemctl enable influxdb 
-sudo systenctl start influxdb
+sudo systemctl start influxdb
 ```
 
 If you want to install the client command line tool of influxdb，you can download its package from [Offical Website Download](https://docs.influxdata.com/influxdb/v2/tools/influx-cli/)，or from the ChimeStack Website[Downloads/3rd/Influxdb-CLI](https://chimestack.io/downloads/3rd/influxdb-cli)
@@ -195,5 +195,5 @@ timedatectl
 timedatectl list-timezones 
 
 #set new timezone 
-sudo timedatectl set Asia/Shanghai
+sudo timedatectl set-timezone Asia/Shanghai
 ```

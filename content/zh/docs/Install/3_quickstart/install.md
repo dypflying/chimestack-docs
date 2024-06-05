@@ -108,7 +108,7 @@ curl -O https://dl.influxdata.com/influxdb/releases/influxdb2-2.7.5-1.x86_64.rpm
 ```
 sudo yum localinstall influxdb2-2.7.5-1.x86_64.rpm
 sudo systemctl enable influxdb 
-sudo systenctl start influxdb
+sudo systemctl start influxdb
 ```
 
 如果需要influxdb客户端程序，可从[官方下载](https://docs.influxdata.com/influxdb/v2/tools/influx-cli/)客户端安装包，或者从ChimeStack网站[Downloads/3rd/Influxdb-CLI](https://chimestack.io/downloads/3rd/influxdb-cli) 下载influxdb2 客户端安装包
@@ -194,5 +194,5 @@ timedatectl
 timedatectl list-timezones 
 
 #set new timezone 
-sudo timedatectl set Asia/Shanghai
+sudo timedatectl set-timezone Asia/Shanghai
 ```

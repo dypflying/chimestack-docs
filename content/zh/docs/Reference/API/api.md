@@ -1883,10 +1883,12 @@ This will show hosts
 |order|query|string|false|'asc' or 'desc' of sorting|
 |name|query|string|false|filter by the 'name' field|
 |state|query|integer(int64)|false|filter by the 'state' field|
+|monitor_state|query|integer(int64)|false|filter by the 'monitor_state' field|
 |rack_name|query|string|false|filter by the rack's name|
 |manage_ip|query|string|false|filter by the host's management IP address|
 |AzUuid|path|string|true|filter by the AZ's uuid|
 |ClusterUuid|path|string|true|filter by the cluster's uuid|
+|uuid|query|string|false|filter by the 'uuid' field|
 
 > Example responses
 
@@ -2283,6 +2285,45 @@ This will disable a host
 <aside class="warning">
 </aside>
 
+### drainHost
+
+<a id="opIddrainHost"></a>
+
+> Code samples
+
+```http
+PUT /v1/az/string/cluster/string/host/string/drain HTTP/1.1
+Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+
+```
+
+`PUT /az/{AzUuid}/cluster/{ClusterUuid}/host/{HostUuid}/drain`
+
+stop all host's virtual machines
+
+<h3 id="drainhost-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|HostUuid|path|string|true|the host's uuid|
+
+> Example responses
+
+
+<h3 id="drainhost-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+|default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+
+<aside class="warning">
+</aside>
+
 ### enableHost
 
 <a id="opIdenableHost"></a>
@@ -2326,6 +2367,109 @@ This will enable a host
 ```
 
 <h3 id="enablehost-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+|default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+
+<aside class="warning">
+</aside>
+
+### migrateHost
+
+<a id="opIdmigrateHost"></a>
+
+> Code samples
+
+```http
+PUT /v1/az/string/cluster/string/host/string/migrate HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 90
+
+{"migrate_local_disk_vms":false,"target_host_uuid":"4be21239-293c-4989-b637-4df104f17caf"}
+```
+
+`PUT /az/{AzUuid}/cluster/{ClusterUuid}/host/{HostUuid}/migrate`
+
+migrate all host's virtual machines to another hosts
+
+> Body parameter
+
+```json
+{
+  "migrate_local_disk_vms": false,
+  "target_host_uuid": "4be21239-293c-4989-b637-4df104f17caf"
+}
+```
+
+<h3 id="migratehost-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|HostUuid|path|string|true|the host's uuid|
+|body|body|[MigrateHostRequest](#schemamigratehostrequest)|true|the http post body|
+
+> Example responses
+
+
+<h3 id="migratehost-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+|default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+
+<aside class="warning">
+</aside>
+
+### rebuildHost
+
+<a id="opIdrebuildHost"></a>
+
+> Code samples
+
+```http
+PUT /v1/az/string/cluster/string/host/string/rebuild HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 59
+
+{"target_host_uuid":"4be21239-293c-4989-b637-4df104f17caf"}
+```
+
+`PUT /az/{AzUuid}/cluster/{ClusterUuid}/host/{HostUuid}/rebuild`
+
+rebuild all the host's virtual machines to another host
+
+> Body parameter
+
+```json
+{
+  "target_host_uuid": "4be21239-293c-4989-b637-4df104f17caf"
+}
+```
+
+<h3 id="rebuildhost-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|AzUuid|path|string|true|the AZ's uuid|
+|ClusterUuid|path|string|true|the cluster's uuid|
+|HostUuid|path|string|true|the host's uuid|
+|body|body|[RebuildHostRequest](#schemarebuildhostrequest)|false|the http post body|
+
+> Example responses
+
+
+<h3 id="rebuildhost-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2417,6 +2561,7 @@ This will show available clients
 |order|query|string|false|'asc' or 'desc' of sorting|
 |name|query|string|false|filter by the 'name' field|
 |state|query|integer(int64)|false|filter by the 'state' field|
+|monitor_state|query|integer(int64)|false|filter by the 'monitor_state' field|
 |rack_name|query|string|false|filter by the rack's name|
 |manage_ip|query|string|false|filter by the client's management IP address|
 |all|query|integer(int64)|false|retrieve all the clients|
@@ -7894,6 +8039,58 @@ detach a network interface from the virtual machine
 <aside class="warning">
 </aside>
 
+### migrateVm
+
+<a id="opIdmigrateVm"></a>
+
+> Code samples
+
+```http
+PUT /v1/vm/string/migrate HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 143
+
+{"copy_local_snapshots":true,"merge_local_snapshots":true,"migrate_local_disks":true,"target_host_uuid":"4be21239-293c-4989-b637-4df104f17caf"}
+```
+
+`PUT /vm/{VmUuid}/migrate`
+
+migrate a virtual machine to another host
+
+> Body parameter
+
+```json
+{
+  "copy_local_snapshots": true,
+  "merge_local_snapshots": true,
+  "migrate_local_disks": true,
+  "target_host_uuid": "4be21239-293c-4989-b637-4df104f17caf"
+}
+```
+
+<h3 id="migratevm-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|VmUuid|path|string|true|the virtual machine's uuid|
+|body|body|[VmMigrateRequest](#schemavmmigraterequest)|false|the http post body|
+
+> Example responses
+
+
+<h3 id="migratevm-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+|default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+
+<aside class="warning">
+</aside>
+
 ### startVm
 
 <a id="opIdstartVm"></a>
@@ -8802,6 +8999,28 @@ user  request
 |password|string|true|none|the password for authing|
 |user_name|string|true|none|the username for authing|
 
+### MigrateHostRequest
+<!-- backwards compatibility -->
+<a id="schemamigratehostrequest"></a>
+<a id="schema_MigrateHostRequest"></a>
+<a id="tocSmigratehostrequest"></a>
+<a id="tocsmigratehostrequest"></a>
+
+```json
+{
+  "migrate_local_disk_vms": false,
+  "target_host_uuid": "4be21239-293c-4989-b637-4df104f17caf"
+}
+
+```
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|migrate_local_disk_vms|boolean|false|none|whether to migrate the virtual machines with local disks (default is false)|
+|target_host_uuid|string|false|none|the target host's uuid, system will automatically assign one host if omit|
+
 ### OpenApiResponse
 <!-- backwards compatibility -->
 <a id="schemaopenapiresponse"></a>
@@ -8829,6 +9048,26 @@ user  request
 |error|[CommonError](#schemacommonerror)|false|none|none|
 |requestId|string|false|none|in: body|
 |result|any|false|none|in: body|
+
+### RebuildHostRequest
+<!-- backwards compatibility -->
+<a id="schemarebuildhostrequest"></a>
+<a id="schema_RebuildHostRequest"></a>
+<a id="tocSrebuildhostrequest"></a>
+<a id="tocsrebuildhostrequest"></a>
+
+```json
+{
+  "target_host_uuid": "4be21239-293c-4989-b637-4df104f17caf"
+}
+
+```
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|target_host_uuid|string|false|none|the target host's uuid, system will automatically assign one host if omit|
 
 ### UpdateAzRequest
 <!-- backwards compatibility -->
@@ -9175,4 +9414,30 @@ user  request
 |step_iops|integer(int64)|true|none|the step iops value of the volume specification|
 |step_throughput|integer(int64)|true|none|the step throughput value of the volume specification|
 |storage_pool_uuid|string|true|none|the storage pool's Uuid|
+
+### VmMigrateRequest
+<!-- backwards compatibility -->
+<a id="schemavmmigraterequest"></a>
+<a id="schema_VmMigrateRequest"></a>
+<a id="tocSvmmigraterequest"></a>
+<a id="tocsvmmigraterequest"></a>
+
+```json
+{
+  "copy_local_snapshots": true,
+  "merge_local_snapshots": true,
+  "migrate_local_disks": true,
+  "target_host_uuid": "4be21239-293c-4989-b637-4df104f17caf"
+}
+
+```
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|copy_local_snapshots|boolean|false|none|whether to copy all local snapshots to the target host prior to triggering the migration process, becasue the local snapshots are not migratable|
+|merge_local_snapshots|boolean|false|none|whether to merge all local snapshots prior to triggering the migration process, becasue the local snapshots are not migratable|
+|migrate_local_disks|boolean|false|none|setting it to true to migrate local disks, by default a vm contains non-shared disks is not migratable, but if the local disk has local external snapshots, it is not migratable as well, you need to set the "merge_snapshots" option to true|
+|target_host_uuid|string|false|none|the target host's uuid, system will automatically assign one host if omit|
 

@@ -15,7 +15,7 @@ title: ChimeStack
 
 
 {{% blocks/lead color="primary" %}}
-ChimeStack是一个轻量化的云计算基础设施即服务(IaaS)软件，通过ChimeStack可以帮助企业或组织快速地构建和管理企业私有云环境。ChimeStack优化了超融合环境中的存储和计算的I/O路径，尤其适用于小规模私有云、边缘计算服务场景。
+ChimeStack是一个轻量化的云计算基础设施即服务(IaaS)软件，通过ChimeStack可以帮助企业/组织快速地构建和管理企业私有云环境。ChimeStack对超融合环境中存储和计算的I/O路径进行了优化，提升了I/O效率。ChimeStack让部署运维私有云环境变得尤其简单，并最大化地减少了云平台组件对系统资源的消耗，使其更适用于小规模私有云、边缘计算服务场景。
 {.-text-yellow}
 {{% /blocks/lead %}}
 
@@ -27,12 +27,12 @@ ChimeStack是一个轻量化的云计算基础设施即服务(IaaS)软件，通�
 {{% /blocks/feature %}}
 
 
-{{% blocks/feature icon="fa-lightbulb" title="轻量"  %}}
-消耗极少量物理资源
+{{% blocks/feature icon="fa-lightbulb" title="轻量" %}}
+平台组件消耗极少物理资源
 {{% /blocks/feature %}}
 
 {{% blocks/feature icon="fab fa-dropbox" title="高效" %}}
-支持存算融合部署，缩短I/O路径，提高效率
+优化存算融合环境I/O路径，提高效率
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}
@@ -40,16 +40,16 @@ ChimeStack是一个轻量化的云计算基础设施即服务(IaaS)软件，通�
 
 {{% blocks/section type="row" %}}
 
-{{% blocks/feature icon="fab fa-mixer" title="弹性" %}}
-简单、灵活地扩缩容
+{{% blocks/feature icon="fab fa-mixer" title="灵活" %}}
+简单快捷地管理平台资源、调度策略等
 {{% /blocks/feature %}}
 
 {{% blocks/feature icon="fa-compass" title="可靠"  %}}
-全部组件支持HA部署，架构稳定可靠
+平台全部组件支持HA部署，稳定可靠
 {{% /blocks/feature %}}
 
 {{% blocks/feature icon="fa-eye" title="友好" %}}
-支持用户界面和CLI交互，提供SDK支持二开
+提供Web GUI和Cli命令行管控平台和资源，并提供SDK供二次开发
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}

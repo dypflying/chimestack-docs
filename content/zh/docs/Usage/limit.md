@@ -1,6 +1,6 @@
 ---
-title: 3.4 限制
-weight: 4
+title: 3.5 限制
+weight: 5
 description: 介绍ChimeStack平台各资源的限制条件
 ---
 

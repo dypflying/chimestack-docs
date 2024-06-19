@@ -1,5 +1,5 @@
 ---
-title: 1 产品概述
+title: 1. 产品概述
 description: 简要介绍ChimeStack是什么，有什么优势以及功能全景图
 weight: 1
 ---

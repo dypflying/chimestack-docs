@@ -1,6 +1,6 @@
 ---
-title: 4 CLI介绍
-weight: 4
+title: 3.3 命令行工具(CLI)介绍
+weight: 3
 description: 本章介绍ChimeStack命令行工具(CLI)的使用方法
 ---
 

@@ -1,7 +1,5 @@
 ---
-title: 5 参考
-weight: 5
-description: 介绍ChimeStack API和SDK的使用说明
+title: 4. 参考手册
+weight: 4
+description: ChimeStack API的使用说明
 ---
-
-待更新

@@ -100,6 +100,8 @@ chimeadm initserver influxdb --vip-endpoint http://192.168.231.120:8086 \
   --bucket chime \
 ```
 
+其中192.168.231.120是负载均衡的VIP地址，192.168.231.121和192.168.231.122是influxdb实例真实的IP地址。
+
 ### 配置s3
 
 通过以下命令更新chime-server配置
@@ -113,7 +115,7 @@ chimeadm initserver s3 --ip <ip address> --port <port> --ak <ak> --sk <sk> --emb
 - port: s3实例的访问端口
 - ak: s3的ak凭证
 - sk: s3的sk凭证
-- embedded: 启用内置的s3单路径存储引擎
+- embedded: 是否启用内置的s3单路径存储引擎
 - path: 当embedded设置时，s3存储的路径
  
 例如:
@@ -121,8 +123,8 @@ chimeadm initserver s3 --ip <ip address> --port <port> --ak <ak> --sk <sk> --emb
 # use embedded minio engine 
 chimeadm initserver s3 --ip 192.168.231.100 --port 9000 --ak chime --sk chime --embedded --path /storage/s3
 
-# use 3rd s3 service 
-chimeadm initserver s3 --ip 192.168.231.101 --port 9000 --ak chime --sk chime
+# use 3rd s3 service, e.g. minio 
+chimeadm initserver s3 --ip 192.168.231.101 --port 9000 --ak minioadmin --sk minioadmin
 ```
 
 ### 检查chime-server
@@ -133,27 +135,25 @@ chimeadm initserver s3 --ip 192.168.231.101 --port 9000 --ak chime --sk chime
 chimeadm initserver check 
 ```
 
-如果检查成功，则说明配置完成且有效，chime-server已经准备好，可以直接启动
+如果检查成功，则说明配置完成且有效，chime-server已经准备好可以启动
 
 ### 运行chime-server
 
-可以通过以下两种方式启动chime-server:
-
-1. 在前台启动，方便观察输出，可用于调试阶段: 
-```
-chime-server    
-```
-
-2. 通过systemd启动
 ```
 sudo systemctl start chime-server
+```
+
+检查运行状态:
+
+```
+sudo systemctl status chime-server
 ```
 
 chime-server的运行日志在/var/log/chime/server.log
 
 ## 配置并启动chime-portal 
 
-chime-server二进制程序文件除了包含了ChimeStack的管控服务端程序，还内嵌了一个Web UI(portal), Web UI可以独立于Server进程单独运行，也可以和Server运行在一个进程中(默认)。
+chime-server程序除了ChimeStack的管控服务端程序，还内嵌了Web UI(chime-portal), Web UI即可以独立于Server进程单独运行，也可以和Server运行在一个进程中(默认)。
 
 下面介绍如何配置、初始化和运行chime-portal
 
@@ -214,7 +214,8 @@ chimeadm initportal run \
 ```
 chimeadm initportal check 
 ```
-如果检查成功，则说明配置完成，chime-portal可以启动
+
+如果检查成功，则说明配置无误，chime-portal可以启动
 
 ### 运行chime-portal
 
@@ -233,26 +234,27 @@ server和portal配置完成后，运行chime-server会同时启动server和porta
 如果需要分别运行server和portal，可以将 /etc/chime/server.yaml中 [chime-portal]的部分拷贝到新文件, 例如/etc/chime/portal.yaml, 原来的配置文件仅保存[chime-server]部分。这样server和portal可以分别运行: 
 
 ```
-chime-server #仅运行server
-chime-server --cfg /etc/chime/portal.yaml #仅运行portal 
+sudo systemctl start chime-server #仅运行server
+sudo systemctl start chime-portal #仅运行portal
 ```
 
 ## 配置并启动chime-agent
 
 ### 配置chime-agent
 
-chime-agent是ChimeStack的客户端程序，运行在计算节点上(计算节点和管理节点没有界限，可以是不同的服务器，也可以是相同的服务器)。chime-agent启动时会读取agent的配置文件(/etc/chime/agent.yaml)，下面介绍如何通过chimeadm配置并启动agent
+chime-agent是ChimeStack的客户端程序，运行在计算节点上(计算节点和管理节点既可以是不同的服务器，也可以是相同的服务器)。chime-agent启动时会读取agent的配置文件(/etc/chime/agent.yaml)，下面介绍如何通过chimeadm配置并启动agent
 
 通过以下命令配置agent运行参数
 
 ```
-chimeadm initagent --host [host name] --ip <ip address> --rack <rackname> --api <server ip:port> --token <token>
+chimeadm initagent --host [host name] --manage-ip <manage ip address> --node-ip <node ip address>  --storage-ip <storage ip address>  --rack <rackname> --api <server ip:port> --token <token>
 ```
-
 
 命令行参数解释如下: 
 - host(可选): 当前host的名称，如果忽略chimeadm会自动生成一个host名称
-- ip: 当前节点的管理网ip
+- manage-ip: 当前节点的管理网ip
+- manage-ip: 当前节点的业务网ip
+- storage-ip: 当前节点的存储网ip
 - rack: 当前节点所在机架的名称
 - api: chime-server api服务的uri
 - token: chime-server的认证token
@@ -262,7 +264,9 @@ chimeadm initagent --host [host name] --ip <ip address> --rack <rackname> --api 
 ```
 chimeadm initagent
   --host chime-node1 \
-  --ip 192.168.231.158 \
+  --manage-ip 192.168.231.158 \
+  --node-ip 172.28.10.101 \
+  --storage-ip 10.10.10.101 \
   --rack rack1 
   --api 192.168.231.101:8801 \
   --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVdWlkIjoiMGZhYjZkYTQtYmU4Zi00ZGJhLTlhYzgtMTlmNGZmNTE5ZjM0IiwiYXVkIjoiY2hpbWUiLCJleHAiOjE3MTE3OTc0OTYsImlhdCI6MTcxMTc5NzQ5NiwiaXNzIjoiY2hpbWUiLCJzdWIiOiJjaGltZSJ9.DpCskpkyEHodbxPbj061iLMw1n04ibjZQ8qj5o0lRTA
@@ -282,18 +286,16 @@ chimeadm initagent check
 
 ### 运行chime-agent
 
-可以通过两种方式运行chime-agent:
-
-1. 在计算节点直接运行chime-agent程序，可以观察程序输出，方便调试阶段使用
-
-```
-chime-agent
-```
-
-2. 通过systemd启动
 
 ```
 sudo systemctl start chime-agent 
+```
+
+检查chime-agent运行状态:
+
+
+```
+sudo systemctl status chime-agent 
 ```
 
 chime-agent的运行时日志信息在/var/log/chime/agent.log

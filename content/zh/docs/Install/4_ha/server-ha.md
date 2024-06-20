@@ -76,7 +76,7 @@ sudo systemctl restart keepalived
 ### 双活(active-active)配置方案
 
 {{% alert title="提示" color="warning" %}}
-对于分布式系统在多活模式下，可能出现事务的一致性问题，chime-server通过预先对执行的事务添加记录锁，基本保障了在分布式部署中事务的一致性。但目前dev-x.x.x版本测试尚未充分，所以对于Dev版本的ChimeStack不建议采用多活的配置，仍然推荐主备的配置方式达到chime-server的高可用。
+对于分布式系统在多活模式下，可能出现事务的一致性问题，chime-server通过对待执行的事务前置记录锁，基本保障了在多活管控进程事务的一致性。但目前dev-x.x.x版本测试尚未充分，所以对于Dev版本的ChimeStack不建议采用多活的配置，仍然推荐主备的配置方式来实现chime-server进程的高可用。
 {{% /alert %}}
 
 在多活(双活)模式下，各chime-server会根据选择的load balancing算法接受请求，但只有一个服务器可以接收入口请求，也就是说，只有其中一个服务器作为路由器接收外部请求，然后分发到所有可达的chime-server实例来响应请求。这种方式是keepalived+lvs的经典场景，即keepalived提供虚拟路由(VIP)、健康检测和故障failover功能，lvs负责负载均衡。

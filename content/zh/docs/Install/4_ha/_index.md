@@ -13,16 +13,18 @@ weight: 5
 
 - chime-server: 一主一备(多备) + keepalived(VIP) 
 - chime-portal: 双活(多活) + keepalived(VIP) + LVS(load balancing)
-- chime-agent: ChimeStack自实现的故障时客户虚拟机自动迁移
+- chime-agent: 故障域同节点的故障域，节点出现故障时可以通过迁移、重建虚拟机实现虚拟机的高可用。
 - mysql: 互为主从双活实例 + keepalived(VIP), 或者percona集群部署
 - influxdb: 双活实例 + 客户端双写 + 服务端通过VIP读 + keepalived(VIP)
-- s3: minio的MNMD(Multiple-Node-Multiple-Drive)
+- s3: minio的MNMD(Multiple-Node-Multiple-Drive)部署模型
 
-### 节点及配置规划
+### 节点配置要求
 
 生产环境最小配置计算公式: 2*管控节点 + n*计算节点 (n>=1)
 
-节点和节点名称及IP规划：
+### 高可用环境示例规格
+
+示例节点、节点名称和节点IP规划：
 
 | Node | Hostname | Manage IP       | Description | 
 |------|----------|----------|-------------|
@@ -38,19 +40,19 @@ weight: 5
 | 192.168.231.11:8801 | chime-server | Server1 API的真实endpoint | 
 | 192.168.231.12:8801 | chime-server | Server2 API的真实endpoint | 
 | 192.168.231.10:8801 | chime-server | Server API的VIP endpoint |
-| 192.168.231.11:8802 | chime-server | Server1 grpc的真实endpoint | 
-| 192.168.231.12:8802 | chime-server | Server2 grpc的真实endpoint | 
-| 192.168.231.10:8802 | chime-server | Server grpc的VIP endpoint |
-| 192.168.231.11:8033 | chime-portal | Server1 web UI的真实endpoint | 
-| 192.168.231.12:8033 | chime-portal | Server2 web UI的真实endpoint | 
-| 192.168.231.20:80   | chime-portal | web UI的VIP endpoint |
-| 192.168.231.11:3306 | mysql        | Server1 mysql的真实endpoint | 
-| 192.168.231.12:3306 | mysql        | Server2 mysql的真实endpoint | 
-| 192.168.231.30:3306 | mysql        | mysql的VIP endpoint |
-| 192.168.231.11:8086 | influxdb     | Server1 influxdb的真实endpoint | 
-| 192.168.231.12:8086 | influxdb     | Server2 influxdb的真实endpoint | 
-| 192.168.231.40:8086 | influxdb     | influxdb的VIP endpoint |
-| 192.168.231.11:9000 | minio        | Server1 minio的真实endpoint | 
-| 192.168.231.12:9000 | minio        | Server2 minio的真实endpoint | 
-| 192.168.231.50:9000 | minio        | minio的VIP endpoint |
+| 192.168.231.11:8802 | chime-server | Server1 grpc服务的真实endpoint | 
+| 192.168.231.12:8802 | chime-server | Server2 grpc服务的真实endpoint | 
+| 192.168.231.10:8802 | chime-server | Server grpc服务的VIP endpoint |
+| 192.168.231.11:8033 | chime-portal | Server1 web UI服务的真实endpoint | 
+| 192.168.231.12:8033 | chime-portal | Server2 web UI服务的真实endpoint | 
+| 192.168.231.20:80   | chime-portal | web UI服务的VIP endpoint |
+| 192.168.231.11:3306 | mysql        | Server1 mysql服务的真实endpoint | 
+| 192.168.231.12:3306 | mysql        | Server2 mysql服务的真实endpoint | 
+| 192.168.231.30:3306 | mysql        | mysql服务的VIP endpoint |
+| 192.168.231.11:8086 | influxdb     | Server1 influxdb服务的真实endpoint | 
+| 192.168.231.12:8086 | influxdb     | Server2 influxdb服务的真实endpoint | 
+| 192.168.231.40:8086 | influxdb     | influxdb服务的VIP endpoint |
+| 192.168.231.11:9000 | minio        | Server1 minio服务的真实endpoint | 
+| 192.168.231.12:9000 | minio        | Server2 minio服务的真实endpoint | 
+| 192.168.231.50:9000 | minio        | minio服务的VIP endpoint |
 

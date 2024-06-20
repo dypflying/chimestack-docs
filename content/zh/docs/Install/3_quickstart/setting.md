@@ -1,10 +1,13 @@
 ---
 title: 配置ChimeStack
 date: 2023-11-09
-description: 本章介绍如何快速配置并启动ChimeStack
+description: 本章介绍快速配置并启动ChimeStack
 weight: 5
 ---
 
+{{% alert title="提示" color="primary" %}}
+如果是通过AllInOne的ISO系统镜像直接安装的ChimeStack无需进行额外的配置可直接使用, 可忽略本章节
+{{% /alert %}}
 
 ## 配置并启动chime-server
 
@@ -48,7 +51,6 @@ chimeadm initserver mysql --ip 127.0.0.1 \
 ```
 
 运行成功后，数据库chime被成功初始化，同时/etc/chime/server.yaml中的数据库配置信息会被更新。
-
 
 ### 配置influxdb 
 

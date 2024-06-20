@@ -1,17 +1,55 @@
 ---
 title: 安装ChimeStack
 date: 2023-11-09
-description: 本章介绍如何安装ChimeStack
+description: 本章介绍如何安装ChimeStack在AllInOne环境
 weight: 3
 ---
 
-## 通过ISO安装ChimeStack 
+## 1. 通过ISO安装ChimeStack 
 
-## 手动安装ChimeStack 
+从 [Downloads/Releases](https://chimestack.io/downloads/releases)下载ChimeStack的AllInOne ISO镜像安装盘，刻录成光盘或者拷贝U盘进行安装。在虚拟化环境中，可以直接以安装虚拟机的方式通过CDRom进行安装。
 
-### 安装Chime-Stack包 
+{{% alert title="提示" color="primary" %}}
+注意: 需要启用VT-x和IOMMU支持，且系统需要配置2个网络接口
+{{% /alert %}}
 
-Chime-Stack的二进制安装包可从 [Downloads/Releases](https://chimestack.io/downloads/releases) 下载
+安装后的系统，包含已经安装及配置完成ChimeStack的二进制程序(chime-server, chime-agent, chimecli)、配置文件、mysql数据库、influxdb、minio。
+
+仅需要启动ChimeStack即可直接使用
+
+```
+systemctl start chime-server
+systemctl start chime-agent 
+```
+
+通过访问浏览器 'http://<your IP address>:8033/' 即可以直接使用
+
+{{% alert title="提示" color="primary" %}}
+初始超级管理员/密码为: admin/admin
+{{% /alert %}}
+
+**注意**: 用ISO安装的ChimeStack，已经完成以下配置:
+- 一个可用区(Default)
+- 一个集群(Default)
+- 一个节点(就是本机)
+- 一个本地存储池，在/mnt/local目录
+- 一个业务网络，使用网卡名称eth1
+- 一个公有镜像桶
+- 三个实例规格(已经关联到Default集群)
+- 两个云盘规格(已经关联到Default集群)
+
+另外，数据组件的安装路径在：
+- mysql的数据文件在/var/lib/mysql
+- influxdb的数据文件在/var/lib/influxdb
+- minio的存储路径在/mnt/minio
+
+如果需要更换存储磁盘，可以通过修改服务配置或者挂载新磁盘到以上路径的方式。
+
+## 2. 手动安装ChimeStack 
+
+### 2.1 安装ChimeStack包 
+
+从 [Downloads/Releases](https://chimestack.io/downloads/releases) 下载ChimeStack的二进制安装包
 
 {{% alert title="提示" color="primary" %}}
 目前chime-stack安装包仅在centos7/8/9上测试通过
@@ -23,49 +61,55 @@ Chime-Stack的二进制安装包可从 [Downloads/Releases](https://chimestack.i
 sudo ./chimestack-x.x.x.bin 
 ```
 
-- 二进制程序chime-server, chime-agent和chimeadm安装在/usr/bin/
-- server和agent的配置文件在/etc/chime/
-- 进程相关文件在/var/lib/chime/
-- 日志文件在/var/log/chime/ 
+- 二进制程序chime-server、chime-agent、chimeadm和chimecli安装在/usr/bin/
+- server和agent的配置文件(server.yaml和agent.yaml)在/etc/chime/
+- 进程运行时所需文件和目录在/var/lib/chime/
+- 日志文件在/var/log/chime/
   
-如果系统中已经安装了chime-stack，执行安装命令后，除了二进制程序会被更新外，/etc/chime、/var/lib/chime和/var/lib/log下的所有文件均不会被更新，如果要强制更新，运行:
+如果系统中已经安装了chime-stack，执行安装命令后，仅可执行程序会被更新(chime-server、chime-agent、chimeadm、chimecli)，但其它文件/etc/chime、/var/lib/chime和/var/lib/log下的所有文件均不会被更新，如果要强制更新，运行:
 
 ```
 sudo ./chimestack-x.x.x.bin --force 
 ```
 
-### 安装第三方组件
+{{% alert title="提示" color="primary" %}}
+注意：强制更新后，旧版本的配置文件、进程运行时文件以及日志文件会全部被覆盖
+{{% /alert %}}
 
-chime-stack(或)依赖以下第三方程序: 
-- (必须)mysql: 存储chime-server的元数据信息
-- (必须)influxdb: 存储chime-server运行时的全部监控数据
-- (可选)遵守s3协议的对象存储服务软件(如minio),作为镜像服务、备份服务的存储引擎。chime-server内部已经集成了一个简单的s3引擎(minio实现)，当缺少第三方s3服务软件时，可以选择用chime-server的内嵌的s3引擎为镜像服务提供存储的基础设置软件。 
+### 2.2 安装所需组件
 
-#### 1.安装mysql 
+chime-stack依赖以下第三方程序: 
+- (必须)mysql: 元数据的存储
+- (必须)influxdb: 监控数据的存储
+- (可选)遵守s3协议的对象存储服务软件(如minio),作为镜像服务、备份服务的存储引擎 
+
+#### 2.2.1 安装mysql 
 
 推荐安装mysql7.0以上版本
 
-##### 公网可达的安装方式
+##### 网络安装方式
 
 ```
 sudo yum install mysql-server 
 ```
+
 或
+
 ```
 sudo dnf install mysql-server 
 ```
 
 {{% alert title="提示" color="primary" %}}
-如果当前系统已经安装了旧版本的mysql服务，需要先卸载旧的mysql: 
+如果当前系统已经安装了旧版本的mysql服务，最好先卸载旧的mysql: 
 ```
 sudo yum remove mysql-server
 ```
 
-并且需要把 /var/lib/mysql文件夹清空。否则新的mysql可能会出现innodb配置错误
+并且把旧的/var/lib/mysql文件夹清空。否则新安装的mysql可能会出现innodb配置错误
 
 {{% /alert %}}
 
-##### 离线的安装方式
+##### 离线安装方式
 
 mysql8.x的离线安装包可以从 [官方下载](https://dev.mysql.com/downloads/mysql/) 或者从 [Downloads/3rd/Mysql](https://chimestack.io/downloads/3rd/mysql) 获取。
 
@@ -91,11 +135,11 @@ sudo systemctl start mysqld
 ```
 
 
-#### 2.安装influxdb 
+#### 2.2.2.安装influxdb 
 
-ChimeStack要求influxdb 2.x版本，不能和influxdb 1.x的版本一起使用
+ChimeStack要求influxdb 2.x版本
 
-可从官网下载 [官方下载]（https://docs.influxdata.com/influxdb/v2/install/）influxdb官方安装包，例如:
+可从官网下载 [官方下载]（https://docs.influxdata.com/influxdb/v2/install/）influxdb官方安装包:
 
 ```
 curl -O https://dl.influxdata.com/influxdb/releases/influxdb2-2.7.5-1.x86_64.rpm
@@ -111,7 +155,7 @@ sudo systemctl enable influxdb
 sudo systemctl start influxdb
 ```
 
-如果需要influxdb客户端程序，可从[官方下载](https://docs.influxdata.com/influxdb/v2/tools/influx-cli/)客户端安装包，或者从ChimeStack网站[Downloads/3rd/Influxdb-CLI](https://chimestack.io/downloads/3rd/influxdb-cli) 下载influxdb2 客户端安装包
+如果需要安装influxdb客户端程序，可从[官方下载](https://docs.influxdata.com/influxdb/v2/tools/influx-cli/)客户端安装包，或者从ChimeStack网站[Downloads/3rd/Influxdb-CLI](https://chimestack.io/downloads/3rd/influxdb-cli) 下载influxdb2 客户端安装包
 
 下载后安装客户端程序: 
 
@@ -120,13 +164,13 @@ sudo tar xvf influxdb2-client-2.7.3-linux-amd64.tar.gz
 sudo cp influx /usr/bin/ 
 ```
 
-### 安装第三方s3服务程序
+#### 2.2.3 安装第三方s3服务软件
 
 ChimeStack可以对接任何支持s3协议的对象存储引擎，推荐使用minio，minio的部署配置方法参考 [官方文档](https://min.io/docs/minio/linux/operations/installation.html)
 
-### 安装qemu+libvirt
+### 2.3 安装qemu+libvirt
 
-安装 libvirt, qemu, genisoimage
+网络安装 libvirt, qemu, genisoimage
 
 ```
 sudo dnf install qemu-kvm libvirt genisoimage 
@@ -148,10 +192,10 @@ sudo systemctl enable libvirtd
 sudo systemctl start libvirtd
 ```
 
-### 安装chrony服务
+### 2.4 安装chrony服务
 
 {{% alert title="提示" color="primary" %}}
-CentOS 8以后已经使用chrony替代ntp 
+推荐使用chrony，CentOS 8以后的版本已经用chrony替代ntp 
 {{% /alert %}}
 
 安装chrony 
@@ -184,7 +228,7 @@ sudo systemctl enable chronyd
 sudo systemctl start chronyd
 ```
 
-### 设置时区
+### 2.5 设置时区
 
 ```
 #check current timezone setting

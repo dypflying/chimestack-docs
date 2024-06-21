@@ -15,7 +15,7 @@ ChimeStack关于influxdb高可用的解决方案比较简单，通过部署双�
 其中通过物理网口的IP地址访问的influxdb的endpoint叫做real endpoint, 通过VIP访问influxdb的endpoint叫做vip endpoint，客户端对influxdb的数据写入是直接写入全部的real endpoint，而对influxdb数据的读取是通过vip endpoint。
 
 {{% alert title="提示" color="primary" %}}
-这种部署的一个弊端是，由于网络、服务器可能出现的异常，两个influxdb的数据可能不完全一致，当发生VIP切换时，可能出现信息不一致问题。
+由于网络、服务器可能出现的异常，不一定能完全成功写入两个influxdb实例，两个influxdb的数据可能不完全一致。
 {{% /alert %}}
 
 ##### chime-server的influxdb配置
@@ -33,7 +33,7 @@ VIP: 192.168.231.40
 
 ```
 chimeadm initserver influxdb --vip-endpoint http://192.168.231.40:8086 \
-  --real-endpoints http://192.168.231.11:8086,http://192.168.231.12:8086
+  --real-endpoints http://192.168.231.11:8086,http://192.168.231.12:8086 \
   --token x5iGbxLx-2QKN64I3wooyZsHPtmGB4OvBspdSLuOcEBeN-_-rrnC_1GbtSrJrUD0-qSiXsYrKC0T4VF4m97ecw== \
   --org chime \
   --bucket chime \
@@ -107,4 +107,4 @@ sudo systemctl restart keepalived
 
 ###### 其它高可用方案
 
-客户也可以采取开源的influx-cluster方案，具体参考 [influxdb-cluster部署配置](https://github.com/chengshiwen/influxdb-cluster)，或者influxdb官方付费版的Influxdb Enterprise方案, 具体参考 [官方Influx Enterprise部署配置](https://docs.influxdata.com/enterprise_influxdb/v1/)，这两种方案的可用性/可靠性均优于influxdb双写+keepalived的方案，但部署成本和经济成本均比较高，客户可以综合考虑比较收益和成本进行选择。
+您也可以采取开源的influx-cluster方案，具体参考 [influxdb-cluster部署配置](https://github.com/chengshiwen/influxdb-cluster)，或者influxdb官方付费版的Influxdb Enterprise方案, 具体参考 [官方Influx Enterprise部署配置](https://docs.influxdata.com/enterprise_influxdb/v1/)，这两种方案的可用性/可靠性均优于influxdb双写+keepalived的方案，但部署和经济成本较高，您可以综合考虑比较收益和成本进行选择。

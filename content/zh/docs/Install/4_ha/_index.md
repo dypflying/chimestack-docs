@@ -1,5 +1,5 @@
 ---
-title: 2.4 高可用配置
+title: 2.4 生产环境高可用配置
 date: 2023-11-09
 description: 本章介绍在生产环境下的ChimeStack的部署配置方案，包括chime-server、chime-agent的高可用部署及配置，以及mysql, influxdb和s3的高可用部署及配置。
 weight: 5

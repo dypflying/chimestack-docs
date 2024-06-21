@@ -1,5 +1,5 @@
 ---
-title: mysql配置
+title: mysql的高可用部署配置
 date: 2023-11-09
 weight: 4
 ---

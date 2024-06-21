@@ -1,6 +1,6 @@
 ---
-title: 2.3 快速开始
-description: 本章介绍如何快速部署配置一个All-In-One的ChimeStack
+title: 2.3 快速开始一个AllInOne的ChimeStack
+description: 本章介绍如何快速部署配置一个AllInOne的ChimeStack
 weight: 4
 ---
 

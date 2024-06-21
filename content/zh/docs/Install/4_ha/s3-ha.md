@@ -5,7 +5,7 @@ weight: 5
 ---
 
 
-当前流行的s3软件均能提供高可用的架构方案，ChimeStack推荐使用minio的多节点多硬盘架构实现服务的高可用
+当前流行的s3软件均能提供高可用的架构方案，ChimeStack推荐使用minio的多节点多硬盘架构实现服务的高可用，本章示例一个双节点6硬盘的minio的MNMD(Multiple-Node-Multiple-Drive)部署模型
 
 ##### 环境准备
 

@@ -1,6 +1,6 @@
 ---
-title: 用户首页
-description: 普通用户首页功能介绍
+title: 用户仪表盘
+description: 用户首页仪表盘功能介绍
 weight: 2
 ---
 

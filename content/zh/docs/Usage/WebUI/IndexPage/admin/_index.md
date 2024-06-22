@@ -1,6 +1,6 @@
 ---
-title: 管理员首页
-description: 管理员首页功能介绍
+title: 管理员仪表盘
+description: 管理员首页仪表盘功能介绍
 weight: 3
 ---
 

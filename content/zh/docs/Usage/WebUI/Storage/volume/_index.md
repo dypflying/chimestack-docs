@@ -15,6 +15,7 @@ weight: 2
   * 挂载的实例页：显示云盘挂载的虚拟机实例信息
   * 快照信息页：显示该云盘的快照列表
   * 云盘监控页：显示云盘的I/O数据
+  * 操作日志页：显示云盘的操作日志
   
 {{% imgproc volume_list Fit "1000x1000" %}}
 云盘列表页
@@ -30,6 +31,11 @@ weight: 2
 
 {{% imgproc volume_stat Fit "1000x400" %}}
 云盘I/O统计
+{{% /imgproc %}}
+
+
+{{% imgproc volume_log Fit "1000x400" %}}
+云盘操作日志
 {{% /imgproc %}}
 
 ## 新建云盘

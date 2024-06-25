@@ -906,7 +906,6 @@ chimecli host listHost \
 
 返回:
 
-
 ```
 {
   "requestId": "c1e1595f-e0e1-4d06-aad2-8baa09b0a783",
@@ -5246,7 +5245,7 @@ Flags:
 命令行:
 
 ```
-chimecli compute describeVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
+chimecli compute describeVm --VmUuid 2fc99bf7-7f78-4a07-b7d6-471f3b0b5001
 ```
 
 返回:
@@ -5447,7 +5446,6 @@ chimecli compute stopVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 }
 ```
 
-
 ### 迁移虚拟机
 
 #### 命令原型
@@ -5501,6 +5499,7 @@ chimecli compute migrateVm \
   }
 }
 ```
+
 ### 更新虚拟机
 
 #### 命令原型
@@ -5589,6 +5588,7 @@ chimecli compute deleteVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf
 
 返回:
 
+
 ```
 {
   "requestId": "3bb72de6-3d03-425b-a004-6b4e1f12c851",
@@ -5597,6 +5597,7 @@ chimecli compute deleteVm --VmUuid 4be21239-293c-4989-b637-4df104f17caf
   }
 }
 ```
+
 
 ## 云硬盘相关命令
 
@@ -5866,7 +5867,7 @@ Flags:
 命令行:
 
 ```
-chimecli volume getVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
+chimecli volume getVolume --VolumeUuid 0c53842d-77d8-4f9e-8b9b-0ab870a081d3
 ```
 
 返回:
@@ -6315,7 +6316,7 @@ Flags:
 命令行:
 
 ```
-chimecli volume  getSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69
+chimecli volume  getSnapshot --SnapshotUuid afef6f3b-45da-467b-a15b-53dc784bd32c
 ```
 
 返回:

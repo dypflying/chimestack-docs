@@ -61,14 +61,13 @@ ChimeStack是一个轻量化的云计算基础设施即服务(IaaS)软件，通�
 获取ChimeStack安装包
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fab fa-github" title="Contributions welcome!"
+{{% blocks/feature icon="fab fa-github" title="Github!"
     url="https://github.com/dypflying/chimestack" %}}
-欢迎新贡献者! 从 **GitHub** 开始一个 [Pull Request](https://github.com/dypflying/chimestack/pulls) 吧. 
+新版本的发布通知
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fab fa-twitter" title="关注 Twitter!"
-    url="https://twitter.com/chimestack" %}}
-新版本的发布通知等.
+{{% blocks/feature icon="fa fa-envelope" title="MailTo" %}}
+chimestack@sina.com
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}

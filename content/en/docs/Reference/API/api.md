@@ -1897,48 +1897,86 @@ This will show hosts
 
 ```json
 {
-  "requestId": "4fbe3aaa-e491-4dc2-8eb3-f821a17b9883",
+  "requestId": "d66a080a-ab9a-4764-a289-df3d4f83dadc",
   "result": {
     "elements": [
       {
+        "active_domains": 1,
         "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
         "cluster_name": "Default",
         "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-        "created_at": "2024-04-11T10:57:34Z",
+        "created_at": "2024-06-22T09:11:02Z",
         "description": "",
-        "manage_ip": "192.168.231.128",
-        "name": "host-a428263d",
+        "domains": 1,
+        "heartbeat_at": "2024-06-23T09:09:42Z",
+        "last_operation_created_at": "2024-06-24T11:35:07Z",
+        "last_operation_finished_at": "2024-06-24T11:35:07Z",
+        "last_operation_name": "drain",
+        "last_operation_state": 1,
+        "manage_ip": "192.168.231.175",
+        "monitor_state": 0,
+        "name": "dev3",
+        "networks": [],
+        "node_ip": "10.10.10.3",
+        "operation": "",
         "physical_memory": 0,
         "physical_vcpus": 0,
         "rack_name": "rack1",
+        "reserved_ip1": "",
+        "reserved_ip2": "",
         "reserved_memory": 0,
         "reserved_vcpus": 0,
-        "state": 0,
+        "state": 5,
+        "storage_ip": "172.28.10.3",
+        "storage_pools": [],
+        "tasks": [],
         "total_memory": 0,
         "total_vcpus": 0,
         "used_memory": 0,
         "used_vcpus": 0,
-        "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a"
+        "uuid": "12345678-1112-449d-8d3e-3ff8b1323d9e",
+        "vm_count": 1,
+        "vm_running_count": 0,
+        "vms": []
       },
       {
+        "active_domains": 1,
         "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
         "cluster_name": "Default",
         "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-        "created_at": "2024-04-01T11:18:54Z",
+        "created_at": "2024-06-17T12:05:19Z",
         "description": "",
-        "manage_ip": "192.168.231.158",
-        "name": "dennis",
+        "domains": 1,
+        "heartbeat_at": "2024-06-23T09:09:44Z",
+        "last_operation_created_at": "2024-06-17T12:05:19Z",
+        "last_operation_finished_at": "2024-06-17T12:05:19Z",
+        "last_operation_name": "create",
+        "last_operation_state": 1,
+        "manage_ip": "192.168.231.128",
+        "monitor_state": 0,
+        "name": "host-a428263d",
+        "networks": [],
+        "node_ip": "10.10.10.1",
+        "operation": "",
         "physical_memory": 0,
         "physical_vcpus": 0,
         "rack_name": "rack1",
+        "reserved_ip1": "",
+        "reserved_ip2": "",
         "reserved_memory": 0,
         "reserved_vcpus": 0,
         "state": 1,
+        "storage_ip": "172.28.10.1",
+        "storage_pools": [],
+        "tasks": [],
         "total_memory": 0,
         "total_vcpus": 0,
         "used_memory": 0,
         "used_vcpus": 0,
-        "uuid": "a4824bcd-1112-449d-8d3e-3ff8b1323d9e"
+        "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+        "vm_count": 1,
+        "vm_running_count": 1,
+        "vms": []
       }
     ],
     "size": 2,
@@ -2079,27 +2117,149 @@ This will describe a host
 
 ```json
 {
-  "requestId": "843a98df-ab5d-43ed-8d86-84e7a09b3c42",
+  "requestId": "0000e0b4-94e8-42bf-802d-84619d21da2d",
   "result": {
     "host": {
+      "active_domains": 1,
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
       "cluster_name": "Default",
       "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-      "created_at": "2024-04-11T10:57:34Z",
+      "created_at": "2024-06-17T12:05:19Z",
       "description": "",
+      "domains": 1,
+      "heartbeat_at": "2024-06-23T09:09:44Z",
+      "last_operation_created_at": null,
+      "last_operation_finished_at": null,
+      "last_operation_name": "",
+      "last_operation_state": 0,
       "manage_ip": "192.168.231.128",
+      "monitor_state": 0,
       "name": "host-a428263d",
-      "physical_memory": 8291917824,
+      "networks": [
+        {
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "cluster_name": "",
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "2024-06-17T11:10:24Z",
+          "description": "",
+          "interface_name": "ens224",
+          "name": "br1",
+          "state": 1,
+          "type": 0,
+          "uuid": "0851de9d-631b-4a50-b52f-df636a954ef7",
+          "vlan_id": ""
+        }
+      ],
+      "node_ip": "10.10.10.1",
+      "operation": "",
+      "physical_memory": 8038023168,
       "physical_vcpus": 4,
       "rack_name": "rack1",
+      "reserved_ip1": "",
+      "reserved_ip2": "",
       "reserved_memory": 0,
       "reserved_vcpus": 0,
-      "state": 0,
-      "total_memory": 16583835648,
-      "total_vcpus": 8,
+      "state": 1,
+      "storage_ip": "172.28.10.1",
+      "storage_pools": [
+        {
+          "az_uuid": "",
+          "cluster_name": "",
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "2024-05-12T02:42:25Z",
+          "description": "",
+          "meta": "{\"backend_path\":\"/chime/backend\",\"image_cache_path\":\"/chime/cache\"}",
+          "name": "new-storagepool",
+          "physical_size": 0,
+          "reserved_size": 0,
+          "state": 1,
+          "total_size": 0,
+          "type": 0,
+          "used_size": 0,
+          "uuid": "3b3cb1d6-b84e-4633-8cb1-5e6b4969c0fb"
+        },
+        {
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "cluster_name": "",
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "2023-06-25T19:10:18Z",
+          "description": "localstoragepool2aa",
+          "meta": "{\"backend_path\":\"/hyperc/backend\",\"image_cache_path\":\"/hyperc/cache\"}",
+          "name": "LocalStoragePool",
+          "physical_size": 0,
+          "reserved_size": 0,
+          "state": 1,
+          "total_size": 0,
+          "type": 0,
+          "used_size": 0,
+          "uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a"
+        }
+      ],
+      "tasks": [
+        {
+          "created_at": "2024-06-17T12:05:19Z",
+          "description": "create-host-flowchain-a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "finished_at": "2024-06-17T12:05:19Z",
+          "operation_name": "create",
+          "request_id": "0321588b-2b0e-47b8-a907-657340ec5453",
+          "resource_type": "host",
+          "resource_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "state": 1,
+          "updated_at": "2024-06-17T12:05:19Z",
+          "uuid": "08a8aa99-8d3e-4b10-a8e1-924f3fe8e7d3"
+        },
+        {
+          "created_at": "2024-06-17T12:05:10Z",
+          "description": "delete-host-flowchain-a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "finished_at": "2024-06-17T12:05:10Z",
+          "operation_name": "delete",
+          "request_id": "a5eb672b-7ebd-411a-8c4d-c97462dbc74e",
+          "resource_type": "host",
+          "resource_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "state": 1,
+          "updated_at": "2024-06-17T12:05:10Z",
+          "uuid": "d25fd1fb-fb30-43cd-80e0-c992aadf7ea4"
+        }
+      ],
+      "total_memory": 8038023168,
+      "total_vcpus": 4,
       "used_memory": 1073741824,
       "used_vcpus": 1,
-      "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a"
+      "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+      "vm_count": 1,
+      "vm_running_count": 1,
+      "vms": [
+        {
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "boot_type": "",
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "2024-06-22T07:55:38Z",
+          "description": "",
+          "host_ip": "",
+          "host_name": "",
+          "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "hyper_type": "",
+          "image_name": "",
+          "last_operation_created_at": null,
+          "last_operation_finished_at": null,
+          "last_operation_name": "",
+          "last_operation_state": 0,
+          "memory": 1073741824,
+          "name": "vm-ceph",
+          "nics": [],
+          "operation": "",
+          "os_arch": "",
+          "os_detail": "",
+          "os_type": "",
+          "spec_type": 0,
+          "state": 1,
+          "tags": null,
+          "tasks": [],
+          "uuid": "2fc99bf7-7f78-4a07-b7d6-471f3b0b5001",
+          "vcpus": 1,
+          "volumes": []
+        }
+      ]
     }
   }
 }
@@ -2314,6 +2474,17 @@ stop all host's virtual machines
 > Example responses
 
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "cf297413-7e55-4348-9af9-c2df0c794383",
+  "result": {
+    "host": "ok"
+  }
+}
+```
+
 <h3 id="drainhost-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -2418,6 +2589,17 @@ migrate all host's virtual machines to another hosts
 > Example responses
 
 
+> OpenApiResponse
+
+```json
+{
+  "requestId": "8ab00455-caf3-4aad-9ffc-491c2243f518",
+  "result": {
+    "host": "ok"
+  }
+}
+```
+
 <h3 id="migratehost-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -2468,6 +2650,17 @@ rebuild all the host's virtual machines to another host
 
 > Example responses
 
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "ff85da27-9887-48bc-a038-334d7d352c77",
+  "result": {
+    "host": "ok"
+  }
+}
+```
 
 <h3 id="rebuildhost-responses">Responses</h3>
 
@@ -2573,40 +2766,75 @@ This will show available clients
 
 ```json
 {
-  "requestId": "bac39ae5-b097-4780-b122-383c1cc13295",
+  "requestId": "84fbe26a-640c-46a7-9cc3-39832de5beae",
   "result": {
     "elements": [
       {
-        "active_domains": 0,
+        "active_domains": 1,
+        "active_used_memory": 1073741824,
+        "active_used_vcpus": 1,
+        "created_at": "2024-05-13T06:35:14Z",
+        "description": "",
+        "domains": 1,
+        "heartbeat_at": "2024-06-23T09:09:42Z",
+        "manage_ip": "192.168.231.175",
+        "monitor_state": 0,
+        "name": "dev3",
+        "node_ip": "10.10.10.3",
+        "rack_name": "rack1",
+        "reserved_ip1": "",
+        "reserved_ip2": "",
+        "state": 1,
+        "storage_ip": "172.28.10.3",
+        "used_memory": 1073741824,
+        "used_vcpus": 1,
+        "uuid": "12345678-1112-449d-8d3e-3ff8b1323d9e"
+      },
+      {
+        "active_domains": 1,
+        "active_used_memory": 1073741824,
+        "active_used_vcpus": 1,
         "created_at": "2024-04-11T10:56:57Z",
         "description": "",
-        "domains": 0,
-        "heartbeat_at": "2024-04-17T11:32:48Z",
+        "domains": 1,
+        "heartbeat_at": "2024-06-23T09:09:44Z",
         "manage_ip": "192.168.231.128",
+        "monitor_state": 0,
         "name": "host-a428263d",
+        "node_ip": "10.10.10.1",
         "rack_name": "rack1",
+        "reserved_ip1": "",
+        "reserved_ip2": "",
         "state": 1,
-        "used_memory": 0,
-        "used_vcpus": 0,
+        "storage_ip": "172.28.10.1",
+        "used_memory": 1073741824,
+        "used_vcpus": 1,
         "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a"
       },
       {
         "active_domains": 0,
+        "active_used_memory": 0,
+        "active_used_vcpus": 0,
         "created_at": "2024-04-01T11:07:49Z",
         "description": "",
         "domains": 0,
         "heartbeat_at": "2024-04-15T11:29:33Z",
         "manage_ip": "192.168.231.158",
+        "monitor_state": 0,
         "name": "dennis",
+        "node_ip": "",
         "rack_name": "rack1",
-        "state": 1,
+        "reserved_ip1": "",
+        "reserved_ip2": "",
+        "state": 0,
+        "storage_ip": "",
         "used_memory": 0,
         "used_vcpus": 0,
         "uuid": "a4824bcd-1112-449d-8d3e-3ff8b1323d9e"
       }
     ],
-    "size": 2,
-    "total": 2
+    "size": 3,
+    "total": 3
   }
 }
 ```
@@ -3904,31 +4132,60 @@ list network interfaces
 
 ```json
 {
-  "requestId": "3ef89c92-2abb-47b5-a6a4-3a2f913802df",
+  "requestId": "1c455403-cae0-417e-a5ae-21f6b70a73a5",
   "result": {
     "elements": [
       {
         "attached_vms": [],
-        "created_at": "2024-04-18T13:41:51Z",
+        "created_at": "2024-06-22T10:50:56Z",
         "description": "",
-        "gateway": "192.168.231.0",
-        "ip": "192.168.231.1",
-        "mac": "52:54:00:1a:26:0d",
-        "name": "primary-nic-vm1",
-        "netmask": "255.255.255.192",
+        "gateway": "192.168.231.2",
+        "ip": "192.168.231.11",
+        "last_operation_created_at": null,
+        "last_operation_finished_at": null,
+        "last_operation_name": "",
+        "last_operation_state": 0,
+        "mac": "52:54:00:6e:52:be",
+        "name": "primary-nic-vm-local",
+        "netmask": "255.255.255.0",
         "network_name": "br1",
         "network_type": 0,
         "operation": "",
         "primary": 1,
         "state": 2,
-        "subnet_cidr": "192.168.231.1/26",
-        "subnet_name": "subnet1",
-        "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
-        "uuid": "9579970a-ff8b-450b-b4ac-e062f3338bd9"
+        "subnet_cidr": "192.168.231.1/24",
+        "subnet_name": "Subnet1",
+        "subnet_uuid": "f76a3110-1e8e-4094-84e8-a168d27b895b",
+        "tasks": [],
+        "uuid": "1a588665-453b-43d3-b98f-94289e305995"
+      },
+      {
+        "attached_vms": [],
+        "created_at": "2024-06-22T07:55:41Z",
+        "description": "",
+        "gateway": "192.168.231.2",
+        "ip": "192.168.231.0",
+        "last_operation_created_at": null,
+        "last_operation_finished_at": null,
+        "last_operation_name": "",
+        "last_operation_state": 0,
+        "mac": "52:54:00:0e:33:55",
+        "name": "primary-nic-vm-ceph",
+        "netmask": "255.255.255.0",
+        "network_name": "br1",
+        "network_type": 0,
+        "operation": "",
+        "primary": 1,
+        "state": 2,
+        "subnet_cidr": "192.168.231.1/24",
+        "subnet_name": "Subnet1",
+        "subnet_uuid": "f76a3110-1e8e-4094-84e8-a168d27b895b",
+        "tasks": [],
+        "uuid": "52f217a1-019f-4de8-8dfa-97a8cc503c00"
       }
     ],
-    "size": 1,
-    "total": 1
+    "size": 2,
+    "total": 2
   }
 }
 ```
@@ -4055,26 +4312,62 @@ get a network interface's detailed information
 
 ```json
 {
-  "requestId": "e47884dd-973f-469c-95a9-f704c8f4f925",
+  "requestId": "0ac44d83-02ce-4113-8478-025cb1d6a6b7",
   "result": {
     "nic": {
-      "attached_vms": [],
-      "created_at": "2024-04-19T04:04:30Z",
+      "attached_vms": [
+        {
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "boot_type": "",
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "2024-06-22T10:50:56Z",
+          "description": "",
+          "host_ip": "",
+          "host_name": "",
+          "host_uuid": "12345678-1112-449d-8d3e-3ff8b1323d9e",
+          "hyper_type": "",
+          "image_name": "",
+          "last_operation_created_at": null,
+          "last_operation_finished_at": null,
+          "last_operation_name": "",
+          "last_operation_state": 0,
+          "memory": 1073741824,
+          "name": "vm-local",
+          "nics": [],
+          "operation": "",
+          "os_arch": "",
+          "os_detail": "",
+          "os_type": "",
+          "spec_type": 0,
+          "state": 4,
+          "tags": null,
+          "tasks": [],
+          "uuid": "75392964-db07-44b9-bdf4-1ea509dbdf07",
+          "vcpus": 1,
+          "volumes": []
+        }
+      ],
+      "created_at": "2024-06-22T10:50:56Z",
       "description": "",
-      "gateway": "192.168.231.0",
-      "ip": "192.168.231.2",
-      "mac": "52:54:00:8a:31:6a",
-      "name": "test-nic",
-      "netmask": "255.255.255.192",
+      "gateway": "192.168.231.2",
+      "ip": "192.168.231.11",
+      "last_operation_created_at": null,
+      "last_operation_finished_at": null,
+      "last_operation_name": "",
+      "last_operation_state": 0,
+      "mac": "52:54:00:6e:52:be",
+      "name": "primary-nic-vm-local",
+      "netmask": "255.255.255.0",
       "network_name": "br1",
       "network_type": 0,
       "operation": "",
-      "primary": 0,
-      "state": 1,
-      "subnet_cidr": "192.168.231.1/26",
-      "subnet_name": "subnet1",
-      "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
-      "uuid": "16655315-8684-4e22-bd5f-4d8d30618629"
+      "primary": 1,
+      "state": 2,
+      "subnet_cidr": "192.168.231.1/24",
+      "subnet_name": "Subnet1",
+      "subnet_uuid": "f76a3110-1e8e-4094-84e8-a168d27b895b",
+      "tasks": [],
+      "uuid": "1a588665-453b-43d3-b98f-94289e305995"
     }
   }
 }
@@ -4699,7 +4992,7 @@ list volumes
 
 ```json
 {
-  "requestId": "a93a9e10-706a-443c-9564-ed2d8c829aca",
+  "requestId": "cba5f937-4d64-4411-bd2f-da9ae115060d",
   "result": {
     "elements": [
       {
@@ -4707,34 +5000,78 @@ list volumes
         "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
         "cdrom": 0,
         "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-        "created_at": "2024-04-18T13:41:51Z",
+        "created_at": "2024-06-22T10:50:56Z",
         "description": "",
+        "format": "qcow2",
+        "host_ip": "",
+        "host_name": "",
+        "host_uuid": "12345678-1112-449d-8d3e-3ff8b1323d9e",
+        "image_name": "",
+        "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
+        "iops": 1000,
+        "last_operation_created_at": null,
+        "last_operation_finished_at": null,
+        "last_operation_name": "",
+        "last_operation_state": 0,
+        "name": "root-volume-vm-local",
+        "operation": "",
+        "parent_version": 1,
+        "root": 1,
+        "size": 21474836480,
+        "snapshot_count": 2,
+        "snapshots": [],
+        "spec_name": "Standard",
+        "state": 2,
+        "storage_pool_name": "LocalStoragePool",
+        "storage_pool_type": 0,
+        "tasks": [],
+        "throughput": 20971520,
+        "type": 0,
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+        "uuid": "6a8a26ab-4aa9-41c7-9ac4-62a90f905960",
+        "version": 2,
+        "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+      },
+      {
+        "attached_vms": [],
+        "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+        "cdrom": 0,
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2024-06-22T07:55:38Z",
+        "description": "",
+        "format": "qcow2",
         "host_ip": "",
         "host_name": "",
         "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
         "image_name": "",
         "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
-        "iops": 1000,
-        "name": "root-volume-vm1",
+        "iops": 2000,
+        "last_operation_created_at": null,
+        "last_operation_finished_at": null,
+        "last_operation_name": "",
+        "last_operation_state": 0,
+        "name": "root-volume-vm-ceph",
         "operation": "",
         "parent_version": -1,
         "root": 1,
         "size": 21474836480,
         "snapshot_count": 0,
         "snapshots": [],
-        "spec_name": "Standard",
+        "spec_name": "CephMini",
         "state": 2,
-        "storage_pool_name": "Local Storage Pool",
-        "storage_pool_type": 0,
-        "throughput": 20971520,
+        "storage_pool_name": "CephPool",
+        "storage_pool_type": 2,
+        "tasks": [],
+        "throughput": 209715200,
+        "type": 2,
         "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
-        "uuid": "c3d9c7b0-df2a-4713-8175-a74f3d94573c",
+        "uuid": "0c53842d-77d8-4f9e-8b9b-0ab870a081d3",
         "version": 0,
-        "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+        "volume_spec_uuid": "30b84c1e-2044-43d3-932b-569742fd44c3"
       }
     ],
-    "size": 1,
-    "total": 1
+    "size": 2,
+    "total": 2
   }
 }
 ```
@@ -4878,37 +5215,75 @@ get a volume's detailed information
 
 ```json
 {
-  "requestId": "2ab9af2c-fc26-49ee-a5e7-a045849d6fac",
+  "requestId": "283bdd11-8331-4718-bad4-1cb17cb326b0",
   "result": {
     "volume": {
-      "attached_vms": [],
+      "attached_vms": [
+        {
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "boot_type": "",
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "2024-06-22T07:55:38Z",
+          "description": "",
+          "host_ip": "",
+          "host_name": "",
+          "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "hyper_type": "",
+          "image_name": "",
+          "last_operation_created_at": null,
+          "last_operation_finished_at": null,
+          "last_operation_name": "",
+          "last_operation_state": 0,
+          "memory": 1073741824,
+          "name": "vm-ceph",
+          "nics": [],
+          "operation": "",
+          "os_arch": "",
+          "os_detail": "",
+          "os_type": "",
+          "spec_type": 0,
+          "state": 1,
+          "tags": null,
+          "tasks": [],
+          "uuid": "2fc99bf7-7f78-4a07-b7d6-471f3b0b5001",
+          "vcpus": 1,
+          "volumes": []
+        }
+      ],
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
       "cdrom": 0,
       "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-      "created_at": "2024-04-19T01:31:30Z",
+      "created_at": "2024-06-22T07:55:38Z",
       "description": "",
+      "format": "qcow2",
       "host_ip": "192.168.231.128",
       "host_name": "host-a428263d",
       "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
-      "image_name": "",
-      "image_uuid": "",
-      "iops": 1000,
-      "name": "test-volume",
+      "image_name": "centos7_cloudinit.qcow2",
+      "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
+      "iops": 2000,
+      "last_operation_created_at": null,
+      "last_operation_finished_at": null,
+      "last_operation_name": "",
+      "last_operation_state": 0,
+      "name": "root-volume-vm-ceph",
       "operation": "",
       "parent_version": -1,
-      "root": 0,
+      "root": 1,
       "size": 21474836480,
       "snapshot_count": 0,
       "snapshots": [],
-      "spec_name": "Standard",
-      "state": 1,
-      "storage_pool_name": "Local Storage Pool",
-      "storage_pool_type": 0,
-      "throughput": 20971520,
+      "spec_name": "CephMini",
+      "state": 2,
+      "storage_pool_name": "CephPool",
+      "storage_pool_type": 2,
+      "tasks": [],
+      "throughput": 209715200,
+      "type": 2,
       "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
-      "uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
+      "uuid": "0c53842d-77d8-4f9e-8b9b-0ab870a081d3",
       "version": 0,
-      "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+      "volume_spec_uuid": "30b84c1e-2044-43d3-932b-569742fd44c3"
     }
   }
 }
@@ -5251,19 +5626,25 @@ get a snapshot's detail information
 
 ```json
 {
-  "requestId": "a03f1ff3-4827-4b51-bdda-68ba94400203",
+  "requestId": "ae3b219c-5876-4045-b8a2-7c62d4764dab",
   "result": {
     "snapshot": {
-      "created_at": "2024-04-19T02:27:44Z",
+      "created_at": "2024-06-22T10:57:21Z",
       "description": "",
-      "name": "test-snapshot",
+      "last_operation_created_at": "2024-06-22T10:57:21Z",
+      "last_operation_finished_at": "2024-06-22T10:57:22Z",
+      "last_operation_name": "create",
+      "last_operation_state": 1,
+      "name": "snap2",
       "operation": "",
-      "parent_volume_version": -1,
+      "parent_volume_version": 0,
       "state": 1,
+      "tasks": [],
       "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
-      "uuid": "fec61438-370b-4c19-9333-6ce6ab016e69",
-      "volume_uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
-      "volume_version": 0
+      "uuid": "afef6f3b-45da-467b-a15b-53dc784bd32c",
+      "volume_name": "root-volume-vm-local",
+      "volume_uuid": "6a8a26ab-4aa9-41c7-9ac4-62a90f905960",
+      "volume_version": 1
     }
   }
 }
@@ -6897,6 +7278,86 @@ get virtual machine's disk i/o statistical information
 <aside class="warning">
 </aside>
 
+### getHostCpuStats
+
+<a id="opIdgetHostCpuStats"></a>
+
+> Code samples
+
+```http
+GET /v1/metrics/host_cpu?range=0&window=0&host_name=string HTTP/1.1
+Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+
+```
+
+`GET /metrics/host_cpu`
+
+get host's cpu usage statistical information
+
+<h3 id="gethostcpustats-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|range|query|integer(int64)|true|the time range for querying the statistics|
+|window|query|integer(int64)|true|the time window for aggregating the statistics|
+|host_name|query|string|true|the host's name|
+|host_uuid|query|string|false|the host's uuid|
+
+> Example responses
+
+
+<h3 id="gethostcpustats-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+|default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+
+<aside class="warning">
+</aside>
+
+### getHostMemoryStats
+
+<a id="opIdgetHostMemoryStats"></a>
+
+> Code samples
+
+```http
+GET /v1/metrics/host_memory?range=0&window=0&host_name=string HTTP/1.1
+Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+
+```
+
+`GET /metrics/host_memory`
+
+get host's memory usage statistical information
+
+<h3 id="gethostmemorystats-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|range|query|integer(int64)|true|the time range for querying the statistics|
+|window|query|integer(int64)|true|the time window for aggregating the statistics|
+|host_name|query|string|true|the host's name|
+|host_uuid|query|string|false|the host's uuid|
+
+> Example responses
+
+
+<h3 id="gethostmemorystats-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+|default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+
+<aside class="warning">
+</aside>
+
 ### getInterfaceNetIOStats
 
 <a id="opIdgetInterfaceNetIOStats"></a>
@@ -7323,22 +7784,26 @@ list virtual machines
 
 ```json
 {
-  "requestId": "dd66fcff-67e4-4d9c-abd2-410bc8f558b6",
+  "requestId": "a5dd7159-0f11-4258-98cc-092baab56e2f",
   "result": {
     "elements": [
       {
         "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
         "boot_type": "",
         "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-        "created_at": "2024-04-18T13:41:51Z",
+        "created_at": "2024-06-22T07:55:38Z",
         "description": "",
         "host_ip": "",
         "host_name": "",
         "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
         "hyper_type": "",
         "image_name": "",
+        "last_operation_created_at": "2024-06-22T07:55:38Z",
+        "last_operation_finished_at": "2024-06-22T07:56:20Z",
+        "last_operation_name": "create",
+        "last_operation_state": 1,
         "memory": 1073741824,
-        "name": "vm1",
+        "name": "vm-ceph",
         "nics": [],
         "operation": "",
         "os_arch": "",
@@ -7347,7 +7812,8 @@ list virtual machines
         "spec_type": 0,
         "state": 1,
         "tags": null,
-        "uuid": "7a46560b-c00b-4acc-a677-4dcfbfa11a77",
+        "tasks": [],
+        "uuid": "2fc99bf7-7f78-4a07-b7d6-471f3b0b5001",
         "vcpus": 1,
         "volumes": []
       }
@@ -7597,50 +8063,73 @@ get a virtual machine's detailed information
 
 ```json
 {
-  "requestId": "f419f343-d0f2-4f3a-926b-990d9323c896",
+  "requestId": "513712a7-6539-4de9-af17-eed963e6c5f1",
   "result": {
     "vm": {
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
       "boot_type": "bios",
       "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-      "created_at": "2024-04-18T13:41:51Z",
+      "created_at": "2024-06-22T07:55:38Z",
       "description": "",
       "host_ip": "192.168.231.128",
       "host_name": "host-a428263d",
       "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
       "hyper_type": "",
       "image_name": "centos7_cloudinit.qcow2",
+      "last_operation_created_at": null,
+      "last_operation_finished_at": null,
+      "last_operation_name": "",
+      "last_operation_state": 0,
       "memory": 1073741824,
-      "name": "vm1",
+      "name": "vm-ceph",
       "nics": [
         {
           "attached_vms": [],
-          "created_at": "2024-04-18T13:41:51Z",
+          "created_at": "2024-06-22T07:55:41Z",
           "description": "",
-          "gateway": "192.168.231.0",
-          "ip": "192.168.231.1",
-          "mac": "52:54:00:1a:26:0d",
-          "name": "primary-nic-vm1",
-          "netmask": "255.255.255.192",
+          "gateway": "192.168.231.2",
+          "ip": "192.168.231.0",
+          "last_operation_created_at": null,
+          "last_operation_finished_at": null,
+          "last_operation_name": "",
+          "last_operation_state": 0,
+          "mac": "52:54:00:0e:33:55",
+          "name": "primary-nic-vm-ceph",
+          "netmask": "255.255.255.0",
           "network_name": "br1",
           "network_type": 0,
           "operation": "",
           "primary": 1,
           "state": 2,
-          "subnet_cidr": "192.168.231.1/26",
-          "subnet_name": "subnet1",
-          "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
-          "uuid": "9579970a-ff8b-450b-b4ac-e062f3338bd9"
+          "subnet_cidr": "192.168.231.1/24",
+          "subnet_name": "Subnet1",
+          "subnet_uuid": "f76a3110-1e8e-4094-84e8-a168d27b895b",
+          "tasks": [],
+          "uuid": "52f217a1-019f-4de8-8dfa-97a8cc503c00"
         }
       ],
       "operation": "",
       "os_arch": "x86_64",
-      "os_detail": "CentOS 7.x",
+      "os_detail": "CentOS7.x",
       "os_type": "CentOS",
       "spec_type": 0,
       "state": 1,
       "tags": null,
-      "uuid": "7a46560b-c00b-4acc-a677-4dcfbfa11a77",
+      "tasks": [
+        {
+          "created_at": "2024-06-22T07:55:38Z",
+          "description": "create-vm-flowchain",
+          "finished_at": "2024-06-22T07:56:20Z",
+          "operation_name": "create",
+          "request_id": "ec7a5745-a71f-408c-bd33-da0bc3d8c326",
+          "resource_type": "vm",
+          "resource_uuid": "2fc99bf7-7f78-4a07-b7d6-471f3b0b5001",
+          "state": 1,
+          "updated_at": "2024-06-22T07:56:20Z",
+          "uuid": "706d79d2-2dce-48dc-8e68-e931187696b6"
+        }
+      ],
+      "uuid": "2fc99bf7-7f78-4a07-b7d6-471f3b0b5001",
       "vcpus": 1,
       "volumes": [
         {
@@ -7648,15 +8137,20 @@ get a virtual machine's detailed information
           "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
           "cdrom": 0,
           "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-          "created_at": "2024-04-18T13:41:51Z",
+          "created_at": "2024-06-22T07:55:38Z",
           "description": "",
+          "format": "qcow2",
           "host_ip": "",
           "host_name": "",
           "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
           "image_name": "centos7_cloudinit.qcow2",
           "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
-          "iops": 1000,
-          "name": "root-volume-vm1",
+          "iops": 2000,
+          "last_operation_created_at": null,
+          "last_operation_finished_at": null,
+          "last_operation_name": "",
+          "last_operation_state": 0,
+          "name": "root-volume-vm-ceph",
           "operation": "",
           "parent_version": -1,
           "root": 1,
@@ -7667,11 +8161,13 @@ get a virtual machine's detailed information
           "state": 2,
           "storage_pool_name": "",
           "storage_pool_type": 0,
-          "throughput": 20971520,
+          "tasks": [],
+          "throughput": 209715200,
+          "type": 2,
           "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
-          "uuid": "c3d9c7b0-df2a-4713-8175-a74f3d94573c",
+          "uuid": "0c53842d-77d8-4f9e-8b9b-0ab870a081d3",
           "version": 0,
-          "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+          "volume_spec_uuid": "30b84c1e-2044-43d3-932b-569742fd44c3"
         }
       ]
     }
@@ -8080,6 +8576,17 @@ migrate a virtual machine to another host
 
 > Example responses
 
+
+> OpenApiResponse
+
+```json
+{
+  "requestId": "f4f02ee8-8407-4a8c-a217-a9ee2b643b6b",
+  "result": {
+    "vm": "ok"
+  }
+}
+```
 
 <h3 id="migratevm-responses">Responses</h3>
 

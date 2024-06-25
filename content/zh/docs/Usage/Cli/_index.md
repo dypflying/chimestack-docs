@@ -4944,22 +4944,26 @@ chimecli compute listVm --state 1
 
 ```
 {
-  "requestId": "dd66fcff-67e4-4d9c-abd2-410bc8f558b6",
+  "requestId": "81817f91-f300-4bdf-a6f6-c98d70485094",
   "result": {
     "elements": [
       {
         "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
         "boot_type": "",
         "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-        "created_at": "2024-04-18T13:41:51Z",
+        "created_at": "2024-06-22T07:55:38Z",
         "description": "",
         "host_ip": "",
         "host_name": "",
         "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
         "hyper_type": "",
         "image_name": "",
+        "last_operation_created_at": "2024-06-22T07:55:38Z",
+        "last_operation_finished_at": "2024-06-22T07:56:20Z",
+        "last_operation_name": "create",
+        "last_operation_state": 1,
         "memory": 1073741824,
-        "name": "vm1",
+        "name": "vm-ceph",
         "nics": [],
         "operation": "",
         "os_arch": "",
@@ -4968,7 +4972,8 @@ chimecli compute listVm --state 1
         "spec_type": 0,
         "state": 1,
         "tags": null,
-        "uuid": "7a46560b-c00b-4acc-a677-4dcfbfa11a77",
+        "tasks": [],
+        "uuid": "2fc99bf7-7f78-4a07-b7d6-471f3b0b5001",
         "vcpus": 1,
         "volumes": []
       }
@@ -5248,40 +5253,49 @@ chimecli compute describeVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 
 ```
 {
-  "requestId": "f419f343-d0f2-4f3a-926b-990d9323c896",
+  "requestId": "95ef4dfa-fc3f-43f0-8fbe-30c34fe2f85a",
   "result": {
     "vm": {
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
       "boot_type": "bios",
       "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-      "created_at": "2024-04-18T13:41:51Z",
+      "created_at": "2024-06-22T07:55:38Z",
       "description": "",
       "host_ip": "192.168.231.128",
       "host_name": "host-a428263d",
       "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
       "hyper_type": "",
       "image_name": "centos7_cloudinit.qcow2",
+      "last_operation_created_at": null,
+      "last_operation_finished_at": null,
+      "last_operation_name": "",
+      "last_operation_state": 0,
       "memory": 1073741824,
-      "name": "vm1",
+      "name": "vm-ceph",
       "nics": [
         {
           "attached_vms": [],
-          "created_at": "2024-04-18T13:41:51Z",
+          "created_at": "2024-06-22T07:55:41Z",
           "description": "",
-          "gateway": "192.168.231.0",
-          "ip": "192.168.231.1",
-          "mac": "52:54:00:1a:26:0d",
-          "name": "primary-nic-vm1",
-          "netmask": "255.255.255.192",
+          "gateway": "192.168.231.2",
+          "ip": "192.168.231.0",
+          "last_operation_created_at": null,
+          "last_operation_finished_at": null,
+          "last_operation_name": "",
+          "last_operation_state": 0,
+          "mac": "52:54:00:0e:33:55",
+          "name": "primary-nic-vm-ceph",
+          "netmask": "255.255.255.0",
           "network_name": "br1",
           "network_type": 0,
           "operation": "",
           "primary": 1,
           "state": 2,
-          "subnet_cidr": "192.168.231.1/26",
-          "subnet_name": "subnet1",
-          "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
-          "uuid": "9579970a-ff8b-450b-b4ac-e062f3338bd9"
+          "subnet_cidr": "192.168.231.1/24",
+          "subnet_name": "Subnet1",
+          "subnet_uuid": "f76a3110-1e8e-4094-84e8-a168d27b895b",
+          "tasks": [],
+          "uuid": "52f217a1-019f-4de8-8dfa-97a8cc503c00"
         }
       ],
       "operation": "",
@@ -5291,7 +5305,21 @@ chimecli compute describeVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
       "spec_type": 0,
       "state": 1,
       "tags": null,
-      "uuid": "7a46560b-c00b-4acc-a677-4dcfbfa11a77",
+      "tasks": [
+        {
+          "created_at": "2024-06-22T07:55:38Z",
+          "description": "create-vm-flowchain",
+          "finished_at": "2024-06-22T07:56:20Z",
+          "operation_name": "create",
+          "request_id": "ec7a5745-a71f-408c-bd33-da0bc3d8c326",
+          "resource_type": "vm",
+          "resource_uuid": "2fc99bf7-7f78-4a07-b7d6-471f3b0b5001",
+          "state": 1,
+          "updated_at": "2024-06-22T07:56:20Z",
+          "uuid": "706d79d2-2dce-48dc-8e68-e931187696b6"
+        }
+      ],
+      "uuid": "2fc99bf7-7f78-4a07-b7d6-471f3b0b5001",
       "vcpus": 1,
       "volumes": [
         {
@@ -5299,15 +5327,20 @@ chimecli compute describeVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
           "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
           "cdrom": 0,
           "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-          "created_at": "2024-04-18T13:41:51Z",
+          "created_at": "2024-06-22T07:55:38Z",
           "description": "",
+          "format": "qcow2",
           "host_ip": "",
           "host_name": "",
           "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
           "image_name": "centos7_cloudinit.qcow2",
           "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
-          "iops": 1000,
-          "name": "root-volume-vm1",
+          "iops": 2000,
+          "last_operation_created_at": null,
+          "last_operation_finished_at": null,
+          "last_operation_name": "",
+          "last_operation_state": 0,
+          "name": "root-volume-vm-ceph",
           "operation": "",
           "parent_version": -1,
           "root": 1,
@@ -5318,11 +5351,13 @@ chimecli compute describeVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
           "state": 2,
           "storage_pool_name": "",
           "storage_pool_type": 0,
-          "throughput": 20971520,
+          "tasks": [],
+          "throughput": 209715200,
+          "type": 2,
           "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
-          "uuid": "c3d9c7b0-df2a-4713-8175-a74f3d94573c",
+          "uuid": "0c53842d-77d8-4f9e-8b9b-0ab870a081d3",
           "version": 0,
-          "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+          "volume_spec_uuid": "30b84c1e-2044-43d3-932b-569742fd44c3"
         }
       ]
     }
@@ -5617,7 +5652,7 @@ chimecli volume listVolume --state 2
 
 ```
 {
-  "requestId": "a93a9e10-706a-443c-9564-ed2d8c829aca",
+  "requestId": "1138b36d-e86d-4523-b533-5e40afef0c37",
   "result": {
     "elements": [
       {
@@ -5625,34 +5660,78 @@ chimecli volume listVolume --state 2
         "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
         "cdrom": 0,
         "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-        "created_at": "2024-04-18T13:41:51Z",
+        "created_at": "2024-06-22T10:50:56Z",
         "description": "",
+        "format": "qcow2",
+        "host_ip": "",
+        "host_name": "",
+        "host_uuid": "12345678-1112-449d-8d3e-3ff8b1323d9e",
+        "image_name": "",
+        "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
+        "iops": 1000,
+        "last_operation_created_at": null,
+        "last_operation_finished_at": null,
+        "last_operation_name": "",
+        "last_operation_state": 0,
+        "name": "root-volume-vm-local",
+        "operation": "",
+        "parent_version": 1,
+        "root": 1,
+        "size": 21474836480,
+        "snapshot_count": 2,
+        "snapshots": [],
+        "spec_name": "Standard",
+        "state": 2,
+        "storage_pool_name": "Local Storage Pool",
+        "storage_pool_type": 0,
+        "tasks": [],
+        "throughput": 20971520,
+        "type": 0,
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+        "uuid": "6a8a26ab-4aa9-41c7-9ac4-62a90f905960",
+        "version": 2,
+        "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+      },
+      {
+        "attached_vms": [],
+        "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+        "cdrom": 0,
+        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+        "created_at": "2024-06-22T07:55:38Z",
+        "description": "",
+        "format": "qcow2",
         "host_ip": "",
         "host_name": "",
         "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
         "image_name": "",
         "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
-        "iops": 1000,
-        "name": "root-volume-vm1",
+        "iops": 2000,
+        "last_operation_created_at": null,
+        "last_operation_finished_at": null,
+        "last_operation_name": "",
+        "last_operation_state": 0,
+        "name": "root-volume-vm-ceph",
         "operation": "",
         "parent_version": -1,
         "root": 1,
         "size": 21474836480,
         "snapshot_count": 0,
         "snapshots": [],
-        "spec_name": "Standard",
+        "spec_name": "Ceph Mini",
         "state": 2,
-        "storage_pool_name": "Local Storage Pool",
-        "storage_pool_type": 0,
-        "throughput": 20971520,
+        "storage_pool_name": "Ceph Pool",
+        "storage_pool_type": 2,
+        "tasks": [],
+        "throughput": 209715200,
+        "type": 2,
         "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
-        "uuid": "c3d9c7b0-df2a-4713-8175-a74f3d94573c",
+        "uuid": "0c53842d-77d8-4f9e-8b9b-0ab870a081d3",
         "version": 0,
-        "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+        "volume_spec_uuid": "30b84c1e-2044-43d3-932b-569742fd44c3"
       }
     ],
-    "size": 1,
-    "total": 1
+    "size": 2,
+    "total": 2
   }
 }
 ```
@@ -5794,37 +5873,75 @@ chimecli volume getVolume --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 
 ```
 {
-  "requestId": "2ab9af2c-fc26-49ee-a5e7-a045849d6fac",
+  "requestId": "f4f8238d-fdce-4997-84fe-6e588a9354c7",
   "result": {
     "volume": {
-      "attached_vms": [],
+      "attached_vms": [
+        {
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "boot_type": "",
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "2024-06-22T07:55:38Z",
+          "description": "",
+          "host_ip": "",
+          "host_name": "",
+          "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "hyper_type": "",
+          "image_name": "",
+          "last_operation_created_at": null,
+          "last_operation_finished_at": null,
+          "last_operation_name": "",
+          "last_operation_state": 0,
+          "memory": 1073741824,
+          "name": "vm-ceph",
+          "nics": [],
+          "operation": "",
+          "os_arch": "",
+          "os_detail": "",
+          "os_type": "",
+          "spec_type": 0,
+          "state": 1,
+          "tags": null,
+          "tasks": [],
+          "uuid": "2fc99bf7-7f78-4a07-b7d6-471f3b0b5001",
+          "vcpus": 1,
+          "volumes": []
+        }
+      ],
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
       "cdrom": 0,
       "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-      "created_at": "2024-04-19T01:31:30Z",
+      "created_at": "2024-06-22T07:55:38Z",
       "description": "",
+      "format": "qcow2",
       "host_ip": "192.168.231.128",
       "host_name": "host-a428263d",
       "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
-      "image_name": "",
-      "image_uuid": "",
-      "iops": 1000,
-      "name": "test-volume",
+      "image_name": "centos7_cloudinit.qcow2",
+      "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
+      "iops": 2000,
+      "last_operation_created_at": null,
+      "last_operation_finished_at": null,
+      "last_operation_name": "",
+      "last_operation_state": 0,
+      "name": "root-volume-vm-ceph",
       "operation": "",
       "parent_version": -1,
-      "root": 0,
+      "root": 1,
       "size": 21474836480,
       "snapshot_count": 0,
       "snapshots": [],
-      "spec_name": "Standard",
-      "state": 1,
-      "storage_pool_name": "Local Storage Pool",
-      "storage_pool_type": 0,
-      "throughput": 20971520,
+      "spec_name": "Ceph Mini",
+      "state": 2,
+      "storage_pool_name": "Ceph Pool",
+      "storage_pool_type": 2,
+      "tasks": [],
+      "throughput": 209715200,
+      "type": 2,
       "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
-      "uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
+      "uuid": "0c53842d-77d8-4f9e-8b9b-0ab870a081d3",
       "version": 0,
-      "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
+      "volume_spec_uuid": "30b84c1e-2044-43d3-932b-569742fd44c3"
     }
   }
 }
@@ -6140,7 +6257,7 @@ Flags:
 命令行:
 
 ```
-bin/chimecli volume listVolumeSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
+chimecli volume listVolumeSnapshot --VolumeUuid 134698fb-b6ef-40f0-962c-b47b644e7d1f
 ```
 
 返回:
@@ -6205,19 +6322,25 @@ chimecli volume  getSnapshot --SnapshotUuid fec61438-370b-4c19-9333-6ce6ab016e69
 
 ```
 {
-  "requestId": "a03f1ff3-4827-4b51-bdda-68ba94400203",
+  "requestId": "7922d7d4-201f-4d09-8ad4-6fbb1599117e",
   "result": {
     "snapshot": {
-      "created_at": "2024-04-19T02:27:44Z",
+      "created_at": "2024-06-22T10:57:21Z",
       "description": "",
-      "name": "test-snapshot",
+      "last_operation_created_at": "2024-06-22T10:57:21Z",
+      "last_operation_finished_at": "2024-06-22T10:57:22Z",
+      "last_operation_name": "create",
+      "last_operation_state": 1,
+      "name": "snap2",
       "operation": "",
-      "parent_volume_version": -1,
+      "parent_volume_version": 0,
       "state": 1,
+      "tasks": [],
       "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
-      "uuid": "fec61438-370b-4c19-9333-6ce6ab016e69",
-      "volume_uuid": "134698fb-b6ef-40f0-962c-b47b644e7d1f",
-      "volume_version": 0
+      "uuid": "afef6f3b-45da-467b-a15b-53dc784bd32c",
+      "volume_name": "root-volume-vm-local",
+      "volume_uuid": "6a8a26ab-4aa9-41c7-9ac4-62a90f905960",
+      "volume_version": 1
     }
   }
 }
@@ -6446,31 +6569,60 @@ chimecli network listNic --state 2
 
 ```
 {
-  "requestId": "3ef89c92-2abb-47b5-a6a4-3a2f913802df",
+  "requestId": "36834694-3d2a-4a15-b39e-aeed2f02e40f",
   "result": {
     "elements": [
       {
         "attached_vms": [],
-        "created_at": "2024-04-18T13:41:51Z",
+        "created_at": "2024-06-22T10:50:56Z",
         "description": "",
-        "gateway": "192.168.231.0",
-        "ip": "192.168.231.1",
-        "mac": "52:54:00:1a:26:0d",
-        "name": "primary-nic-vm1",
-        "netmask": "255.255.255.192",
+        "gateway": "192.168.231.2",
+        "ip": "192.168.231.11",
+        "last_operation_created_at": null,
+        "last_operation_finished_at": null,
+        "last_operation_name": "",
+        "last_operation_state": 0,
+        "mac": "52:54:00:6e:52:be",
+        "name": "primary-nic-vm-local",
+        "netmask": "255.255.255.0",
         "network_name": "br1",
         "network_type": 0,
         "operation": "",
         "primary": 1,
         "state": 2,
-        "subnet_cidr": "192.168.231.1/26",
-        "subnet_name": "subnet1",
-        "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
-        "uuid": "9579970a-ff8b-450b-b4ac-e062f3338bd9"
+        "subnet_cidr": "192.168.231.1/24",
+        "subnet_name": "Subnet1",
+        "subnet_uuid": "f76a3110-1e8e-4094-84e8-a168d27b895b",
+        "tasks": [],
+        "uuid": "1a588665-453b-43d3-b98f-94289e305995"
+      },
+      {
+        "attached_vms": [],
+        "created_at": "2024-06-22T07:55:41Z",
+        "description": "",
+        "gateway": "192.168.231.2",
+        "ip": "192.168.231.0",
+        "last_operation_created_at": null,
+        "last_operation_finished_at": null,
+        "last_operation_name": "",
+        "last_operation_state": 0,
+        "mac": "52:54:00:0e:33:55",
+        "name": "primary-nic-vm-ceph",
+        "netmask": "255.255.255.0",
+        "network_name": "br1",
+        "network_type": 0,
+        "operation": "",
+        "primary": 1,
+        "state": 2,
+        "subnet_cidr": "192.168.231.1/24",
+        "subnet_name": "Subnet1",
+        "subnet_uuid": "f76a3110-1e8e-4094-84e8-a168d27b895b",
+        "tasks": [],
+        "uuid": "52f217a1-019f-4de8-8dfa-97a8cc503c00"
       }
     ],
-    "size": 1,
-    "total": 1
+    "size": 2,
+    "total": 2
   }
 }
 ```
@@ -6580,33 +6732,69 @@ Flags:
 命令行:
 
 ```
-chimecli network getNic --NicUuid 16655315-8684-4e22-bd5f-4d8d30618629
+chimecli network getNic --NicUuid 1a588665-453b-43d3-b98f-94289e305995
 ```
 
 返回:
 
 ```
 {
-  "requestId": "e47884dd-973f-469c-95a9-f704c8f4f925",
+  "requestId": "1ba3bc91-ba6a-460d-b69f-76be16a7b859",
   "result": {
     "nic": {
-      "attached_vms": [],
-      "created_at": "2024-04-19T04:04:30Z",
+      "attached_vms": [
+        {
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "boot_type": "",
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "2024-06-22T10:50:56Z",
+          "description": "",
+          "host_ip": "",
+          "host_name": "",
+          "host_uuid": "12345678-1112-449d-8d3e-3ff8b1323d9e",
+          "hyper_type": "",
+          "image_name": "",
+          "last_operation_created_at": null,
+          "last_operation_finished_at": null,
+          "last_operation_name": "",
+          "last_operation_state": 0,
+          "memory": 1073741824,
+          "name": "vm-local",
+          "nics": [],
+          "operation": "",
+          "os_arch": "",
+          "os_detail": "",
+          "os_type": "",
+          "spec_type": 0,
+          "state": 4,
+          "tags": null,
+          "tasks": [],
+          "uuid": "75392964-db07-44b9-bdf4-1ea509dbdf07",
+          "vcpus": 1,
+          "volumes": []
+        }
+      ],
+      "created_at": "2024-06-22T10:50:56Z",
       "description": "",
-      "gateway": "192.168.231.0",
-      "ip": "192.168.231.2",
-      "mac": "52:54:00:8a:31:6a",
-      "name": "test-nic",
-      "netmask": "255.255.255.192",
+      "gateway": "192.168.231.2",
+      "ip": "192.168.231.11",
+      "last_operation_created_at": null,
+      "last_operation_finished_at": null,
+      "last_operation_name": "",
+      "last_operation_state": 0,
+      "mac": "52:54:00:6e:52:be",
+      "name": "primary-nic-vm-local",
+      "netmask": "255.255.255.0",
       "network_name": "br1",
       "network_type": 0,
       "operation": "",
-      "primary": 0,
-      "state": 1,
-      "subnet_cidr": "192.168.231.1/26",
-      "subnet_name": "subnet1",
-      "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7",
-      "uuid": "16655315-8684-4e22-bd5f-4d8d30618629"
+      "primary": 1,
+      "state": 2,
+      "subnet_cidr": "192.168.231.1/24",
+      "subnet_name": "Subnet1",
+      "subnet_uuid": "f76a3110-1e8e-4094-84e8-a168d27b895b",
+      "tasks": [],
+      "uuid": "1a588665-453b-43d3-b98f-94289e305995"
     }
   }
 }

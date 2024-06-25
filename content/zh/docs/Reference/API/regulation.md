@@ -1,5 +1,5 @@
 ---
-title: API使用规范
+title: 使用规范
 weight: 1
 ---
 

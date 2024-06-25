@@ -180,9 +180,36 @@ Flags:
 
 ### 通过Web UI重建
 
-在"**节点管理**"页面，选中要迁移的节点，在"**操作**"栏目中，点击"**清空**"菜单项，弹出确认对话框后，点击"**确认**"执行清空操作，清空任务执行时节点的状态机会被锁定，完成后节点的信息会被更新(节点虚拟机数量、清空任务的执行情况等)。
+在"**节点管理**"页面，选中要迁移的节点，在"**操作**"栏目中，点击"**重建**"菜单项，弹出确认对话框后，点击"**确认**"执行重建操作，重建任务执行时节点的状态机会被锁定，完成后节点的信息会被更新(节点虚拟机数量、重建任务的执行情况等)。
 
 {{% imgproc node_rebuild Fit "900x300" %}}
 节点重建
 {{% /imgproc %}}
 
+### 通过chimecli重建
+
+命令原型:
+
+```
+  chimecli host rebuildHost [flags]
+
+Flags:
+      --AzUuid string                              Required. the AZ's uuid
+      --Body string                                Optional json string for [Body]. the http post body
+      --ClusterUuid string                         Required. the cluster's uuid
+      --HostUuid string                            Required. the host's uuid
+      --rebuildHostRequest.TargetHostUuid string   the target host's uuid, system will automatically assign one host if omit
+```
+
+参数说明：
+- **rebuildHostRequest.TargetHostUuid**: (可选)目标节点的Uuid
+
+示例:
+
+```
+   chimecli host rebuildHost \
+      --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+      --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 \
+      --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a \
+      --migrateHostRequest.TargetHostUuid 12345678-1112-449d-8d3e-3ff8b1323d9e 
+```

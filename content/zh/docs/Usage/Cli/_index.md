@@ -868,6 +868,7 @@ Flags:
       --ClusterUuid string   Required. filter by the cluster's uuid
   -h, --help                 help for listHost
       --manage_ip string     filter by the host's management IP address
+      --monitor_state int    filter by the 'monitor_state' field
       --name string          filter by the 'name' field
       --order string         'asc' or 'desc' of sorting
       --page int             the page number of the results in paging
@@ -887,6 +888,7 @@ Flags:
 |order|string|false|'asc' or 'desc' of sorting|
 |name|string|false|filter by the 'name' field|
 |state|integer|false|filter by the 'state' field|
+|monitor_state|integer|false|filter by the 'monitor_state' field|
 |rack_name|string|false|filter by the rack's name|
 |manage_ip|string|false|filter by the host's management IP address|
 |AzUuid|string|true|filter by the AZ's uuid|
@@ -907,48 +909,86 @@ chimecli host listHost \
 
 ```
 {
-  "requestId": "4fbe3aaa-e491-4dc2-8eb3-f821a17b9883",
+  "requestId": "c1e1595f-e0e1-4d06-aad2-8baa09b0a783",
   "result": {
     "elements": [
       {
+        "active_domains": 1,
         "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
         "cluster_name": "Default",
         "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-        "created_at": "2024-04-11T10:57:34Z",
+        "created_at": "2024-06-22T09:11:02Z",
         "description": "",
-        "manage_ip": "192.168.231.128",
-        "name": "host-a428263d",
+        "domains": 1,
+        "heartbeat_at": "2024-06-23T09:09:42Z",
+        "last_operation_created_at": "2024-06-24T11:35:07Z",
+        "last_operation_finished_at": "2024-06-24T11:35:07Z",
+        "last_operation_name": "drain",
+        "last_operation_state": 1,
+        "manage_ip": "192.168.231.175",
+        "monitor_state": 0,
+        "name": "dev3",
+        "networks": [],
+        "node_ip": "10.10.10.3",
+        "operation": "",
         "physical_memory": 0,
         "physical_vcpus": 0,
         "rack_name": "rack1",
+        "reserved_ip1": "",
+        "reserved_ip2": "",
         "reserved_memory": 0,
         "reserved_vcpus": 0,
-        "state": 0,
+        "state": 5,
+        "storage_ip": "172.28.10.3",
+        "storage_pools": [],
+        "tasks": [],
         "total_memory": 0,
         "total_vcpus": 0,
         "used_memory": 0,
         "used_vcpus": 0,
-        "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a"
+        "uuid": "12345678-1112-449d-8d3e-3ff8b1323d9e",
+        "vm_count": 1,
+        "vm_running_count": 0,
+        "vms": []
       },
       {
+        "active_domains": 1,
         "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
         "cluster_name": "Default",
         "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-        "created_at": "2024-04-01T11:18:54Z",
+        "created_at": "2024-06-17T12:05:19Z",
         "description": "",
-        "manage_ip": "192.168.231.158",
-        "name": "dennis",
+        "domains": 1,
+        "heartbeat_at": "2024-06-23T09:09:44Z",
+        "last_operation_created_at": "2024-06-17T12:05:19Z",
+        "last_operation_finished_at": "2024-06-17T12:05:19Z",
+        "last_operation_name": "create",
+        "last_operation_state": 1,
+        "manage_ip": "192.168.231.128",
+        "monitor_state": 0,
+        "name": "host-a428263d",
+        "networks": [],
+        "node_ip": "10.10.10.1",
+        "operation": "",
         "physical_memory": 0,
         "physical_vcpus": 0,
         "rack_name": "rack1",
+        "reserved_ip1": "",
+        "reserved_ip2": "",
         "reserved_memory": 0,
         "reserved_vcpus": 0,
         "state": 1,
+        "storage_ip": "172.28.10.1",
+        "storage_pools": [],
+        "tasks": [],
         "total_memory": 0,
         "total_vcpus": 0,
         "used_memory": 0,
         "used_vcpus": 0,
-        "uuid": "a4824bcd-1112-449d-8d3e-3ff8b1323d9e"
+        "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+        "vm_count": 1,
+        "vm_running_count": 1,
+        "vms": []
       }
     ],
     "size": 2,
@@ -1086,27 +1126,149 @@ chimecli host getHost \
 
 ```
 {
-  "requestId": "843a98df-ab5d-43ed-8d86-84e7a09b3c42",
+  "requestId": "0000e0b4-94e8-42bf-802d-84619d21da2d",
   "result": {
     "host": {
+      "active_domains": 1,
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
       "cluster_name": "Default",
       "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-      "created_at": "2024-04-11T10:57:34Z",
+      "created_at": "2024-06-17T12:05:19Z",
       "description": "",
+      "domains": 1,
+      "heartbeat_at": "2024-06-23T09:09:44Z",
+      "last_operation_created_at": null,
+      "last_operation_finished_at": null,
+      "last_operation_name": "",
+      "last_operation_state": 0,
       "manage_ip": "192.168.231.128",
+      "monitor_state": 0,
       "name": "host-a428263d",
-      "physical_memory": 8291917824,
+      "networks": [
+        {
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "cluster_name": "",
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "2024-06-17T11:10:24Z",
+          "description": "",
+          "interface_name": "ens224",
+          "name": "br1",
+          "state": 1,
+          "type": 0,
+          "uuid": "0851de9d-631b-4a50-b52f-df636a954ef7",
+          "vlan_id": ""
+        }
+      ],
+      "node_ip": "10.10.10.1",
+      "operation": "",
+      "physical_memory": 8038023168,
       "physical_vcpus": 4,
       "rack_name": "rack1",
+      "reserved_ip1": "",
+      "reserved_ip2": "",
       "reserved_memory": 0,
       "reserved_vcpus": 0,
-      "state": 0,
-      "total_memory": 16583835648,
-      "total_vcpus": 8,
+      "state": 1,
+      "storage_ip": "172.28.10.1",
+      "storage_pools": [
+        {
+          "az_uuid": "",
+          "cluster_name": "",
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "2024-05-12T02:42:25Z",
+          "description": "",
+          "meta": "{\"backend_path\":\"/chime/backend\",\"image_cache_path\":\"/chime/cache\"}",
+          "name": "new-storagepool",
+          "physical_size": 0,
+          "reserved_size": 0,
+          "state": 1,
+          "total_size": 0,
+          "type": 0,
+          "used_size": 0,
+          "uuid": "3b3cb1d6-b84e-4633-8cb1-5e6b4969c0fb"
+        },
+        {
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "cluster_name": "",
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "2023-06-25T19:10:18Z",
+          "description": "local storage pool2aa",
+          "meta": "{\"backend_path\":\"/hyperc/backend\",\"image_cache_path\":\"/hyperc/cache\"}",
+          "name": "Local Storage Pool",
+          "physical_size": 0,
+          "reserved_size": 0,
+          "state": 1,
+          "total_size": 0,
+          "type": 0,
+          "used_size": 0,
+          "uuid": "f5165a18-e6b3-42b4-8efc-ad496f318a0a"
+        }
+      ],
+      "tasks": [
+        {
+          "created_at": "2024-06-17T12:05:19Z",
+          "description": "create-host-flowchain-a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "finished_at": "2024-06-17T12:05:19Z",
+          "operation_name": "create",
+          "request_id": "0321588b-2b0e-47b8-a907-657340ec5453",
+          "resource_type": "host",
+          "resource_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "state": 1,
+          "updated_at": "2024-06-17T12:05:19Z",
+          "uuid": "08a8aa99-8d3e-4b10-a8e1-924f3fe8e7d3"
+        },
+        {
+          "created_at": "2024-06-17T12:05:10Z",
+          "description": "delete-host-flowchain-a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "finished_at": "2024-06-17T12:05:10Z",
+          "operation_name": "delete",
+          "request_id": "a5eb672b-7ebd-411a-8c4d-c97462dbc74e",
+          "resource_type": "host",
+          "resource_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "state": 1,
+          "updated_at": "2024-06-17T12:05:10Z",
+          "uuid": "d25fd1fb-fb30-43cd-80e0-c992aadf7ea4"
+        }
+      ],
+      "total_memory": 8038023168,
+      "total_vcpus": 4,
       "used_memory": 1073741824,
       "used_vcpus": 1,
-      "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a"
+      "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+      "vm_count": 1,
+      "vm_running_count": 1,
+      "vms": [
+        {
+          "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "boot_type": "",
+          "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
+          "created_at": "2024-06-22T07:55:38Z",
+          "description": "",
+          "host_ip": "",
+          "host_name": "",
+          "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
+          "hyper_type": "",
+          "image_name": "",
+          "last_operation_created_at": null,
+          "last_operation_finished_at": null,
+          "last_operation_name": "",
+          "last_operation_state": 0,
+          "memory": 1073741824,
+          "name": "vm-ceph",
+          "nics": [],
+          "operation": "",
+          "os_arch": "",
+          "os_detail": "",
+          "os_type": "",
+          "spec_type": 0,
+          "state": 1,
+          "tags": null,
+          "tasks": [],
+          "uuid": "2fc99bf7-7f78-4a07-b7d6-471f3b0b5001",
+          "vcpus": 1,
+          "volumes": []
+        }
+      ]
     }
   }
 }
@@ -1368,6 +1530,161 @@ chimecli host suspendHost \
 }
 ```
 
+
+### 迁移Host 
+
+#### 命令原型
+
+```
+chimecli host migrateHost --help
+migrate all host's virtual machines to another hosts
+
+Usage:
+  chimecli host migrateHost [flags]
+
+Flags:
+      --AzUuid string                              Required. the AZ's uuid
+      --Body string                                Optional json string for [Body]. the http post body
+      --ClusterUuid string                         Required. the cluster's uuid
+      --HostUuid string                            Required. the host's uuid
+  -h, --help                                       help for migrateHost
+      --migrateHostRequest.MigrateLocalDiskVms     whether to migrate the virtual machines with local disks (default is false)
+      --migrateHostRequest.TargetHostUuid string   the target host's uuid, system will automatically assign one host if omit
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|HostUuid|string|true|the host's uuid|
+|migrateHostRequest.MigrateLocalDiskVms|bool|false|whether to migrate the virtual machines with local disks｜
+|migrateHostRequest.TargetHostUuid|string|false|the target host's uuid, system will automatically assign one host if omit｜
+
+#### 示例
+
+命令行:
+```
+chimecli host migrateHost \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e \
+  --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a \
+  --migrateHostRequest.MigrateLocalDiskVms \
+  --migrateHostRequest.TargetHostUuid 12345678-1112-449d-8d3e-3ff8b1323d9e 
+```
+
+返回:
+
+```
+{
+  "requestId": "8ab00455-caf3-4aad-9ffc-491c2243f518",
+  "result": {
+    "host": "ok"
+  }
+}
+```
+
+
+### 清空Host 
+
+#### 命令原型
+
+```
+chimecli host drainHost --help
+stop all host's virtual machines
+
+Usage:
+  chimecli host drainHost [flags]
+
+Flags:
+      --AzUuid string        Required. the AZ's uuid
+      --ClusterUuid string   Required. the cluster's uuid
+      --HostUuid string      Required. the host's uuid
+  -h, --help                 help for drainHost
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|HostUuid|string|true|the host's uuid|
+
+#### 示例
+
+命令行:
+```
+chimecli host drainHost \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e \
+  --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a 
+```
+
+返回:
+
+```
+{
+  "requestId": "cf297413-7e55-4348-9af9-c2df0c794383",
+  "result": {
+    "host": "ok"
+  }
+}
+```
+
+
+### 重建Host 
+
+#### 命令原型
+
+```
+chimecli host rebuildHost --help
+rebuild all the host's virtual machines to another host
+
+Usage:
+  chimecli host rebuildHost [flags]
+
+Flags:
+      --AzUuid string                              Required. the AZ's uuid
+      --Body string                                Optional json string for [Body]. the http post body
+      --ClusterUuid string                         Required. the cluster's uuid
+      --HostUuid string                            Required. the host's uuid
+  -h, --help                                       help for rebuildHost
+      --rebuildHostRequest.TargetHostUuid string   the target host's uuid, system will automatically assign one host if omit
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|AzUuid|string|true|the AZ's uuid|
+|ClusterUuid|string|true|the cluster's uuid|
+|HostUuid|string|true|the host's uuid|
+|rebuildHostRequest.TargetHostUuid|string|false|the target host's uuid, system will automatically assign one host if omit｜
+
+#### 示例
+
+命令行:
+```
+chimecli host rebuildHost \
+  --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
+  --ClusterUuid e359211d-a882-4609-baad-db57557fdf2e \
+  --HostUuid a428263d-64a9-4653-8d7e-556c20c0d77a \
+  --migrateHostRequest.TargetHostUuid 12345678-1112-449d-8d3e-3ff8b1323d9e 
+```
+
+返回:
+
+```
+{
+  "requestId": "ff85da27-9887-48bc-a038-334d7d352c77",
+  "result": {
+    "host": "ok"
+  }
+}
+```
+
 ### 查看物理节点列表
 
 #### 命令原型
@@ -1418,40 +1735,75 @@ chimecli host listClient
 
 ```
 {
-  "requestId": "bac39ae5-b097-4780-b122-383c1cc13295",
+  "requestId": "f4d68139-6355-470e-bea2-660c49316195",
   "result": {
     "elements": [
       {
-        "active_domains": 0,
+        "active_domains": 1,
+        "active_used_memory": 1073741824,
+        "active_used_vcpus": 1,
+        "created_at": "2024-05-13T06:35:14Z",
+        "description": "",
+        "domains": 1,
+        "heartbeat_at": "2024-06-23T09:09:42Z",
+        "manage_ip": "192.168.231.175",
+        "monitor_state": 0,
+        "name": "dev3",
+        "node_ip": "10.10.10.3",
+        "rack_name": "rack1",
+        "reserved_ip1": "",
+        "reserved_ip2": "",
+        "state": 1,
+        "storage_ip": "172.28.10.3",
+        "used_memory": 1073741824,
+        "used_vcpus": 1,
+        "uuid": "12345678-1112-449d-8d3e-3ff8b1323d9e"
+      },
+      {
+        "active_domains": 1,
+        "active_used_memory": 1073741824,
+        "active_used_vcpus": 1,
         "created_at": "2024-04-11T10:56:57Z",
         "description": "",
-        "domains": 0,
-        "heartbeat_at": "2024-04-17T11:32:48Z",
+        "domains": 1,
+        "heartbeat_at": "2024-06-23T09:09:44Z",
         "manage_ip": "192.168.231.128",
+        "monitor_state": 0,
         "name": "host-a428263d",
+        "node_ip": "10.10.10.1",
         "rack_name": "rack1",
+        "reserved_ip1": "",
+        "reserved_ip2": "",
         "state": 1,
-        "used_memory": 0,
-        "used_vcpus": 0,
+        "storage_ip": "172.28.10.1",
+        "used_memory": 1073741824,
+        "used_vcpus": 1,
         "uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a"
       },
       {
         "active_domains": 0,
+        "active_used_memory": 0,
+        "active_used_vcpus": 0,
         "created_at": "2024-04-01T11:07:49Z",
         "description": "",
         "domains": 0,
         "heartbeat_at": "2024-04-15T11:29:33Z",
         "manage_ip": "192.168.231.158",
+        "monitor_state": 0,
         "name": "dennis",
+        "node_ip": "",
         "rack_name": "rack1",
-        "state": 1,
+        "reserved_ip1": "",
+        "reserved_ip2": "",
+        "state": 0,
+        "storage_ip": "",
         "used_memory": 0,
         "used_vcpus": 0,
         "uuid": "a4824bcd-1112-449d-8d3e-3ff8b1323d9e"
       }
     ],
-    "size": 2,
-    "total": 2
+    "size": 3,
+    "total": 3
   }
 }
 ```
@@ -5060,6 +5412,60 @@ chimecli compute stopVm --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77
 }
 ```
 
+
+### 迁移虚拟机
+
+#### 命令原型
+
+```
+chimecli compute migrateVm --help
+migrate a virtual machine to another host
+
+Usage:
+  chimecli compute migrateVm [flags]
+
+Flags:
+      --Body string                              Optional json string for [Body]. the http post body
+      --VmUuid string                            Required. the virtual machine's uuid
+  -h, --help                                     help for migrateVm
+      --vmMigrateRequest.CopyLocalSnapshots      whether to copy all local snapshots to the target host prior to triggering the migration process, becasue the local snapshots are not migratable
+      --vmMigrateRequest.MergeLocalSnapshots     whether to merge all local snapshots prior to triggering the migration process, becasue the local snapshots are not migratable
+      --vmMigrateRequest.MigrateLocalDisks       setting it to true to migrate local disks, by default a vm contains non-shared disks is not migratable, but if the local disk has local external snapshots, it is not migratable as well, you need to set the "merge_snapshots" option to true
+      --vmMigrateRequest.TargetHostUuid string   the target host's uuid, system will automatically assign one host if omit
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|VmUuid|string|true|the virtual machine's uuid|
+|vmMigrateRequest.TargetHostUuid|string|false|the target host's uuid, system will automatically assign one host if omit|
+|vmMigrateRequest.MigrateLocalDisks|bool|false|setting it to true to migrate local disks, by default a vm contains non-shared disks is not migratable, but if the local disk has local external snapshots, it is not migratable as well, you need to set the "merge_snapshots" option to true|
+|vmMigrateRequest.CopyLocalSnapshots|bool|false|whether to copy all local snapshots to the target host prior to triggering the migration process, becasue the local snapshots are not migratable|
+|vmMigrateRequest.MergeLocalSnapshots|bool|false|whether to merge all local snapshots prior to triggering the migration process, becasue the local snapshots are not migratable|
+
+#### 示例
+
+命令行:
+
+```
+chimecli compute migrateVm \
+  --VmUuid 7a46560b-c00b-4acc-a677-4dcfbfa11a77 \
+  --vmMigrateRequest.TargetHostUuid 12345678-1112-449d-8d3e-3ff8b1323d9e  \
+  --vmMigrateRequest.MigrateLocalDisks \
+  --vmMigrateRequest.CopyLocalSnapshots
+```
+
+返回:
+
+```
+{
+  "requestId": "f4f02ee8-8407-4a8c-a217-a9ee2b643b6b",
+  "result": {
+    "vm": "ok"
+  }
+}
+```
 ### 更新虚拟机
 
 #### 命令原型

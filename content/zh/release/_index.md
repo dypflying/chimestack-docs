@@ -9,21 +9,29 @@ weight: 30
 {.mt-8}
 {{% /blocks/cover %}}
 
-{{% blocks/section color="light" type="row" %}}
+{{% blocks/section color="default" type="row" %}}
+
+#### [ChimeStack功能介绍(v0.1)](/release/landscape)
+
+<br></br>
+
+
 ## 当前版本
 
 |版本|说明|下载链接|
 |----|----|-------|
-|dev.0.1.1|安全组、限额管理|[下载](http://download.chimestack.io/dev.0.1.1/)|
-|dev.0.1.2|资源锁优化、任务超时控制、报警通知管理、虚拟机创建时不启动|[下载](http://download.chimestack.io/dev.0.1.2/)|
+|dev.0.1.1|实现了安全组、限额管理功能|[下载](http://download.chimestack.io/dev.0.1.1/)|
+|dev.0.1.2|优化资源锁，添加任务超时控制、报警通知管理、虚拟机创建时不启动等功能|[下载](http://download.chimestack.io/dev.0.1.2/)|
 
 {{% /blocks/section %}}
   
-{{% blocks/section color="primary" type="row" %}}
-## 路线图(RoadMap)
+<hr/>
+{{% blocks/section color="default" type="row" %}}
+
+## RoadMap
 
 - 版本 0.1
-  - [ChimeStack功能介绍(v0.1)](/release/deprecated)
+  - [ChimeStack功能介绍(v0.1)](/release/landscape)
 - 版本 0.2 
   - ChimeStor
     - ChimeStor存储池
@@ -42,15 +50,16 @@ weight: 30
 - 版本 2.0 
   - VPC虚拟专有网
   - NAT网关
-  
+
 {{% /blocks/section %}}
 
-{{% blocks/section color="light" type="row" %}}
+{{% blocks/section color="gray" type="row" %}}
+
 ## 弃用版本
 
 |版本|说明|
 |----|----|
-|dev.0.1.0|[ChimeStack功能介绍(v0.1)](/release/deprecated)|
+|dev.0.1.0|已经下架|
 
 {{% /blocks/section %}}
 

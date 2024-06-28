@@ -7,7 +7,7 @@ title: ChimeStack
   Know More <i class="fas fa-arrow-alt-circle-right ms-2"></i>
 </a>
 <a class="btn btn-lg btn-secondary me-3 mb-4" href="https://github.com/dypflying/chimestack">
-  Download <i class="fab fa-github ms-2 "></i>
+  Download <i class="fa-download ms-2 "></i>
 </a>
 <p class="lead mt-5" style="color:yellow;"><b>A Lightweight Private Cloud Infrastructure Software</b></p>
 {{< blocks/link-down color="info" >}}
@@ -15,7 +15,7 @@ title: ChimeStack
 
 
 {{% blocks/lead color="primary" %}}
-ChimeStack is a lightweight cloud computing infrastructure as a service (IaaS) software. ChimeStack helps companies and organizations quickly build and operate private cloud environments. ChimeStack improves the storage's efficiency in hyper-converged environments by shortening the I/O path. ChimeStack is designed for small-scale cloud infrastructure as a service and edge computing service scenarios.
+ChimeStack is a lightweight cloud computing infrastructure as a service (IaaS) software. ChimeStack helps companies and organizations easily set up and manage private cloud environments. ChimeStack introduces a ChimeStor storage component that shortens I/O paths between computing and storage to improve storage efficiency, especially for a hyper-converged environment. ChimeStack is agile, elastic, and simple enough, suitable for small-scale private clouds or edge computing scenarios.
 {.-text-yellow}
 {{% /blocks/lead %}}
 
@@ -23,16 +23,16 @@ ChimeStack is a lightweight cloud computing infrastructure as a service (IaaS) s
 {{% blocks/section color="dark" type="row" %}}
 
 {{% blocks/feature icon="fa-gears" title="Simple"  %}}
-Quick deployment and simplified operation
+Fast deployment and simple operation and maintenance
 {{% /blocks/feature %}}
 
 
 {{% blocks/feature icon="fa-lightbulb" title="Lightweight"  %}}
-ChimeStack occupies very limited physical resource in the runtime
+Less physical resource are consumed in the runtime
 {{% /blocks/feature %}}
 
 {{% blocks/feature icon="fab fa-dropbox" title="Efficient" %}}
-ChimeStack supports storage and computing hyperconveged deployment with high efficiency I/O path
+Improved I/O efficiency for hyper-conveged cloud environment
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}
@@ -41,15 +41,15 @@ ChimeStack supports storage and computing hyperconveged deployment with high eff
 {{% blocks/section type="row" %}}
 
 {{% blocks/feature icon="fab fa-mixer" title="Elastic" %}}
-Simplified scale-out and scale-in
+Easy to scale out or scale in
 {{% /blocks/feature %}}
 
 {{% blocks/feature icon="fa-compass" title="Reliable" %}}
-ChimeStack's overall components support high-availability deployment and automatical failover
+All components are high-available  
 {{% /blocks/feature %}}
 
 {{% blocks/feature icon="fa-eye" title="Friendly" %}}
-ChimeStack provides a web GUI and a command line tool for interactive operations, and provides SDKs for further development purposes 
+Provides web GUI and CLI tools for interactive management, and SDKs for further development 
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}
@@ -58,17 +58,16 @@ ChimeStack provides a web GUI and a command line tool for interactive operations
 {{% blocks/section type="row" %}}
 
 {{% blocks/feature icon="fa-download" title="Download" url="https://chimestack.io/download" %}}
-Download ChimeStack's installation packages
+Download ChimeStack's Packages
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fab fa-github" title="Contributions welcome!"
+{{% blocks/feature icon="fab fa-github" title="Github!"
     url="https://github.com/dypflying/chimestack" %}}
-Welcome new contributors! **GitHub** Start from a [Pull Request](https://github.com/dypflying/chimestack/pulls). 
+Notifications for new releases, submit issues
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fab fa-twitter" title="Follow Twitter!"
-    url="https://twitter.com/chimestack" %}}
-For release notifications
+{{% blocks/feature icon="fa fa-envelope" title="Email" url="mailto:chimestack@sina.com" %}}
+chimestack@sina.com
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}

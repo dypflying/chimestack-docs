@@ -14,21 +14,23 @@ Cloud computing can not be easier
 
 **ChimeStack is lightweight**
 
-ChimeStack is **not** like other private-cloud software always takes along a big set of components and requires a complex deployment, complex operations, and maintenance, also takes up much physical resources in the runtime.
+ChimeStack is **not** like other private-cloud software takes along a big set of components requires complex deployment, operation, and maintenance, and consumes considerable physical resources in the runtime.
 
-ChimeStack streamlines components and 3rd programs as many as possible, only depending on a few well-known 3rd software. And only two executable binaries make the ChimeStack run, one is the centralized management program named "chime-server" and the other one is the client-side program named "chime-agent" which is managed by the "chime-server" and runs as an agent in the node servers. The 2 binaries are both developed by Golang, no any other libraries will be deployed, and both binaries only take very limited physical resources in the runtime 
+ChimeStack streamlines components and 3rd programs as many as possible, only depends on a few well-known 3rd softwares. The ChimeStack  rumtime framework only contains the management side process(chime-server), client side process(chime-agent) and storage service process(chime-stor). All these 3 programs are developed by Golang, and they only consume very limited physical resources in the runtime. 
 
-ChimeStack can be deployed on a single server(AllInOne), and can also be deployed in clustered servers of up to 100 nodes. For the AllInOne deployment, as a minimum requirement, it only needs 2 cores and 4 GiB memory to run a full-functioned ChimeStack cloud platform and 5 virtual machines can be created as well.
+ A ChimeStack cluster can be deployed on a single server(AllInOne), or be deployed in a group of servers that have no more than 256 nodes. For the AllInOne deployment, a minimum environment only requires 2 CPU cores and 4 GiB memory to run a full-functioned ChimeStack cloud platform as well as 5 virtual machines can be created.
 
 {{% /blocks/lead %}}
 
 {{% blocks/lead %}}
 
-**ChimeStack supports both converged and isolated computing/storage**
+**ChimeStack supports both converged and separated computing/storage**
 
-- In the isolation computing/storage scenario, the computing cluster and the storage cluster are managed independently, for instance, their capacity can be scaled in or out independently. Regardless of the cluster's physical independence, they work together and make the cloud computing virtualization service function as a whole.
+ChimeStack supports both scenarios.
 
-- In the convergence scenario, ChimeStack introduces a new I/O affinity engine which always schedules the primary replication of the virtual machine's data to the nearest storage of the computing node where the virtual machine instance is located, so for the converged cases, the nearest storage to the computing is always the persistent disk on that node. The engine shortens the I/O read path and hence improves the I/O read efficiency. 
+In the hyper-converged scenario, ChimeStack's newly introduced engine(chime-stor) schedules the I/O of the virtual machine to the native storage of the node where the virtual machine locates as much as possible, greatly shortening the I/O paths in data transmission, improving performance and reducing network bandwidth usage.
+
+In the separated scenario, ChimeStack enables virtual machines to connect to the Ceph cluster with the "librbd" protocol, or connect to other block storage services with the "iSCSI" protocol.
 
 {{% /blocks/lead %}}
 
@@ -36,6 +38,8 @@ ChimeStack can be deployed on a single server(AllInOne), and can also be deploye
 
 **ChimeStack is simple**
 
-ChimeStack provides a user-friendly Web GUI, and a command line tool to manage and operate resources, and provides whole APIs with documents and SDKs for any further development purposes.
+One of the initiatives of ChimeStack is to have as less as middleware dependencies, less complex inter-module dependency topology, and simplify deployment and operation as much as possible. For instance, an AllInOne cloud environment can be deployed in 10 minutes.
+
+ChimeStack provides a user-friendly Web GUI, and a command line tool to manage and operate the platform's resources and virtualized resources, and provides APIs and SDKs for further developing purposes.
 
 {{% /blocks/lead %}}

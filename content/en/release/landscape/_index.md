@@ -2,7 +2,7 @@
 title: ChimeStack Features' Introduction(v0.1)
 ---
 
-{{% blocks/cover title="ChimeStack功能介绍(v0.1)" image_anchor="top" height="10" color="primary"  %}}
+{{% blocks/cover title="ChimeStack Features' Introduction(v0.1)" image_anchor="top" height="10" color="primary"  %}}
 {.mt-1}
 {{% /blocks/cover %}}
 
@@ -19,13 +19,13 @@ title: ChimeStack Features' Introduction(v0.1)
 - **Node(Host)**
   - Lifecycle management
   - Failure migration management
-- **存储池**
+- **Storage Pool**
   - Local storage pool management
   - Ceph storage pool management
-- **网络**
+- **Network**
   - Layer-2 network management
   - Subnet management
-- **镜像**
+- **Image**
   - Image bucket management
   - Public image management
 - **Instance specification management**

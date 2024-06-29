@@ -33,7 +33,7 @@ sudo reboot
 
 It is recommended to bond network interfaces as a unified name. On the one hand, it can normalize the interface names of each network. On the other hand, because modern physical network cards often have more than two interfaces, stacking bonds across network cards can also improve the availability and efficiency of network cards.
 
-Details refer to [Introduction to Network Interface Bonding](/docs/reference/other/bond)
+Details refer to [Introduction to Network Interface Bonding](/en/docs/reference/other/bond)
 
 ### System Setup
 

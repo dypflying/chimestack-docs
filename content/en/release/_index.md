@@ -11,7 +11,7 @@ weight: 30
 
 {{% blocks/section color="default" type="row" %}}
 
-#### [ChimeStack Features' Introduction(v0.1)](/release/landscape)
+#### [ChimeStack Features' Introduction(v0.1)](landscape)
 
 <br></br>
 
@@ -31,7 +31,7 @@ weight: 30
 ## RoadMap
 
 - Version 0.1
-  - [ChimeStack Features' Introduction(v0.1)](/release/landscape)
+  - [ChimeStack Features' Introduction(v0.1)](landscape)
 - Version 0.2 
   - ChimeStor 
     - ChimeStor's storage pool 

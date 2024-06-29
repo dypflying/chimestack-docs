@@ -41,7 +41,7 @@ weight: 2
 
 **说明**
 
-chime-stack依赖mysql提供元数据存储，依赖influxdb提供监控数据存储，根据不同的场景，规划管理节点配置, 举例如下(以下均为最小配置)：
+ChimeStack依赖mysql提供元数据存储，依赖influxdb提供监控数据存储，根据不同的场景，规划管理节点配置, 举例如下(以下均为最小配置)：
 
 - 部署chime-server，且管理10台计算节点，所需: 2核CPU + 4GB内存 + 10GB硬盘 
 - 部署chime-server+mysql+influxdb 且管理10台计算节点，所需: 4核CPU + 8GB内存 + 50GB硬盘

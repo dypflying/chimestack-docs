@@ -1,5 +1,5 @@
 ---
-title: 3. 使用ChimeStack
+title: 3. Usage of ChimeStack
 weight: 3
-description: 介绍ChimeStack的使用方法
+description: Introduction to the usage of ChimeStack
 ---

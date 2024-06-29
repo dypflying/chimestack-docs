@@ -1,24 +1,24 @@
 ---
-title: 3.5 限制
+title: 3.5 Limitation
 weight: 5
-description: 介绍ChimeStack平台各资源的限制条件
+description: Introducion to the limitation of ChimeStack's objects
 ---
 
 
-|资源|类型|限制说明|
+|Object|Object Type|Limitation Description|
 |---|---|---|
-|可用区|平台资源|最多32个可用区|
-|集群|平台资源|每个可用区下最多32个集群|
-|节点|平台资源|每个集群下最多512节点|
-|存储池|平台资源|每个集群下最多16个存储池|
-|二层网络|平台资源|每个集群下最多16个二层网络|
-|子网|平台资源|每个二层网络下最多16个子网|
-|计算规格|平台资源|计算规格不限个数，但单个集群最多绑定32个计算规格|
-|云盘规格|平台资源|云盘规格不限个数，但单个集群最多绑定32个云盘规格|
-|镜像桶|平台资源|公有镜像桶有且只有一个，私有镜像桶每个用户有且只有一个，总个数不限制|
-|虚拟机|虚拟化资源|不限制个数|
-|镜像|虚拟化资源|不限制个数|
-|云盘|虚拟化资源|每个用户可以创建的云盘总数没有限制，但每个虚拟机最多挂载128个云盘|
-|快照|虚拟化资源|每个云盘最多16个快照|
-|虚拟网卡|虚拟化资源|每个用户可以创建的虚拟网卡总数没有限制，但每个虚拟机最多挂载16个虚拟网卡|
-|安全组|虚拟化资源|每个用户最多8个安全组|
+|Available Zone|Platform Resource|up to 32 zones|
+|Cluster|Platform Resource|up to 32 clusters for single available zone|
+|Node(Host)|Platform Resource|up to 256 nodes for single cluster|
+|Storage Pool|Platform Resource|up to 16 storage pools for single cluster|
+|Layer-2 Network|Platform Resource|up to 16 layer-2 networks for single cluster|
+|Subnet|Platform Resource|up to 16 subnets for single layer-2 network|
+|Instance Specification|Platform Resource|no limitation in total, but up to 32 instance specifications can be associated with a single cluster|
+|Volume Specification|Platform Resource|no limitation in total, but up to 32 volume specifications can be associated with a single cluster|
+|Image Bucket|Platform Resource|only one public image bucket, each user has a self-owned image bucket|
+|Virtual Machine|Virtualized Resource|no limitation|
+|Image|Virtualized Resource|no limitation|
+|Volume|Virtualized Resource|no limitation in total，but each virtual machine can attach up to 128 volumes|
+|Snapshot|Virtualized Resource|up to 32 snapshots for a single volume|
+|NIC|Virtualized Resource|no limitation in total，but each virtual machine can attach up to 16 virtual NICs|
+|Security Group|Virtualized Resource|up to 16 security group for one user|

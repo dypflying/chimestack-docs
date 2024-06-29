@@ -1,26 +1,26 @@
 ---
-title: 3.1 名词解释
+title: 3.1 Glossary
 weight: 1
 ---
 
-### 云平台资源名词
+### Glossary of Plaform Resource
  
-- 可用区: 一个逻辑的概念，代表一系列集群的组合。物理上通常代表一个区域，比如华北区域、华东区域等等，属于同一可用区的集群之间相互通信的网络延迟常常限定在一个较小的范围内，比如3ms,5ms等。
-- 集群: 一组物理服务器组成的集群，该集群的所有服务器可以互相通信，并且往往具备相近的配置（通常要求同构），一个集群由管控面程序统一管理。
-- 节点: 一个节点即代表一台服务器，在ChimseStack架构中，一个节点只能隶属于一个集群，一个节点可以是管控节点、计算节点或存储节点三者之一，也可以是三者中的两个或者三者全部（如AllInOne）环境。
-- 二层网络: 数据链路层的网络，ChimeStack架构要求最少定义一个二层网络，虚拟机资源会接入在这个二层网络上。
-- 子网: 对于一个二层网络，可以根据用途划分一个或者若干个子网区域，每个子网独立管理。
-- 存储池: 存储池的概念相当于把一组存储资源(服务器、硬盘)作为一个可虚拟化的整体，按需分配虚拟化存储资源。在ChimeStack架构中，包含本地存储池、Ceph存储池以及ChimeStor存储池。其中本地存储池使用的是计算节点上的存储资源，具备最高的读写性能，但缺乏高可用架构；Ceph存储池和ChimeStor存储池，即可以存算分离部署，也可以存算融合部署。在融合部署时，ChimeStor自研的存储引擎具备更好的存储性能以及较少的系统资源占用。
-- 镜像桶: 一个镜像桶相当于一个s3 bucket，即把一组权限相同的镜像资源放在一个镜像桶里。每个ChimeStack平台拥有一个公有镜像桶，每个平台用户有且只有一个镜像桶。
-- 公有镜像: 所有用户都可以使用的镜像资源。
-- 计算规格: 一系列虚拟机计算资源规格定义，创建虚拟机时必须指定一个虚拟机规格。
-- 云盘规格: 一系列虚拟云硬盘的大小和性能参数的组合，不同规格的云硬盘定义不同的性能参数。
+- Available Zone: A logical object represents a combination of a series of clusters. Physically, it usually represents a region, such as North China, East China, etc. The network latency for communication among clusters inside an available zone is usually limited to a smaller time-elapse range, such as 3ms, 5ms, etc.
+- Cluster: A cluster consists of a group of physical servers, which can communicate with each other and often have similar configurations (usually identical configured). A cluster must be managed by one control plane program. 
+- Node(Host): A node/host represents a physical server. In the ChimseStack architecture, a node can only belong to one cluster. However, a node can act as either one, two, or all roles out of the 3 roles of nodes(management node, computing node, and storage node). For instance, for an AllInOne deployment, the server acts as all of the roles.   
+- Layer-2 Network: The ChimeStack requires defining at least one layer-2 network, because virtual machines depend on the layer-2 network to communicate.
+- Subnet: Inside a layer-2 network, it can be divided into several subnets based on customized requirements, each subnet can be managed independently.
+- Sotrage Pool: A storage pool represents a group of storage resources (servers as well as their hard disks) that are virtualized into a whole pool for storage, and with which allocates virtualized storage resources on demand. In the ChimeStack architecture, there are 3 kinds of storage pools, such as local pool, Ceph pool, and ChimeStor pool. The local storage pool uses the native storage resources on the same node where the instance runs, which performs best for read and write I/O, but lacks of high-availability mechanism; the Ceph storage pool and the ChimeStor storage pool can either be deployed in the same computing cluster or deployed in a separated cluster. For a converged deployment, ChimeStor's engine has better performance and less system resource consumption.
+- Image Bucket: An image bucket physically represents a S3 bucket, which contains a group of system images, and there must be one but only one public image bucket in ChimeStack's control plane, each user has one dedicated image bucket.
+- Public Image: The system image resources for all users.
+- Instance Specification: A series of virtual machine's specification definitions. It is required to specify an instance specification when creating a virtual machine.
+- Volume Specification: A combination of the size and I/O performance parameters of virtual cloud disk specification definitions.
 
-### 云虚拟化资源名词
+### Glossary of Virtualization Resource
 
-- 虚拟机实例: 即通过虚拟化后运行的虚拟计算机资源。
-- 私有镜像: 用户自己上传的计算机镜像资源。
-- 云盘: 即虚拟硬盘资源，可以挂载给任何同用户的虚拟机。
-- 快照: 云盘的快照资源。
-- 虚拟网卡: 一个具备mac地址并绑定IP地址的虚拟网卡资源，可以挂载给任何同用户的虚拟机。
-- 安全组: 一组网络权限的使用定义，可以挂载给虚拟机使其定义的网络权限对于该虚拟机生效。
+- Virtual Machine Instance: Virtualized computer resources.
+- Private Image: User's self uploaded system image resources. 
+- Volume: Virtualized hard disk resources, which can attach to virtual machines.s 
+- Snapshot: Snapshots of volumes.
+- Virtualized Network Interface: A virtualized NIC contains a MAC address as well as an IP address, it can be attached to any virtual machines belonging to the same user.
+- Security Group: A set of network access control definitions, a virtual machine associated with a security group follows its network access control definitions. 

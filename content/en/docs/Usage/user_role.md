@@ -1,15 +1,15 @@
 ---
-title: 3.2 用户角色和权限
+title: 3.2 User roles and permissions
 weight: 2
-description: 介绍ChimeStack平台的用户和三层角色权限体系
+description: Introduction to ChimeStack's user roles and permissions
 ---
 
-## ChimeStack用户的三层角色介绍
+## User Roles
 
-| 角色                 | 说明                               | 权限 |
+| Role                | Description      | Privilege |
 |---------------------|------------------------------------|------|
-| 超级管理员  | 超级管理员角色,唯一账号 —— admin       | 云平台资源管理、用户管理、云虚拟化资源生命周期管理 |
-| 管理员        | 管理员,可由超级管理员创建管理           | 云平台资源管理 |
-| 用户              | 普通用户,可由超级管理员或管理员创建管理   | 云虚拟化资源的生命周期管理 |
+| Super Administator  | super administator, "admin" is the only super administator | platform management, user management, cloud resources management |
+| Administator        | administator, created by super administator or administators | platform management、user management |
+| User                | normal user, created by super administator or administators  | cloud resources management |
 
-**注意**: 超级管理员可以查看所有用户的虚拟化资源，并有权限对虚拟化资源进行生命周期的管理。普通用户自能对自己的虚拟化资源进行生命周期的管理。
+**Note**: The super administrator can manage the lifecycle of all resources in the ChimeStack. 

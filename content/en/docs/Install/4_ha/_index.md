@@ -5,7 +5,7 @@ description: This chapter introduces how to deploy and configure the ChimeStack 
 weight: 5
 ---
 
-### Introduction to ChimeStack's HA Architecture
+###  ChimeStack's HA Architecture Overview
 
 In the production environment, The high-availability solution of ChimeStack is to clusterize its services in distributed nodes and introduce the "keepalived+LVS" component into the production for services' health check, automatic failover, and load balancing. So that when some components or services of ChimeStack are down, with the HA setting of keepalived+LVS, it will detect the failure and will failover to a healthy one in seconds, ChimeStack's overall supposed SLA is 99.5%.
 
@@ -18,12 +18,14 @@ Following is the summary of the HA solutions for ChimeStack's components
 - influxdb: active-active instances + chime-client dual writes + chime-server read from VIP endpoint+ keepalived(VIP)
 - s3: minio's MNMD(Multiple-Node-Multiple-Drive) deployments
 
-### Make Nodes Plan 
+### HA requirements for deploying nodes
 
 The simple formula for calculating the minimum nodes setting for a production environment: 
 > m * server nodes + n * computing nodes (2<=m<=3, n>=1)
 
-Plan for nodes and their hostnames and IP addresses：
+### High availability environment example
+
+Plan for nodes and as well as their hostnames and IP addresses：
 
 | Node | Hostname | Manage IP       | Description | 
 |------|----------|----------|-------------|

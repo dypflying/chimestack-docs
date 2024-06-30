@@ -231,7 +231,7 @@ chime-portal:
 
 server和portal配置完成后，运行chime-server会同时启动server和portal
 
-如果需要分别运行server和portal，可以将 /etc/chime/server.yaml中 [chime-portal]的部分拷贝到新文件, 例如/etc/chime/portal.yaml, 原来的配置文件仅保存[chime-server]部分。这样server和portal可以分别运行: 
+如果需要分别运行server和portal，可以将 /etc/chime/server.yaml中 [chime-portal]的部分拷贝到文件/etc/chime/portal.yaml中, 原来的配置文件仅保存[chime-server]部分。这样server和portal可以分别运行: 
 
 ```
 sudo systemctl start chime-server #仅运行server
@@ -253,7 +253,7 @@ chimeadm initagent --host [host name] --manage-ip <manage ip address> --node-ip 
 命令行参数解释如下: 
 - host(可选): 当前host的名称，如果忽略chimeadm会自动生成一个host名称
 - manage-ip: 当前节点的管理网ip
-- manage-ip: 当前节点的业务网ip
+- node-ip: 当前节点的业务网ip
 - storage-ip: 当前节点的存储网ip
 - rack: 当前节点所在机架的名称
 - api: chime-server api服务的uri
@@ -262,12 +262,12 @@ chimeadm initagent --host [host name] --manage-ip <manage ip address> --node-ip 
 例如:
 
 ```
-chimeadm initagent
+chimeadm initagent \
   --host chime-node1 \
   --manage-ip 192.168.231.158 \
   --node-ip 172.28.10.101 \
   --storage-ip 10.10.10.101 \
-  --rack rack1 
+  --rack rack1 \
   --api 192.168.231.101:8801 \
   --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVdWlkIjoiMGZhYjZkYTQtYmU4Zi00ZGJhLTlhYzgtMTlmNGZmNTE5ZjM0IiwiYXVkIjoiY2hpbWUiLCJleHAiOjE3MTE3OTc0OTYsImlhdCI6MTcxMTc5NzQ5NiwiaXNzIjoiY2hpbWUiLCJzdWIiOiJjaGltZSJ9.DpCskpkyEHodbxPbj061iLMw1n04ibjZQ8qj5o0lRTA
 ```

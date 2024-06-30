@@ -5,6 +5,9 @@ description: This chapter introduces how to configure and start ChimeStack
 weight: 5
 ---
 
+{{% alert title="Information" color="primary" %}}
+If ChimeStack is installed with the AllInOne ISO image, so there is no other additional configuration needed. Please ignore this chapter.
+{{% /alert %}}
 
 ## Configure and Start chime-server
 
@@ -12,7 +15,7 @@ This section introduces how to configure the chime-server's indenpdent component
 
 ### Configure and initiate mysql
 
-##### create new mysql user 
+##### Create new mysql user 
 
 Login mysql with root user via client tool, create new user named "chime"，and grant privileges to user chime
 
@@ -22,7 +25,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'chime'@'%';
 flush privileges;
 ```
 
-##### initiate database
+##### Initiate database
 
 Utilize the "chimeadm" command to initiate the mysql database and update the configuration of chime-server
 
@@ -52,7 +55,7 @@ If the command completes successfully, the "chime" database is created and initi
 
 ### Configure influxdb 
 
-##### initiate influxdb
+##### Initiate influxdb
 
 **method #1**: initiate by the Web UI
 
@@ -74,7 +77,7 @@ influx setup \
 
 **Note**: if not specify the "token" flag, then it will generate an API token instead, which should be kept carefully.
 
-##### Configure influxdb setting for chime-server
+##### Configure influxdb setting of chime-server
 
 The following command updates the influxdb's setting in the configuration of chime-server
 
@@ -82,7 +85,7 @@ The following command updates the influxdb's setting in the configuration of chi
 chimeadm initserver influxdb --vip-endpoint <vip based endpoint> --real-endpoints <real service endpoints> --token <token> --org <org> --bucket <bucket>
 ```
 
-The command's flags are explained as follows: 
+The command's flags are explained as following: 
 - vip-endpoint: if the influxdb is accessed through a VIP with load balancing provisioned by keepalived+lvs tools，the vip-endpoint should be set to the ingress endpoint of the load balancing instance; If the influxdb is accessed directly，vip-endpoint should be set to the endpoint of infludb instance.
 - real-endpoints: influxdb instances' endpoints(use commas to separate multiple endpoints)
 - token: API token to access influxdb
@@ -99,9 +102,9 @@ chimeadm initserver influxdb --vip-endpoint http://192.168.231.120:8086 \
   --bucket chime \
 ```
 
-### Configure S3 setting for chime-server
+### Configure S3 setting of chime-server
 
-Update the s3 setting in the configuration of chime-server by: 
+You can update the s3 setting in the configuration of chime-server by following command: 
 
 ```
 chimeadm initserver s3 --ip <ip address> --port <port> --ak <ak> --sk <sk> --embedded --path [path to storage] 
@@ -132,22 +135,18 @@ You can invoke the "chimeadm initserver check" sub-command to check the correctn
 ```
 chimeadm initserver check 
 ```
-The success of the checking means the configuration is complete and valid, hence the chime-server is ready to run
+The success of the checking means the configuration is complete and valid, the chime-server is ready to run
 
 ### Launch chime-server
-
-chime-server can be lauched by either one of the following methods
-
-1. Start in the front-end, it will keep printing information in the terminal，mainly used for debugging purpose: 
-   
-```
-chime-server    
-```
-
-1. Start by systemd:
    
 ```
 sudo systemctl start chime-server
+```
+
+Check the chime-server's status:
+
+```
+sudo systemctl status chime-server
 ```
 
 chime-server's runtime log locates at /var/log/chime/server.log
@@ -216,7 +215,7 @@ You can invoke the "check" sub-command to check the correctness of the configura
 chimeadm initportal check 
 ```
 
-The success of the checking means the configuration is complete and valid, hence the chime-portal is ready to run
+The success of the checking means the configuration is complete and valid, the chime-portal is ready to run
 
 ### Start chime-portal
 
@@ -232,11 +231,11 @@ chime-portal:
 
 With such configurations, launching a chime-server process will start a server routine and a portal routine simultaneously.
 
-To run a chime-server and a chime-portal respectively is quite simple, just move the content of "[chime-server]" section from the server.yaml to another yaml file, such as portal.yaml, and then you can launch the chime-server process and the chime-portal process respectively, for instance: 
+To run a chime-server and a chime-portal respectively is quite simple, just move the content of "[chime-server]" section from the server.yaml to the portal.yaml file, then you can launch the chime-server and the chime-portal respectively as following: 
 
 ```
-chime-server --cfg /etc/chime/sefver.yaml #only launch server
-chime-server --cfg /etc/chime/portal.yaml #only launch portal
+sudo systemctl start chime-server #only launch server
+sudo systemctl start chime-portal #only launch portal
 ```
 
 ## Configure and start chime-agent
@@ -248,13 +247,15 @@ chime-agent is the client-side program of ChimeStack，normally runs in the comp
 You can configure the chime-agent by the following command:
 
 ```
-chimeadm initagent --host [host name] --ip <ip address> --rack <rackname> --api <server ip:port> --token <token>
+chimeadm initagent --host [host name] --manage-ip <manage ip address> --node-ip <node ip address>  --storage-ip <storage ip address>  --rack <rackname> --api <server ip:port> --token <token>
 ```
 
 
 The command's flags are explained as follows: 
 - host(optional): current hostname, chimeadm will generate a random hostname if omit this flag.
-- ip: current node's management IP address 
+- manage-ip: current node's management network's IP address 
+- node-ip: current node's business network's IP address 
+- storage-ip: current node's storage network's IP address 
 - rack: the rack name where the node is located
 - api: the API endpoint of chime-server
 - token: the API token of chime-server
@@ -262,10 +263,12 @@ The command's flags are explained as follows:
 For instance:
 
 ```
-chimeadm initagent
+chimeadm initagent \
   --host chime-node1 \
-  --ip 192.168.231.158 \
-  --rack rack1 
+  --manage-ip 192.168.231.158 \
+  --node-ip 172.28.10.101 \
+  --storage-ip 10.10.10.101 \
+  --rack rack1 \
   --api 192.168.231.101:8801 \
   --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVdWlkIjoiMGZhYjZkYTQtYmU4Zi00ZGJhLTlhYzgtMTlmNGZmNTE5ZjM0IiwiYXVkIjoiY2hpbWUiLCJleHAiOjE3MTE3OTc0OTYsImlhdCI6MTcxMTc5NzQ5NiwiaXNzIjoiY2hpbWUiLCJzdWIiOiJjaGltZSJ9.DpCskpkyEHodbxPbj061iLMw1n04ibjZQ8qj5o0lRTA
 ```
@@ -284,18 +287,14 @@ The success of the checking means the configuration is complete and valid，chim
 
 ### Start chime-agent
 
-chime-agent can be launched by either one of the following methods: 
-
-1. Start in the front-end, it will keep printing information in the terminal，mainly used for debugging purpose: 
-
-```
-chime-agent
-```
-
-2. Start by systemd
-
 ```
 sudo systemctl start chime-agent 
+```
+
+check the chime-agent's running status: 
+
+```
+sudo systemctl status chime-agent 
 ```
 
 chime-agent's runtime log locates at /var/log/chime/agent.log

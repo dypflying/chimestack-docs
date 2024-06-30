@@ -71,12 +71,12 @@ sudo systemctl restart keepalived
 
 After the restart, you can access the chime-server's services via the VIP address，such as "http://192.168.231.10:8033/" for Web UI,  or "192.168.231.10:8801" for API service.
 
-In case of the chime-server's services in the master node are not accessable or the master node downs, the VIP address will shift to one of the slave nodes; And when the master node and the chime-server in the master recover, the VIP address will shift back to the master node automatically. 
+In case the chime-server’s services in the master node are not accessible or the master node is down, the VIP address will shift to one of the slave nodes; And when the master node and the chime-server in the master recover, the VIP address will shift back to the master node automatically.
 
 ### Active-active Scheme
 
 {{% alert title="Warning" color="warning" %}}
-Like other distributed systems, chime-server in multiple-active scheme has to solve the consistency issue as well. The chime-server's implementation manages to solve the consistency issue by adding record locks to the transactions prior to executing them. However, the current dev-x.x.x version of ChimeStack has not been tested sufficiently for the consistency cases, so by now it is still not recommended to use the active-active scheme for chime-server's deployment, while the active-standby scheme is recommended.
+Like other distributed systems, chime-server in multiple-active schemes has to solve the consistency issue as well. The chime-server's implementation manages to solve the consistency issue by adding record locks to the transactions before executing them. However, the current dev-x.x.x version of ChimeStack has not been tested sufficiently for the consistency cases, so by now it is still not recommended to use the active-active scheme for chime-server's deployment, while the active-standby scheme is recommended.
 {{% /alert %}}
 
 In multi-active (active-active) mode, each chime-server will receive requests distributed by the load balancer with a specific load-balancing algorithm, but only one node in the node group takes the role of the load-balancing router to receive the external requests and distribute them to chime-servers. The scheme can be implemented by the classic combination of "keepalived"+"lvs", that is, the keepalived framework provides virtual routing(VIP), health checks and failover mechanism, and the lvs framework provisions the load-balancing.
@@ -291,4 +291,4 @@ sudo systemctl start chime-server
 chime-server 
 ```
 
-Check server1 and server2，confirm the VIP address (192.168.231.10/20) is back to the server1's network interface of ens160, and confirm the Web UI and API service of chime-server are accessible and functioning normally. 
+Check server1 and server2, confirm the VIP address (192.168.231.10/20) is back to the server1's network interface of ens160, and confirm the Web UI and API service of chime-server are accessible and functioning normally. 

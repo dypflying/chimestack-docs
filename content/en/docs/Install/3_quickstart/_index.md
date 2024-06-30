@@ -1,5 +1,5 @@
 ---
-title: 2.3 Quick Start
+title: 2.3 Quick Start An AllInOne ChimeStack
 description: This chapter introduces how to deploy an all-in-one ChimeStack platform
 weight: 4
 ---

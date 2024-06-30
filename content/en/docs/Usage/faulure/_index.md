@@ -21,7 +21,7 @@ The operation methods for a node's failover include:
 * **Rebuild**: Rebuild the same virtual machine instances on other nodes, of scenarios:
   - Migrate the virtual machines on the failure node to other nodes when the node is down.
 
-Following is the introduction to the 3 operation methods through Web UI.
+Following is the introduction to the 3 operational methods.
 
 ## Node Mingration
 
@@ -42,10 +42,10 @@ Fill the following options then begin the migration:
 - **Target Host**: You can select a target node, so all the virtual machines on the source node will be migrated to the target node, but it will fail if the physical resources (CPU, memory, storage) of the target node are not enough to accommodate them. Or you can leave the option unselected, the system will schedule the virtual machines to the most suitable nodes in the cluster according to their physical resource consumption data.
 - **Migrate VMs With Local Disks**: If this option is selected, even if the virtual machine contains local disks, it will be migrated as well. **Note**, migrating a virtual machine with local disks will consume plenty of network bandwidth and physical CPU resources, also it takes a much longer time to finish, depending on the amount of data written in the local disks, because the migration process will not only copy the memory but also copy the disks' data. This option is not selected by default, if leave the option unselected, the virtual machines with local disks will not be migrated.
 
-When the migration is triggered, the node's state machine is locked, and the node's information will be updated after the migration is completed (such as, the number of virtual machines on the node, the final status of the migration task, etc.).
+During the migration is ongoing, the node's state machine is locked, and the node's information will be updated after the migration is completed (such as, the number of virtual machines on the node, the final status of the migration task, etc.).
 
 
-### Trigger monirgation via chimecli
+### Trigger migration via chimecli
 
 Command Usage:
 
@@ -122,7 +122,8 @@ Besides this feature is convenient to shut down the virtual machines on the node
 
 ### Trigger a drain on Web UI
 
-在"**节点管理**"页面，选中要迁移的节点，在"**操作**"栏目中，点击"**清空**"菜单项，弹出确认对话框后，点击"**确认**"执行清空操作，清空任务执行时节点的状态机会被锁定，完成后节点的信息会被更新(节点虚拟机数量、清空任务的执行情况等)。
+Choose the node to be drained from the node list on the "**Registered Host Management**" page, click the "**Drain**" button in the "**Operation**" menu, then click the "**Confirm**" button to start. 
+During the draining process is ongoing, the node's state machine is locked, and the node's information will be updated after the process is completed (such as, the number of virtual machines on the node, the final status of the draining task, etc.).
 
 {{% imgproc node_drain Fit "480x350" %}}
 drain a node
@@ -175,22 +176,24 @@ Example:
 
 ## Node Rebuild
 
-根据"节点清空"的功能说明，"清空"+"重建"的功能是为了应对节点宕机时，故障节点上虚拟机服务能够快速恢复的运维方法。重建功能是把故障节点的全部虚拟机在其它正常的节点重新创建。需要特别注意以下几点: 
-1. 故障节点上带有本地盘的虚拟机，在节点"重建"的过程中，不会被重建，因为本地盘的数据由于宕机原因无法进行拷贝，所以使用本地盘的虚拟机的可靠性本身就受限于节点的可靠性，一般不推荐使用带本地盘的虚拟机。
-2. 重建任务只能从管控端发起(Web Ui或chimecli)，不能从chime-agent端发起。
-3. 只有处于"已清空"状态的节点才能执行"重建"操作。
+According to the above descriptions for the "Drain Node" and "Rebuild Node" processes, it is an operational method to restore the virtual machine services in case of their physical server is down. In short, a node rebuilding process is to recreate all the virtual machines of the down node on other normal functioning nodes. However, the following points require attention:
 
-### 通过Web UI重建
+1. The virtual machines with local disks on the failed node will not be rebuilt during the "rebuilding" process, because the data on the local disk of the failed node cannot be copied. Therefore, the reliability of virtual machines using local disks is heavily limited by the reliability of the physical node. 
+2. Rebuild prcess can only be triggered from the control plane(Web Ui or chimecli), can not be triggered from the chime-agent.
+3. Only nodes in the "drained" state can perform the rebuild operation.
 
-在"**节点管理**"页面，选中要迁移的节点，在"**操作**"栏目中，点击"**重建**"菜单项，弹出确认对话框后，点击"**确认**"执行重建操作，重建任务执行时节点的状态机会被锁定，完成后节点的信息会被更新(节点虚拟机数量、重建任务的执行情况等)。
+### Trigger a rebuilding process on Web UI
+
+Choose the node to be drained from the node list on the "**Registered Host Management**" page, click the "**Rebuild**" button in the "**Operation**" menu, then click the "**Confirm**" button to start. 
+During the rebuilding process is ongoing, the node's state machine is locked, and the node's information will be updated after the process is completed (such as, the number of virtual machines on the node, the final status of the rebuilding task, etc.).
 
 {{% imgproc node_rebuild Fit "900x300" %}}
-节点重建
+node rebuild
 {{% /imgproc %}}
 
-### 通过chimecli重建
+### Trigger rebuild via chimecli's command line
 
-命令原型:
+Command Usage:
 
 ```
   chimecli host rebuildHost [flags]
@@ -203,10 +206,10 @@ Flags:
       --rebuildHostRequest.TargetHostUuid string   the target host's uuid, system will automatically assign one host if omit
 ```
 
-参数说明：
-- **rebuildHostRequest.TargetHostUuid**: (可选)目标节点的Uuid
+Argument Description:
+- **rebuildHostRequest.TargetHostUuid**: (optional) Target host's Uuid
 
-示例:
+Example:
 
 ```
    chimecli host rebuildHost \

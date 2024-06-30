@@ -6,47 +6,48 @@ description: This chapter introduces the solutions for handling node failures
 
 ## Overview
 
-当一个节点由于硬件、软件问题出现异常时，或者需要关机维护时，为了保障虚拟资源服务的可靠性、可用性，需要把节点上运行的虚拟服务(虚拟机实例、虚拟云盘等)迁移到其它功能正常的节点。如下图所示: 
+When a node is abnormal due to hardware or software issues or needs a shutdown for maintenance, to keep the availability of the virtualization services, such as virtual machine instances, virtual cloud disks, etc. which are running on the node have to be migrated to other functioning nodes. As shown below: 
 
-![节点故障迁移](/images/chime-agent-ha.png)
+![node failover](/images/chime-agent-ha.png)
 
-一个节点可采取的运维方法包含:
+The operation methods for a node's failover include:
 
-* **Migration**: 把一个节点上所有的虚拟机资源在用户无感知的基础上迁移到其它节点上，适用场景:
-  - 节点非宕机故障时虚拟机迁移
-  - 节点维护时虚拟机迁移
-* **Drain**: 把一个节点上所有运行的虚拟机停止，适用场景:
-  - 防止脑裂，在其它节点重建虚拟机前，需要停止该节点虚拟机
-  - 节点关机维护
-* **Rebuild**: 在其它节点重新创建同样的虚拟机实例，适用场景:
-  - 节点宕机故障时虚拟机迁移
+* **Migration**: Migrate all virtual machines on the failure node to other nodes without the user's awareness, of scenarios:
+  - Live migrate virtual machines when the node is abnormal but not down
+  - Live migrate virtual machines when the node needs a shutdown for maintenance
+* **Drain**: stop all the virtual machines on a node, of scenarios:
+  - To prevent "brain split", stop all the virtual machines on this node before rebuilding them on other nodes.
+  - To shutdown the node for any reasons.
+* **Rebuild**: Rebuild the same virtual machine instances on other nodes, of scenarios:
+  - Migrate the virtual machines on the failure node to other nodes when the node is down.
 
-下面分别介绍这三种节点故障处理方法。
+Following is the introduction to the 3 operation methods through Web UI.
 
-## 节点迁移功能
+## Node Mingration
 
-迁移功能是通过libvirt把虚拟机实例在其运行或者停止状态下，从一个物理节点迁移到另一个物理节点，迁移的过程不影响用户正常使用虚拟机。
-迁移可以通过管控面发起，即Web UI或者CLI(chimecli)发起迁移指令。也可以通过数据面发起，即通过chime-agent发起迁移指令，但通过chime-agent进行迁移通常是只是一种当管控面无法正常控制节点情况下，故障的运维手段，不是常规操作，非必要尽量不使用。
-节点迁移过程中数据复制可以通过任意联通的网络完成，如果节点迁移是通过chime-server发起的，则迁移数据(内存拷贝)是通过"管理网"完成的; 如果节点迁移是通过chime-agent发起的，则可以选择网络网、业务网或者存储网(如果有)进行迁移数据。
+The node migration is to migrate the virtual machine instances from one physical node to other nodes through libvirt, while the instance user is not aware of the migration process.
+A migration process can be triggered through the control plane(Web UI or chimecli). Although the chime-agent can also trigger it, it is not recommended since triggering migration by chime-agent is only for the case that the control plane cannot connect the node normally, and it can not update the metadata of the resources related to the migration in real-time.   
+However for the node migration process, if it is triggered by the chime-agent's command line, the data transmission of the migration can use either one of the established networks. That is, you can choose either the management network, node network, or storage network (if any) for transmitting the data. But if the migration task is triggered by the chime-server or chimecli, the migration data can only be transmitted through the "management network".
 
-### 通过Web UI迁移
+### Trigger migration on Web UI
 
-在"**节点管理**"页面，选中要迁移的节点，在"**操作**"栏目中，点击"**迁移**"菜单项，弹出迁移选项页: 
+Choose the node to be migrated from the node list on the "**Registered Host Management**" page, click the "**Migrate**" button in the "**Operation**" menu, pop up the migration options page as following.
 
 {{% imgproc node_migrate Fit "700x400" %}}
-节点迁移
+node migration
 {{% /imgproc %}}
 
-其中选择以下选项开始迁移: 
+Fill the following options then begin the migration:
 
-- **目标节点**: 可选则一个目标节点，当前节点上的所有虚拟机都将迁移到目标节点，如果目标节点的资源(CPU,内存,存储)不足以安置全部的虚拟机，则迁移会失败。如果不选择目标节点，则系统会自动安排被迁移的虚拟机到集群内其它节点上。
-- **迁移带本地盘的虚拟机**: 如果选中该选项，即使虚拟机包含本地硬盘，也会被一起迁移。需要注意的是，迁移带本地硬盘的虚拟机会消耗大量的网络带宽以及物理CPU等资源，而且耗时较长，迁移时间和本地硬盘实际使用的数据量大小成正比，因为迁移带本地盘的虚拟机，除了要进行内存拷贝，还需要将硬盘数据也一起拷贝。该选项默认不选中，即节点的迁移会忽略掉带本地硬盘的虚拟机。 
+- **Target Host**: You can select a target node, so all the virtual machines on the source node will be migrated to the target node, but it will fail if the physical resources (CPU, memory, storage) of the target node are not enough to accommodate them. Or you can leave the option unselected, the system will schedule the virtual machines to the most suitable nodes in the cluster according to their physical resource consumption data.
+- **Migrate VMs With Local Disks**: If this option is selected, even if the virtual machine contains local disks, it will be migrated as well. **Note**, migrating a virtual machine with local disks will consume plenty of network bandwidth and physical CPU resources, also it takes a much longer time to finish, depending on the amount of data written in the local disks, because the migration process will not only copy the memory but also copy the disks' data. This option is not selected by default, if leave the option unselected, the virtual machines with local disks will not be migrated.
 
-迁移执行后，节点的状态机会被锁定，迁移完成后节点的信息会被更新(节点虚拟机数量、迁移任务的执行情况等)。
+When the migration is triggered, the node's state machine is locked, and the node's information will be updated after the migration is completed (such as, the number of virtual machines on the node, the final status of the migration task, etc.).
 
-### 通过chimecli迁移
 
-命令原型:
+### Trigger monirgation via chimecli
+
+Command Usage:
 
 ```
  chimecli host migrateHost [flags]
@@ -61,11 +62,11 @@ Flags:
       --migrateHostRequest.TargetHostUuid string   the target host's uuid, system will automatically assign one host if omit
 ```
 
-参数说明：
-- **migrateHostRequest.MigrateLocalDiskVms**: (可选)迁移带本地盘的虚拟机
-- **migrateHostRequest.TargetHostUuid**: (可选)目标节点的Uuid
+Argument Description：
+- **migrateHostRequest.MigrateLocalDiskVms**: (optional) migrate the virtual machines with local disks
+- **migrateHostRequest.TargetHostUuid**: (optional) target node's Uuid
 
-示例:
+Example:
 
 ```
    chimecli host migrateHost \
@@ -77,13 +78,13 @@ Flags:
 
 ```
 
-### 通过chime-agent迁移
+### Migrate via chime-agent's command line
 
-{{% alert title="提示" color="primary" %}}
-和由管控面发起的节点迁移不同，通过chime-agent迁移节点上的虚拟机，必须指定一个迁移用的网络和一个目标节点
+{{% alert title="Information" color="primary" %}}
+Unlike the node migration triggered by the control plane components, migrating via chime-agent must specify a network for transmitting data and a target node for accommodating virtual machines.
 {{% /alert %}}
 
-命令原型:
+Command Usage:
 
 ```
   chime-agent migrate 
@@ -96,15 +97,15 @@ Flags:
   --confirm 
 ```
 
-参数说明:
+Argument Description:
 
-- **interface**: 指定迁移数据用的网络接口名称
-- **dest**: 指定目标节点IP
-- **vm_uuid**: (可选)单个虚拟机迁移，这个参数和all二者必须选一
-- **all**: 迁移节点上全部虚拟机，这个参数和vm_uuid二者必须选一
-- **confirm**: 该参数代表执行实际的迁移动作，否者只会校验命令行参数
+- **interface**: Specify the network interface name for transmitting data
+- **dest**: Specify the target node's IP address
+- **vm_uuid**: (Optional) Specify the UUID of a single virtual machine to be migrated only, this option must be chosen if the "--all" option omits. 
+- **all**: Migrate all the virtual machines on the node, this option must be chosen if the "--vm_uuid" option omits. 
+- **confirm**: Specify this option to trigger a real migration, otherwise, it acts as a "dry-run" which only checks the parameters and migrating conditions.
 
-示例:
+Example:
 
 ```
   chime-agent migrate \
@@ -114,22 +115,23 @@ Flags:
   --confirm 
 ```
 
-## 节点清空功能
+## Node Drain
 
-节点清空功能即把一个节点上所有的虚拟机停机，并且把该节点的管控状态标记为"清空"，不再接受新虚拟机的调度。这个功能除了能批量地关闭节点上的虚拟机外，它更主要是为了应对节点故障宕机的严重异常设计的。当节点由于硬件严重故障宕机后，如果不能快速恢复，需要把节点上的虚拟机迁移到其它节点，但由于节点宕机的原因无法通过libvirt进行迁移，只能在其它节点重建这些虚拟机，虚拟机重建后，必须确保故障节点的虚拟机不会重新运行进而导致"脑裂"现象的发生，所以必须在"重建"操作前，对故障节点进行"清空"操作，保证任意时刻，虚拟机资源的唯一性。
+The node drain function shuts down all virtual machines on the node and marks the node as "drained" state, a drained node will not be scheduled with any new virtual machine. 
+Besides this feature is convenient to shut down the virtual machines on the node in parallel, this feature is more essentially designed for mitigating the services' downtime in case of serious node failures. For example, when a node crashes due to some hardware failure or something else, if this failure can't be restored in a short period, the virtual machines on the node must be migrated to other nodes. However, because the node is down, the standard migration can't be performed through libvirt, the virtual machines have to be rebuilt on other nodes as a secondary failover method. After the rebuilding process finishes, it is important to make sure that the virtual machines on the source node will no longer be active, otherwise, it will cause the "brain split" problem. Therefore, it is necessary to trigger a "drain" process on the source node before triggering the "rebuild" process on the other nodes. With the "drain" and "rebuild" operations, it ensures the uniqueness of a single virtual machine instance at any time.
 
-### 通过Web UI清空
+### Trigger a drain on Web UI
 
 在"**节点管理**"页面，选中要迁移的节点，在"**操作**"栏目中，点击"**清空**"菜单项，弹出确认对话框后，点击"**确认**"执行清空操作，清空任务执行时节点的状态机会被锁定，完成后节点的信息会被更新(节点虚拟机数量、清空任务的执行情况等)。
 
 {{% imgproc node_drain Fit "480x350" %}}
-节点清空
+drain a node
 {{% /imgproc %}}
 
 
-### 通过chimecli清空
+### Drain via chimecli tool
 
-命令原型:
+Command Usage:
 
 ```
   chimecli host drainHost [flags]
@@ -140,7 +142,7 @@ Flags:
       --HostUuid string      Required. the host's uuid
 ```
 
-示例:
+Example:
 
 ```
    chimecli host drainHost \
@@ -150,9 +152,9 @@ Flags:
 
 ```
 
-### 通过chime-agent清空
+### Drain via chime-agent's commnad line 
 
-命令原型:
+Command Usage:
 
 ```
   chime-agent drain 
@@ -161,17 +163,17 @@ Flags:
   --confirm 
 ```
 
-参数说明:
+Argument Description:
 
-- **confirm**: 该参数代表执行实际的清空动作
+- **confirm**: Specify this option to trigger a real draining process, otherwise, it acts as a "dry-run" which only checks the parameters and draining conditions.
 
-示例:
+Example:
 
 ```
   chime-agent drain --confirm 
 ```
 
-## 重建
+## Node Rebuild
 
 根据"节点清空"的功能说明，"清空"+"重建"的功能是为了应对节点宕机时，故障节点上虚拟机服务能够快速恢复的运维方法。重建功能是把故障节点的全部虚拟机在其它正常的节点重新创建。需要特别注意以下几点: 
 1. 故障节点上带有本地盘的虚拟机，在节点"重建"的过程中，不会被重建，因为本地盘的数据由于宕机原因无法进行拷贝，所以使用本地盘的虚拟机的可靠性本身就受限于节点的可靠性，一般不推荐使用带本地盘的虚拟机。

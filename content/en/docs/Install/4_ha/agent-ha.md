@@ -5,7 +5,7 @@ weight: 3
 ---
 
 {{% alert title="Information" color="default" %}}
-本章节仅介绍chime-agent如何和chime-server一起工作来实现虚拟机资源的高可用，没有涉及到部署配置的内容，如果您正在部署生产环境，可选择性地忽略本章。
+This chapter only introduces how the chime-agent works with the chime-server to achieve high availability of virtual machines. It does not involve any deployment configuration. If you are deploying a production environment, you can optionally ignore this chapter.
 {{% /alert %}}
 
 ## Introduction to chime-agent's HA 
@@ -92,14 +92,15 @@ The chime-agent's command line enables us to migrate the virtual machines throug
 
 #### Scenario #5: Node's management network is up, the business network is down
 
-chime-agent会每30s检测业务网的状态，如果业务网出现问题，chime-agent在向chime-server上报心跳时，会标记计算节点状态为"error"。在这种情况下，chime-server对于该节点的管控是正常的，可以通过"迁移"或者"清空"+"重建"将该节点的虚拟机迁移到其它节点。当然也可以通过运维命令"chime-agent migrate"通过管理网(或存储网)进行迁移。需要注意的是，在这种情况下，因为业务网络中断，客户对虚拟机的访问是中断的，但虚拟机实例在正常运行。 
+Chime-agent monitors the business network by checking its connectivity every 30 seconds, if there is a problem with the business network, chime-agent will report the problem with the heartbeat report to the chime-server and mark the current node as in "error" state. 
+Since the management network is normal, you can either "migrate" the node or "drain" + "rebuild" the node by the control plane and naturally use the management network for data transmission. **Note**: In this case, since the business network is down, the user can not access the virtual machines on the problematical node while they are running until the migration is done
 
 #### Scenario #6: Node's management network and business network are both down
 
-此时，chime-server对于该节点的监控状态标记是"不可达",由于管理网和业务网都不可达，所以无法通过管理网、业务网进行迁移,也无法通过chime-server对该节点进行"清空"。在这种情况下，需要登录该节点执行命令:
+At this time, the monitor state of the node is marked as "unreachable". Since both the management network and the business network are down, we can not migrate the virtual machines through the management network or the business network, and the control plane(chime-server) is not able to reach the node either. In this case, you need to login to the node's terminal and execute the command as following:
 
 ```
 chime-agent drain 
 ```
 
-来手动清空该节点的虚拟机，然后在chime-server端执行"清空"命令(目的是保持chime-server和chime-agent)状态一致，然后"重建"该节点。
+to manually drain all the virtual machines on the node, then "drain" the node again via the chime-server to keep the node's state consistent between the chime-server and chime-agent, and then you can invoke a "rebuild" task to have the virtual machines recreated on other nodes.

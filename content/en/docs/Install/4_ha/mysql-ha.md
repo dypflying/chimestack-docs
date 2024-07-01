@@ -26,7 +26,7 @@ plus, install the start keepalived service on each node, and setup a VIP for exp
 
 VIP: 192.168.231.30
 
-##### 1.Configure the server2 to be synchronized with server1 via binlog
+##### 1. Configure the server2 to be synchronized with server1 via binlog
 
 edit /etc/my.conf file on server1, add or modify the following content:
 
@@ -77,7 +77,7 @@ change master to master_host='192.168.231.11',master_user='chimesync',master_pas
 
 **Note**: the master_log_file and master_log_pos values must be same with the binlog values of the output of the command "show master status" invoked on the master Mysql.
 
-##### 2.Configure the server1 to be synchronized with server2 via binlog
+##### 2. Configure the server1 to be synchronized with server2 via binlog
 
 edit /etc/my.conf on server2, add or modify the following content:
 
@@ -129,7 +129,7 @@ change master to master_host='192.168.231.12',master_user='chimesync',master_pas
 **Note**: the master_log_file and master_log_pos values must be same with the binlog values of the output of the command "show master status" invoked on the master Mysql.
 
 
-##### 3.Test binlog's mutual replications between server1 and server2
+##### 3. Test binlog's mutual replications between server1 and server2
 
 create test1/test2 table in the "chime" database on server1/server2 respectively 
 
@@ -149,7 +149,7 @@ SHOW TABLES;
 
 check the test1/test2 tables exist on both mysql instances
 
-##### 4.Change master/slave setting
+##### 4. Change master/slave setting
 
 If need to change master/slave setting, you should stop the replications first, and change the master/slave setting and then restart the slave replication again, for instance:
 
@@ -159,7 +159,7 @@ change master to xxx xxx ...
 START SLAVE;
 ```
 
-##### 5.keepalived configuration
+##### 5. keepalived configuration
 
 edit /etc/keepalived/keepalived.conf file on server1, add or modify the following content:
 

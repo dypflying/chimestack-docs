@@ -6,7 +6,7 @@ weight: 5
 
 ##### Overview
 
-The solution for influxdb's high availability is relatively simple, that is to deploy two influxdb instances on 2 servers, whose API tokens as well as their orginization and bucket settings are all same. chime-agent writes logs to the dual influxdb databases simultaneously, and with the help of keepalived, setup a VIP address and make the 2 influxdb instances a master and a backup, all the query requests for influxdb's data are routed to the VIP address. In short, the solution is to dual writes to influxdb and query from the HA-ensured VIP address. 
+The solution for influxdb’s high availability is relatively simple, that is to deploy two influxdb instances on 2 servers, whose API tokens as well as their organization and bucket settings are all the same. chime-agent writes logs to the dual influxdb databases simultaneously, and with the help of keepalived, set up a VIP address and make the 2 influxdb instances a master and a backup, all the query requests for influxdb’s data are routed to the VIP address. In short, the solution is to dual writes to the influxdb and query from the HA-ensured VIP address.
 
 Following is the architecture of the solution: 
 
@@ -14,7 +14,7 @@ Following is the architecture of the solution:
 
 
 {{% alert title="Information" color="primary" %}}
-One shortcoming of the deployment is when there are some exceptions occur due to network or hardwares of the servers' problem, there could be data consistency issue between the 2 influxdb's storage becasue some data may be lost, as a result, when the VIP address switches, the queries result maybe inconsistent.
+Due to certain exceptions that could occur from the network or server, data may not be able to be written to the dual InfluxDB instances completely successfully, so the data in the two InfluxDB instances may not be consistent.
 {{% /alert %}}
 
 ##### chime-server's influxdb setting: 
@@ -105,4 +105,4 @@ sudo systemctl restart keepalived
 
 ###### Other HA solutions
 
-One solution is to use the open-sourced influx-cluster, more details refer to [Influxdb-cluster Deployement](https://github.com/chengshiwen/influxdb-cluster). Another solution is to use the official Influxdb Enterprise, more details refer to [Influx Enterprise Deployment](https://docs.influxdata.com/enterprise_influxdb/v1/), both of the 2 solutions could perform better HA than the solution provisioned in the chapter. 
+One solution is to use the open-sourced influx-cluster, more details refer to [Influxdb-cluster Deployement](https://github.com/chengshiwen/influxdb-cluster). Another solution is to use the official Enterprise version of Influxdb, more details refer to [Influx Enterprise Deployment](https://docs.influxdata.com/enterprise_influxdb/v1/), both of the 2 solutions could perform better HA than the solution provisioned in the chapter. 

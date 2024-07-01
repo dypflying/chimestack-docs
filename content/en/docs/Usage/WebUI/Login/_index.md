@@ -5,14 +5,6 @@ weight: 3
 description: This chapter introduces how to login the ChimeStack and how to update personal information
 ---
 
-## 3 User Roles in ChimeStack
-
-| Role                | Description      | Privilege |
-|---------------------|------------------------------------|------|
-| Super Administator  | super administator, "admin" is the only super administator | platform management, user management, cloud resources management |
-| Administator        | administator, created by super administator or administators | platform management、user management |
-| User                | normal user, created by super administator or administators  | cloud resources management |
-
 ## System Login
 
 Access the url of "http://\<your-chime-server-vip-address\>:8033/" in browser, open the login page.
@@ -23,24 +15,40 @@ Access the url of "http://\<your-chime-server-vip-address\>:8033/" in browser, o
 Input username and password to login
 
 {{% pageinfo color="primary" %}}
-the initial username/password of the super administrator is "admin/admin"
+The initial username/password of the super administrator is: admin/admin
 {{% /pageinfo %}}
 
 {{% alert title="Note" color="primary" %}}
-user passwords in ChimeStack are double encrypted and stored
+User passwords in ChimeStack are stored with double encryption
 {{% /alert %}}
 
 ## Update personal information including password 
 
-点击屏幕右上角的头像
-Click user's avator on the top-right of the main page, for instance: 
+Click user's avator on the top-right of the main page, such as: 
 
 {{% imgproc userpanel Fit "240x240" %}}
 {{% /imgproc %}}
 
-Click the **Setting** button，enter the user's information edit page, for instance:
+Click the **Setting** button，enter the user's information edit page, such as:
 
 {{% imgproc usersetting Fit "600x600" %}}
 {{% /imgproc %}}
 
-User's password, avator login name and nickname can be updated in the page. 
+You can update the user's password, avator, login name and nickname in the page. 
+
+## User session's limitation
+
+By default, each account can have 2 sessions. The latest session will kick out the oldest session if the number of sessions exceeds the limitation. You can change the number of session limitations by modifying the chime-server's configuration file. Such as editing the /etc/chime/server.yaml file as follows:
+
+```
+chime-server:
+  #the number of user sessions:
+  user_sessions: 2
+  ...
+```
+
+Then restart the chime-server to have the change take into effect:
+
+```
+systemctl restart chime-server 
+```

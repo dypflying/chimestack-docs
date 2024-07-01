@@ -4,37 +4,38 @@ date: 2023-11-09
 weight: 5
 ---
 
-Currently there are couples of 3rd S3 softwares which are designed with high available solutions. Chimestack recommends using the Minio as the S3 provider and its multi-node, multi-drive deployment model to achive HA for S3. 
+Currently, there are a couple of 3rd S3 software which are designed with high-available solutions. Chimestack recommends using the Minio as the S3 provider and its multi-node, multi-drive deployment model to achieve HA for S3. 
 
-This chapter introduces how to deploy the Minio's MNMD in production
+This chapter introduces how to deploy the Minio of MNMD in production
 
 ##### Environment Preparation
 
-Requires 2 nodes, and 3 hard disks per node, such as:
+Prepares 2 nodes, 3 hard disks per node, such as:
 
 |  Node        |     HostName      |        IP       |                     Disks               |
 |--------------|-------------------|-----------------|-----------------------------------------|
 | ServerNode1  | server1.chime.com |  192.168.231.11 | /dev/nvme0n2,/dev/nvme0n3,/dev/nvme0n4  |
 | ServerNode2  | server2.chime.com |  192.168.231.12 | /dev/nvme0n2,/dev/nvme0n3,/dev/nvme0n4  |
 
-VIP: 192.168.231.50 and its domain name: s3.chime.com
+VIP: 192.168.231.50 
+Domain name: s3.chime.com
 
-format the hard disks as xfs filesystem and mount them to the planned directories on both server1 and server2 
-
-```
-mkfs.xfs /dev/nvme0n2 && mkfs.xfs /dev/nvme0n3 && mkfs.xfs /dev/nvme0n4 
-mkdir -p /minio/disk1 && mkdir -p /minio/disk2 && mkdir -p /minio/disk3
-mount /dev/nvme0n2 /minio/disk1
-mount /dev/nvme0n3 /minio/disk2
-mount /dev/nvme0n4 /minio/disk3
-```
-
-add a user named minio-user and the a user group with the same name on both server1 and server2, and change the directories' owner to minio-user, such as: 
+Format the hard disks as xfs filesystem and mount them to the planned directories on both server1 and server2 
 
 ```
-groupadd -r minio-user
-useradd -M -r -g minio-user minio-user
-chown -R minio-user:minio-user /minio/disk1 /minio/disk2 /minio/disk3 
+sudo mkfs.xfs /dev/nvme0n2 && mkfs.xfs /dev/nvme0n3 && mkfs.xfs /dev/nvme0n4 
+sudo mkdir -p /minio/disk1 && mkdir -p /minio/disk2 && mkdir -p /minio/disk3
+sudo mount /dev/nvme0n2 /minio/disk1
+sudo mount /dev/nvme0n3 /minio/disk2
+sudo mount /dev/nvme0n4 /minio/disk3
+```
+
+Add a user named minio-user as well as a group on both server1 and server2, and change the directories' owner to minio-user, such as: 
+
+```
+sudo groupadd -r minio-user
+sudo useradd -M -r -g minio-user minio-user
+sudo chown -R minio-user:minio-user /minio/disk1 /minio/disk2 /minio/disk3 
 ```
 
 ##### Install Minio 
@@ -48,7 +49,7 @@ sudo dnf install minio.rpm
 
 ##### Configure minio
 
-Create a new /etc/default/minio file on server1 and server2 respectively, a minio process will read necessary running parameters from this file during its startup. And add following content: 
+Create a new /etc/default/minio file on server1 and server2 respectively, minio process will read its runtime parameters from this file during its startup process, then add the following content: 
 
 ```
 # The MINIO_VOLUMES setting covers 2 MinIO hosts with 3 drives each at the specified hostname and drive locations.
@@ -67,7 +68,7 @@ MINIO_ROOT_PASSWORD=minioadmin
 MINIO_SERVER_URL="http://s3.chime.com:9000"
 ```
 
-###### Start minio cluster
+##### Start minio cluster
 
 Start minio process on server1 and server2 respectively，then check the status of the the minio process:
 
@@ -76,7 +77,7 @@ sudo systemctl start minio
 systemctl status minio
 ```
 
-###### Configure keepalived+lvs
+##### Configure keepalived+lvs
 
 Edit /etc/keepalived/keepalived.conf file on server1, add or modify the following content:
 
@@ -159,7 +160,7 @@ virtual_server 192.168.231.50 9000 {
 }
 ```
 
-restart keepalived to make the configuration changes take into effect
+Restart the keepalived daemon to make the changes take into effect
 
 ```
 sudo systemctl restart keepalived

@@ -21,19 +21,19 @@ VIP: 192.168.231.50, 域名: s3.chime.com
 在server1和server2分别格式化磁盘为xfs文件系统并挂载目录:
 
 ```
-mkfs.xfs /dev/nvme0n2 && mkfs.xfs /dev/nvme0n3 && mkfs.xfs /dev/nvme0n4 
-mkdir -p /minio/disk1 && mkdir -p /minio/disk2 && mkdir -p /minio/disk3
-mount /dev/nvme0n2 /minio/disk1
-mount /dev/nvme0n3 /minio/disk2
-mount /dev/nvme0n4 /minio/disk3
+sudo mkfs.xfs /dev/nvme0n2 && mkfs.xfs /dev/nvme0n3 && mkfs.xfs /dev/nvme0n4 
+sudo mkdir -p /minio/disk1 && mkdir -p /minio/disk2 && mkdir -p /minio/disk3
+sudo mount /dev/nvme0n2 /minio/disk1
+sudo mount /dev/nvme0n3 /minio/disk2
+sudo mount /dev/nvme0n4 /minio/disk3
 ```
 
 在server1和server2分别添加minio-user用户和用户组，并改变存储目录所有者:
 
 ```
-groupadd -r minio-user
-useradd -M -r -g minio-user minio-user
-chown -R minio-user:minio-user /minio/disk1 /minio/disk2 /minio/disk3 
+sudo groupadd -r minio-user
+sudo useradd -M -r -g minio-user minio-user
+sudo chown -R minio-user:minio-user /minio/disk1 /minio/disk2 /minio/disk3 
 ```
 
 ##### 安装minio 
@@ -66,7 +66,7 @@ MINIO_ROOT_PASSWORD=minioadmin
 MINIO_SERVER_URL="http://s3.chime.com:9000"
 ```
 
-###### 启动minio集群
+##### 启动minio集群
 
 在server1和server2分别启动minio，并查看minio启动状态
 ```
@@ -74,7 +74,7 @@ sudo systemctl start minio
 systemctl status minio
 ```
 
-###### 配置keepalived+lvs
+##### 配置keepalived+lvs
 
 在server1编辑/etc/keepalived/keepalived.conf，添加如下配置:
 

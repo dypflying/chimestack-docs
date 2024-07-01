@@ -1,5 +1,5 @@
 ---
-title: 2 Install ChimeStack
+title: 2. Install ChimeStack
 description: Introduce the installation and configurations of ChimeStack
 weight: 2
 ---

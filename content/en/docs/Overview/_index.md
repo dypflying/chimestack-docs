@@ -1,5 +1,5 @@
 ---
-title: 1 Overview
+title: 1. Overview
 description: A brief introduction to ChimeStack, its advantages, and its landscape
 weight: 1
 ---

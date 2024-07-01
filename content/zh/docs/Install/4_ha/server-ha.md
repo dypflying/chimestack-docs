@@ -278,8 +278,6 @@ ip -br a
 
 ```
 sudo systemctl stop chime-server
-#or
-sudo pkill chime-server 
 ```
 
 在server2，确认VIP(192.168.231.10/20)在网卡ens160上，并通过VIP访问Web UI及API，确认功能正常。
@@ -288,8 +286,6 @@ sudo pkill chime-server
 
 ```
 sudo systemctl start chime-server
-#or
-chime-server 
 ```
 
 分别检查server1和server2，确认VIP(192.168.231.10/20)在server1的网卡ens160上，并通过VIP访问Web UI及API，功能正常。

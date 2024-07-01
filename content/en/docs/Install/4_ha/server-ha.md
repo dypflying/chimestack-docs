@@ -277,8 +277,6 @@ Stop the chime-server process in server1:
 
 ```
 sudo systemctl stop chime-server
-#or
-sudo pkill chime-server 
 ```
 
 In the node of server2，confirm the VIP address (192.168.231.10/20) is on its network interface of ens160, and confirm the Web UI and API service of chime-server are accessible and functioning normally. 
@@ -287,8 +285,6 @@ Then start the chime-server process in the server1 again:
 
 ```
 sudo systemctl start chime-server
-#or
-chime-server 
 ```
 
 Check server1 and server2, confirm the VIP address (192.168.231.10/20) is back to the server1's network interface of ens160, and confirm the Web UI and API service of chime-server are accessible and functioning normally. 

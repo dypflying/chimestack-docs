@@ -1,5 +1,5 @@
 ---
-title: Introduction to Network Interface Bonding
+title: Network Interface Bonding
 weight: 3
 ---
 

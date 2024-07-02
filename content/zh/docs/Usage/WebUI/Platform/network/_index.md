@@ -18,7 +18,7 @@ weight: 5
   * 输入网卡名称
   * (可选)描述信息
 {{% alert title="警告" color="warning" %}}
-注意：网卡名称必须是集群所有物理中真实的网卡名称，如果网卡名称不统一，请参考"网卡归一化"章节。
+注意：网卡名称必须是集群所有物理中真实的网卡名称，如果网卡名称不统一，请参考[网卡绑定介绍](/docs/reference/other/bond)章节。
 {{% /alert %}}
 
 {{% imgproc network_new Fit "1000x600" %}}

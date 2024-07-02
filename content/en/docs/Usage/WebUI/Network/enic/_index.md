@@ -8,13 +8,14 @@ weight: 2
 ## Check Network Interfaces
 
 * Check network interface list:
-  * To change current cluster, click **Change Cluster** and then select **Zone** and **Cluster**
-  * Click **filter** button, input or select filter conditions, check the filtered network interfaces list
-  * Click **columns** button，select the columns to be displayed in the list，by default it shows all columns
+  * To change current cluster, click "**Change Cluster**" and then select "**Zone**" and "**Cluster**"
+  * Click "**filter**" button, input or select filter conditions, check the filtered network interfaces list
+  * Click "**columns**" button，select the columns to be displayed in the list，by default it shows all columns
 * To view a network interface's details, select the network interface in the list，detailed information will be showed in the below panel.
   * General information tab: show the general information of the network inerface
   * Attached instances tab: show the virtual machine instance to which the network interface attaches
   * Network interface monitor tab: Show the network interface's I/O statistical information in charts
+  * Operation logs tab: Show the network interface's operation logs
   
 {{% imgproc nic_list Fit "1000x600" %}}
 network interfaces list page
@@ -26,6 +27,10 @@ virtual machines to which the network interface attaches
 
 {{% imgproc nic_stat Fit "1000x400" %}}
 network interface's I/O monitor
+{{% /imgproc %}}
+
+{{% imgproc nic_logs Fit "1000x400" %}}
+network interface's operation logs
 {{% /imgproc %}}
 
 ## Create Network Interface

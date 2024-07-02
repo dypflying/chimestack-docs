@@ -7,14 +7,15 @@ weight: 2
 ## Volume List
 
 * Check volumes list：
-  * To change current cluster, click **Change Cluster** and then select **Zone** and **Cluster**
-  * Click **filter** button, input or select filter conditions, check the filtered volumes list
-  * Click **columns** button，select the columns to be displayed in the list，by default it shows all columns
+  * To change current cluster, click "**Change Cluster**" and then select "**Zone**" and "**Cluster**"
+  * Click "**filter**" button, input or select filter conditions, check the filtered volumes list
+  * Click "**columns**" button，select the columns to be displayed in the list，by default it shows all columns
 * To view a volume's details, select a volume in the list，detailed information will be showed in the below panel.
   * General information tab: show the general information of the volume
   * Attached instances tab: show the virtual machine instance to which the volume attaches
   * Snapshot tab: show the snapshots of the volume
   * Volume monitor tab: Show the volume's I/O statistical information in charts
+  * Operation log tab: Show the the volume's operation logs
   
 {{% imgproc volume_list Fit "1000x1000" %}}
 volume list page
@@ -30,6 +31,10 @@ volume's snapshot list
 
 {{% imgproc volume_stat Fit "1000x400" %}}
 volume's I/O monitor
+{{% /imgproc %}}
+
+{{% imgproc volume_logs Fit "1000x400" %}}
+volume's operation logs
 {{% /imgproc %}}
 
 ## Create New Volume

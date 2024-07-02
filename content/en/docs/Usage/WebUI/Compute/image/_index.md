@@ -7,12 +7,12 @@ weight: 3
 ## Check User Images
 
 * Check user's image list：
-  * Click **Filter** button, input or select filter conditions, check the filtered image list
-  * Click **Columns** button，select the columns to be displayed in the list，by default it shows all columns
+  * Click "**Filter**" button, input or select filter conditions, check the filtered image list
+  * Click "**Columns**" button，select the columns to be displayed in the list，by default it shows all columns
 * Update user's image：
-  * Click **Edit** button to edit image's attributes
+  * Click "**Edit**" button to edit image's attributes
 * Delete user's image 
-  * Click **Delete** button to delete an image
+  * Click "**Delete**" button to delete an image
   
 {{% imgproc image_list Fit "1000x500" %}}
 User's image list page

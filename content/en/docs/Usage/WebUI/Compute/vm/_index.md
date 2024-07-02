@@ -7,15 +7,16 @@ weight: 2
 ## Check Virtual Machines
 
 * Check virutal machine list：
-  * To change current cluster, click **Change Cluster** and then select **Zone** and **Cluster**
-  * Click **filter** button, input or select filter conditions, check the filtered virtual machine list
-  * Click **columns** button，select the columns to be displayed in the list，by default it shows all columns
+  * To change current cluster, click "**Change Cluster**" and then select **Zone** and **Cluster**
+  * Click "**filter**" button, input or select filter conditions, check the filtered virtual machine list
+  * Click "**columns**" button，select the columns to be displayed in the list，by default it shows all columns
 * To view a virtual machine's details, select the virutal machine in the list，detailed information will be showed in the below panel.
   * General information tab: show the general information of the virtual machine
   * Volumes information tab: list the attached volumes' information of the virtual machine 
   * Network interfaces information tab: list the attached network interfaces' information of the virtual machine 
-  * System monitor tab: Show the virtual machine's CPU and memory usage percentage in charts 
-  * I/O monitor tab: Show the virtual machine's overall statistics of its disk I/O and network I/O in charts
+  * System monitor tab: show the virtual machine's CPU and memory usage percentage in charts 
+  * I/O monitor tab: show the virtual machine's overall statistics of its disk I/O and network I/O in charts
+  * Operation log tab: show the operation logs of the virtual machine. 
 
 {{% imgproc vmlist Fit "1000x1000" %}}
 virtual machine's list and details 
@@ -37,6 +38,10 @@ virtual machine's CPU and memory usage percentage
 virtual machine's overall statistics of disk I/O and network I/O
 {{% /imgproc %}}
 
+{{% imgproc vmlogs Fit "1000x500" %}}
+virtual machine's operation logs
+{{% /imgproc %}}
+
 ## Virtual Machine Management
 
 ### Create New Virtual Machine
@@ -54,15 +59,15 @@ virtual machine's overall statistics of disk I/O and network I/O
 {{% /imgproc %}}
 
 * Input following items in the "Login" tab:
-  * (Optional) the password for the root user，**Note: if the guest OS doesn't have the cloud-init installed, the password will not be taken into effect**。
+  * (Optional) the password for the root user，**Note: If the cloud-init is not installed on the guest operating system, this setting will not take effect.**。
   * (Optional) the password for the vnc login
 {{% imgproc newvmlogin Fit "1000x600" %}}
 {{% /imgproc %}}
 
 * Input or choose following items in the "Add Virtual Hardware" tab:
   * CDRom device, if set the CDRom as boot device, so the system will boot from this CDRom 
-  * Up to 32 data volumes can be added to the virtual machine 
-  * Up to 8 network interfaces can be added to the virtual machine
+  * Up to 128 data volumes can be added to the virtual machine 
+  * Up to 16 network interfaces can be added to the virtual machine
 {{% imgproc newvmdevices Fit "1000x1500" %}}
 {{% /imgproc %}}
 
@@ -79,6 +84,15 @@ virtual machine's overall statistics of disk I/O and network I/O
   
 {{% alert title="Warning" color="warning" %}}
 The deleted virtual machines can not be restored anymore, and the attached resources of the virtual machines can not be restored either
+{{% /alert %}}
+
+* **Migrate**: Migrate the virtual machine to another node (including online and offline migration). Before triggering a migration, you can specify a target node to migrate or not specify a node to let the system automatically schedule the most suitable node(based on the node’s resource allocation data). If the virtual machine contains local disks, you must turn on the “Migrate local hard disk” option there, otherwise the migration will fail.
+
+{{% imgproc vm_migrate Fit "800x300" %}}
+{{% /imgproc %}}
+
+{{% alert title="Warning" color="warning" %}}
+Migrating a virtual machine with local disks, all disk data will be copied to the target node,  it will consume plenty of system and network resources and take much longer to finish. Hence it is not recommended to migrate virtual machines that attach local disks.
 {{% /alert %}}
 
 ### Batch Operation

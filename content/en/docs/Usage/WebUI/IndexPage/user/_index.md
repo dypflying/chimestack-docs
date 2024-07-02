@@ -8,21 +8,21 @@ weight: 2
 {{% /imgproc %}}
 
 * Login Information
-  * current user name
-  * login datetime, system datetime
+  * Current user name
+  * Login datetime, system datetime
 * Unread Alert Summary 
   * Categorize the alerts by their severity as "Urgent","Severe" and "Warn"
   * Show the top 3 alert items sorted by severity and their unread count 
   * Click the "View All" link to enter the alert list view page 
 * Virtualized Resource Statistical Summary
-  * virtual machines' summary
-  * volumes' summary
-  * elastic network interfaces' summary
+  * Virtual machines' usage summary
+  * Volumes' usage summary
+  * Elastic network interfaces' usage summary
 * Virtual Machines' Average Usage Statistical Summary
   * CPU's average usage
-  * memory's average usage
+  * Memory's average usage
 
 
 {{% pageinfo color="primary" %}}
-you can choose different time ranges to show the statistics in the page
+You can choose different time ranges to display the statistical data in the page
 {{% /pageinfo %}}

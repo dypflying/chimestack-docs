@@ -3,73 +3,73 @@ title: Introduction to Mysql's Architecture
 weight: 3
 ---
 
-在当代软件系统中，数据库的高可用尤为关键，毕竟数据库是承载软件系统数据存储和检索的基础组件，mysql作为ChimeStack的当前的数据存储组件，其可用性直接关系到chime-server以及整个ChimeStack的可用性和可靠性。
+Modern software systems need to have their information stored in high-availability databases. As the data storage component of ChimeStack, the availability of MySQL is a key aspect of the reliability of the chime-server and even the entire ChimeStack.
 
-下面介绍几种常用的mysql高可用架构:
+Following are some popular MySQL's high-availability architectures:
 
-### 1.双主+keepalived模式
+### 1. Dual master+keepalived model
      
-两台MySQL数据库互为主从, 同过keepalived设定的VIP对外提供服务，keepalived负责mysql实例的健康检测和failover。ChimeStack默认的mysql高可用方案。
+Deploy two MySQL databases that are mutually master-slave, and provide external services through a VIP address provisioned by keepalived. Keepalived takes charge of the MySQL instance's health detection and automatic failover. It is adopted as ChimeStack's default MySQL's HA solution.
    
 ![keepalived+dualmaster](/images/mysql+keepalived.png)
     
 ### 2.MMM(Multi-Master Replication Manager)
 
-多主复制机制，基于MySQL的复制机制，通过在多个MySQL实例之间进行主从复制，实现了数据的同步和备份。
+The multi-master replication mechanism is based on the MySQL replication mechanism. It achieves data synchronization and backup by performing master-slave replication between multiple MySQL instances.
    
 ![Google-MMM](/images/mysql+mmm.png)
    
-其中Google开源项目MySQL-MMM提供了MySQL主主复制配置的监控、故障转移和管理的一套可伸缩的脚本套件。[下载地址](https://mysql-mmm.org/)
+The Google's open source project "MySQL-MMM" provides a scalable script suite for monitoring, failover and management of MySQL master-master replication configuration. [Download Link](https://mysql-mmm.org/)
 
 ### 3.MHA(Master High Availability) 
     
-MHA由MHA Node(数据节点)、MHA Manager(管理节点)两部分组成。MHA Node运行在每台MySQL服务器上。MHA Manager可以单独部署在一台独立的机器上，管理多个Master-Slave集群。在主数据库发生故障时，能够快速自动地将备库（Slave）提升为新的主库，以保证系统的连续性和可用性。
+MHA consists of two parts: MHA Node (data node) and MHA Manager (management node). MHA Node runs on each MySQL server. MHA Manager can be deployed on a separate machine to manage multiple Master-Slave clusters. When the master database fails, the slave instance can be automatically promoted to the master instance quickly to ensure the entire system's continuity and availability.
    
 ![MHA](/images/mysql+mha.png)
 
-部署配置参考 [MHA作者github](https://github.com/yoshinorim/mha4mysql-manager/wiki/Installation)
+Deployment and configuration refer to [MHA github](https://github.com/yoshinorim/mha4mysql-manager/wiki/Installation)
 
 ### 4.MGR(MySQL Group Replication)
-    
-MySQL官方提供的一种高可用性架构，用于实现MySQL数据库的主从复制和自动故障切换。MGR基于MySQL的InnoDB存储引擎和Group Replication插件，通过使用多主复制的方式来提供高可用性和数据一致性。
+
+A high-availability solution provided by the official MySQL team, it implements master-slave replication and automatic failover. MGR is based on MySQL's InnoDB storage engine and its group replication plug-in, which provides high availability and data consistency by using multi-master replication.
    
 ![MGR-Deploy](/images/mysql+mgr+deploy.png)
 
-Mysql Group Replication 数据一致性协议: 
+Mysql Group Replication's data consistency protocol: 
 
 ![MGR-Transaction](/images/mysql+mgr+thoery.png)
 
 
-部署配置参考 [Mysql官方Blog](https://dev.mysql.com/blog-archive/mysql-group-replication-a-quick-start-guide/)。
+Deployment and configuration refer to [Mysql Offical Blog](https://dev.mysql.com/blog-archive/mysql-group-replication-a-quick-start-guide/)。
    
 ### 5.Mysql NDB Cluster
-    
-MySQL官方提供的一种分布式数据库解决方案，旨在提供高可用性、可扩展性和实时性能。它基于NDB(Network DataBase)存储引擎，使用多台服务器组成一个集群，提供数据的分片和复制，以实现高可用性和负载均衡。
+
+A distributed database solution officially provided by MySQL, designed to provide high availability, scalability, and real-time performance. It is based on the NDB (Network DataBase) storage engine, which uses multiple servers to form a cluster, provides data sharding and replication, it achieves high availability and load balancing.
    
 ![NDB Cluster](/images/mysql+ndb-cluster.png)
 
-部署配置可参考 [Mysql官方文档](https://dev.mysql.com/doc/refman/8.3/en/mysql-cluster-installation.html)
+Deployment and configuration refer to  [Mysql Offical Documentation](https://dev.mysql.com/doc/refman/8.3/en/mysql-cluster-installation.html)
 
 ### 6.Galera Cluster
-     
-基于同步多主复制的MySQL集群解决方案。使用Galera Replication插件，通过在多个MySQL节点之间同步数据来实现高可用性和负载均衡。
+
+It is a MySQL cluster solution based on synchronous multi-master replication, it uses the Galera Replication plug-in to achieve high availability and load balancing by synchronizing data between multiple MySQL nodes.
    
 ![Galera Cluster](/images/mysql+galera.png)
 
-部署配置可参考 [Galera官方文档](https://galeracluster.com/)
+Deployment and configuration refer to [Galera Official Documentation](https://galeracluster.com/)
 
 ### 7.PXC(Percona XtraDB Cluster)
 
-基于Galera Cluster的高可用性和高性能的MySQL集群解决方案。由Percona开发的，建立在Galera Replication插件之上，提供了多主复制和数据同步的功能。
+A high-availability and high-performance MySQL cluster solution based on Galera Cluster. Developed by Percona, it is built on the Galera Replication plug-in and provides multi-master replication and data synchronization capabilities.
 
 ![Percona Cluster](/images/mysql+percona-cluster.png)
 
-安装配置方法可以参考 [Percona官方文档](https://docs.percona.com/percona-xtradb-cluster/8.0/quickstart-overview.html)
+Deployment and configuration refer to [Percona Official Documentation](https://docs.percona.com/percona-xtradb-cluster/8.0/quickstart-overview.html)
 
-### 数据可靠性增强方案
+### Solution for enhancing data reliability
 
-除了以上几种常见的mysql高可用架构，还有以下几种可以配合mysql高可用架构一起使用数据可靠性方案: 
+In addition to the above several MySQL's high availability solutions, there are also some data reliability enhancement solutions that can be used together with MySQL's high availability solutions:
 
-- RAID10(Redundant Array of Independent Disks 10)存储方案: 结合了RAID1(镜像)和RAID0(条带)的特性。RAID10通过将多个磁盘组合在一起，提供了数据冗余和性能增强的优势。
-- SAN(Storage Area Network)高速网络存储: 它将存储设备(如磁盘阵列、磁带库等)与服务器连接起来，提供高性能、高可用性和可扩展性的存储解决方案。
-- Mysql+DRBD: 通过将MySQL数据库的数据目录配置为DRBD设备，可以实现数据的实时复制和故障转移。
+- RAID10(Redundant Array of Independent Disks 10) storage solution: It combines the features of RAID1 (mirroring) and RAID0 (striping), RAID10 provides the advantages of data redundancy and performance enhancement by combining multiple disks.
+- SAN(Storage Area Network) storage solution: It connects storage devices (such as disk arrays, tape libraries, etc.) to servers to provide high-performance, high-availability and scalable storage solutions.
+- Mysql+DRBD: By building its data persistent directory of the MySQL database as a DRBD device, it can achieve real-time replication and automatic failover.

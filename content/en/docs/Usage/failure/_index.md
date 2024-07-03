@@ -1,5 +1,5 @@
 ---
-title: 3.6 Solutions For Node failures
+title: 3.6 Solutions for Node Failures
 weight: 6
 description: This chapter introduces the solutions for handling node failures
 ---

@@ -4,23 +4,24 @@ description: This chapter introduces how to manage public images in ChimeStack
 weight: 10
 ---
 
-* Check image bucket list
-  * Click **Filter** button, input or select filter conditions, check the filtered image bucket list. Each user has a dedicated image bucket.
-  * Click **Columns** button，select the columns to be displayed in the list，by default it shows all columns
+## Check image buckets
+  * Click "**Filter**" button, input or select filter conditions, check the filtered image bucket list. Each user has a dedicated image bucket.
+  * Click "**Columns**" button，select the columns to be displayed in the list，by default it shows all columns
 
 {{% imgproc bucket_list Fit "1000x600" %}}
 image bucket list
 {{% /imgproc %}}
 
-* Check image list
-  * Click **Filter** button, input or select filter conditions, check the filtered image list. 
-  * Click **Columns** button，select the columns to be displayed in the list，by default it shows all columns
+## Check images
+  * Click "**Filter**" button, input or select filter conditions, check the filtered image list. 
+  * Click "**Columns**" button，select the columns to be displayed in the list，by default it shows all columns
   
 {{% imgproc image_list Fit "1000x600" %}}
 image list
 {{% /imgproc %}}
 
-* Add a public image, input or choose the following information: 
+## Add a public image
+Input or choose the following information: 
   * Input the name of the image, which is restricted to 2～64 characters.
   * Choose the file format of the image from the dropdown menu, which contains "raw", "qcow2" and "iso" file format
   * Choose the operation system's type from the dropdown menu. 
@@ -31,5 +32,5 @@ image list
 
   
 {{% imgproc image_new Fit "1000x600" %}}
-create new image
+create new piblic image
 {{% /imgproc %}}

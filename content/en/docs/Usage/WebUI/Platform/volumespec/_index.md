@@ -4,15 +4,15 @@ description: This chapter introduces how to manage volume specifications in Chim
 weight: 9
 ---
 
-* Check volume specification list 
-  * Click **Filter** button, input or select filter conditions, check the filtered volume specification list
-  * Click **Columns** button，select the columns to be displayed in the list，by default it shows all columns
+## Check volume specifications 
+  * Click "**Filter**" button, input or select filter conditions, check the filtered volume specification list
+  * Click "**Columns**" button，select the columns to be displayed in the list，by default it shows all columns
   
 {{% imgproc volumespec_list Fit "1000x600" %}}
 volume specification list 
 {{% /imgproc %}}
 
-* Create new volume specification
+## Create new volume specification
   * Input the name of the volume specification
   * Choose a storage pool 
   * Input the minimum IOPS of the volume specification
@@ -37,14 +37,15 @@ a volume's throughput = MAX('minimum throughput', MIN('maximum throughput', size
 {{% /pageinfo %}}
 
 {{% imgproc volumespec_new Fit "1000x600" %}}
-新建云盘规格
+create new volume specification
 {{% /imgproc %}}
 
-* Volume specification management 
-  * Click **Edit** item button in the operation dropdown menu to update a volume specification's properties
-  * Click **Delete** item button in the operation dropdown menu to delete a volume specification.
+## Volume specification management 
+  * Click "**Edit**" item button in the operation dropdown menu to update a volume specification's properties
+  * Click "**Delete**" item button in the operation dropdown menu to delete a volume specification.
 
-* Attach volume specification to cluster: to have the volume specification available in clusters, administator must attach it to the clusters before creating virtual volumes with this specification. You can click the **Attach to Cluster** item button in the operation dropdown menu to attach it to clusters, one volume specification can be attached to multiple clusters.
+## Attach volume specification to a cluster 
+To have the volume specification available in a cluster, administator must attach it to the cluster before creating virtual volumes with this specification. You can click the "**Attach to Cluster**" item button in the operation dropdown menu to attach it to a cluster, one volume specification can be attached to multiple clusters.
 
 {{% imgproc volumespec_relation Fit "1000x600" %}}
 Attach volume specifications to clusters

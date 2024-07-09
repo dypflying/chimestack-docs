@@ -64,11 +64,30 @@ virtual machine's operation logs
 {{% imgproc newvmlogin Fit "1000x600" %}}
 {{% /imgproc %}}
 
-* Input or choose following items in the "Add Virtual Hardware" tab:
-  * CDRom device, if set the CDRom as boot device, so the system will boot from this CDRom 
-  * Up to 128 data volumes can be added to the virtual machine 
-  * Up to 16 network interfaces can be added to the virtual machine
-{{% imgproc newvmdevices Fit "1000x1500" %}}
+* Input or choose following items in the "CDRom" tab:
+  * CDRom's image source, OS type, and image
+  * wheter to set it as a boot device, if so the system will boot from the CDRom 
+
+
+{{% imgproc newvm_cdrom Fit "1000x1500" %}}
+{{% /imgproc %}}
+
+* Input or choose following items in the "Data Volumes" tab:
+  * Input volume's name 
+  * Select a volume specification 
+  * Input volume's size 
+
+**Note**: Up to 128 data volumes can be added to the virtual machine 
+{{% imgproc newvm_volume Fit "1000x1500" %}}
+{{% /imgproc %}}
+
+* Input or choose following items in the "Network Interface" tab:
+  * Input NIC's name 
+  * Select a network 
+  * Select a subnet 
+  
+**Note**: Up to 16 network interfaces can be added to the virtual machine
+{{% imgproc newvm_nic Fit "1000x1500" %}}
 {{% /imgproc %}}
 
 ### Update Virtual Machine's Information

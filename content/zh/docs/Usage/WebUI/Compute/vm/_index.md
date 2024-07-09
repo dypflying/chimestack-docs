@@ -64,12 +64,30 @@ weight: 2
 {{% imgproc newvmlogin Fit "1000x600" %}}
 {{% /imgproc %}}
 
-* 在"添加虚拟设备"页输入或选择:
-  * CDRom设备，如果选择"从CDRom"启动，则该CDRom作为引导盘启动
-  * 可以添加最多128块数据云盘
-  * 可以添加最多16个网卡
-{{% imgproc newvmdevices Fit "1000x1500" %}}
+* 在"CDROM"页输入或选择:
+  * CDRom设备的规格
+  * CDRom设备的镜像源、操作系统类型以及镜像
+  * 是否"从CDRom"启动，若是则该CDRom作为引导盘启动
+{{% imgproc newvm_cdrom Fit "1000x600" %}}
 {{% /imgproc %}}
+
+* 在"数据云盘"页输入或选择:
+  * 数据云盘名称
+  * 数据云盘规格
+  * 数据云盘大小
+{{% imgproc newvm_volume Fit "1000x600" %}}
+{{% /imgproc %}}
+
+**注**: 最多可以添加127块数据云盘
+
+* 在"附加网卡"页输入或选择:
+  * 网卡名称
+  * 选择网络
+  * 选择子网
+{{% imgproc newvm_nic Fit "1000x600" %}}
+{{% /imgproc %}}
+
+**注**: 最多可以添加15个网卡
 
 ### 更新虚拟机信息
 

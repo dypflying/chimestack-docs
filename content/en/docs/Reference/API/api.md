@@ -3471,6 +3471,7 @@ list networks
 |name|query|string|false|filter by the 'name' field|
 |state|query|integer(int64)|false|filter by the 'state' field|
 |type|query|integer(int64)|false|filter by network type(0: classical network, 1:vlan, 2:vxlan)|
+|bridge_name|query|string|false|filter by network bridge's name|
 |interface_name|query|string|false|filter by network interface's name|
 |AzUuid|path|string|true|filter by AZ's uuid|
 |ClusterUuid|path|string|true|filter by the cluster's uuid|
@@ -3527,9 +3528,9 @@ Content-Type: application/json
 Accept: application/json
 Authorization: Bearer <api token>
 Host: api.yourchimestack.com:8801
-Content-Length: 81
+Content-Length: 101
 
-{"description":"default network","interface_name":"ens224","name":"br1","type":0}
+{"bridge_name":"br1","description":"default network","interface_name":"ens224","name":"br1","type":0}
 ```
 
 `POST /az/{AzUuid}/cluster/{ClusterUuid}/network`
@@ -3540,6 +3541,7 @@ create a network
 
 ```json
 {
+  "bridge_name": "br1",
   "description": "default network",
   "interface_name": "ens224",
   "name": "br1",
@@ -9131,6 +9133,7 @@ instance spec request
 
 ```json
 {
+  "bridge_name": "br1",
   "description": "default network",
   "interface_name": "ens224",
   "name": "br1",
@@ -9143,6 +9146,7 @@ instance spec request
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
+|bridge_name|string|true|none|the network's actual bridge name|
 |description|string|false|none|description for the network|
 |interface_name|string|true|none|the unified interface name which the network uses in the node|
 |name|string|true|none|the network's name|

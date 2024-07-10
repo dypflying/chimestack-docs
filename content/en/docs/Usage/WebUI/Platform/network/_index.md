@@ -15,6 +15,7 @@ layer-2 network list page
 * Create new layer-2 network
   * Input the name of the network
   * Choose the type of the layer-2 network from "classical network", "VLAN network" and "VxLan network", but current version of ChimeStack only support the "classical network", while the other two types of network are coming soon.
+  * Input the network bridge name
   * Input the network interface's name, which has been regularized before as a unique network interface name for all the nodes in the cluster.
   * (Optional) Input description
 {{% alert title="Warning" color="warning" %}}

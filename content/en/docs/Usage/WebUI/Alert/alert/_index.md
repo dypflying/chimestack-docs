@@ -15,5 +15,5 @@ Alert list
 * If the alert is handled, you can acknowledge the alert so that it will be removed from the notification list.
   
 {{% imgproc alert_accept Fit "1000x1000" %}}
-Accept alerts
+Acknowledge alerts
 {{% /imgproc %}}

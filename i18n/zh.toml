@@ -22,10 +22,11 @@ other = "所有"
 
 # Footer text
 [footer_all_rights_reserved]
-other = "保留所有权利"
+other = "保留所有权利   京ICP备2024076141号"
 
 [footer_privacy_policy]
 other = "隐私政策"
+
 
 
 # Post (blog, articles etc.)

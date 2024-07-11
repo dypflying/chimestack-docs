@@ -7,7 +7,7 @@ weight: 3
 
 ## 1. 通过ISO安装ChimeStack 
 
-从[Download/Releases](http://download.chimestack.io/releases)下载ChimeStack的AllInOne ISO镜像安装盘，刻录成光盘或者拷贝U盘进行安装。在虚拟化环境中，可以直接以安装虚拟机的方式通过CDRom进行安装。
+从[Download/Releases](http://download.chimestack.cloud/releases)下载ChimeStack的AllInOne ISO镜像安装盘，刻录成光盘或者拷贝U盘进行安装。在虚拟化环境中，可以直接以安装虚拟机的方式通过CDRom进行安装。
 
 {{% alert title="提示" color="primary" %}}
 注意: 需要启用VT-x和IOMMU支持，且系统需要配置2个网络接口
@@ -49,7 +49,7 @@ systemctl start chime-agent
 
 ### 2.1 安装ChimeStack包 
 
-从 [Download/Releases](http://download.chimestack.io/releases) 下载ChimeStack的二进制安装包
+从 [Download/Releases](http://download.chimestack.cloud/releases) 下载ChimeStack的二进制安装包
 
 {{% alert title="提示" color="primary" %}}
 目前chime-stack安装包仅在centos7/8/9上测试通过
@@ -111,7 +111,7 @@ sudo yum remove mysql-server
 
 ##### 离线安装方式
 
-mysql8.x的离线安装包可以从 [官方下载](https://dev.mysql.com/downloads/mysql/) 或者从 [Download/3rd/Mysql](http://download.chimestack.io/3rd/mysql) 获取。
+mysql8.x的离线安装包可以从 [官方下载](https://dev.mysql.com/downloads/mysql/) 或者从 [Download/3rd/Mysql](http://download.chimestack.cloud/3rd/mysql) 获取。
 
 安装所需的rpm及其顺序如下：
 1. mysql-community-common-8.0.36-1.el8.x86_64.rpm
@@ -145,7 +145,7 @@ ChimeStack要求influxdb 2.x版本
 curl -O https://dl.influxdata.com/influxdb/releases/influxdb2-2.7.5-1.x86_64.rpm
 ```
 
-或者从ChimeStack网站[Download/3rd/Influxdb](http://download.chimestack.io/3rd/influxdb) 下载influxdb 2.7.5安装包
+或者从ChimeStack网站[Download/3rd/Influxdb](http://download.chimestack.cloud/3rd/influxdb) 下载influxdb 2.7.5安装包
 
 下载后运行: 
 
@@ -155,7 +155,7 @@ sudo systemctl enable influxdb
 sudo systemctl start influxdb
 ```
 
-如果需要安装influxdb客户端程序，可从[官方下载](https://docs.influxdata.com/influxdb/v2/tools/influx-cli/)客户端安装包，或者从ChimeStack网站[Download/3rd/Influxdb-CLI](http://download.chimestack.io/3rd/influxdb-cli) 下载influxdb2 客户端安装包
+如果需要安装influxdb客户端程序，可从[官方下载](https://docs.influxdata.com/influxdb/v2/tools/influx-cli/)客户端安装包，或者从ChimeStack网站[Download/3rd/Influxdb-CLI](http://download.chimestack.cloud/3rd/influxdb-cli) 下载influxdb2 客户端安装包
 
 下载后安装客户端程序: 
 

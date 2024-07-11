@@ -7,7 +7,7 @@ weight: 3
 
 ## 1. Install ChimeStack with ISO packages
 
-Download ChimeStack's AllInOne installation iso image from [Download/Releases](http://download.chimestack.io/releases), you can burn it into a CD or copy it to a USB flash drive for installation. 
+Download ChimeStack's AllInOne installation iso image from [Download/Releases](http://download.chimestack.cloud/releases), [download]({{ <.Site.Title> }})you can burn it into a CD or copy it to a USB flash drive for installation. 
 
 {{% alert title="Information" color="primary" %}}
 Note: System requires VT-x and IOMM supportU, and needs as least 2 network interfaces
@@ -32,7 +32,7 @@ The initial account/password of the super administrator: admin/admin
 
 ### 2.1 Install ChimeStack Packages
 
-Download the ChimeStack's binary packages from [Download/Releases](http://download.chimestack.io/releases).
+Download the ChimeStack's binary packages from [Download/Releases](http://download.chimestack.cloud/releases).
 
 {{% alert title="Note" color="primary" %}}
 Currently, the install package has only been tested on CentOS7/8/9
@@ -89,7 +89,7 @@ And please empty the /var/lib/mysql directory, otherwise there could be innodb c
 
 ##### Installation with Packages
 
-The installation package of mysql8.x can be downloaded from [Offical Website Download](https://dev.mysql.com/downloads/mysql/) or from [Download/3rd/Mysql](http://download.chimestack.io/3rd/mysql)
+The installation package of mysql8.x can be downloaded from [Offical Website Download](https://dev.mysql.com/downloads/mysql/) or from [Download/3rd/Mysql](http://download.chimestack.cloud/3rd/mysql)
 
 Please install the RPM packages in the following sequence：
 1. mysql-community-common-8.0.36-1.el8.x86_64.rpm
@@ -123,7 +123,7 @@ Influxdb installation packages can be downloaded from [Offical Website Download]
 curl -O https://dl.influxdata.com/influxdb/releases/influxdb2-2.7.5-1.x86_64.rpm
 ```
 
-or download the influxdb 2.7.5 package from the ChimeStack web site [Download/3rd/Influxdb](http://download.chimestack.io/3rd/influxdb).
+or download the influxdb 2.7.5 package from the ChimeStack web site [Download/3rd/Influxdb](http://download.chimestack.cloud/3rd/influxdb).
 
 Run the following commands after downloading: 
 
@@ -133,7 +133,7 @@ sudo systemctl enable influxdb
 sudo systemctl start influxdb
 ```
 
-If you want to install the client command line tool of influxdb，you can download its package from [Offical Website Download](https://docs.influxdata.com/influxdb/v2/tools/influx-cli/)，or from the ChimeStack Website[Download/3rd/Influxdb-CLI](http://download.chimestack.io/3rd/influxdb-cli)
+If you want to install the client command line tool of influxdb，you can download its package from [Offical Website Download](https://docs.influxdata.com/influxdb/v2/tools/influx-cli/)，or from the ChimeStack Website[Download/3rd/Influxdb-CLI](http://download.chimestack.cloud/3rd/influxdb-cli)
 
 Run the following commands after downloading: 
 

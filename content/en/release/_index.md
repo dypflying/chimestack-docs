@@ -20,8 +20,8 @@ weight: 30
 
 |Version|Description|Download Link|
 |----|----|-------|
-|dev.0.1.1| introduced security groups, resource's limitation management |[Download](http://download.chimestack.io/dev.0.1.1/)|
-|dev.0.1.2| optimized resource locking mechanism, introduced task overtime control mechanism, alarm's email/text notification, virtual machine's no-start creation |[Download](http://download.chimestack.io/dev.0.1.2/)|
+|dev.0.1.1| introduced security groups, resource's limitation management |[Download](http://download.chimestack.cloud/releases/dev.0.1.1/)|
+|dev.0.1.2| optimized resource locking mechanism, introduced task overtime control mechanism, alarm's email/text notification, virtual machine's no-start creation |[Download](http://download.chimestack.cloud/releases/dev.0.1.2/)|
 
 {{% /blocks/section %}}
   

@@ -57,13 +57,12 @@ Provides web GUI and CLI tools for interactive management, and SDKs for further 
 
 {{% blocks/section type="row" %}}
 
-{{% blocks/feature icon="fa-download" title="Download" url="https://chimestack.io/download" %}}
-Download ChimeStack's Packages
+{{% blocks/feature icon="fa-download" title="Download" %}}
+Download [ChimeStack's Packages](http://download.chimestack.cloud/releases/)
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fab fa-github" title="Github!"
-    url="https://github.com/dypflying/chimestack" %}}
-Notifications for new releases, submit issues
+{{% blocks/feature icon="fab fa-github" title="Github!" %}}
+Notifications for new releases, submit issues. [ChimeStack Github](https://github.com/dypflying/chimestack)
 {{% /blocks/feature %}}
 
 {{% blocks/feature icon="fa fa-envelope" title="Email" url="mailto:chimestack@sina.com" %}}

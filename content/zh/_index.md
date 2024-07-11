@@ -6,7 +6,7 @@ title: ChimeStack
 <a class="btn btn-lg btn-primary me-3 mb-4" href="/docs/">
   了解更多 <i class="fas fa-arrow-alt-circle-right ms-2"></i>
 </a>
-<a class="btn btn-lg btn-secondary me-3 mb-4" href="http://download.chimestack.io/">
+<a class="btn btn-lg btn-secondary me-3 mb-4" href="http://download.chimestack.cloud/releases/">
   下载 <i class="fa-download ms-2 "></i>
 </a>
 <p class="lead mt-5" style="color:yellow;"><b>轻量化的私有云基础设施服务软件</b></p>
@@ -57,13 +57,12 @@ ChimeStack是一个轻量化的云计算基础设施即服务(IaaS)软件，通�
 
 {{% blocks/section type="row" %}}
 
-{{% blocks/feature icon="fa-download" title="下载" url="http://download.chimestack.io/" %}}
-获取ChimeStack安装包
+{{% blocks/feature icon="fa-download" title="下载" %}}
+获取 [ChimeStack安装包](http://download.chimestack.cloud/releases/)
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fab fa-github" title="Github!"
-    url="https://github.com/dypflying/chimestack" %}}
-新版本的发布通知,提交问题
+{{% blocks/feature icon="fab fa-github" title="Github!" %}}
+新版本的发布通知,提交问题 [ChimeStack Github](https://github.com/dypflying/chimestack)
 {{% /blocks/feature %}}
 
 {{% blocks/feature icon="fa fa-envelope" title="Email" url="mailto:chimestack@sina.com" %}}

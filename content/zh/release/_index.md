@@ -20,8 +20,8 @@ weight: 30
 
 |版本|说明|下载链接|
 |----|----|-------|
-|dev.0.1.1|实现了安全组、限额管理功能|[下载](http://download.chimestack.io/dev.0.1.1/)|
-|dev.0.1.2|优化资源锁，添加任务超时控制、报警通知管理、虚拟机创建时不启动等功能|[下载](http://download.chimestack.io/dev.0.1.2/)|
+|dev.0.1.1|实现了安全组、限额管理功能|[下载](http://download.chimestack.cloud/releases/dev.0.1.1/)|
+|dev.0.1.2|优化资源锁，添加任务超时控制、报警通知管理、虚拟机创建时不启动等功能|[下载](http://download.chimestack.cloud/releases/dev.0.1.2/)|
 
 {{% /blocks/section %}}
   

@@ -54,6 +54,7 @@ virtual machine's operation logs
   * (Optional) Choose a bootable image (can be searched by image bucket type, format and OS type)，if no bootable image selected，you must add a bootable CDRom as the primary boot device in the "Add Virtual Hardware" tab, otherwise there is no bootable device for the virtual machine to startup.
   * Choose a newwork
   * Choose a subnet
+  * Choose a security group
 
 {{% imgproc newvmgeneral Fit "1000x1500" %}}
 {{% /imgproc %}}
@@ -85,6 +86,7 @@ virtual machine's operation logs
   * Input NIC's name 
   * Select a network 
   * Select a subnet 
+  * Select a security group
   
 **Note**: Up to 16 network interfaces can be added to the virtual machine
 {{% imgproc newvm_nic Fit "1000x1500" %}}

@@ -39,6 +39,7 @@ network interface's operation logs
   * (Optional) input description
   * Choose a newwork
   * Choose a subnet
+  * Choose a security group
   * (Optional) Input an IP address
   
 {{% imgproc nic_new Fit "1000x400" %}}

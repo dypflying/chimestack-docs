@@ -1,5 +1,5 @@
 ---
-title: API Version 0.0.1
+title: API Version dev.0.1.1
 language_tabs:
   - http: HTTP
 toc_footers: []
@@ -4214,9 +4214,9 @@ Content-Type: application/json
 Accept: application/json
 Authorization: Bearer <api token>
 Host: api.yourchimestack.com:8801
-Content-Length: 146
+Content-Length: 165
 
-{"description":"a network interface example","ip":"192.168.231.20","name":"nic1","primary":0,"subnet_uuid":"e73efdf7-d232-4556-ba95-3851100a47b7"}
+{"description":"a network interface example","ip":"192.168.231.20","name":"nic1","primary":0,"sg_uuid":"string","subnet_uuid":"e73efdf7-d232-4556-ba95-3851100a47b7"}
 ```
 
 `POST /nic`
@@ -4231,6 +4231,7 @@ create a network interface
   "ip": "192.168.231.20",
   "name": "nic1",
   "primary": 0,
+  "sg_uuid": "string",
   "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7"
 }
 ```
@@ -7744,6 +7745,271 @@ get volume's i/o statistical information
 <aside class="warning">
 </aside>
 
+## SecurityGroup
+
+### listSecurityGroup
+
+<a id="opIdlistSecurityGroup"></a>
+
+> Code samples
+
+```http
+GET /v1/securitygroup HTTP/1.1
+Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+
+```
+
+`GET /securitygroup`
+
+list security groups
+
+<h3 id="listsecuritygroup-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|page|query|integer(int64)|false|the page number of the results in paging|
+|size|query|integer(int64)|false|the page size of the results in paging|
+|sort|query|string|false|the field to be sorted by|
+|order|query|string|false|'asc' or 'desc' of sorting|
+|name|query|string|false|filter by the 'name' field|
+|uuid|query|string|false|filter by the 'uuid' field|
+
+> Example responses
+
+
+<h3 id="listsecuritygroup-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+|default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+
+<aside class="warning">
+</aside>
+
+### createSecurityGroup
+
+<a id="opIdcreateSecurityGroup"></a>
+
+> Code samples
+
+```http
+POST /v1/securitygroup HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 420
+
+{"description":"a security group example","egress_rules":[{"action":"REJECT","description":"a security group rule example","dip":"0.0.0.0/0","direction":0,"dport":"1:100","protocol":"tcp","sip":"0.0.0.0/0","sport":"1:100"}],"ingress_rules":[{"action":"REJECT","description":"a security group rule example","dip":"0.0.0.0/0","direction":0,"dport":"1:100","protocol":"tcp","sip":"0.0.0.0/0","sport":"1:100"}],"name":"sg1"}
+```
+
+`POST /securitygroup`
+
+create a security group
+
+> Body parameter
+
+```json
+{
+  "description": "a security group example",
+  "egress_rules": [
+    {
+      "action": "REJECT",
+      "description": "a security group rule example",
+      "dip": "0.0.0.0/0",
+      "direction": 0,
+      "dport": "1:100",
+      "protocol": "tcp",
+      "sip": "0.0.0.0/0",
+      "sport": "1:100"
+    }
+  ],
+  "ingress_rules": [
+    {
+      "action": "REJECT",
+      "description": "a security group rule example",
+      "dip": "0.0.0.0/0",
+      "direction": 0,
+      "dport": "1:100",
+      "protocol": "tcp",
+      "sip": "0.0.0.0/0",
+      "sport": "1:100"
+    }
+  ],
+  "name": "sg1"
+}
+```
+
+<h3 id="createsecuritygroup-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|[SGRequest](#schemasgrequest)|false|the http post body|
+
+> Example responses
+
+
+<h3 id="createsecuritygroup-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+|default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+
+<aside class="warning">
+</aside>
+
+### getSecurityGroup
+
+<a id="opIdgetSecurityGroup"></a>
+
+> Code samples
+
+```http
+GET /v1/securitygroup/string HTTP/1.1
+Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+
+```
+
+`GET /securitygroup/{SecurityGroupUuid}`
+
+get a SG's detailed information
+
+<h3 id="getsecuritygroup-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|SecurityGroupUuid|path|string|true|the security group's uuid|
+
+> Example responses
+
+
+<h3 id="getsecuritygroup-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+|default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+
+<aside class="warning">
+</aside>
+
+### deleteSecurityGroup
+
+<a id="opIddeleteSecurityGroup"></a>
+
+> Code samples
+
+```http
+DELETE /v1/securitygroup/string HTTP/1.1
+Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+
+```
+
+`DELETE /securitygroup/{SecurityGroupUuid}`
+
+delete a security group
+
+<h3 id="deletesecuritygroup-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|SecurityGroupUuid|path|string|true|the security group's uuid|
+
+> Example responses
+
+
+<h3 id="deletesecuritygroup-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+|default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+
+<aside class="warning">
+</aside>
+
+### updateSecurityGroup
+
+<a id="opIdupdateSecurityGroup"></a>
+
+> Code samples
+
+```http
+PATCH /v1/securitygroup/string HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer <api token>
+Host: api.yourchimestack.com:8801
+Content-Length: 420
+
+{"description":"a security group example","egress_rules":[{"action":"REJECT","description":"a security group rule example","dip":"0.0.0.0/0","direction":0,"dport":"1:100","protocol":"tcp","sip":"0.0.0.0/0","sport":"1:100"}],"ingress_rules":[{"action":"REJECT","description":"a security group rule example","dip":"0.0.0.0/0","direction":0,"dport":"1:100","protocol":"tcp","sip":"0.0.0.0/0","sport":"1:100"}],"name":"sg1"}
+```
+
+`PATCH /securitygroup/{SecurityGroupUuid}`
+
+update a security group
+
+> Body parameter
+
+```json
+{
+  "description": "a security group example",
+  "egress_rules": [
+    {
+      "action": "REJECT",
+      "description": "a security group rule example",
+      "dip": "0.0.0.0/0",
+      "direction": 0,
+      "dport": "1:100",
+      "protocol": "tcp",
+      "sip": "0.0.0.0/0",
+      "sport": "1:100"
+    }
+  ],
+  "ingress_rules": [
+    {
+      "action": "REJECT",
+      "description": "a security group rule example",
+      "dip": "0.0.0.0/0",
+      "direction": 0,
+      "dport": "1:100",
+      "protocol": "tcp",
+      "sip": "0.0.0.0/0",
+      "sport": "1:100"
+    }
+  ],
+  "name": "sg1"
+}
+```
+
+<h3 id="updatesecuritygroup-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|SecurityGroupUuid|path|string|true|the security group's uuid|
+|body|body|[SGRequest](#schemasgrequest)|false|the http post body|
+
+> Example responses
+
+
+<h3 id="updatesecuritygroup-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+|default|Default|OpenApiResponse|[OpenApiResponse](#schemaopenapiresponse)|
+
+<aside class="warning">
+</aside>
+
 ## Compute
 
 ### listVm
@@ -7848,9 +8114,9 @@ Content-Type: application/json
 Accept: application/json
 Authorization: Bearer <api token>
 Host: api.yourchimestack.com:8801
-Content-Length: 940
+Content-Length: 959
 
-{"az_uuid":"cbd2819b-b49a-47ad-9fa4-307774d97865","cdrom":{"bootable":1,"host_uuid":"a4824bcd-1112-449d-8d3e-3ff8b1323d9e","image_uuid":"f9600f11-cb97-4ed7-90ab-0928a089b129","name":"test-cdrom","volume_spec_uuid":"af52a0fe-f1fc-483c-9197-aead9786a73a"},"cluster_uuid":"65bbc21f-0289-4bbf-9517-6b8da9688774","description":"a virutal machine example","host_uuid":"a428263d-64a9-4653-8d7e-556c20c0d77a","instance_spec_uuid":"cd047e9d-2720-4397-84e5-777e4a39a531","name":"test-vm","nics":[{"description":"a network interface example","ip":"192.168.231.20","name":"nic1","primary":0,"subnet_uuid":"e73efdf7-d232-4556-ba95-3851100a47b7"}],"password":"chime123","vnc_password":"chime123","volumes":[{"description":"a volume example","host_uuid":"a4824bcd-1112-449d-8d3e-3ff8b1323d9e","image_uuid":"f9600f11-cb97-4ed7-90ab-0928a089b129","name":"test-volume","root":0,"size":107374182400,"volume_spec_uuid":"af52a0fe-f1fc-483c-9197-aead9786a73a"}]}
+{"az_uuid":"cbd2819b-b49a-47ad-9fa4-307774d97865","cdrom":{"bootable":1,"host_uuid":"a4824bcd-1112-449d-8d3e-3ff8b1323d9e","image_uuid":"f9600f11-cb97-4ed7-90ab-0928a089b129","name":"test-cdrom","volume_spec_uuid":"af52a0fe-f1fc-483c-9197-aead9786a73a"},"cluster_uuid":"65bbc21f-0289-4bbf-9517-6b8da9688774","description":"a virutal machine example","host_uuid":"a428263d-64a9-4653-8d7e-556c20c0d77a","instance_spec_uuid":"cd047e9d-2720-4397-84e5-777e4a39a531","name":"test-vm","nics":[{"description":"a network interface example","ip":"192.168.231.20","name":"nic1","primary":0,"sg_uuid":"string","subnet_uuid":"e73efdf7-d232-4556-ba95-3851100a47b7"}],"password":"chime123","vnc_password":"chime123","volumes":[{"description":"a volume example","host_uuid":"a4824bcd-1112-449d-8d3e-3ff8b1323d9e","image_uuid":"f9600f11-cb97-4ed7-90ab-0928a089b129","name":"test-volume","root":0,"size":107374182400,"volume_spec_uuid":"af52a0fe-f1fc-483c-9197-aead9786a73a"}]}
 ```
 
 `POST /vm`
@@ -7880,6 +8146,7 @@ create a virtual machine
       "ip": "192.168.231.20",
       "name": "nic1",
       "primary": 0,
+      "sg_uuid": "string",
       "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7"
     }
   ],
@@ -9165,6 +9432,7 @@ instance spec request
   "ip": "192.168.231.20",
   "name": "nic1",
   "primary": 0,
+  "sg_uuid": "string",
   "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7"
 }
 
@@ -9178,6 +9446,7 @@ instance spec request
 |ip|string|false|none|the IP address of the nic|
 |name|string|true|none|the virtual network interface's name|
 |primary|integer(int64)|false|none|whether the nic is the primary nic, which can not be removed from a virtual machine|
+|sg_uuid|string|true|none|the security group's Uuid|
 |subnet_uuid|string|true|none|the subnet's Uuid, which the nic belongs to|
 
 ### CreateSnapshotRequest
@@ -9344,6 +9613,7 @@ user  request
       "ip": "192.168.231.20",
       "name": "nic1",
       "primary": 0,
+      "sg_uuid": "string",
       "subnet_uuid": "e73efdf7-d232-4556-ba95-3851100a47b7"
     }
   ],
@@ -9579,6 +9849,88 @@ user  request
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |target_host_uuid|string|false|none|the target host's uuid, system will automatically assign one host if omit|
+
+### SGRequest
+<!-- backwards compatibility -->
+<a id="schemasgrequest"></a>
+<a id="schema_SGRequest"></a>
+<a id="tocSsgrequest"></a>
+<a id="tocssgrequest"></a>
+
+```json
+{
+  "description": "a security group example",
+  "egress_rules": [
+    {
+      "action": "REJECT",
+      "description": "a security group rule example",
+      "dip": "0.0.0.0/0",
+      "direction": 0,
+      "dport": "1:100",
+      "protocol": "tcp",
+      "sip": "0.0.0.0/0",
+      "sport": "1:100"
+    }
+  ],
+  "ingress_rules": [
+    {
+      "action": "REJECT",
+      "description": "a security group rule example",
+      "dip": "0.0.0.0/0",
+      "direction": 0,
+      "dport": "1:100",
+      "protocol": "tcp",
+      "sip": "0.0.0.0/0",
+      "sport": "1:100"
+    }
+  ],
+  "name": "sg1"
+}
+
+```
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|description|string|false|none|description for the security group|
+|egress_rules|[[SGRuleRequest](#schemasgrulerequest)]|true|none|the security group's egress rules|
+|ingress_rules|[[SGRuleRequest](#schemasgrulerequest)]|true|none|the security group's ingress rules|
+|name|string|true|none|the security group's name|
+
+### SGRuleRequest
+<!-- backwards compatibility -->
+<a id="schemasgrulerequest"></a>
+<a id="schema_SGRuleRequest"></a>
+<a id="tocSsgrulerequest"></a>
+<a id="tocssgrulerequest"></a>
+
+```json
+{
+  "action": "REJECT",
+  "description": "a security group rule example",
+  "dip": "0.0.0.0/0",
+  "direction": 0,
+  "dport": "1:100",
+  "protocol": "tcp",
+  "sip": "0.0.0.0/0",
+  "sport": "1:100"
+}
+
+```
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|action|string|true|none|the sg rule's action, like ACCEPT, REJECT|
+|description|string|false|none|description for the security group rule|
+|dip|string|false|none|the sg rule's dest IP cidr, like 192.168.231.0/24, 192.168.231.100/32|
+|direction|integer(int64)|true|none|the sg rule's direction, 0: ingress, 1:egress|
+|dport|string|false|none|the sg rule's dest port range, like 1:100 means the ports of 1 to 100, 80:80 means the port of 80|
+|protocol|string|true|none|the sg rule's protocol, like tcp, udp, icmp, all|
+|sip|string|false|none|the sg rule's source IP cidr, like 192.168.231.0/24, 192.168.231.100/32|
+|sport|string|false|none|the sg rule's source port range, like 1:100 means the ports of 1 to 100, 80:80 means the port of 80|
 
 ### UpdateAzRequest
 <!-- backwards compatibility -->

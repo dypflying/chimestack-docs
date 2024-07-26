@@ -71,8 +71,8 @@ influx setup \
   --token x5iGbxLx-2QKN64I3wooyZsHPtmGB4OvBspdSLuOcEBeN-_-rrnC_1GbtSrJrUD0-qSiXsYrKC0T4VF4m97ecw== \
   --org chime \
   --bucket chime \
+  --name chime \
   --force
-  --name chime
 ```
 
 **Note**: if not specify the "token" flag, then it will generate an API token instead, which should be kept carefully.
@@ -96,10 +96,10 @@ For instance:
 
 ```
 chimeadm initserver influxdb --vip-endpoint http://192.168.231.120:8086 \
-  --real-endpoints http://192.168.231.121:8086,http://192.168.231.122:8086
+  --real-endpoints http://192.168.231.121:8086,http://192.168.231.122:8086 \
   --token x5iGbxLx-2QKN64I3wooyZsHPtmGB4OvBspdSLuOcEBeN-_-rrnC_1GbtSrJrUD0-qSiXsYrKC0T4VF4m97ecw== \
   --org chime \
-  --bucket chime \
+  --bucket chime
 ```
 
 ### Configure S3 setting of chime-server

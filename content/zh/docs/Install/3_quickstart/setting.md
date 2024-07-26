@@ -69,8 +69,8 @@ influx setup \
   --token x5iGbxLx-2QKN64I3wooyZsHPtmGB4OvBspdSLuOcEBeN-_-rrnC_1GbtSrJrUD0-qSiXsYrKC0T4VF4m97ecw== \
   --org chime \
   --bucket chime \
+  --name chime \
   --force
-  --name chime
 ```
 
 其中如果token选项为空的话，会自动生成一个api-token，api-token需要被妥善保存，后续作为Influxdb API的访问凭证。
@@ -94,10 +94,10 @@ chimeadm initserver influxdb --vip-endpoint <vip based endpoint> --real-endpoint
 
 ```
 chimeadm initserver influxdb --vip-endpoint http://192.168.231.120:8086 \
-  --real-endpoints http://192.168.231.121:8086,http://192.168.231.122:8086
+  --real-endpoints http://192.168.231.121:8086,http://192.168.231.122:8086 \
   --token x5iGbxLx-2QKN64I3wooyZsHPtmGB4OvBspdSLuOcEBeN-_-rrnC_1GbtSrJrUD0-qSiXsYrKC0T4VF4m97ecw== \
   --org chime \
-  --bucket chime \
+  --bucket chime 
 ```
 
 其中192.168.231.120是负载均衡的VIP地址，192.168.231.121和192.168.231.122是influxdb实例真实的IP地址。

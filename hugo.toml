@@ -56,6 +56,7 @@ anchor = "smart"
 # Comment out the next line to disable GA tracking. Also disables the feature described in [params.ui.feedback].
 id = "UA-00000000-0"
 
+staticDir = ['static']
 # Language configuration
 
 [languages]
@@ -63,6 +64,7 @@ id = "UA-00000000-0"
 languageName ="English"
 # Weight used for sorting.
 weight = 2
+contentDir = "content/en"
 [languages.en.params]
 title = "ChimeStack"
 description = "A lightweight software that provides services for cloud infrastructure"
@@ -120,7 +122,7 @@ version = "0.1.1"
 
 # A link to latest version of the docs. Used in the "version-banner" partial to
 # point people to the main doc site.
-url_latest_version = "https://chimestack.io"
+url_latest_version = "https://chimestack.cloud"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
 github_repo = "https://github.com/dypflying/chimestack"
@@ -178,36 +180,15 @@ no = 'Sorry to hear that. Please <a href="https://github.com/dypflying/chimestac
 enable = false
 
 [params.links]
-# End user relevant links. These will show up on left side of footer and in the community page if you have one.
-[[params.links.user]]
-  name = "User mailing list"
-  url = "https://chimestack.io/mail"
-  icon = "fa fa-envelope"
-  desc = "Discussion and help from your fellow users"
-[[params.links.user]]
-  name ="Twitter"
-  url = "https://chimestack.io/twitter"
-  icon = "fab fa-twitter"
-  desc = "Follow us on Twitter to get the latest news!"
-[[params.links.user]]
-  name = "Stack Overflow"
-  url = "https://chimestack.io/stack"
-  icon = "fab fa-stack-overflow"
-  desc = "Practical questions and curated answers"
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
   name = "GitHub"
   url = "https://github.com/dypflying/chimestack"
   icon = "fab fa-github"
-  desc = "Development takes place here!"
-[[params.links.developer]]
-  name = "Slack"
-  url = "https://chimestack.io/slack"
-  icon = "fab fa-slack"
-  desc = "Chat with other project developers"
+  desc = "Discuss development issues and find release notes!"
 [[params.links.developer]]
   name = "Developer mailing list"
-  url = "https://chimestack.io/mail"
+  url = "mailto:chimestack@sina.com"
   icon = "fa fa-envelope"
   desc = "Discuss development issues around the project"
 

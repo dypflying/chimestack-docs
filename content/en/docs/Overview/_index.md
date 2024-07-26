@@ -1,36 +1,26 @@
 ---
-title: Overview
-description: Here's where your user finds out if your project is for them.
+title: 1. Overview
+description: A brief introduction to ChimeStack, its advantages, and its landscape
 weight: 1
 ---
 
-{{% pageinfo %}}
-This is a placeholder page that shows you how to use this template site.
-{{% /pageinfo %}}
+## What is ChimeStack？
 
+ChimeStack is a new lightweight cloud computing IaaS software. ChimeStack is designed for small-scale private clouds, including edge computing and hyper-converged computing. ChimeStack provides a user-friendly Web UI, a command line tool and an administration tool, so you can deploy, operate and manage your private cloud platforms easily with limited effort.
 
-The Overview is where your users find out about your project. Depending on the size of your docset, you can have a separate overview page (like this one) or put your overview contents in the Documentation landing page (like in the Docsy User Guide).
+## Why ChimeStack?
 
-Try answering these questions for your user in this page:
+* **ChimeStack is lightweight** 
+There are only two executable programs actually functioning in the ChimeStack framework, they are the management server program - "Chime-Server" and the client program - "Chime-Agent". Both are developed by Golang, no other libraries are needed and they occupy very limited system resources in the runtime. For instance, in the AllInOne deployment scenario, it only needs a server with 2 cores CPU and 4 GiB of memory to make the whole platform stack functionally work, and no more than 5 virtual machines can be launched simultaneously. It is essential for saving resources. 
 
-## What is it?
+* **ChimeStack supports convergence** 
 
-Introduce your project, including what it does or lets you do, why you would use it, and its primary goal (and how it achieves it). This should be similar to your README description, though you can go into a little more detail here if you want.
+ChimeStack supports both isolated computing/storage and converged computing/storage scenarios. In the isolation scenario, ChimeStack introduced a new storage engine(ChimeStor), which directs a virtual machine's I/O to the storage media in the same node where the virtual machine's instance is located. With such I/O affinity mechanism, it shortens the I/O path and reduces the network data transmission amount, hence improving the I/O performance such as reducing the I/O latency, etc. 
+  
+* **ChimeStack is simple** 
+Not like other cloud platforms which deploy and maintain many components in parallel, occupy more system resources and require highly professional human skills and costly maintenance efforts. One of the initiatives of ChimeStack is to minimize the complexity of the cloud computing platform, such as by reducing the components as well as their interdependencies, and simplifying its deployment and maintenance, it costs 30 minutes to establish an AllInOne private cloud computing platform. 
 
-## Why do I want it?
-
-Help your user know if your project will help them. Useful information can include:
-
-* **What is it good for?**: What types of problems does your project solve? What are the benefits of using it?
-
-* **What is it not good for?**: For example, point out situations that might intuitively seem suited for your project, but aren't for some reason. Also mention known limitations, scaling issues, or anything else that might let your users know if the project is not for them.
-
-* **What is it *not yet* good for?**: Highlight any useful features that are coming soon.
-
-## Where should I go next?
-
-Give your users next steps from the Overview. For example:
-
-* [Getting Started](/docs/getting-started/): Get started with $project
-* [Examples](/docs/examples/): Check out some example code!
+## Landscape of ChimeStack
+{{% imgproc chime-landscape Fit "1500x650" %}}
+{{% /imgproc %}}
 

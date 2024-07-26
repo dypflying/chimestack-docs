@@ -1,7 +1,5 @@
 ---
 title: API
 weight: 2
-description: Chime API使用介绍
+description: Chime API Reference
 ---
-
-待更新

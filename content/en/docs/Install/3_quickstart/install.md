@@ -13,9 +13,15 @@ Download ChimeStack's AllInOne installation iso image from [Download/Releases](h
 Note: System requires VT-x and IOMM supportU, and needs as least 2 network interfaces
 {{% /alert %}}
 
-After the installation, the system has the binaries of chime-server, chime-agent and chimecli, and all the related configuration files, and 3rd softwares including MySQL, influxdb, and minio are installed and configured.
+After the installation of system, the required 3rd softwares including MySQL, influxdb, and minio are installed and configured as well, then you can login the system via ssh and execute the following command:
 
-You can simplely start the ChimeStack as following: 
+```
+/root/chime_allinone.bin
+```
+
+the executable installation package will install the ChimeStack's binaries such as chime-server, chime-agent, chimecli and chimeadm, and initiate the mysql database, the related configurations and directories.
+
+After that, you can simplely start the ChimeStack as following: 
 
 ```
 systemctl start chime-server

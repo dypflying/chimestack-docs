@@ -9,13 +9,20 @@ weight: 3
 
 从[Download/Releases](http://download.chimestack.cloud/releases)下载ChimeStack的AllInOne ISO镜像安装盘，刻录成光盘或者拷贝U盘进行安装。在虚拟化环境中，可以直接以安装虚拟机的方式通过CDRom进行安装。
 
+
 {{% alert title="提示" color="primary" %}}
 注意: 需要启用VT-x和IOMMU支持，且系统需要配置2个网络接口
 {{% /alert %}}
 
-安装后的系统，包含已经安装及配置完成ChimeStack的二进制程序(chime-server, chime-agent, chimecli)、配置文件、mysql数据库、influxdb、minio。
+系统安装后，ChimeStack运行完整功能需要的组件(libvirt, mysql, influxdb和minio)已经装好。然后通过ssh登录系统，直接运行如下可执行程序:
 
-仅需要启动ChimeStack即可直接使用
+```
+/root/chime_allinone.bin
+```
+
+该程序将安装ChimeStack的二进制程序(chime-server, chime-agent, chimecli和chimeadm)，初始化数据库、配置文件和相关目录。
+
+安装完成后，可直接启动ChimeStack: 
 
 ```
 systemctl start chime-server

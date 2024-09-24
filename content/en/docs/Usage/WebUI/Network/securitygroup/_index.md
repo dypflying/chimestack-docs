@@ -33,7 +33,7 @@ security group's operation logs
 
 ## Create Security Group
 * Input basic information:
-  * Input name of the security group, it is restricted to 2～64 characters
+  * Input name of the security group, it is restricted to 2～64 characters and only allows alphbet, number, “-” and “_”.
   * (Optional) input description
 
 {{% imgproc sg_new_basic Fit "1000x400" %}}
@@ -43,7 +43,7 @@ create new security group
 * Input ingress rules:
   * Action policy(ACCEPT or REJECT)
   * Protocol(tcp, udp, icmp)
-  * Source address's CIDR(default is 0.0.0.0/0, which stands for all IPs)
+  * Source address's CIDR(default is 0.0.0.0/0, which stands for all IPs), it supports both IPv4 and IPv6
   * Destination port or port range(it can be a port number or a port range, e.g. "1000:2000" stands for the ports from 1000 to 2000)
   * (Optional) input description
 
@@ -63,7 +63,7 @@ input security group's ingress rules
 * Input egress rules:
   * Action policy(ACCEPT or REJECT)
   * Protocol(tcp, udp, icmp)
-  * Destination address's CIDR(default is 0.0.0.0/0, which stands for all IPs)
+  * Destination address's CIDR(default is 0.0.0.0/0, which stands for all IPs), it supports both IPv4 and IPv6
   * Destination port or port range(it can be a port number or a port range, e.g. "1000:2000" stands for the ports from 1000 to 2000)
   * (Optional) input description
 

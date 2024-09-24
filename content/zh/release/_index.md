@@ -1,65 +1,42 @@
 ---
 title: 版本和下载
-linkTitle: 版本介绍和下载
+linkTitle: 版本和下载
 menu: {main: {weight: 30}}
 weight: 30
 ---
 
-{{% blocks/cover title="版本介绍及下载" image_anchor="top" height="10" color="green"  %}}
+{{% blocks/cover title="版本介绍及下载" image_anchor="top" height="10" color="green" %}}
 {.mt-8}
 {{% /blocks/cover %}}
 
+
 {{% blocks/section color="default" type="row" %}}
-
-#### [ChimeStack功能介绍(v0.1)](/release/landscape)
-
-<br></br>
-
 
 ## 当前版本
 
-|版本|说明|下载链接|
+|版本|改版履历|下载链接|
 |----|----|-------|
-|dev.0.1.1|实现了安全组、限额管理功能|[下载](http://download.chimestack.cloud/releases/dev.0.1.1/)|
-|dev.0.1.2|优化资源锁，添加任务超时控制、报警通知管理、虚拟机创建时不启动等功能|[下载](http://download.chimestack.cloud/releases/dev.0.1.2/)|
+|dev.0.1.2|添加任务超时控制、报警人管理、报警设置管理、报警规则变更、失败补偿任务、安全组IPv6规格、优化部分WebUI|[下载](http://download.chimestack.cloud/releases/dev.0.1.2/)|
 
 {{% /blocks/section %}}
   
 <hr/>
-{{% blocks/section color="default" type="row" %}}
-
-## RoadMap
-
-- 版本 0.1
-  - [ChimeStack功能介绍(v0.1)](/release/landscape)
-- 版本 0.2 
-  - ChimeStor
-    - ChimeStor存储池
-    - 客户端(qemu)iSCSI接入
-    - ChimeStor云盘生命周期管理, I/O读写
-    - ChimeStor快照生命周期管理
-  - 云盘扩容、探测客户机是否安装QGA、修改root密码
-- 版本 1.0 
-  - 标签服务
-  - 虚拟机亲和和反亲和调度
-  - 物理CPU独占模式及Numa设定
-  - GPU虚拟化
-- 版本 1.1 
-  - NFS存储池实现
-  - Vlan二层网络
-- 版本 2.0 
-  - VPC虚拟专有网
-  - NAT网关
-
-{{% /blocks/section %}}
 
 {{% blocks/section color="gray" type="row" %}}
 
 ## 弃用版本
 
-|版本|说明|
-|----|----|
-|dev.0.1.0|已经下架|
+|版本|改版履历|下载链接|
+|----|----|-------|
+|dev.0.1.0|已下架|N/A|
+|dev.0.1.1|实现安全组管理、操作日志管理、资源限额功能|[下载](http://download.chimestack.cloud/releases/dev.0.1.1/)|
 
 {{% /blocks/section %}}
 
+
+{{% blocks/section color="default" type="row" %}}
+
+- ## [ChimeStack V0.1 功能介绍](/release/landscape)
+- ## [ChimeStack Roadmap介绍](/release/roadmap)
+
+{{% /blocks/section %}}

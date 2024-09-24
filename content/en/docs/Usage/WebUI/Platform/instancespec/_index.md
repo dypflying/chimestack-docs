@@ -13,7 +13,7 @@ instance specification list
 {{% /imgproc %}}
 
 ## Create new instance specification
-  * Input the name of the instance specification
+  * Input the name of the instance specification, which is restricted to 2～64 characters and only allows alphbet, number, “-” and “_”.
   * Choose a type of the instance specification
     * Shared: virtual machines share the physical resources, with this type, resources are utilized more efficiently but may cause resources conflict when the physical resources are running out
     * Dedicated: each virtual machine monoplizes its physical resource

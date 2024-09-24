@@ -13,7 +13,7 @@ storage pool list
 {{% /imgproc %}}
 
 ## Create new storage pool
-  * Input the name of the storage pool 
+  * Input the name of the storage pool, which is restricted to 2～64 characters and only allows alphbet, number, “-” and “_”.
   * Choose the type of the storage pool
     * Local Storage: the local persistent disks in the computing nodes
     * Ceph storage: Ceph's storage pool

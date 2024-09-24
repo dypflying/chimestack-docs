@@ -9,11 +9,11 @@ weight: 5
 If ChimeStack is installed with the AllInOne ISO image, so there is no other additional configuration needed. Please ignore this chapter.
 {{% /alert %}}
 
-## Configure and Start chime-server
+## 1. Configure and Start chime-server/chime-portal
 
 This section introduces how to configure the chime-server's indenpdent components including mysql, influxdb and OSS(s3), and how to launch a chime-server process.  
 
-### Configure and initiate mysql
+### 1.1 Configure and initiate mysql
 
 ##### Create new mysql user 
 
@@ -53,7 +53,7 @@ chimeadm initserver mysql --ip 127.0.0.1 \
 If the command completes successfully, the "chime" database is created and initiated, and the mysql related settings in the configuration file of /etc/chime/server.yaml will be updated as well. 
 
 
-### Configure influxdb 
+### 1.2 Configure influxdb 
 
 ##### Initiate influxdb
 
@@ -102,7 +102,7 @@ chimeadm initserver influxdb --vip-endpoint http://192.168.231.120:8086 \
   --bucket chime
 ```
 
-### Configure S3 setting of chime-server
+### 1.3 Configure S3 setting of chime-server
 
 You can update the s3 setting in the configuration of chime-server by following command: 
 
@@ -128,7 +128,7 @@ chimeadm initserver s3 --ip 192.168.231.100 --port 9000 --ak chime --sk chime --
 chimeadm initserver s3 --ip 192.168.231.101 --port 9000 --ak chime --sk chime
 ```
 
-### Check chime-server
+### 1.4 Check chime-server
 
 You can invoke the "chimeadm initserver check" sub-command to check the correctness of the chime-server's configuration, it will check the availability of Mysql, Influxdb and S3 components by probing their connectivity and functions, for instance, run following command in the server node:
 
@@ -137,27 +137,8 @@ chimeadm initserver check
 ```
 The success of the checking means the configuration is complete and valid, the chime-server is ready to run
 
-### Launch chime-server
-   
-```
-sudo systemctl start chime-server
-```
 
-Check the chime-server's status:
-
-```
-sudo systemctl status chime-server
-```
-
-chime-server's runtime log locates at /var/log/chime/server.log
-
-## Configure and launch chime-portal 
-
-The executable binary file of chime-server not only includes the management server，but also embeds a Web UI(portal) component, which is by default launched together with the management server，but it can also be launched as a standalone process.
-
-Next section introduces how to configure, initiate and start a chime-portal process
-
-### Configure and initiate the portal database 
+### 1.5 Configure and initiate the portal database 
 
 You can initiate the portal database and update the configuration of chime-portal by the following command: 
 
@@ -184,30 +165,26 @@ chimeadm initportal mysql --ip 127.0.0.1 \
 
 If the command completes successfully, the "portal" database is created and initiated, and the mysql related settings in the configuration file of /etc/chime/server.yaml will be updated as well. 
 
-### Configure chime-portal's runtime properties
+### 1.6 Configure chime-portal's runtime parameters
 
-You can invoke the following command to configure portal's runtime properties
+Chime-portal performs its functions through the chime-server's APIs, the following command is used to configure the runtime parameters of chime-portal:
+
 
 ```
-chimeadm initportal run --port <port> --api-url <api server addr: port> --prefix [prefix] 
+chimeadm initportal runtime --api-uri <server vip/ip:port> --bind-port <port>
 ```
-
 
 The command's flags are explained as follows: 
-- port: chime-portal's access port 
-- api-url: chime-server's API endpoint
-- prefix: chime-server's API version in path, default is "/v1"
+- api-uri: chime-server's API endpoint, note that when chime-servers are deployed in multi-active mode, you need to use the VIP address of the service instead of the physical IP addresses.
+- bind-port: chime-portal's service port, by default it is 8033. 
 
 For instance:
 
 ```
-chimeadm initportal run \
-  --port 8033 \
-  --api-url 192.168.231.101:8801 \
-  --prefix /v1
+chimeadm initportal runtime --api-uri 127.0.0.1:8801 --bind-port 8035 
 ```
 
-### Check chime-portal
+### 1.7 Check chime-portal
 
 You can invoke the "check" sub-command to check the correctness of the configuration of chime-portal, for instance:
 
@@ -217,30 +194,50 @@ chimeadm initportal check
 
 The success of the checking means the configuration is complete and valid, the chime-portal is ready to run
 
-### Start chime-portal
 
-By default the chime-server and the chime-portal are launched in the same process，and their configurations are both in the file of /etc/chime/server.yaml，whose contents look like: 
+### 1.8 Run chime-server/chime-portal
+
+The chime-server binary program includes both the server service (centerized management service) and the portal service (Web UI service). These two services can be either launched in one process, or launched in two seperate processes of the same server, or launched independently as processes of different servers.
+
+When the chime-server program is about to function, which services to start is determined based on the setting of the environment variable "CHIME_SERVER_MODEL", for example: 
+- CHIME_SERVER_MODEL=combined: it is the default setting，which means chime-server process will serve as both "server"  and "portal".
+- CHIME_SERVER_MODEL=server: the chime-server process only serves as the centerized server.
+- CHIME_SERVER_MODEL=portal: the chime-server process only serves as the portal server for Web UI.  
+
+It is recommended to manage the chimestack service through the systemd framework of Linux. Users usually don't need to change the environment variables by themselves. Systemd will read the environment variables from specific environment file.
+
+- For chime-server.service systemd service, it will load the /etc/default/chime-server environment file before start up the process，the "CHIME_SERVER_MODEL" variable is set to "combined" by default. 
+- For chime-portal.service systemd service, it will load the /etc/default/chime-portal environment file before start up the process，the "CHIME_SERVER_MODEL" variable is set to "portal" by default. 
+
+After the server and portal are configured and initiated, you can start the server and portal services, for example, to start them in the combined mode , just to start chime-server.service as following:
+
 ```
-chime-server:
-    ......
-    ......
-chime-portal: 
-    ......
-    ......
+sudo systemctl start chime-server.service
 ```
 
-With such configurations, launching a chime-server process will start a server routine and a portal routine simultaneously.
-
-To run a chime-server and a chime-portal respectively is quite simple, just move the content of "[chime-server]" section from the server.yaml to the portal.yaml file, then you can launch the chime-server and the chime-portal respectively as following: 
+To start the "server" and the "portal" services seperatedly，you can run them as following:
 
 ```
-sudo systemctl start chime-server #only launch server
-sudo systemctl start chime-portal #only launch portal
+#change the CHIME_SERVER_MODEL=server in /etc/default/chime-server file
+sudo systemctl start chime-server.service
+sudo systemctl start chime-portal.service
 ```
 
-## Configure and start chime-agent
+Check their runtime status:
 
-### Configure chime-agent
+```
+sudo systemctl status chime-server
+# if launched the portal service 
+sudo systemctl status chime-portal 
+```
+
+chime-server's runtime logs are located at /var/log/chime/server.log
+
+chime-portal's runtime logs are located at /var/log/chime/portal.log
+
+## 2. Configure and start chime-agent
+
+### 2.1 Configure chime-agent
 
 chime-agent is the client-side program of ChimeStack，normally runs in the computing nodes(actually there is no restriction for defining a server node and a computing node, they can share the same machine or be deployed separately). chime-agent reads the configurations from the /etc/chime/agent.yaml file during the startup, following introduces how to configure and start chime-agent via the "chimeadm" tool.
 
@@ -275,17 +272,8 @@ chimeadm initagent \
 
 If the command finishes successfully，chime-agent will receive its components' settings from the chime-server and save them in the configuration of agent。
 
-### Check chime-agent
 
-You can run the "check" sub-command to check the correctness of the chime-agent's configuration，and test the connectivity to chime-server.
-
-```
-chimeadm initagent check 
-```
-
-The success of the checking means the configuration is complete and valid，chime-agent is ready to run.
-
-### Start chime-agent
+### 2.2 Start chime-agent
 
 ```
 sudo systemctl start chime-agent 

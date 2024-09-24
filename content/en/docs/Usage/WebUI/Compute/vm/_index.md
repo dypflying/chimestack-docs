@@ -15,8 +15,10 @@ weight: 2
   * Volumes information tab: list the attached volumes' information of the virtual machine 
   * Network interfaces information tab: list the attached network interfaces' information of the virtual machine 
   * System monitor tab: show the virtual machine's CPU and memory usage percentage in charts 
-  * I/O monitor tab: show the virtual machine's overall statistics of its disk I/O and network I/O in charts
-  * Operation log tab: show the operation logs of the virtual machine. 
+  * Interface monitor tab: show the virtual machine's overall statistics of its network I/O in charts
+  * Disk monitor tab: show the virtual machine's overall statistics of its disk I/O and capacity in charts
+  * Alert tab: show the unacknowledged alerts related to this virtual machine
+  * Operation log tab: show the operation logs of the virtual machine
 
 {{% imgproc vmlist Fit "1000x1000" %}}
 virtual machine's list and details 
@@ -34,8 +36,16 @@ attached elastic network interfaces list
 virtual machine's CPU and memory usage percentage
 {{% /imgproc %}}
 
-{{% imgproc vmioperf Fit "1000x500" %}}
-virtual machine's overall statistics of disk I/O and network I/O
+{{% imgproc vmnetperf Fit "1000x500" %}}
+virtual machine's overall statistics of network I/O
+{{% /imgproc %}}
+
+{{% imgproc vmdiskperf Fit "1000x500" %}}
+virtual machine's overall statistics of disk I/O and disk capacity
+{{% /imgproc %}}
+
+{{% imgproc vmalert Fit "1000x500" %}}
+virtual machine's unacknowledged alerts
 {{% /imgproc %}}
 
 {{% imgproc vmlogs Fit "1000x500" %}}
@@ -46,7 +56,7 @@ virtual machine's operation logs
 
 ### Create New Virtual Machine
 * Input or choose following items in the "Basic" information tab:
-  * Input name of the virtual machine, it is restricted to 2～64 characters
+  * Input name of the virtual machine, it is restricted to 2～64 characters and only allows alphbet, number, "-" and "_".
   * (Optional) input description
   * Choose one of the instance specifications 
   * Choose one of the volume specifications for the root volume

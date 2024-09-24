@@ -15,6 +15,7 @@ weight: 2
   * General information tab: show the general information of the network inerface
   * Attached instances tab: show the virtual machine instance to which the network interface attaches
   * Network interface monitor tab: Show the network interface's I/O statistical information in charts
+  * Alert tab: show the unacknowledged alerts related to this network interface
   * Operation logs tab: Show the network interface's operation logs
   
 {{% imgproc nic_list Fit "1000x600" %}}
@@ -29,13 +30,18 @@ virtual machines to which the network interface attaches
 network interface's I/O monitor
 {{% /imgproc %}}
 
+{{% imgproc nic_alert Fit "1000x400" %}}
+network interface's unacknowledged alerts
+{{% /imgproc %}}
+
+
 {{% imgproc nic_logs Fit "1000x400" %}}
 network interface's operation logs
 {{% /imgproc %}}
 
 ## Create Network Interface
 * Input or choose:
-  * Input name of the network interface, it is restricted to 2～64 characters
+  * Input name of the network interface, it is restricted to 2～64 characters and only allows alphbet, number, "-" and "_".
   * (Optional) input description
   * Choose a newwork
   * Choose a subnet

@@ -14,7 +14,8 @@ weight: 2
   * General information tab: show the general information of the volume
   * Attached instances tab: show the virtual machine instance to which the volume attaches
   * Snapshot tab: show the snapshots of the volume
-  * Volume monitor tab: Show the volume's I/O statistical information in charts
+  * Volume monitor tab: Show the volume's I/O and capacity statistical information in charts
+  * Alert tab: show the unacknowledged alerts related to the volume.
   * Operation log tab: Show the the volume's operation logs
   
 {{% imgproc volume_list Fit "1000x1000" %}}
@@ -30,7 +31,11 @@ volume's snapshot list
 {{% /imgproc %}}
 
 {{% imgproc volume_stat Fit "1000x400" %}}
-volume's I/O monitor
+volume's I/O and capacity monitor
+{{% /imgproc %}}
+
+{{% imgproc volume_alert Fit "1000x400" %}}
+volume's related unacknowledged alerts
 {{% /imgproc %}}
 
 {{% imgproc volume_logs Fit "1000x400" %}}
@@ -39,7 +44,7 @@ volume's operation logs
 
 ## Create New Volume
 * Input or choose the following information:
-  * Input the name of the volume, which is restricted to 2～64 characters
+  * Input the name of the volume, which is restricted to 2～64 characters and only allows alphbet, number, “-” and “_”.
   * (Optional) Input description
   * Choose a volume specification
   * Input the size of the volume

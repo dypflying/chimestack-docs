@@ -13,7 +13,7 @@ volume specification list
 {{% /imgproc %}}
 
 ## Create new volume specification
-  * Input the name of the volume specification
+  * Input the name of the volume specification, which is restricted to 2～64 characters and only allows alphbet, number, "-" and "_".
   * Choose a storage pool 
   * Input the minimum IOPS of the volume specification
   * Input the maximum IOPS of the volume specification

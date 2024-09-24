@@ -22,7 +22,7 @@ image list
 
 ## Add a public image
 Input or choose the following information: 
-  * Input the name of the image, which is restricted to 2～64 characters.
+  * Input the name of the image, which is restricted to 2～64 characters and only allows alphbet, number, "-" and "_".
   * Choose the file format of the image from the dropdown menu, which contains "raw", "qcow2" and "iso" file format
   * Choose the operation system's type from the dropdown menu. 
   * Choose the operation system's version.

@@ -43,6 +43,9 @@ registered node list page
   * Layer-2 Network information tab: list the layer-2 networks on the node
   * Storage pool information tab: list the local storage pools on the node
   * System monitor tab: show the node's CPU and memory usage percentage in charts 
+  * Net monitor tab: show the net I/O statistical information in charts 
+  * Disk monitor tab: show the disk I/O and capacity statistical information in charts 
+  * Alert information tab: show the unacknowledged alerts related to the host
   * Operation log tab: show the operation logs of the node. 
 
 {{% imgproc host_vms Fit "1000x600" %}}
@@ -57,8 +60,20 @@ node's layer-2 network list
 node's storage pool list
 {{% /imgproc %}}
 
-{{% imgproc host_stat Fit "1000x400" %}}
+{{% imgproc host_sys_stat Fit "1000x400" %}}
 node's system monitor information
+{{% /imgproc %}}
+
+{{% imgproc host_net_stat Fit "1000x400" %}}
+node's network monitor information
+{{% /imgproc %}}
+
+{{% imgproc host_disk_stat Fit "1000x400" %}}
+node's storage monitor information
+{{% /imgproc %}}
+
+{{% imgproc host_alert Fit "1000x400" %}}
+node's unacknowledged alerts
 {{% /imgproc %}}
 
 {{% imgproc host_log Fit "1000x400" %}}

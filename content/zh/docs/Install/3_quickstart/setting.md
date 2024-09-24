@@ -9,11 +9,11 @@ weight: 5
 如果是通过AllInOne的ISO系统镜像直接安装的ChimeStack无需进行额外的配置可直接使用, 可忽略本章节
 {{% /alert %}}
 
-## 配置并启动chime-server
+## 1.配置并启动chime-server/chime-portal
 
-本章节说明如何配置chime-server依赖的mysql,influxdb和s3组件，及如何启动chime-server
+本章节说明如何配置chime-server和chime-portal依赖的mysql,influxdb和s3组件，及如何启动chime-server/chime-portal
 
-### 配置和初始化mysql
+### 1.1 配置和初始化mysql
 
 ##### 创建mysql新账户
 
@@ -52,7 +52,7 @@ chimeadm initserver mysql --ip 127.0.0.1 \
 
 运行成功后，数据库chime被成功初始化，同时/etc/chime/server.yaml中的数据库配置信息会被更新。
 
-### 配置influxdb 
+### 1.2 配置influxdb 
 
 ##### 初始化influxdb
 
@@ -102,7 +102,7 @@ chimeadm initserver influxdb --vip-endpoint http://192.168.231.120:8086 \
 
 其中192.168.231.120是负载均衡的VIP地址，192.168.231.121和192.168.231.122是influxdb实例真实的IP地址。
 
-### 配置s3
+### 1.3 配置s3
 
 通过以下命令更新chime-server配置
 
@@ -127,7 +127,7 @@ chimeadm initserver s3 --ip 192.168.231.100 --port 9000 --ak chime --sk chime --
 chimeadm initserver s3 --ip 192.168.231.101 --port 9000 --ak minioadmin --sk minioadmin
 ```
 
-### 检查chime-server
+### 1.4 检查chime-server
 
 通过chimeadm initserver check命令检查chime-server的配置, 并且检查mysql, influxdb和s3等依赖组件的可用性, 在server节点运行:
 
@@ -135,29 +135,9 @@ chimeadm initserver s3 --ip 192.168.231.101 --port 9000 --ak minioadmin --sk min
 chimeadm initserver check 
 ```
 
-如果检查成功，则说明配置完成且有效，chime-server已经准备好可以启动
+如果检查成功，则说明配置完成且有效，chime-server已经准备好可以启动（如果需连带chime-portal一起启动，需要配置完成chime-portal）
 
-### 运行chime-server
-
-```
-sudo systemctl start chime-server
-```
-
-检查运行状态:
-
-```
-sudo systemctl status chime-server
-```
-
-chime-server的运行日志在/var/log/chime/server.log
-
-## 配置并启动chime-portal 
-
-chime-server程序除了ChimeStack的管控服务端程序，还内嵌了Web UI(chime-portal), Web UI即可以独立于Server进程单独运行，也可以和Server运行在一个进程中(默认)。
-
-下面介绍如何配置、初始化和运行chime-portal
-
-### 配置和初始化portal数据库
+### 1.5 配置和初始化portal数据库
 
 通过以下命令初始化portal数据库并更新chime-portal配置
 
@@ -184,30 +164,25 @@ chimeadm initportal mysql --ip 127.0.0.1 \
 
 运行成功后，数据库portal被成功初始化，同时/etc/chime/server.yaml中的portal数据库配置信息被更新。
 
-### 配置portal运行参数
+### 1.6 配置chime-portal运行参数
 
-通过以下命令配置portal运行参数
+chime-portal通过调用chime-server的API实现其功能，可通过以下命令配置chime-portal的运行参数:
 
 ```
-chimeadm initportal run --port <port> --api-url <api server addr: port> --prefix [prefix] 
+chimeadm initportal runtime --api-uri <server vip/ip:port> --bind-port <port>
 ```
-
 
 命令行参数解释如下: 
-- port: chime-portal的访问端口
-- api-url: chime-server的api访问地址
-- prefix: chime-server的api的访问版本, 默认为 "/v1"
+- api-uri: chime-server API服务的uri, 注意chime-server为多活部署时，需要输入服务的VIP地址而不是单个chime-server实例的物理IP
+- bind-port: chime-port运行时的服务端口号(默认为8033)
 
 例如:
 
 ```
-chimeadm initportal run \
-  --port 8033 \
-  --api-url 192.168.231.101:8801 \
-  --prefix /v1
+chimeadm initportal runtime --api-uri 127.0.0.1:8801 --bind-port 8035 
 ```
 
-### 检查chime-portal
+### 1.7 检查chime-portal
 
 运行check命令检查chime-portal的配置和组件的连通性:
 
@@ -217,30 +192,52 @@ chimeadm initportal check
 
 如果检查成功，则说明配置无误，chime-portal可以启动
 
-### 运行chime-portal
 
-默认chime-server和chime-portal是在同一个进程中启动的，server和portal的配置都在文件/etc/chime/server.yaml中，该配置文件的默认格式为: 
+### 1.8 运行chime-server/chime-portal
+
+chime-server二进制程序即包含了server服务(管控端服务)也包含portal服务(Web UI服务)，这两个服务可以在一个进程中启动，也可以分别运行在同一服务器的两个不同进程中，或者作为不同服务器的进程独立运行。
+
+chime-server程序启动时，会根据环境变量"CHIME_SERVER_MODEL"的设置判断启动服务的类型，例如
+
+- CHIME_SERVER_MODEL=combined: 默认选项，即一个chime-server进程同时启动server和portal两个服务.
+- CHIME_SERVER_MODEL=server: chime-server进程只启动server服务.
+- CHIME_SERVER_MODEL=portal: chime-server进程只启动portal服务。 
+
+推荐通过默认的systemd管理chimestack服务，用户通常不需要自己更改环境变量，systemd默认会读取默认环境变量文件
+
+- 对于chime-server.service服务, 进程启动前会加载/etc/default/chime-server环境变量文件，"CHIME_SERVER_MODEL"变量值为默认的"combined"
+- 对于chime-portal.service服务, 进程启动前会加载/etc/default/chime-portal环境变量文件，"CHIME_SERVER_MODEL"变量值为默认的"portal"
+
+server和portal配置完成后，可以启动server和portal服务，对于combined模式的设置，仅需启动chime-server.service即可,例如:
+
 ```
-chime-server:
-    ......
-    ......
-chime-portal: 
-    ......
-    ......
+sudo systemctl start chime-server.service
 ```
 
-server和portal配置完成后，运行chime-server会同时启动server和portal
-
-如果需要分别运行server和portal，可以将 /etc/chime/server.yaml中 [chime-portal]的部分拷贝到文件/etc/chime/portal.yaml中, 原来的配置文件仅保存[chime-server]部分。这样server和portal可以分别运行: 
+对于设置成单独启动的server和portal服务，需要启动chime-server.service和chime-portal.service，例如:
 
 ```
-sudo systemctl start chime-server #仅运行server
-sudo systemctl start chime-portal #仅运行portal
+#CHIME_SERVER_MODEL=server in /etc/default/chime-server
+sudo systemctl start chime-server.service
+sudo systemctl start chime-portal.service
 ```
 
-## 配置并启动chime-agent
+检查运行状态:
 
-### 配置chime-agent
+```
+sudo systemctl status chime-server
+# if launched the portal service 
+sudo systemctl status chime-portal 
+```
+
+chime-server的运行日志在/var/log/chime/server.log
+
+chime-portal的运行日志在/var/log/chime/portal.log
+
+
+## 2.配置并启动chime-agent
+
+### 2.1 配置chime-agent
 
 chime-agent是ChimeStack的客户端程序，运行在计算节点上(计算节点和管理节点既可以是不同的服务器，也可以是相同的服务器)。chime-agent启动时会读取agent的配置文件(/etc/chime/agent.yaml)，下面介绍如何通过chimeadm配置并启动agent
 
@@ -274,18 +271,7 @@ chimeadm initagent \
 
 配置成功后，chime-server会自动下发配置，完成其它组件访问的设置。
 
-### 检查chime-agent
-
-运行check命令检查chime-agent的配置，以及和chime-server的连通性
-
-```
-chimeadm initagent check 
-```
-
-如果检查成功后，说明配置完成，chime-agent可以启动
-
-### 运行chime-agent
-
+### 2.2 运行chime-agent
 
 ```
 sudo systemctl start chime-agent 

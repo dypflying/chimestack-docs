@@ -1,8 +1,8 @@
 ---
-title: ChimeStack Features' Introduction(v0.1)
+title: Introduction To ChimeStack V0.1 Features
 ---
 
-{{% blocks/cover title="ChimeStack Features' Introduction(v0.1)" image_anchor="top" height="10" color="primary"  %}}
+{{% blocks/cover title="Introduction To ChimeStack Features" image_anchor="top" height="10" color="primary"  %}}
 {.mt-1}
 {{% /blocks/cover %}}
 
@@ -17,8 +17,9 @@ title: ChimeStack Features' Introduction(v0.1)
 - **Available Zone Management**
 - **Cluster Management**
 - **Node(Host)**
-  - Lifecycle management
-  - Failure migration management
+  - Node's lifecycle management
+  - Node's details (general information, virtual machines accommodated, related local networks, related storage pools, monitoring figures, alerts, operation logs)
+  - Migration management for failures
 - **Storage Pool**
   - Local storage pool management
   - Ceph storage pool management
@@ -35,48 +36,57 @@ title: ChimeStack Features' Introduction(v0.1)
 
 ### 1.2 Virtual Resource Management
 
-- **Virtual Machine**
-  - Lifecycle management(create,start,stop,delete)
-  - VM details(general information, volume information, NIC information, monitor, logs)
-  - VM migration
+- **Virtual Machine and User Image**
+  - VM's lifecycle management(create,start,stop,delete)
+  - VM details(general information, attached volumes, attached Nics, monitoring figures, alerts, operation logs)
+  - VM migration management
   - VM change(volume add/remove, NIC add/remove)
-- **Volume**
-  - Lifecycle management(create, attach, detach, delete)
-  - Volume details(general information、attached VMs, snapshot information, monitor、logs)
-  - Support Ceph volume and local volume
-  - Snapshot management(create, delete, restore to volume)
+  - User image's lifecycle management
+- **Volume and Snapshot**
+  - Volume's lifecycle management(create, attach, detach, delete)
+  - Volume details(general information、attached VMs, snapshots, monitoring figures, alerts, operation logs)
+  - Support Ceph and local volumes
+  - Snapshot's lifecycle management(create, delete, restore to volume)
 - **Elastic NIC**
-  - Lifecycle management(create, attach, detach, delete)
-  - NIC details(general information、attached VMs, monitor、logs)
+  - NIC's lifecycle management(create, attach, detach, delete)
+  - NIC details(general information、attached VMs, monitoring figures, alerts, operation logs)
 - **Security Group**
-  - Lifecycle management(create, change, delete)
-  - Security group details(general information, rule information, attached VMs)
-  - Only support IPv4
+  - Security group's lifecycle management(create, change, delete)
+  - Security group details(general information, rule information)
+  - Support IPv4 and IPv6
   
 <br></br>
 
-### 1.3 Monitoring and alarm management
-- Cluster's monitoring data graphical display and alarm management
-- Node monitoring data collection, retrieval, graphical display and alarm management
-- Virtual resource monitoring data collection, retrieval, graphical display, and alarm management
+### 1.3 Monitoring and Alert management
+- Cluster's monitoring data graphical display and alart display
+- Node's monitoring data collection, retrieval, graphical display and alart display
+- Virtual machine's monitoring data collection, retrieval, graphical display, and alart display
+- Volume's monitoring data collection, retrieval, graphical display, and alart display
+- Network interface's monitoring data collection, retrieval, graphical display, and alart display
+- Alert rule management
+- Alert reveiver managemet
+- Alert service's setting 
 
 <br></br>
 
 ### 1.4 Deployment and Configuration
 
 - **The chimeadm Tool**
-  - Provides configuration utilities for chime-server
-  - Provides configuration utilities for chime-agent
-  - Provides runtime statistic information.
+  - Provides configuration functions for chime-server
+  - Provides configuration functions for chime-agent
 - **AllInOne Installation Image**
 
 <br></br>
 
-### 1.5 Others
+### 1.5 Command Line
+- chimecli utility 
 
-- User and Permission Management
-- Limitation Management
+<br></br>
+
+### 1.6 Others
 - Dashboards
+- Account and permission management
+- Operation log Management
 
 <br></br>
 
@@ -85,21 +95,21 @@ title: ChimeStack Features' Introduction(v0.1)
 <br></br>
 
 ### chime-server
-Management and control plane program, communicates with chime-agents through gRPC protocol to deliver control commands. chime-server also integrates with a web portal. 
+Management and control plane program of Chimestack, user can interact with chime-server via server's API or SDK for managing the platform resources and the virtual resources. It communicates with chime-agents with gRPC protocol to deliver its control commands. chime-server also integrates with the chime-portal by default. 
 
 <br></br>
 
 ### chime-agent
-Client-side program, running on computing nodes, receives the commands delivered from the chime-server and handles the virtualized resources on the node. 
+Client-side program, running on computing nodes, receives the commands delivered from the chime-server and handles both the physical resources and the virtualized resources on the node. 
 
 <br></br>
 
 ### chimecli 
-A command line management tool program.
+A command line tool program, which operate the chime-server through the SDK.
 
 <br></br>
 
 ### chimeadm
-A deployment and configuration utility program, which can quickly configure the runtime parameters of the chime-server and the chime-agent.
+A deployment and configuration utility program, by which can quickly configure the runtime settings of the chime-server and the chime-agent.
 
 {{% /blocks/section %}}

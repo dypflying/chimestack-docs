@@ -29,7 +29,7 @@ systemctl start chime-server
 systemctl start chime-agent 
 ```
 
-通过访问浏览器 'http://<your IP address>:8033/' 即可以直接使用
+通过浏览器访问 'http://\<your IP address\>:8033/' 即可以直接使用
 
 {{% alert title="提示" color="primary" %}}
 初始超级管理员/密码为: admin/admin
@@ -44,6 +44,7 @@ systemctl start chime-agent
 - 一个公有镜像桶
 - 三个实例规格(已经关联到Default集群)
 - 两个云盘规格(已经关联到Default集群)
+- Admin账户一个默认的安全组，允许ssh(22端口)登录
 
 另外，数据组件的安装路径在：
 - mysql的数据文件在/var/lib/mysql

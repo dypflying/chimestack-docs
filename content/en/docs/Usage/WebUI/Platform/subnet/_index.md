@@ -13,7 +13,7 @@ subnet list
 {{% /imgproc %}}
 
 ## Create new subnet
-  * Input the name of the subnet
+  * Input the name of the subnet, which is restricted to 2～64 characters and only allows alphbet, number, “-” and “_”.
   * Choose a network which the subnet belongs to
   * Input the CIDR
   * (Optional) Input the gateway of the subnet（if omit, it will use the first IP address from the CIDR's IP range as the gateway）

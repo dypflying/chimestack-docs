@@ -43,7 +43,10 @@ weight: 4
   * 虚拟机实例页：显示该节点包含的虚拟机实例信息
   * 二层网络页：显示该节点关联的二层网络信息
   * 存储池页：显示该节点关联的本地存储池信息
-  * 系统监控页：显示改节点的系统监控信息
+  * 系统监控页：显示该节点的系统监控信息
+  * 网卡监控页：显示该节点的网络I/O监控信息
+  * 云盘监控页：显示该节点的磁盘I/O和容量监控信息
+  * 报警信息页: 显示该节点的未确认报警信息
   * 节点操作日志页：显示节点的操作日志
 
 {{% imgproc host_vms Fit "1000x600" %}}
@@ -58,8 +61,20 @@ weight: 4
 关联的存储池列表信息
 {{% /imgproc %}}
 
-{{% imgproc host_stat Fit "1000x400" %}}
+{{% imgproc host_sys_stat Fit "1000x400" %}}
 系统监控信息
+{{% /imgproc %}}
+
+{{% imgproc host_net_stat Fit "1000x400" %}}
+网卡I/O监控信息
+{{% /imgproc %}}
+
+{{% imgproc host_disk_stat Fit "1000x400" %}}
+云盘I/O和容量监控信息
+{{% /imgproc %}}
+
+{{% imgproc host_alert Fit "1000x400" %}}
+节点未确认的报警信息
 {{% /imgproc %}}
 
 {{% imgproc host_log Fit "1000x400" %}}

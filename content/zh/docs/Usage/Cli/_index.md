@@ -18,18 +18,22 @@ chimecli <resource category> <operation> [flags]
 
 > "resource category"为资源类别，目前可用CLI管理操作的资源为: 
 
+- alert: 报警
 - az: 可用区
 - cluster: 集群
-- host: 节点
-- storage_pool: 存储池
-- network: 网络
-- instance_spec: 计算规格
-- volume_spec: 云硬盘规格
-- image: 镜像
-- alert: 报警
 - compute: 虚拟机
-- volume: 云硬盘
+- global: 系统参数
+- host: 节点
+- image: 镜像
+- instance_spec: 计算规格
+- network: 网络
+- operation_log: 操作日志
+- security_group: 安全组
+- storage_pool: 存储池
 - user: 用户
+- volume: 云硬盘
+- volume_spec: 云硬盘规格
+
 
 > "operation"为操作资源的命令，是对[API](/docs/reference/api/)的封装，和[API](/docs/reference/api/)相对应。
 
@@ -908,21 +912,22 @@ chimecli host listHost \
 
 ```
 {
-  "requestId": "c1e1595f-e0e1-4d06-aad2-8baa09b0a783",
+  "requestId": "18cca981-ab72-47f5-8ad5-7f50e105a812",
   "result": {
     "elements": [
       {
-        "active_domains": 1,
+        "active_domains": 0,
+        "alerts": [],
         "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
         "cluster_name": "Default",
         "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-        "created_at": "2024-06-22T09:11:02Z",
+        "created_at": "2024-07-04T10:16:54Z",
         "description": "",
         "domains": 1,
-        "heartbeat_at": "2024-06-23T09:09:42Z",
-        "last_operation_created_at": "2024-06-24T11:35:07Z",
-        "last_operation_finished_at": "2024-06-24T11:35:07Z",
-        "last_operation_name": "drain",
+        "heartbeat_at": "2024-07-13T14:59:57Z",
+        "last_operation_created_at": "2024-07-04T10:16:54Z",
+        "last_operation_finished_at": "2024-07-04T10:16:54Z",
+        "last_operation_name": "create",
         "last_operation_state": 1,
         "manage_ip": "192.168.231.175",
         "monitor_state": 0,
@@ -937,7 +942,7 @@ chimecli host listHost \
         "reserved_ip2": "",
         "reserved_memory": 0,
         "reserved_vcpus": 0,
-        "state": 5,
+        "state": 0,
         "storage_ip": "172.28.10.3",
         "storage_pools": [],
         "tasks": [],
@@ -946,24 +951,25 @@ chimecli host listHost \
         "used_memory": 0,
         "used_vcpus": 0,
         "uuid": "12345678-1112-449d-8d3e-3ff8b1323d9e",
-        "vm_count": 1,
+        "vm_count": 0,
         "vm_running_count": 0,
         "vms": []
       },
       {
         "active_domains": 1,
+        "alerts": [],
         "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
         "cluster_name": "Default",
         "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
         "created_at": "2024-06-17T12:05:19Z",
         "description": "",
         "domains": 1,
-        "heartbeat_at": "2024-06-23T09:09:44Z",
+        "heartbeat_at": "2024-09-05T00:47:22Z",
         "last_operation_created_at": "2024-06-17T12:05:19Z",
         "last_operation_finished_at": "2024-06-17T12:05:19Z",
         "last_operation_name": "create",
         "last_operation_state": 1,
-        "manage_ip": "192.168.231.128",
+        "manage_ip": "172.16.189.133",
         "monitor_state": 0,
         "name": "host-a428263d",
         "networks": [],
@@ -1125,36 +1131,38 @@ chimecli host getHost \
 
 ```
 {
-  "requestId": "0000e0b4-94e8-42bf-802d-84619d21da2d",
+  "requestId": "c66ab0d2-b8e4-4a82-98c2-181dd50899d6",
   "result": {
     "host": {
       "active_domains": 1,
+      "alerts": [],
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
       "cluster_name": "Default",
       "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
       "created_at": "2024-06-17T12:05:19Z",
       "description": "",
       "domains": 1,
-      "heartbeat_at": "2024-06-23T09:09:44Z",
+      "heartbeat_at": "2024-09-05T00:47:22Z",
       "last_operation_created_at": null,
       "last_operation_finished_at": null,
       "last_operation_name": "",
       "last_operation_state": 0,
-      "manage_ip": "192.168.231.128",
+      "manage_ip": "172.16.189.133",
       "monitor_state": 0,
       "name": "host-a428263d",
       "networks": [
         {
           "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+          "bridge_name": "br1",
           "cluster_name": "",
           "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-          "created_at": "2024-06-17T11:10:24Z",
+          "created_at": "2024-07-09T01:49:46Z",
           "description": "",
           "interface_name": "ens224",
-          "name": "br1",
+          "name": "Default_Network",
           "state": 1,
           "type": 0,
-          "uuid": "0851de9d-631b-4a50-b52f-df636a954ef7",
+          "uuid": "4d2c7093-cb2a-49d9-9156-986a9d746003",
           "vlan_id": ""
         }
       ],
@@ -1193,7 +1201,7 @@ chimecli host getHost \
           "created_at": "2023-06-25T19:10:18Z",
           "description": "local storage pool2aa",
           "meta": "{\"backend_path\":\"/hyperc/backend\",\"image_cache_path\":\"/hyperc/cache\"}",
-          "name": "Local Storage Pool",
+          "name": "Local Pool",
           "physical_size": 0,
           "reserved_size": 0,
           "state": 1,
@@ -1215,18 +1223,6 @@ chimecli host getHost \
           "state": 1,
           "updated_at": "2024-06-17T12:05:19Z",
           "uuid": "08a8aa99-8d3e-4b10-a8e1-924f3fe8e7d3"
-        },
-        {
-          "created_at": "2024-06-17T12:05:10Z",
-          "description": "delete-host-flowchain-a428263d-64a9-4653-8d7e-556c20c0d77a",
-          "finished_at": "2024-06-17T12:05:10Z",
-          "operation_name": "delete",
-          "request_id": "a5eb672b-7ebd-411a-8c4d-c97462dbc74e",
-          "resource_type": "host",
-          "resource_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
-          "state": 1,
-          "updated_at": "2024-06-17T12:05:10Z",
-          "uuid": "d25fd1fb-fb30-43cd-80e0-c992aadf7ea4"
         }
       ],
       "total_memory": 8038023168,
@@ -1238,11 +1234,12 @@ chimecli host getHost \
       "vm_running_count": 1,
       "vms": [
         {
+          "alerts": [],
           "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
           "boot_type": "",
           "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-          "created_at": "2024-06-22T07:55:38Z",
-          "description": "",
+          "created_at": "2024-08-27T14:57:30Z",
+          "description": "aaa",
           "host_ip": "",
           "host_name": "",
           "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
@@ -1253,7 +1250,7 @@ chimecli host getHost \
           "last_operation_name": "",
           "last_operation_state": 0,
           "memory": 1073741824,
-          "name": "vm-ceph",
+          "name": "vm-local",
           "nics": [],
           "operation": "",
           "os_arch": "",
@@ -1263,7 +1260,7 @@ chimecli host getHost \
           "state": 1,
           "tags": null,
           "tasks": [],
-          "uuid": "2fc99bf7-7f78-4a07-b7d6-471f3b0b5001",
+          "uuid": "3d64a802-3194-4a72-bd64-cc3e47b02ea6",
           "vcpus": 1,
           "volumes": []
         }
@@ -2933,20 +2930,21 @@ chimecli network listNetwork --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774
 
 ```
 {
-  "requestId": "f346cf6e-12e3-4580-bbd8-66f7bf9388b4",
+  "requestId": "b68a4ded-353d-4244-9cb0-fd02e886916a",
   "result": {
     "elements": [
       {
         "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+        "bridge_name": "br1",
         "cluster_name": "Default",
         "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-        "created_at": "2023-07-20T02:02:31Z",
-        "description": "bridge1",
+        "created_at": "2024-07-09T01:49:46Z",
+        "description": "",
         "interface_name": "ens224",
-        "name": "br1",
+        "name": "Default_Network",
         "state": 1,
         "type": 0,
-        "uuid": "52899f98-3963-4ae0-abde-2ea72e27f2b6",
+        "uuid": "4d2c7093-cb2a-49d9-9156-986a9d746003",
         "vlan_id": ""
       }
     ],
@@ -2971,6 +2969,7 @@ Flags:
       --AzUuid string                               Required. the AZ's uuid
       --Body string                                 Optional json string for [Body]. the http post body
       --ClusterUuid string                          Required. the cluster's uuid
+      --createNetworkRequest.BridgeName string      Required. the network's actual bridge name
       --createNetworkRequest.Description string     description for the network
       --createNetworkRequest.InterfaceName string   Required. the unified interface name which the network uses in the node
       --createNetworkRequest.Name string            Required. the network's name
@@ -2990,6 +2989,7 @@ Flags:
 
 |Name|Type|Required|Description|
 |---|---|---|---|
+|createNetworkRequest.BridgeName|string|true|the network's actual bridge name|
 |createNetworkRequest.Description|string|false|description for the network|
 |createNetworkRequest.InterfaceName|string|true|the unified interface name which the network uses in the node|
 |createNetworkRequest.Name|string|true|the network's name|
@@ -3004,7 +3004,8 @@ chimecli network createNetwork \
   --AzUuid cbd2819b-b49a-47ad-9fa4-307774d97865 \
   --ClusterUuid 65bbc21f-0289-4bbf-9517-6b8da9688774 \
   --createNetworkRequest.Type 0 \
-  --createNetworkRequest.Name br1 \
+  --createNetworkRequest.Name default-network \
+  --createNetworkRequest.BridgeName br1
   --createNetworkRequest.InterfaceName ens224
 ```
 
@@ -3021,7 +3022,8 @@ chimecli network createNetwork \
       "created_at": "0001-01-01T00:00:00Z",
       "description": "",
       "interface_name": "ens224",
-      "name": "br1",
+      "name": "default-network",
+      "bridge_name":"br1",
       "state": 0,
       "type": 0,
       "uuid": "f2a515db-7699-4970-b13c-a8ea9840f62e",
@@ -3062,26 +3064,27 @@ Flags:
 命令行:
 
 ```
-chimecli network getNetwork --NetworkUuid 52899f98-3963-4ae0-abde-2ea72e27f2b6
+chimecli network getNetwork --NetworkUuid 4d2c7093-cb2a-49d9-9156-986a9d746003
 ```
 
 返回:
 
 ```
 {
-  "requestId": "235ff7b9-3364-475f-8800-8bc064e90134",
+  "requestId": "23e35ee0-f105-4e7a-aafe-a46e47108c2b",
   "result": {
     "network": {
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
+      "bridge_name": "br1",
       "cluster_name": "Default",
       "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-      "created_at": "2023-07-20T02:02:31Z",
-      "description": "bridge1",
+      "created_at": "2024-07-09T01:49:46Z",
+      "description": "",
       "interface_name": "ens224",
-      "name": "br1",
+      "name": "Default_Network",
       "state": 1,
       "type": 0,
-      "uuid": "52899f98-3963-4ae0-abde-2ea72e27f2b6",
+      "uuid": "4d2c7093-cb2a-49d9-9156-986a9d746003",
       "vlan_id": ""
     }
   }
@@ -4430,15 +4433,17 @@ Usage:
   chimecli alert listAlert [flags]
 
 Flags:
-  -h, --help           help for listAlert
-      --name string    filter by the 'name' field
-      --order string   'asc' or 'desc' of sorting
-      --page int       the page number of the results in paging
-      --priority int   filter by the 'priority' field
-      --severity int   filter by the 'severity' field
-      --size int       the page size of the results in paging
-      --sort string    the field to be sorted by
-      --state int      filter by the 'state' field
+  -h, --help                   help for listAlert
+      --name string            filter by the 'name' field
+      --order string           'asc' or 'desc' of sorting
+      --page int               the page number of the results in paging
+      --priority int           filter by the 'priority' field
+      --resource_type string   filter by the 'resource_type' field
+      --resource_uuid string   filter by the 'resource_uuid' field
+      --severity int           filter by the 'severity' field
+      --size int               the page size of the results in paging
+      --sort string            the field to be sorted by
+      --state int              filter by the 'state' field
 ```
 
 #### 参数列表
@@ -4453,6 +4458,8 @@ Flags:
 |state|integer|false|filter by the 'state' field|
 |severity|integer|false|filter by the 'severity' field|
 |priority|integer|false|filter by the 'priority' field|
+|resource_type|string|false|filter by the 'resource_type' field|
+|resource_uuid|string|false|filter by the 'resource_uuid' field|
 
 #### 示例
 
@@ -4466,122 +4473,52 @@ chimecli alert listAlert
 
 ```
 {
-  "requestId": "2b5b041d-686a-4873-b5eb-49ea2a9b9632",
+  "requestId": "f9342fe9-4e35-45e5-b2b8-1185f04e7630",
   "result": {
     "elements": [
       {
         "comment": "",
-        "created_at": "2024-04-18T09:16:00Z",
-        "description": "host name: host-a428263d, cpu usage: 0.86",
-        "name": "Host CPU Usage Larger Than 50%",
+        "created_at": "2024-09-04T06:26:41Z",
+        "description": "instance uuid: 3d64a802-3194-4a72-bd64-cc3e47b02ea6, cpu usage: 196.24%",
+        "name": "Instance CPU usage is larger than 95 percentage",
         "priority": 1,
-        "rule_uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc",
+        "resource_type": "vm",
+        "resource_uuid": "3d64a802-3194-4a72-bd64-cc3e47b02ea6",
+        "rule_uuid": "a96478d6-cbcb-4d30-bcdd-cc18fc2d2514",
         "severity": 1,
         "state": 0,
-        "uuid": "07c8983f-f467-4223-b101-aa820585444a"
+        "uuid": "e7f7a4a7-105c-422f-942b-610084da4fdb"
       },
       {
-        "comment": "",
-        "created_at": "2024-04-18T09:16:00Z",
-        "description": "host name: host-a428263d, memory usage: 21.43",
-        "name": "Host Memory Usage Larger Than 80%",
-        "priority": 2,
-        "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
-        "severity": 2,
-        "state": 0,
-        "uuid": "37469f5c-c686-4977-bbc9-424788d8f6fe"
-      },
-      {
-        "comment": "",
-        "created_at": "2024-04-18T09:15:00Z",
-        "description": "host name: host-a428263d, cpu usage: 0.73",
-        "name": "Host CPU Usage Larger Than 50%",
+        "accepted_at": "2024-08-28T08:55:56Z",
+        "comment": "acked",
+        "created_at": "2024-08-17T12:00:47Z",
+        "description": "nic uuid: b0f84f77, net error average rate: 0.00",
+        "name": "Net error larger than 0",
         "priority": 1,
-        "rule_uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc",
+        "resource_type": "nic",
+        "resource_uuid": "b0f84f77-d7df-4805-8343-cd1755befad9",
+        "rule_uuid": "4c0fb64f-a47b-4aef-b74f-2bfa71233f48",
+        "severity": 1,
+        "state": 1,
+        "uuid": "18732216-a3f5-4387-aebc-0fa1cdf23057"
+      },
+      {
+        "comment": "",
+        "created_at": "2024-08-17T11:59:47Z",
+        "description": "nic uuid: b0f84f77, net error average rate: 0.00",
+        "name": "Net error larger than 0",
+        "priority": 1,
+        "resource_type": "nic",
+        "resource_uuid": "b0f84f77-d7df-4805-8343-cd1755befad9",
+        "rule_uuid": "4c0fb64f-a47b-4aef-b74f-2bfa71233f48",
         "severity": 1,
         "state": 0,
-        "uuid": "2e8bbe77-5864-44a2-921c-e1ee88ed6e23"
-      },
-      {
-        "comment": "",
-        "created_at": "2024-04-18T09:15:00Z",
-        "description": "host name: host-a428263d, memory usage: 21.43",
-        "name": "Host Memory Usage Larger Than 80%",
-        "priority": 2,
-        "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
-        "severity": 2,
-        "state": 0,
-        "uuid": "3a7de398-f1e5-4e22-9180-d0b38280de5d"
-      },
-      {
-        "comment": "",
-        "created_at": "2024-04-18T09:14:00Z",
-        "description": "host name: host-a428263d, cpu usage: 0.67",
-        "name": "Host CPU Usage Larger Than 50%",
-        "priority": 1,
-        "rule_uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc",
-        "severity": 1,
-        "state": 0,
-        "uuid": "a5004518-afd0-42a4-92b8-c49cc76feacb"
-      },
-      {
-        "comment": "",
-        "created_at": "2024-04-18T09:14:00Z",
-        "description": "host name: host-a428263d, memory usage: 21.43",
-        "name": "Host Memory Usage Larger Than 80%",
-        "priority": 2,
-        "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
-        "severity": 2,
-        "state": 0,
-        "uuid": "6e949a1d-fe8f-4834-bdb6-d696d0bd4f0f"
-      },
-      {
-        "comment": "",
-        "created_at": "2024-04-18T09:13:00Z",
-        "description": "host name: host-a428263d, cpu usage: 0.63",
-        "name": "Host CPU Usage Larger Than 50%",
-        "priority": 1,
-        "rule_uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc",
-        "severity": 1,
-        "state": 0,
-        "uuid": "723729cd-9911-452a-9afb-97540fdc7252"
-      },
-      {
-        "comment": "",
-        "created_at": "2024-04-18T09:13:00Z",
-        "description": "host name: host-a428263d, memory usage: 21.43",
-        "name": "Host Memory Usage Larger Than 80%",
-        "priority": 2,
-        "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
-        "severity": 2,
-        "state": 0,
-        "uuid": "3c7e8f49-f0f9-44ee-86b5-ea9dc4ba9730"
-      },
-      {
-        "comment": "",
-        "created_at": "2024-04-18T09:12:00Z",
-        "description": "host name: host-a428263d, memory usage: 21.43",
-        "name": "Host Memory Usage Larger Than 80%",
-        "priority": 2,
-        "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
-        "severity": 2,
-        "state": 0,
-        "uuid": "e1be82ff-6067-4644-8e40-dac1a7b9b86e"
-      },
-      {
-        "comment": "",
-        "created_at": "2024-04-18T09:12:00Z",
-        "description": "host name: host-a428263d, cpu usage: 0.63",
-        "name": "Host CPU Usage Larger Than 50%",
-        "priority": 1,
-        "rule_uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc",
-        "severity": 1,
-        "state": 0,
-        "uuid": "c24f4240-6e5e-418b-911f-fa46fe173888"
+        "uuid": "31baacf6-8a3d-4e70-a5dc-028e518b3b2f"
       }
     ],
-    "size": 10,
-    "total": 28219
+    "size": 3,
+    "total": 3
   }
 }
 ```
@@ -4613,25 +4550,27 @@ Flags:
 命令行:
 
 ```
-chimecli alert getAlert --AlertUuid e1be82ff-6067-4644-8e40-dac1a7b9b86e
+chimecli alert getAlert --AlertUuid 31baacf6-8a3d-4e70-a5dc-028e518b3b2f
 ```
 
 返回:
 
 ```
 {
-  "requestId": "f2cdbe5d-60a3-4f6b-bdc6-2b07e389454f",
+  "requestId": "7b3d6bde-49df-4f15-8e20-0d0f5d68f229",
   "result": {
     "alert": {
       "comment": "",
-      "created_at": "2024-04-18T09:12:00Z",
-      "description": "host name: host-a428263d, memory usage: 21.43",
-      "name": "Host Memory Usage Larger Than 80%",
-      "priority": 2,
-      "rule_uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc",
-      "severity": 2,
+      "created_at": "2024-08-17T11:59:47Z",
+      "description": "nic uuid: b0f84f77, net error average rate: 0.00",
+      "name": "Net error larger than 0",
+      "priority": 1,
+      "resource_type": "nic",
+      "resource_uuid": "b0f84f77-d7df-4805-8343-cd1755befad9",
+      "rule_uuid": "4c0fb64f-a47b-4aef-b74f-2bfa71233f48",
+      "severity": 1,
       "state": 0,
-      "uuid": "e1be82ff-6067-4644-8e40-dac1a7b9b86e"
+      "uuid": "31baacf6-8a3d-4e70-a5dc-028e518b3b2f"
     }
   }
 }
@@ -4774,64 +4713,89 @@ chimecli alert listAlertRule
 
 ```
 {
-  "requestId": "e95e66ce-538a-43ee-9162-9ceb6a1cb083",
+  "requestId": "aec867e0-a2d5-49b6-a0e4-de8912d1076c",
   "result": {
     "elements": [
       {
-        "aggregate": "3",
-        "created_at": "2023-10-18T05:33:22Z",
-        "cron": "0 */1 * * * *",
-        "field": "vm_uuid|used_avg",
-        "match": "vm_metrics_aggr|used_avg|>|10.0",
-        "name": "Instance Memory Usage Larger Than 80%",
-        "priority": 2,
-        "severity": 2,
-        "state": 1,
-        "template": "vm uuid: {{vm_uuid}}, memory usage: {{used_avg}}",
-        "uuid": "da08b82e-6d77-11ee-b5ce-000c29dc11fc"
-      },
-      {
-        "aggregate": "3",
-        "created_at": "2023-10-18T01:36:19Z",
-        "cron": "0 */1 * * * *",
-        "field": "host|used_avg",
-        "match": "host_metrics_aggr|used_avg|>|10.0",
-        "name": "Host Memory Usage Larger Than 80%",
-        "priority": 2,
-        "severity": 2,
-        "state": 1,
-        "template": "host name: {{host}}, memory usage: {{used_avg}}",
-        "uuid": "bca66fad-6d56-11ee-b5ce-000c29dc11fc"
-      },
-      {
-        "aggregate": "3",
-        "created_at": "2023-10-18T01:34:01Z",
-        "cron": "0 */1 * * * *",
-        "field": "host|total_avg",
-        "match": "host_metrics_aggr|total_avg|>|10.0",
-        "name": "Host CPU Usage Larger Than 80%",
-        "priority": 2,
-        "severity": 2,
-        "state": 1,
-        "template": "host name: {{host}}, cpu usage: {{total_avg}}",
-        "uuid": "6a7730cf-6d56-11ee-b5ce-000c29dc11fc"
-      },
-      {
-        "aggregate": "3",
-        "created_at": "2023-10-18T01:33:48Z",
-        "cron": "0 */1 * * * *",
-        "field": "host|total_avg",
-        "match": "host_metrics_aggr|total_avg|>|0.3",
-        "name": "Host CPU Usage Larger Than 50%",
+        "created_at": "2024-09-01T08:44:59Z",
+        "match": "vm_metrics_aggr|memory_used_avg|\u003e|90",
+        "name": "Instance used memory is larger than 90 percentage",
+        "period_unit": 1,
+        "period_value": 1,
         "priority": 1,
         "severity": 1,
         "state": 1,
-        "template": "host name: {{host}}, cpu usage: {{total_avg}}",
-        "uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc"
+        "uuid": "e492006b-1001-4431-aa75-69a6bbc4b245"
+      },
+      {
+        "created_at": "2024-09-01T08:42:34Z",
+        "match": "host_metrics_aggr|nic_error_avg|\u003e|1",
+        "name": "Host net error rate is larger than 1",
+        "period_unit": 1,
+        "period_value": 1,
+        "priority": 2,
+        "severity": 2,
+        "state": 1,
+        "uuid": "bdae4294-cbb2-4dd9-8230-d232065c02a3"
+      },
+      {
+        "created_at": "2024-08-10T11:32:20Z",
+        "match": "interface_metrics_aggr|nic_error_avg|\u003e=|1",
+        "name": "NIC net error rate is larger than 1",
+        "period_unit": 1,
+        "period_value": 1,
+        "priority": 1,
+        "severity": 1,
+        "state": 1,
+        "uuid": "4c0fb64f-a47b-4aef-b74f-2bfa71233f48"
+      },
+      {
+        "created_at": "2024-08-09T03:24:50Z",
+        "match": "volume_metrics_aggr|disk_used_percentage|\u003e|50",
+        "name": "Volume used capacity is larger than 50 percentage",
+        "period_unit": 1,
+        "period_value": 1,
+        "priority": 1,
+        "severity": 1,
+        "state": 1,
+        "uuid": "3baf9b5e-438a-44e3-a52f-68cc798f06c1"
+      },
+      {
+        "created_at": "2024-08-05T11:25:06Z",
+        "match": "vm_metrics_aggr|cpu_total_avg|\u003e|95",
+        "name": "Instance CPU usage is larger than 95 percentage",
+        "period_unit": 1,
+        "period_value": 1,
+        "priority": 1,
+        "severity": 1,
+        "state": 1,
+        "uuid": "a96478d6-cbcb-4d30-bcdd-cc18fc2d2514"
+      },
+      {
+        "created_at": "2024-08-04T01:12:20Z",
+        "match": "host_metrics_aggr|memory_used_avg|\u003e|80",
+        "name": "Host used memory is larger than 80 percentage",
+        "period_unit": 1,
+        "period_value": 1,
+        "priority": 1,
+        "severity": 1,
+        "state": 1,
+        "uuid": "7af1c1d9-9f63-4382-96d1-e76fdc3f25c7"
+      },
+      {
+        "created_at": "2024-08-03T05:34:51Z",
+        "match": "host_metrics_aggr|cpu_total_avg|\u003e|60",
+        "name": "Host CPU usage is larger than 60 percentage",
+        "period_unit": 1,
+        "period_value": 1,
+        "priority": 1,
+        "severity": 1,
+        "state": 1,
+        "uuid": "1215bdcc-cf71-42b1-b8ce-6cceab5a29ee"
       }
     ],
-    "size": 4,
-    "total": 4
+    "size": 7,
+    "total": 7
   }
 }
 ```
@@ -4870,24 +4834,468 @@ chimecli alert getAlertRule --RuleUuid 62deb6e7-6d56-11ee-b5ce-000c29dc11fc
 
 ```
 {
-  "requestId": "813dd88f-7b09-4e27-8149-039e94c1f008",
+  "requestId": "02a05ceb-f5e7-4ce2-8ba6-5e6b1e9a337f",
   "result": {
-    "alert": {
-      "aggregate": "3",
-      "created_at": "2023-10-18T01:33:48Z",
-      "cron": "0 */1 * * * *",
-      "field": "host|total_avg",
-      "match": "host_metrics_aggr|total_avg|>|0.3",
-      "name": "Host CPU Usage Larger Than 50%",
+    "alert_rule": {
+      "created_at": "2024-08-03T05:34:51Z",
+      "match": "host_metrics_aggr|cpu_total_avg|\u003e|60",
+      "name": "Host CPU usage is larger than 60 percentage",
+      "period_unit": 1,
+      "period_value": 1,
       "priority": 1,
       "severity": 1,
       "state": 1,
-      "template": "host name: {{host}}, cpu usage: {{total_avg}}",
-      "uuid": "62deb6e7-6d56-11ee-b5ce-000c29dc11fc"
+      "uuid": "1215bdcc-cf71-42b1-b8ce-6cceab5a29ee"
     }
   }
 }
 ```
+
+### 创建报警规则
+
+#### 命令原型
+
+```
+chimecli alert createAlertRule --help
+This will create an alert rule
+
+Usage:
+  chimecli alert createAlertRule [flags]
+
+Flags:
+      --Body string                        Optional json string for [Body]. the http post body
+      --alertRuleRequest.Match string      Required. the real match expression for searching the monitoring data
+      --alertRuleRequest.Name string       Required. the rule's name
+      --alertRuleRequest.PeriodUnit int    Required. the metrics gathering time unit of period, 0: second, 1:minute, 2: hour
+      --alertRuleRequest.PeriodValue int   Required. the metrics gathering time value of period
+      --alertRuleRequest.Priority int      Required. the priority of the alert
+      --alertRuleRequest.Severity int      Required. the severity of the alert
+  -h, --help                               help for createAlertRule
+
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|alertRuleRequest.Match|string|true|the real match expression for searching the monitoring data|
+|alertRuleRequest.Name|string|true|the rule's name|
+|alertRuleRequest.PeriodUnit|int|true|the metrics gathering time unit of period, 0: second, 1:minute, 2: hour|
+|alertRuleRequest.PeriodValue|int|true|the metrics gathering time value of period|
+|alertRuleRequest.Priority|int|true|the priority of the alert, scale up from 0 to 3|
+|alertRuleRequest.Severity|int|true|the severity of the alert, scale up from 0 to 3|
+
+#### 示例
+
+命令行:
+
+```
+chimecli alert  createAlertRule \
+  --alertRuleRequest.Match "host_metrics_aggr|cpu_total_avg|>|80" \ 
+  --alertRuleRequest.Name "Host CPU usage is larger than 80 percentage" \
+  --alertRuleRequest.PeriodUnit 1 \
+  --alertRuleRequest.PeriodValue 1 \
+  --alertRuleRequest.Priority 2 \
+  --alertRuleRequest.Severity 2 
+```
+
+返回:
+
+```
+{
+  "requestId": "fc58dcc5-8900-45e9-a523-33f8a10e3a30",
+  "result": {
+    "alert_rule": {
+      "created_at": "0001-01-01T00:00:00Z",
+      "match": "host_metrics_aggr|cpu_total_avg|\u003e|80",
+      "name": "Host CPU usage is larger than 80 percentage",
+      "period_unit": 1,
+      "period_value": 1,
+      "priority": 2,
+      "severity": 2,
+      "state": 0,
+      "uuid": "0cc03da2-2a46-4ecd-819b-6baacc23de44"
+    }
+  }
+}
+```
+
+### 更新报警规则
+
+#### 命令原型
+
+```
+chimecli alert updateAlertRule --help 
+This will update an alert rule
+
+Usage:
+  chimecli alert updateAlertRule [flags]
+
+Flags:
+      --Body string                        Optional json string for [Body]. the http post body
+      --RuleUuid string                    Required. the alert rule's UUID
+      --alertRuleRequest.Match string      Required. the real match expression for searching the monitoring data
+      --alertRuleRequest.Name string       Required. the rule's name
+      --alertRuleRequest.PeriodUnit int    Required. the metrics gathering time unit of period, 0: second, 1:minute, 2: hour
+      --alertRuleRequest.PeriodValue int   Required. the metrics gathering time value of period
+      --alertRuleRequest.Priority int      Required. the priority of the alert
+      --alertRuleRequest.Severity int      Required. the severity of the alert
+      --alertRuleRequest.Uuid string       the rule's uuid
+  -h, --help                               help for updateAlertRule
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|RuleUuid|string|true|the rule's uuid|
+|alertRuleRequest.Match|string|true|the real match expression for searching the monitoring data|
+|alertRuleRequest.Name|string|true|the rule's name|
+|alertRuleRequest.PeriodUnit|int|true|the metrics gathering time unit of period, 0: second, 1:minute, 2: hour|
+|alertRuleRequest.PeriodValue|int|true|the metrics gathering time value of period|
+|alertRuleRequest.Priority|int|true|the priority of the alert, scale up from 0 to 3|
+|alertRuleRequest.Severity|int|true|the severity of the alert, scale up from 0 to 3|
+
+
+#### 示例
+
+命令行:
+
+```
+chimecli alert updateAlertRule \
+  --RuleUuid "0cc03da2-2a46-4ecd-819b-6baacc23de44" \
+  --alertRuleRequest.Match "host_metrics_aggr|cpu_total_avg|>|80" \
+  --alertRuleRequest.Name "Host CPU usage is larger than 80 percentage" \
+  --alertRuleRequest.PeriodUnit 1 \
+  --alertRuleRequest.PeriodValue 2 \
+  --alertRuleRequest.Priority 2 \
+  --alertRuleRequest.Severity 2 
+```
+
+返回:
+
+```
+{
+  "requestId": "42a5faad-1f3e-4523-a78d-3ddc24a3a203",
+  "result": {
+    "alert_rule": "ok"
+  }
+}
+```
+
+### 删除报警规则
+
+#### 命令原型
+
+```
+chimecli alert deleteAlertRule --help
+This will delete an alert rule.
+
+Usage:
+  chimecli alert deleteAlertRule [flags]
+
+Flags:
+      --RuleUuid string   Required. the alert rule's UUID
+  -h, --help              help for deleteAlertRule
+
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|RuleUuid|string|true|the rule's uuid|
+
+#### 示例
+
+命令行:
+
+```
+chimecli alert deleteAlertRule --RuleUuid "0cc03da2-2a46-4ecd-819b-6baacc23de44" 
+```
+
+返回: 
+
+```
+{
+  "requestId": "8eefa793-56fa-4ae0-a263-c0253938ce9a",
+  "result": {
+    "alert_rule": "ok"
+  }
+}
+```
+
+### 报警接收者列表
+
+#### 命令原型
+
+```
+chimecli alert listAlertPerson --help
+list alert persons
+
+Usage:
+  chimecli alert listAlertPerson [flags]
+
+Flags:
+      --email string    filter by the 'email' field
+  -h, --help            help for listAlertPerson
+      --mobile string   filter by the 'mobile' field
+      --name string     filter by the 'name' field
+      --order string    'asc' or 'desc' of sorting
+      --page int        the page number of the results in paging
+      --size int        the page size of the results in paging
+      --sort string     the field to be sorted by
+      --state int       filter by the 'state' field
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|state|integer|false|filter by the 'state' field|
+|mobile|string|false|filter by the 'mobile' field|
+
+#### 示例
+
+命令行:
+
+```
+chimecli alert listAlertPerson 
+```
+
+返回: 
+
+```
+{
+  "requestId": "bb1cc403-25ca-4aa9-95c1-8b38bc7237bb",
+  "result": {
+    "elements": [
+      {
+        "created_at": "2024-08-02T08:45:03Z",
+        "description": "",
+        "email": "dypflying@sina.com",
+        "mobile": "13260237056",
+        "name": "Yunpeng Deng",
+        "state": 1,
+        "uuid": "72d4de87-4a74-4ccd-a43c-025d51fba525"
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
+}
+```
+
+### 报警接收者详情
+
+#### 命令原型
+
+```
+chimecli alert getAlertPerson --help
+get an alert person's information
+
+Usage:
+  chimecli alert getAlertPerson [flags]
+
+Flags:
+      --PersonUuid string   Required. the alert person's UUID
+  -h, --help                help for getAlertPerson
+
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|PersonUuid|string|true|the alert receiver's UUID|
+
+#### 示例
+
+命令行:
+
+```
+chimecli alert getAlertPerson --PersonUuid "72d4de87-4a74-4ccd-a43c-025d51fba525"
+```
+
+返回: 
+
+```
+{
+  "requestId": "93ad85be-09a3-4a7a-a471-2782488b9aab",
+  "result": {
+    "alert_person": {
+      "created_at": "2024-08-02T08:45:03Z",
+      "description": "",
+      "email": "dypflying@sina.com",
+      "mobile": "13260237056",
+      "name": "Yunpeng Deng",
+      "state": 1,
+      "uuid": "72d4de87-4a74-4ccd-a43c-025d51fba525"
+    }
+  }
+}
+```
+
+### 新建报警接收者
+
+#### 命令原型
+
+```
+chimecli alert createAlertPerson --help
+This will create an alert person
+
+Usage:
+  chimecli alert createAlertPerson [flags]
+
+Flags:
+      --Body string                             Optional json string for [Body]. the http post body
+      --alertPersonRequest.Description string   description for the person
+      --alertPersonRequest.Email string         Required. the person's email
+      --alertPersonRequest.Mobile string        the person's mobile
+      --alertPersonRequest.Name string          Required. the person's name
+      --alertPersonRequest.Uuid string          the person's uuid
+  -h, --help                                    help for createAlertPerson
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|alertPersonRequest.Name|string|true|the alert receiver's name|
+|alertPersonRequest.Email|string|true|the alert receiver's email|
+|alertPersonRequest.Mobile|string|false|the alert receiver's mobile number|
+|alertPersonRequest.Description|false|true|the alert receiver's description|
+
+#### 示例
+
+命令行:
+
+```
+chimecli alert createAlertPerson \
+  --alertPersonRequest.Name "yu lili" \
+  --alertPersonRequest.Email "liliyu@sina.com" 
+```
+
+返回: 
+
+```
+{
+  "requestId": "4617e7a3-6e8d-4d8b-baaf-db805cebc33e",
+  "result": {
+    "alert_person": {
+      "created_at": "2024-09-05T11:14:33.305330571Z",
+      "description": "",
+      "email": "liliyu@sina.com",
+      "mobile": "",
+      "name": "yu lili",
+      "state": 1,
+      "uuid": "78a6568a-df12-45d5-ba4c-4ed7baafdaae"
+    }
+  }
+}
+```
+
+### 更新报警接收者
+
+#### 命令原型
+
+```
+chimecli alert updateAlertPerson --help
+This will update an alert person
+
+Usage:
+  chimecli alert updateAlertPerson [flags]
+
+Flags:
+      --Body string                             Optional json string for [Body]. the http post body
+      --PersonUuid string                       Required. the alert person's UUID
+      --alertPersonRequest.Description string   description for the person
+      --alertPersonRequest.Email string         Required. the person's email
+      --alertPersonRequest.Mobile string        the person's mobile
+      --alertPersonRequest.Name string          Required. the person's name
+      --alertPersonRequest.Uuid string          the person's uuid
+  -h, --help                                    help for updateAlertPerson
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|PersonUuid|string|true|the alert receiver's uuid|
+|alertPersonRequest.Name|string|true|the alert receiver's name|
+|alertPersonRequest.Email|string|true|the alert receiver's email|
+|alertPersonRequest.Mobile|string|false|the alert receiver's mobile number|
+|alertPersonRequest.Description|false|true|the alert receiver's description|
+
+#### 示例
+
+命令行:
+
+```
+chimecli alert updateAlertPerson \
+  --PersonUuid 78a6568a-df12-45d5-ba4c-4ed7baafdaae\
+  --alertPersonRequest.Name "yu lili"\
+  --alertPersonRequest.Email "liliyu@sina.com"
+```
+
+返回: 
+
+```
+{
+  "requestId": "3838bd9d-35c1-4a7a-a150-c39b1a6b2fea",
+  "result": {
+    "alert_person": "ok"
+  }
+}
+```
+
+### 删除报警接收者
+
+#### 命令原型
+
+```
+chimecli alert deleteAlertPerson --help
+This will delete an alert person.
+
+Usage:
+  chimecli alert deleteAlertPerson [flags]
+
+Flags:
+      --PersonUuid string   Required. the alert person's UUID
+  -h, --help                help for deleteAlertPerson
+
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|PersonUuid|string|true|the alert receiver's uuid|
+
+#### 示例
+
+命令行:
+
+```
+chimecli alert deleteAlertPerson --PersonUuid 78a6568a-df12-45d5-ba4c-4ed7baafdaae
+```
+
+返回: 
+
+```
+{
+  "requestId": "8fd36c7c-2285-43b6-9242-1eb58ce66eb1",
+  "result": {
+    "alert_person": "ok"
+  }
+}
+```
+
 
 ## 虚拟机操作相关命令
 
@@ -4943,26 +5351,27 @@ chimecli compute listVm --state 1
 
 ```
 {
-  "requestId": "81817f91-f300-4bdf-a6f6-c98d70485094",
+  "requestId": "89b43012-e343-46c5-bf30-6f42e244e946",
   "result": {
     "elements": [
       {
+        "alerts": [],
         "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
         "boot_type": "",
         "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-        "created_at": "2024-06-22T07:55:38Z",
-        "description": "",
+        "created_at": "2024-08-27T14:57:30Z",
+        "description": "aaa",
         "host_ip": "",
         "host_name": "",
         "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
         "hyper_type": "",
         "image_name": "",
-        "last_operation_created_at": "2024-06-22T07:55:38Z",
-        "last_operation_finished_at": "2024-06-22T07:56:20Z",
-        "last_operation_name": "create",
+        "last_operation_created_at": "2024-09-04T08:53:26Z",
+        "last_operation_finished_at": "2024-09-04T08:53:32Z",
+        "last_operation_name": "start",
         "last_operation_state": 1,
         "memory": 1073741824,
-        "name": "vm-ceph",
+        "name": "vm-local",
         "nics": [],
         "operation": "",
         "os_arch": "",
@@ -4972,7 +5381,7 @@ chimecli compute listVm --state 1
         "state": 1,
         "tags": null,
         "tasks": [],
-        "uuid": "2fc99bf7-7f78-4a07-b7d6-471f3b0b5001",
+        "uuid": "3d64a802-3194-4a72-bd64-cc3e47b02ea6",
         "vcpus": 1,
         "volumes": []
       }
@@ -5109,6 +5518,8 @@ chimecli compute createVm --Body  \
   "requestId": "e8bbddd9-2520-4d46-81ea-720e48bad3b1",
   "result": {
     "vm": {
+      "alerts": [],
+      "tasks": [],
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
       "boot_type": "",
       "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
@@ -5245,22 +5656,37 @@ Flags:
 命令行:
 
 ```
-chimecli compute describeVm --VmUuid 2fc99bf7-7f78-4a07-b7d6-471f3b0b5001
+chimecli compute describeVm --VmUuid 3d64a802-3194-4a72-bd64-cc3e47b02ea6
 ```
 
 返回:
 
 ```
 {
-  "requestId": "95ef4dfa-fc3f-43f0-8fbe-30c34fe2f85a",
+  "requestId": "7f805f4c-4866-45f2-9ac6-128184b35b92",
   "result": {
     "vm": {
+      "alerts": [
+        {
+          "comment": "",
+          "created_at": "2024-09-04T06:26:41Z",
+          "description": "instance uuid: 3d64a802-3194-4a72-bd64-cc3e47b02ea6, cpu usage: 196.24%",
+          "name": "Instance CPU usage is larger than 95 percentage",
+          "priority": 1,
+          "resource_type": "vm",
+          "resource_uuid": "3d64a802-3194-4a72-bd64-cc3e47b02ea6",
+          "rule_uuid": "a96478d6-cbcb-4d30-bcdd-cc18fc2d2514",
+          "severity": 1,
+          "state": 0,
+          "uuid": "e7f7a4a7-105c-422f-942b-610084da4fdb"
+        }
+      ],
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
       "boot_type": "bios",
       "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-      "created_at": "2024-06-22T07:55:38Z",
-      "description": "",
-      "host_ip": "192.168.231.128",
+      "created_at": "2024-08-27T14:57:30Z",
+      "description": "aaa",
+      "host_ip": "172.16.189.133",
       "host_name": "host-a428263d",
       "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
       "hyper_type": "",
@@ -5270,11 +5696,13 @@ chimecli compute describeVm --VmUuid 2fc99bf7-7f78-4a07-b7d6-471f3b0b5001
       "last_operation_name": "",
       "last_operation_state": 0,
       "memory": 1073741824,
-      "name": "vm-ceph",
+      "name": "vm-local",
       "nics": [
         {
+          "alerts": [],
           "attached_vms": [],
-          "created_at": "2024-06-22T07:55:41Z",
+          "bridge_name": "br1",
+          "created_at": "2024-08-27T14:57:30Z",
           "description": "",
           "gateway": "192.168.231.2",
           "ip": "192.168.231.0",
@@ -5282,19 +5710,21 @@ chimecli compute describeVm --VmUuid 2fc99bf7-7f78-4a07-b7d6-471f3b0b5001
           "last_operation_finished_at": null,
           "last_operation_name": "",
           "last_operation_state": 0,
-          "mac": "52:54:00:0e:33:55",
-          "name": "primary-nic-vm-ceph",
+          "mac": "52:54:00:96:ea:68",
+          "name": "primary-nic-vm-local",
           "netmask": "255.255.255.0",
-          "network_name": "br1",
+          "network_name": "Default_Network",
           "network_type": 0,
           "operation": "",
           "primary": 1,
+          "sg_name": "Default",
+          "sg_uuid": "f2b940e7-2411-4424-bdc8-75693c59e67d",
           "state": 2,
           "subnet_cidr": "192.168.231.1/24",
-          "subnet_name": "Subnet1",
-          "subnet_uuid": "f76a3110-1e8e-4094-84e8-a168d27b895b",
+          "subnet_name": "Default_Subnet",
+          "subnet_uuid": "bf834b27-d6eb-4599-bce8-293a2eed67bc",
           "tasks": [],
-          "uuid": "52f217a1-019f-4de8-8dfa-97a8cc503c00"
+          "uuid": "f29faf7e-0a9e-4eda-afd9-1831bde79432"
         }
       ],
       "operation": "",
@@ -5306,27 +5736,52 @@ chimecli compute describeVm --VmUuid 2fc99bf7-7f78-4a07-b7d6-471f3b0b5001
       "tags": null,
       "tasks": [
         {
-          "created_at": "2024-06-22T07:55:38Z",
-          "description": "create-vm-flowchain",
-          "finished_at": "2024-06-22T07:56:20Z",
-          "operation_name": "create",
-          "request_id": "ec7a5745-a71f-408c-bd33-da0bc3d8c326",
+          "created_at": "2024-09-04T08:53:26Z",
+          "description": "start-vm-flowchain",
+          "finished_at": "2024-09-04T08:53:32Z",
+          "operation_name": "start",
+          "request_id": "49a0e2ec-bbb7-4bd1-8b83-2d3413ed306c",
           "resource_type": "vm",
-          "resource_uuid": "2fc99bf7-7f78-4a07-b7d6-471f3b0b5001",
+          "resource_uuid": "3d64a802-3194-4a72-bd64-cc3e47b02ea6",
           "state": 1,
-          "updated_at": "2024-06-22T07:56:20Z",
-          "uuid": "706d79d2-2dce-48dc-8e68-e931187696b6"
+          "updated_at": "2024-09-04T08:53:31Z",
+          "uuid": "b15fd5cb-a713-4b29-83ce-c5633007ba2e"
+        },
+        {
+          "created_at": "2024-09-04T07:21:15Z",
+          "description": "stop-vm-flowchain",
+          "finished_at": "2024-09-04T07:21:20Z",
+          "operation_name": "stop",
+          "request_id": "3c188134-c455-4b47-bdea-5f4c0f6d60da",
+          "resource_type": "vm",
+          "resource_uuid": "3d64a802-3194-4a72-bd64-cc3e47b02ea6",
+          "state": 1,
+          "updated_at": "2024-09-04T07:21:19Z",
+          "uuid": "0f2e0e16-0734-4ebe-87a7-6aad53b75c0b"
+        },
+        {
+          "created_at": "2024-08-27T14:57:30Z",
+          "description": "create-vm-flowchain",
+          "finished_at": "2024-08-27T14:57:36Z",
+          "operation_name": "create",
+          "request_id": "0885cba6-8344-4cab-8e80-95d1d7ae73ec",
+          "resource_type": "vm",
+          "resource_uuid": "3d64a802-3194-4a72-bd64-cc3e47b02ea6",
+          "state": 1,
+          "updated_at": "2024-08-27T14:57:35Z",
+          "uuid": "dd2731e7-fd92-45ec-bbdd-480c730fed7c"
         }
       ],
-      "uuid": "2fc99bf7-7f78-4a07-b7d6-471f3b0b5001",
+      "uuid": "3d64a802-3194-4a72-bd64-cc3e47b02ea6",
       "vcpus": 1,
       "volumes": [
         {
+          "alerts": [],
           "attached_vms": [],
           "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
           "cdrom": 0,
           "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-          "created_at": "2024-06-22T07:55:38Z",
+          "created_at": "2024-08-27T14:57:30Z",
           "description": "",
           "format": "qcow2",
           "host_ip": "",
@@ -5334,29 +5789,29 @@ chimecli compute describeVm --VmUuid 2fc99bf7-7f78-4a07-b7d6-471f3b0b5001
           "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
           "image_name": "centos7_cloudinit.qcow2",
           "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
-          "iops": 2000,
+          "iops": 1000,
           "last_operation_created_at": null,
           "last_operation_finished_at": null,
           "last_operation_name": "",
           "last_operation_state": 0,
-          "name": "root-volume-vm-ceph",
+          "name": "root-volume-vm-local",
           "operation": "",
-          "parent_version": -1,
+          "parent_version": 1,
           "root": 1,
           "size": 21474836480,
-          "snapshot_count": 0,
+          "snapshot_count": 2,
           "snapshots": [],
           "spec_name": "",
           "state": 2,
           "storage_pool_name": "",
           "storage_pool_type": 0,
           "tasks": [],
-          "throughput": 209715200,
-          "type": 2,
+          "throughput": 20971520,
+          "type": 0,
           "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
-          "uuid": "0c53842d-77d8-4f9e-8b9b-0ab870a081d3",
-          "version": 0,
-          "volume_spec_uuid": "30b84c1e-2044-43d3-932b-569742fd44c3"
+          "uuid": "35fbcb12-9a1e-4e0e-a1ad-a96d8d9b4705",
+          "version": 2,
+          "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
         }
       ]
     }
@@ -5653,20 +6108,21 @@ chimecli volume listVolume --state 2
 
 ```
 {
-  "requestId": "1138b36d-e86d-4523-b533-5e40afef0c37",
+  "requestId": "692fc637-9eb5-4091-8ffd-3d3d2086f066",
   "result": {
     "elements": [
       {
+        "alerts": [],
         "attached_vms": [],
         "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
         "cdrom": 0,
         "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-        "created_at": "2024-06-22T10:50:56Z",
+        "created_at": "2024-08-27T14:57:30Z",
         "description": "",
         "format": "qcow2",
         "host_ip": "",
         "host_name": "",
-        "host_uuid": "12345678-1112-449d-8d3e-3ff8b1323d9e",
+        "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
         "image_name": "",
         "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
         "iops": 1000,
@@ -5683,56 +6139,19 @@ chimecli volume listVolume --state 2
         "snapshots": [],
         "spec_name": "Standard",
         "state": 2,
-        "storage_pool_name": "Local Storage Pool",
+        "storage_pool_name": "Local Pool",
         "storage_pool_type": 0,
         "tasks": [],
         "throughput": 20971520,
         "type": 0,
         "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
-        "uuid": "6a8a26ab-4aa9-41c7-9ac4-62a90f905960",
+        "uuid": "35fbcb12-9a1e-4e0e-a1ad-a96d8d9b4705",
         "version": 2,
         "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
-      },
-      {
-        "attached_vms": [],
-        "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
-        "cdrom": 0,
-        "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-        "created_at": "2024-06-22T07:55:38Z",
-        "description": "",
-        "format": "qcow2",
-        "host_ip": "",
-        "host_name": "",
-        "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
-        "image_name": "",
-        "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
-        "iops": 2000,
-        "last_operation_created_at": null,
-        "last_operation_finished_at": null,
-        "last_operation_name": "",
-        "last_operation_state": 0,
-        "name": "root-volume-vm-ceph",
-        "operation": "",
-        "parent_version": -1,
-        "root": 1,
-        "size": 21474836480,
-        "snapshot_count": 0,
-        "snapshots": [],
-        "spec_name": "Ceph Mini",
-        "state": 2,
-        "storage_pool_name": "Ceph Pool",
-        "storage_pool_type": 2,
-        "tasks": [],
-        "throughput": 209715200,
-        "type": 2,
-        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
-        "uuid": "0c53842d-77d8-4f9e-8b9b-0ab870a081d3",
-        "version": 0,
-        "volume_spec_uuid": "30b84c1e-2044-43d3-932b-569742fd44c3"
       }
     ],
-    "size": 2,
-    "total": 2
+    "size": 1,
+    "total": 1
   }
 }
 ```
@@ -5803,6 +6222,8 @@ chimecli volume createVolume \
   "requestId": "2022deeb-e756-4c28-a7e3-0e32e4661100",
   "result": {
     "volume": {
+      "alerts": [],
+      "tasks": [],
       "attached_vms": [],
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
       "cdrom": 0,
@@ -5867,23 +6288,25 @@ Flags:
 命令行:
 
 ```
-chimecli volume getVolume --VolumeUuid 0c53842d-77d8-4f9e-8b9b-0ab870a081d3
+chimecli volume getVolume --VolumeUuid 35fbcb12-9a1e-4e0e-a1ad-a96d8d9b4705
 ```
 
 返回:
 
 ```
 {
-  "requestId": "f4f8238d-fdce-4997-84fe-6e588a9354c7",
+  "requestId": "4bdd2355-c090-441b-8673-9dcbbd4b41e3",
   "result": {
     "volume": {
+      "alerts": [],
       "attached_vms": [
         {
+          "alerts": [],
           "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
           "boot_type": "",
           "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-          "created_at": "2024-06-22T07:55:38Z",
-          "description": "",
+          "created_at": "2024-08-27T14:57:30Z",
+          "description": "aaa",
           "host_ip": "",
           "host_name": "",
           "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
@@ -5894,7 +6317,7 @@ chimecli volume getVolume --VolumeUuid 0c53842d-77d8-4f9e-8b9b-0ab870a081d3
           "last_operation_name": "",
           "last_operation_state": 0,
           "memory": 1073741824,
-          "name": "vm-ceph",
+          "name": "vm-local",
           "nics": [],
           "operation": "",
           "os_arch": "",
@@ -5904,7 +6327,7 @@ chimecli volume getVolume --VolumeUuid 0c53842d-77d8-4f9e-8b9b-0ab870a081d3
           "state": 1,
           "tags": null,
           "tasks": [],
-          "uuid": "2fc99bf7-7f78-4a07-b7d6-471f3b0b5001",
+          "uuid": "3d64a802-3194-4a72-bd64-cc3e47b02ea6",
           "vcpus": 1,
           "volumes": []
         }
@@ -5912,37 +6335,74 @@ chimecli volume getVolume --VolumeUuid 0c53842d-77d8-4f9e-8b9b-0ab870a081d3
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
       "cdrom": 0,
       "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-      "created_at": "2024-06-22T07:55:38Z",
+      "created_at": "2024-08-27T14:57:30Z",
       "description": "",
       "format": "qcow2",
-      "host_ip": "192.168.231.128",
+      "host_ip": "172.16.189.133",
       "host_name": "host-a428263d",
       "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
       "image_name": "centos7_cloudinit.qcow2",
       "image_uuid": "700fb68a-382a-48be-a7f7-7114559c2f2e",
-      "iops": 2000,
+      "iops": 1000,
       "last_operation_created_at": null,
       "last_operation_finished_at": null,
       "last_operation_name": "",
       "last_operation_state": 0,
-      "name": "root-volume-vm-ceph",
+      "name": "root-volume-vm-local",
       "operation": "",
-      "parent_version": -1,
+      "parent_version": 1,
       "root": 1,
       "size": 21474836480,
       "snapshot_count": 0,
-      "snapshots": [],
-      "spec_name": "Ceph Mini",
+      "snapshots": [
+        {
+          "created_at": "2024-09-04T07:21:37Z",
+          "description": "",
+          "last_operation_created_at": "2024-09-04T07:21:37Z",
+          "last_operation_finished_at": "2024-09-04T07:21:37Z",
+          "last_operation_name": "create",
+          "last_operation_state": 1,
+          "name": "snap2",
+          "operation": "",
+          "parent_volume_version": 0,
+          "state": 1,
+          "tasks": [],
+          "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+          "uuid": "d067ecc7-6e31-4950-819b-b2a07c45cd70",
+          "volume_name": "root-volume-vm-local",
+          "volume_uuid": "35fbcb12-9a1e-4e0e-a1ad-a96d8d9b4705",
+          "volume_version": 1
+        },
+        {
+          "created_at": "2024-09-04T07:21:30Z",
+          "description": "",
+          "last_operation_created_at": "2024-09-04T07:21:30Z",
+          "last_operation_finished_at": "2024-09-04T07:21:30Z",
+          "last_operation_name": "create",
+          "last_operation_state": 1,
+          "name": "snap1",
+          "operation": "",
+          "parent_volume_version": -1,
+          "state": 1,
+          "tasks": [],
+          "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
+          "uuid": "cd40ab78-c12f-468e-889f-667e01596c22",
+          "volume_name": "root-volume-vm-local",
+          "volume_uuid": "35fbcb12-9a1e-4e0e-a1ad-a96d8d9b4705",
+          "volume_version": 0
+        }
+      ],
+      "spec_name": "Standard",
       "state": 2,
-      "storage_pool_name": "Ceph Pool",
-      "storage_pool_type": 2,
+      "storage_pool_name": "Local Pool",
+      "storage_pool_type": 0,
       "tasks": [],
-      "throughput": 209715200,
-      "type": 2,
+      "throughput": 20971520,
+      "type": 0,
       "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c",
-      "uuid": "0c53842d-77d8-4f9e-8b9b-0ab870a081d3",
-      "version": 0,
-      "volume_spec_uuid": "30b84c1e-2044-43d3-932b-569742fd44c3"
+      "uuid": "35fbcb12-9a1e-4e0e-a1ad-a96d8d9b4705",
+      "version": 2,
+      "volume_spec_uuid": "38112d5c-7f13-438a-aec5-d14de51bd30f"
     }
   }
 }
@@ -6446,6 +6906,8 @@ chimecli volume restoreVolume \
   "requestId": "8a315f3d-bdec-485f-a017-1855b1f98328",
   "result": {
     "volume": {
+      "alerts": [],
+      "tasks": [],
       "attached_vms": [],
       "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
       "cdrom": 0,
@@ -6570,36 +7032,14 @@ chimecli network listNic --state 2
 
 ```
 {
-  "requestId": "36834694-3d2a-4a15-b39e-aeed2f02e40f",
+  "requestId": "190cab10-3a78-4c5b-b341-0159f700df03",
   "result": {
     "elements": [
       {
+        "alerts": [],
         "attached_vms": [],
-        "created_at": "2024-06-22T10:50:56Z",
-        "description": "",
-        "gateway": "192.168.231.2",
-        "ip": "192.168.231.11",
-        "last_operation_created_at": null,
-        "last_operation_finished_at": null,
-        "last_operation_name": "",
-        "last_operation_state": 0,
-        "mac": "52:54:00:6e:52:be",
-        "name": "primary-nic-vm-local",
-        "netmask": "255.255.255.0",
-        "network_name": "br1",
-        "network_type": 0,
-        "operation": "",
-        "primary": 1,
-        "state": 2,
-        "subnet_cidr": "192.168.231.1/24",
-        "subnet_name": "Subnet1",
-        "subnet_uuid": "f76a3110-1e8e-4094-84e8-a168d27b895b",
-        "tasks": [],
-        "uuid": "1a588665-453b-43d3-b98f-94289e305995"
-      },
-      {
-        "attached_vms": [],
-        "created_at": "2024-06-22T07:55:41Z",
+        "bridge_name": "br1",
+        "created_at": "2024-08-27T14:57:30Z",
         "description": "",
         "gateway": "192.168.231.2",
         "ip": "192.168.231.0",
@@ -6607,23 +7047,25 @@ chimecli network listNic --state 2
         "last_operation_finished_at": null,
         "last_operation_name": "",
         "last_operation_state": 0,
-        "mac": "52:54:00:0e:33:55",
-        "name": "primary-nic-vm-ceph",
+        "mac": "52:54:00:96:ea:68",
+        "name": "primary-nic-vm-local",
         "netmask": "255.255.255.0",
-        "network_name": "br1",
+        "network_name": "Default_Network",
         "network_type": 0,
         "operation": "",
         "primary": 1,
+        "sg_name": "",
+        "sg_uuid": "f2b940e7-2411-4424-bdc8-75693c59e67d",
         "state": 2,
         "subnet_cidr": "192.168.231.1/24",
-        "subnet_name": "Subnet1",
-        "subnet_uuid": "f76a3110-1e8e-4094-84e8-a168d27b895b",
+        "subnet_name": "Default_Subnet",
+        "subnet_uuid": "bf834b27-d6eb-4599-bce8-293a2eed67bc",
         "tasks": [],
-        "uuid": "52f217a1-019f-4de8-8dfa-97a8cc503c00"
+        "uuid": "f29faf7e-0a9e-4eda-afd9-1831bde79432"
       }
     ],
-    "size": 2,
-    "total": 2
+    "size": 1,
+    "total": 1
   }
 }
 ```
@@ -6684,6 +7126,7 @@ chimecli network createNic \
   "requestId": "e926a987-2073-4258-8739-41b60bd637a4",
   "result": {
     "nic": {
+      "alerts": [],
       "attached_vms": [],
       "created_at": "0001-01-01T00:00:00Z",
       "description": "",
@@ -6733,26 +7176,28 @@ Flags:
 命令行:
 
 ```
-chimecli network getNic --NicUuid 1a588665-453b-43d3-b98f-94289e305995
+chimecli network getNic --NicUuid f29faf7e-0a9e-4eda-afd9-1831bde79432
 ```
 
 返回:
 
 ```
 {
-  "requestId": "1ba3bc91-ba6a-460d-b69f-76be16a7b859",
+  "requestId": "b243016d-1844-4a31-8fcb-7f1758f800f9",
   "result": {
     "nic": {
+      "alerts": [],
       "attached_vms": [
         {
+          "alerts": [],
           "az_uuid": "cbd2819b-b49a-47ad-9fa4-307774d97865",
           "boot_type": "",
           "cluster_uuid": "65bbc21f-0289-4bbf-9517-6b8da9688774",
-          "created_at": "2024-06-22T10:50:56Z",
-          "description": "",
+          "created_at": "2024-08-27T14:57:30Z",
+          "description": "aaa",
           "host_ip": "",
           "host_name": "",
-          "host_uuid": "12345678-1112-449d-8d3e-3ff8b1323d9e",
+          "host_uuid": "a428263d-64a9-4653-8d7e-556c20c0d77a",
           "hyper_type": "",
           "image_name": "",
           "last_operation_created_at": null,
@@ -6767,35 +7212,38 @@ chimecli network getNic --NicUuid 1a588665-453b-43d3-b98f-94289e305995
           "os_detail": "",
           "os_type": "",
           "spec_type": 0,
-          "state": 4,
+          "state": 1,
           "tags": null,
           "tasks": [],
-          "uuid": "75392964-db07-44b9-bdf4-1ea509dbdf07",
+          "uuid": "3d64a802-3194-4a72-bd64-cc3e47b02ea6",
           "vcpus": 1,
           "volumes": []
         }
       ],
-      "created_at": "2024-06-22T10:50:56Z",
+      "bridge_name": "br1",
+      "created_at": "2024-08-27T14:57:30Z",
       "description": "",
       "gateway": "192.168.231.2",
-      "ip": "192.168.231.11",
+      "ip": "192.168.231.0",
       "last_operation_created_at": null,
       "last_operation_finished_at": null,
       "last_operation_name": "",
       "last_operation_state": 0,
-      "mac": "52:54:00:6e:52:be",
+      "mac": "52:54:00:96:ea:68",
       "name": "primary-nic-vm-local",
       "netmask": "255.255.255.0",
-      "network_name": "br1",
+      "network_name": "Default_Network",
       "network_type": 0,
       "operation": "",
       "primary": 1,
+      "sg_name": "Default",
+      "sg_uuid": "f2b940e7-2411-4424-bdc8-75693c59e67d",
       "state": 2,
       "subnet_cidr": "192.168.231.1/24",
-      "subnet_name": "Subnet1",
-      "subnet_uuid": "f76a3110-1e8e-4094-84e8-a168d27b895b",
+      "subnet_name": "Default_Subnet",
+      "subnet_uuid": "bf834b27-d6eb-4599-bce8-293a2eed67bc",
       "tasks": [],
-      "uuid": "1a588665-453b-43d3-b98f-94289e305995"
+      "uuid": "f29faf7e-0a9e-4eda-afd9-1831bde79432"
     }
   }
 }
@@ -6997,6 +7445,703 @@ chimecli compute detachNicFromVm \
   "requestId": "c6eac3d4-67e8-4e39-a585-3d64a352c2ac",
   "result": {
     "vm": "ok"
+  }
+}
+```
+
+## 安全组相关命令
+
+### 查看安全组列表
+
+#### 命令原型
+
+```
+chimecli security_group listSecurityGroup --help
+list security groups
+
+Usage:
+  chimecli security_group listSecurityGroup [flags]
+
+Flags:
+  -h, --help           help for listSecurityGroup
+      --name string    filter by the 'name' field
+      --order string   'asc' or 'desc' of sorting
+      --page int       the page number of the results in paging
+      --size int       the page size of the results in paging
+      --sort string    the field to be sorted by
+      --uuid string    filter by the 'uuid' field
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|name|string|false|filter by the 'name' field|
+|uuid|string|false|filter by the security group's uuid|
+
+#### 示例
+
+命令行:
+
+```
+chimecli security_group listSecurityGroup 
+```
+
+返回:
+
+```
+{
+  "requestId": "69e204e9-7299-4603-b6fe-410f919a2c38",
+  "result": {
+    "elements": [
+      {
+        "created_at": "2024-07-17T11:31:29Z",
+        "description": "",
+        "egress_rules": [],
+        "ingress_rules": [],
+        "last_operation_created_at": "2024-09-01T09:31:01Z",
+        "last_operation_finished_at": "2024-09-01T09:31:01Z",
+        "last_operation_name": "update",
+        "last_operation_state": 1,
+        "name": "Default",
+        "nic_count": 1,
+        "operation": "",
+        "rule_count": 1,
+        "state": 1,
+        "tasks": [],
+        "uuid": "f2b940e7-2411-4424-bdc8-75693c59e67d"
+      }
+    ],
+    "size": 1,
+    "total": 1
+  }
+}
+```
+
+### 查看安全组详情
+
+#### 命令原型
+
+```
+chimecli security_group getSecurityGroup --help
+get a SG's detailed information
+
+Usage:
+  chimecli security_group getSecurityGroup [flags]
+
+Flags:
+      --SecurityGroupUuid string   Required. the security group's uuid
+  -h, --help                       help for getSecurityGroup
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|SecurityGroupUuid|string|true|the security group's uuid|
+
+#### 示例
+
+命令行:
+
+```
+chimecli security_group getSecurityGroup --SecurityGroupUuid f2b940e7-2411-4424-bdc8-75693c59e67d
+```
+
+返回:
+
+```
+{
+  "requestId": "9a3cc2b5-eb85-4ed4-a973-a5614fecd0ab",
+  "result": {
+    "securitygroup": {
+      "created_at": "2024-07-17T11:31:29Z",
+      "description": "",
+      "egress_rules": [],
+      "ingress_rules": [
+        {
+          "action": "ACCEPT",
+          "description": "allow ssh",
+          "dip": "",
+          "direction": 0,
+          "dport": "22",
+          "priority": 1,
+          "protocol": "tcp",
+          "sg_uuid": "f2b940e7-2411-4424-bdc8-75693c59e67d",
+          "sip": "0.0.0.0/0",
+          "sport": "",
+          "uuid": "8300febd-9a8f-4734-ad7e-949e00b4d7ee"
+        }
+      ],
+      "last_operation_created_at": null,
+      "last_operation_finished_at": null,
+      "last_operation_name": "",
+      "last_operation_state": 0,
+      "name": "Default",
+      "nic_count": 0,
+      "operation": "",
+      "rule_count": 1,
+      "state": 1,
+      "tasks": [
+        {
+          "created_at": "2024-09-01T09:31:01Z",
+          "description": "update-securitygroup-flowchain",
+          "finished_at": "2024-09-01T09:31:01Z",
+          "operation_name": "update",
+          "request_id": "6bb548e5-9098-44bb-b9b1-10da7342d733",
+          "resource_type": "securitygroup",
+          "resource_uuid": "f2b940e7-2411-4424-bdc8-75693c59e67d",
+          "state": 1,
+          "updated_at": "2024-09-01T09:31:00Z",
+          "uuid": "98a09333-7aba-4c23-a238-4f24ddcae6db"
+        },
+        {
+          "created_at": "2024-07-23T09:17:53Z",
+          "description": "update-securitygroup-flowchain",
+          "finished_at": "2024-07-23T09:18:03Z",
+          "operation_name": "update",
+          "request_id": "ebec17c5-3b12-4183-8fd9-54c3c6c6cd33",
+          "resource_type": "securitygroup",
+          "resource_uuid": "f2b940e7-2411-4424-bdc8-75693c59e67d",
+          "state": 1,
+          "updated_at": "2024-07-23T09:18:03Z",
+          "uuid": "983f126b-a761-46cb-ad44-92e5f8e86b8b"
+        },
+        {
+          "created_at": "2024-07-23T08:51:10Z",
+          "description": "update-securitygroup-flowchain",
+          "finished_at": "2024-07-23T08:51:10Z",
+          "operation_name": "update",
+          "request_id": "1292afdf-426a-4a09-a1a1-b00938bd9969",
+          "resource_type": "securitygroup",
+          "resource_uuid": "f2b940e7-2411-4424-bdc8-75693c59e67d",
+          "state": 1,
+          "updated_at": "2024-07-23T08:51:10Z",
+          "uuid": "974e2c44-55db-4d8b-b5d0-3cb07dc076a4"
+        },
+        {
+          "created_at": "2024-07-23T08:50:48Z",
+          "description": "update-securitygroup-flowchain",
+          "finished_at": "2024-07-23T08:50:48Z",
+          "operation_name": "update",
+          "request_id": "97c66b0f-3faf-4aa5-87f7-3c1920a14dd5",
+          "resource_type": "securitygroup",
+          "resource_uuid": "f2b940e7-2411-4424-bdc8-75693c59e67d",
+          "state": 1,
+          "updated_at": "2024-07-23T08:50:48Z",
+          "uuid": "1a5f6a9f-63e4-40d5-a433-0bc8ad8ef4dc"
+        }],
+      "uuid": "f2b940e7-2411-4424-bdc8-75693c59e67d"
+    }
+  }
+}
+```
+
+### 创建安全组
+
+#### 命令原型
+
+```
+chimecli security_group createSecurityGroup --help
+create a security group
+
+Usage:
+  chimecli security_group createSecurityGroup [flags]
+
+Flags:
+      --Body string                    Optional json string for [Body]. the http post body
+  -h, --help                           help for createSecurityGroup
+      --sGRequest.Description string   description for the security group
+      --sGRequest.Name string          Required. the security group's name
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|body|[sGRequest]|false|the http post body|
+|sGRequest.Description|string|false|the security group's description|
+|sGRequest.Name|string|true|the security group's name|
+
+#### 示例
+
+命令行:
+
+```
+chimecli security_group createSecurityGroup --Body \
+'{ 
+    "name":"test",
+    "description": "",
+    "egress_rules": [],
+    "ingress_rules": [
+      {
+        "action": "ACCEPT",
+        "description": "allow ssh",
+        "dip": "",
+        "direction": 0,
+        "dport": "22",
+        "priority": 1,
+        "protocol": "tcp",
+        "sg_uuid": "f2b940e7-2411-4424-bdc8-75693c59e67d",
+        "sip": "0.0.0.0/0",
+        "sport": ""
+      }
+    ]
+}'
+```
+
+返回:
+
+```
+{
+  "requestId": "b861174c-cc81-47f3-b869-099649f6c97d",
+  "result": {
+    "securitygroup": {
+      "created_at": "0001-01-01T00:00:00Z",
+      "description": "",
+      "egress_rules": [],
+      "ingress_rules": [
+        {
+          "action": "ACCEPT",
+          "description": "allow ssh",
+          "dip": "",
+          "direction": 0,
+          "dport": "22",
+          "priority": 0,
+          "protocol": "tcp",
+          "sg_uuid": "844af42c-87ae-4024-810d-f2f5adf1a8e5",
+          "sip": "0.0.0.0/0",
+          "sport": "",
+          "uuid": "3b231317-0f4d-49a7-a799-85176c7888bb"
+        }
+      ],
+      "last_operation_created_at": null,
+      "last_operation_finished_at": null,
+      "last_operation_name": "",
+      "last_operation_state": 0,
+      "name": "test",
+      "nic_count": 0,
+      "operation": "",
+      "rule_count": 0,
+      "state": 0,
+      "tasks": [],
+      "uuid": "844af42c-87ae-4024-810d-f2f5adf1a8e5"
+    }
+  }
+}
+```
+
+### 更新安全组
+
+#### 命令原型
+
+```
+chimecli security_group updateSecurityGroup --help
+update a security group
+
+Usage:
+  chimecli security_group updateSecurityGroup [flags]
+
+Flags:
+      --Body string                    Optional json string for [Body]. the http post body
+      --SecurityGroupUuid string       Required. the security group's uuid
+  -h, --help                           help for updateSecurityGroup
+      --sGRequest.Description string   description for the security group
+      --sGRequest.Name string          Required. the security group's name
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|body|[sGRequest]|false|the http post body|
+|SecurityGroupUuid|string|true|the security group's uuid|
+|sGRequest.Description|string|false|the security group's description|
+|sGRequest.Name|string|true|the security group's name|
+
+#### 示例
+
+命令行:
+
+```
+chimecli security_group updateSecurityGroup --SecurityGroupUuid 844af42c-87ae-4024-810d-f2f5adf1a8e5 --Body \
+'{ 
+    "name":"test",
+    "description": "",
+    "egress_rules": [],
+    "ingress_rules": [
+      {
+        "action": "ACCEPT",
+        "description": "allow ssh",
+        "dip": "",
+        "direction": 1,
+        "dport": "22",
+        "priority": 1,
+        "protocol": "tcp",
+        "sip": "0.0.0.0/0",
+        "sport": ""
+      }
+    ]
+}'
+```
+
+返回:
+
+```
+{
+  "requestId": "3f00d17a-0dd1-4cfc-a3bb-cb31800df9ae",
+  "result": {
+    "securitygroup": "ok"
+  }
+}
+```
+
+### 删除安全组
+
+#### 命令原型
+
+```
+chimecli security_group deleteSecurityGroup --help
+delete a security group
+
+Usage:
+  chimecli security_group deleteSecurityGroup [flags]
+
+Flags:
+      --SecurityGroupUuid string   Required. the security group's uuid
+  -h, --help                       help for deleteSecurityGroup
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|SecurityGroupUuid|string|true|the security group's uuid|
+
+#### 示例
+
+命令行:
+
+```
+chimecli security_group deleteSecurityGroup --SecurityGroupUuid 844af42c-87ae-4024-810d-f2f5adf1a8e5 
+```
+
+返回:
+
+```
+{
+  "requestId": "cbe3cb43-13a1-4710-aac0-ee61afaa53fe",
+  "result": 1
+}
+```
+
+## 操作日志相关命令
+
+### 查看操作日志列表
+
+#### 命令原型
+
+```
+chimecli operation_log listOperationLog --help
+list operation logs
+
+Usage:
+  chimecli operation_log listOperationLog [flags]
+
+Flags:
+  -h, --help               help for listOperationLog
+      --method string      filter by the 'method' field
+      --order string       'asc' or 'desc' of sorting
+      --page int           the page number of the results in paging
+      --path string        filter by the 'path' field
+      --size int           the page size of the results in paging
+      --sort string        the field to be sorted by
+      --user_uuid string   filter by the 'user_uuid' field
+
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|page|integer|false|the page number of the results in paging|
+|size|integer|false|the page size of the results in paging|
+|sort|string|false|the field to be sorted by|
+|order|string|false|'asc' or 'desc' of sorting|
+|method|string|false|filter by the 'method' field|
+|user_uuid|string|false|filter by user's uuid|
+|path|string|false|filter by the 'path' field|
+
+#### 示例
+
+命令行:
+
+```
+chimecli operation_log listOperationLog 
+```
+
+返回:
+
+```
+{
+  "requestId": "6d56132a-61b9-4a04-bc39-3b2c4e1a0042",
+  "result": {
+    "elements": [
+      {
+        "created_at": "2024-09-05T15:06:13Z",
+        "id": 31699,
+        "input": "",
+        "ip": "127.0.0.1",
+        "method": "DELETE",
+        "path": "/v1/securitygroup/844af42c-87ae-4024-810d-f2f5adf1a8e5",
+        "user_name": "admin",
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c"
+      },
+      {
+        "created_at": "2024-09-05T15:04:46Z",
+        "id": 31698,
+        "input": "{\"egress_rules\":[],\"ingress_rules\":[{\"action\":\"ACCEPT\",\"dport\":\"22\",\"description\":\"allow ssh\",\"direction\":1,\"protocol\":\"tcp\",\"sip\":\"0.0.0.0/0\"}],\"name\":\"test\"}\n",
+        "ip": "127.0.0.1",
+        "method": "PATCH",
+        "path": "/v1/securitygroup/844af42c-87ae-4024-810d-f2f5adf1a8e5",
+        "user_name": "admin",
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c"
+      },
+      {
+        "created_at": "2024-09-05T15:00:48Z",
+        "id": 31697,
+        "input": "{\"egress_rules\":[],\"ingress_rules\":[{\"action\":\"ACCEPT\",\"dport\":\"22\",\"description\":\"allow ssh\",\"direction\":0,\"protocol\":\"tcp\",\"sip\":\"0.0.0.0/0\"}],\"name\":\"test\"}\n",
+        "ip": "127.0.0.1",
+        "method": "POST",
+        "path": "/v1/securitygroup",
+        "user_name": "admin",
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c"
+      },
+      {
+        "created_at": "2024-09-05T11:21:41Z",
+        "id": 31696,
+        "input": "",
+        "ip": "127.0.0.1",
+        "method": "DELETE",
+        "path": "/v1/alert_person/78a6568a-df12-45d5-ba4c-4ed7baafdaae",
+        "user_name": "admin",
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c"
+      },
+      {
+        "created_at": "2024-09-05T11:17:55Z",
+        "id": 31695,
+        "input": "{\"email\":\"liliyu@sina.com\",\"name\":\"yu lili\"}\n",
+        "ip": "127.0.0.1",
+        "method": "PATCH",
+        "path": "/v1/alert_person/78a6568a-df12-45d5-ba4c-4ed7baafdaae",
+        "user_name": "admin",
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c"
+      },
+      {
+        "created_at": "2024-09-05T11:14:33Z",
+        "id": 31694,
+        "input": "{\"email\":\"liliyu@sina.com\",\"name\":\"yu lili\"}\n",
+        "ip": "127.0.0.1",
+        "method": "POST",
+        "path": "/v1/alert_person",
+        "user_name": "admin",
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c"
+      },
+      {
+        "created_at": "2024-09-05T10:39:42Z",
+        "id": 31693,
+        "input": "",
+        "ip": "127.0.0.1",
+        "method": "DELETE",
+        "path": "/v1/alert_rule/0cc03da2-2a46-4ecd-819b-6baacc23de44",
+        "user_name": "admin",
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c"
+      },
+      {
+        "created_at": "2024-09-05T09:56:10Z",
+        "id": 31692,
+        "input": "{\"match\":\"host_metrics_aggr|cpu_total_avg|\u003e|80\",\"name\":\"Host CPU usage is larger than 80 percentage\",\"period_unit\":1,\"period_value\":2,\"priority\":2,\"severity\":2}\n",
+        "ip": "127.0.0.1",
+        "method": "PATCH",
+        "path": "/v1/alert_rule/0cc03da2-2a46-4ecd-819b-6baacc23de44",
+        "user_name": "admin",
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c"
+      },
+      {
+        "created_at": "2024-09-05T09:55:43Z",
+        "id": 31691,
+        "input": "{\"match\":\"host_metrics_aggr|cpu_total_avg|\u003e|80\",\"name\":null,\"period_unit\":null,\"period_value\":null,\"priority\":null,\"severity\":null}\n",
+        "ip": "127.0.0.1",
+        "method": "PATCH",
+        "path": "/v1/alert_rule/0cc03da2-2a46-4ecd-819b-6baacc23de44",
+        "user_name": "admin",
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c"
+      },
+      {
+        "created_at": "2024-09-05T09:55:18Z",
+        "id": 31690,
+        "input": "{\"match\":\"host_metrics_aggr|cpu_total_avg|\u003e|80\",\"name\":null,\"period_unit\":null,\"period_value\":null,\"priority\":null,\"severity\":null}\n",
+        "ip": "127.0.0.1",
+        "method": "PATCH",
+        "path": "/v1/alert_rule/0cc03da2-2a46-4ecd-819b-6baacc23de44",
+        "user_name": "admin",
+        "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c"
+      }
+    ],
+    "size": 10,
+    "total": 52
+  }
+}
+```
+
+
+### 查看操作日志详情
+
+#### 命令原型
+
+```
+chimecli operation_log getOperationLog --help
+get an operation log's detailed information
+
+Usage:
+  chimecli operation_log getOperationLog [flags]
+
+Flags:
+  -h, --help     help for getOperationLog
+      --id int   Required. the operation log's ID
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|id|string|true|the operation's id|
+
+#### 示例
+
+命令行:
+
+```
+chimecli operation_log getOperationLog --id 31690
+```
+
+返回:
+
+```
+{
+  "requestId": "469faf8c-71b7-4569-9baf-2badc1fb48c3",
+  "result": {
+    "operation_log": {
+      "created_at": "2024-09-05T09:55:18Z",
+      "id": 31690,
+      "input": "{\"match\":\"host_metrics_aggr|cpu_total_avg|\u003e|80\",\"name\":null,\"period_unit\":null,\"period_value\":null,\"priority\":null,\"severity\":null}\n",
+      "ip": "127.0.0.1",
+      "method": "PATCH",
+      "path": "/v1/alert_rule/0cc03da2-2a46-4ecd-819b-6baacc23de44",
+      "user_name": "admin",
+      "user_uuid": "9c15f4cb-5f6d-4e45-818f-a4315c54240c"
+    }
+  }
+}
+```
+
+## 全局参数相关命令
+
+### 查看全局参数
+
+#### 命令原型
+
+```
+chimecli global  getGlobal --help
+This will get a global variable
+
+Usage:
+  chimecli global getGlobal [flags]
+
+Flags:
+  -h, --help          help for getGlobal
+      --name string   the global variable's name
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|name|string|true|the global variable's name|
+
+#### 示例
+
+命令行:
+
+```
+chimecli global  getGlobal --name 'email_sender_server'
+```
+
+返回: 
+
+```
+{
+  "requestId": "99bc55c5-94be-46a3-a4d2-eaa1df5a5a6e",
+  "result": {
+    "global": {
+      "description": "",
+      "name": "email_sender_server",
+      "updated_at": null,
+      "value": "smtp.sina.com"
+    }
+  }
+}
+```
+
+
+### 设置全局参数
+
+#### 命令原型
+
+```
+chimecli global updateGlobal --help
+This will update a global variable.
+
+Usage:
+  chimecli global updateGlobal [flags]
+
+Flags:
+      --Body string                        Optional json string for [Body]. the http post body
+      --globalRequest.Description string   the global variable's description
+      --globalRequest.Name string          Required. the global variable's name
+      --globalRequest.Value string         Required. the global variable's value
+
+```
+
+#### 参数列表
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|globalRequest.Name|string|true|the global variable's name|
+|globalRequest.Value|string|true|the global variable's value|
+|globalRequest.Description|string|false|the global variable's description|
+
+#### 示例
+
+命令行:
+
+```
+chimecli global updateGlobal \
+  --globalRequest.Name email_sender_server \
+  --globalRequest.Value smtp.sina.com
+```
+
+返回: 
+
+```
+{
+  "requestId": "98fab558-cf15-4e0a-a7ee-d43769e0efd9",
+  "result": {
+    "global": "ok"
   }
 }
 ```
